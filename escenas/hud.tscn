@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://dw27a5dihjvit"]
+
+[ext_resource type="Script" uid="uid://cux0rnbg6vwuj" path="res://scripts/hud.gd" id="1_m5lxu"]
+
+[node name="HUD" type="CanvasLayer"]
+layer = 3
+script = ExtResource("1_m5lxu")
+
+[node name="Button_bfs" type="Button" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 199.0
+offset_top = -432.0
+offset_right = 285.0
+offset_bottom = -379.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "BFS
+"
+
+[node name="Button_dfs" type="Button" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -796.0
+offset_top = -436.0
+offset_right = -706.0
+offset_bottom = -383.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "DFS
+"
+
+[connection signal="pressed" from="Button_bfs" to="." method="_on_button_bfs_pressed"]
+[connection signal="pressed" from="Button_dfs" to="." method="_on_button_dfs_pressed"]

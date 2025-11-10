@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://doqvur36b3bcq"]
+
+[ext_resource type="Script" uid="uid://txb11pb185do" path="res://scripts/nodo_3d.gd" id="1_75lwm"]
+[ext_resource type="FontFile" uid="uid://4if1vqqqq2oh" path="res://assets/Howdybun.otf" id="2_w6lw2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qvnjd"]
+albedo_color = Color(0.156863, 0.0784314, 0.305882, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_75lwm"]
+material = SubResource("StandardMaterial3D_qvnjd")
+top_radius = 1.5
+bottom_radius = 1.5
+height = 0.3
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_w6lw2"]
+height = 0.3
+radius = 1.5
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_g0xwr"]
+height = 0.35
+radius = 1.51
+
+[node name="Nodo3D" type="Node3D"]
+script = ExtResource("1_75lwm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_75lwm")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.020245, 0.00739384, -0.0156624)
+shape = SubResource("CylinderShape3D_w6lw2")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("CylinderShape3D_g0xwr")
+
+[node name="Label3D" type="Label3D" parent="."]
+offset = Vector2(0, 100)
+modulate = Color(0.908287, 0.343415, 0.245186, 1)
+text = "A"
+font = ExtResource("2_w6lw2")
+font_size = 120
