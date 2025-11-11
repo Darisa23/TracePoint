@@ -1,9 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://cnedxfn2pxh2t"]
+[gd_scene load_steps=15 format=3 uid="uid://cnedxfn2pxh2t"]
 
 [ext_resource type="Shader" uid="uid://cdlt3ujrpad32" path="res://level/sky_with_stars.tres" id="1_hwp5q"]
 [ext_resource type="PackedScene" uid="uid://7s1esfbldf1" path="res://level/cactus/cactus_small_4.tscn" id="1_oaaa3"]
 [ext_resource type="PackedScene" uid="uid://dt6pe66bt6rwr" path="res://level/cactus/Cactus_Small_Clump.tscn" id="2_ba0nm"]
-[ext_resource type="Texture2D" uid="uid://ca3jtautvrj1u" path="res://level/moon.png" id="2_kb37w"]
+[ext_resource type="Texture2D" uid="uid://bqij60qfct7lx" path="res://level/qwantani_moon_noon_puresky_4k.exr" id="2_xii2b"]
 [ext_resource type="PackedScene" uid="uid://bij84ol81kcts" path="res://level/interactable/kill_plane/kill_plane_3d.tscn" id="3_1g472"]
 [ext_resource type="PackedScene" uid="uid://3agu7gb3kjif" path="res://level/cactus/cactus_tall_3.tscn" id="3_b7ara"]
 [ext_resource type="PackedScene" uid="uid://c1d37gy1pj85v" path="res://level/cactus/cactus_tall_5.tscn" id="4_ej5ku"]
@@ -12,46 +12,23 @@
 [ext_resource type="Material" uid="uid://da188d7yrcfr8" path="res://level/platforms.tres" id="7_njuj4"]
 [ext_resource type="PackedScene" uid="uid://c6uew1wfpkt16" path="res://level/interactable/flag/flag_3d.tscn" id="8_kebk2"]
 
-[sub_resource type="Curve" id="Curve_k4wis"]
-_data = [Vector2(0.331719, 0.0391753), 0.0, 0.0, 0, 0, Vector2(0.697336, 1), 0.51276, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_xii2b"]
-curve = SubResource("Curve_k4wis")
-
-[sub_resource type="Gradient" id="Gradient_4p0vt"]
-offsets = PackedFloat32Array(0.784123, 1)
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_jnnrx"]
-frequency = 0.3589
-fractal_octaves = 4
-cellular_distance_function = 2
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rhqlf"]
-width = 1024
-height = 1024
-generate_mipmaps = false
-seamless = true
-color_ramp = SubResource("Gradient_4p0vt")
-noise = SubResource("FastNoiseLite_jnnrx")
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g8ud2"]
 shader = ExtResource("1_hwp5q")
-shader_parameter/top_color = Color(0.288469, 0.182916, 1, 1)
-shader_parameter/bottom_color = Color(1, 0.46805, 0, 1)
-shader_parameter/gradient_curve = SubResource("CurveTexture_xii2b")
-shader_parameter/noise_texture = SubResource("NoiseTexture2D_rhqlf")
-shader_parameter/moon_texture = ExtResource("2_kb37w")
-shader_parameter/moon_direction = Vector3(-1.095, 0.68, 1)
-shader_parameter/moon_size = 0.045
+shader_parameter/skyTexture = ExtResource("2_xii2b")
+shader_parameter/skyColor = Color(1, 1, 1, 1)
+shader_parameter/horizonColor = Color(0.9, 0.9, 0.9, 1)
+shader_parameter/particle_speed = 0.5
+shader_parameter/particle_density = 50.0
+shader_parameter/particle_size = 0.02
+shader_parameter/neon_blue = Color(0.4, 0.8, 1, 1)
+shader_parameter/glow_intensity = 2.0
 
-[sub_resource type="Sky" id="Sky_l5lfc"]
+[sub_resource type="Sky" id="Sky_xii2b"]
 sky_material = SubResource("ShaderMaterial_g8ud2")
 
 [sub_resource type="Environment" id="Environment_5pwhg"]
 background_mode = 2
-sky = SubResource("Sky_l5lfc")
+sky = SubResource("Sky_xii2b")
 ambient_light_source = 3
 ambient_light_color = Color(0.74902, 0.742654, 0.615273, 1)
 ambient_light_sky_contribution = 0.0

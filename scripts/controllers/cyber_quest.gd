@@ -7,7 +7,7 @@ extends Node
 @onready var nivel_3 = $Nivel3_RebuildNet if has_node("Nivel3_RebuildNet") else null
 
 # Referencias al player
-@onready var player = $player
+@onready var player = $"../player"
 
 var nivel_actual: int = 1
 

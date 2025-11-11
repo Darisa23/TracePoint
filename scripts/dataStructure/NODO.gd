@@ -26,35 +26,31 @@ func agregar_vecino(vecino: Nodo) -> void:
 
 func resetear_estado() -> void:
 	visitado = false
+	vc = false
 	distancia = INF
 	padre = null
 
 # Métodos para visualización
 func marcar_correcto() -> void:
 	if nodo_visual:
-		cambiar_color(Color.GREEN)
+		nodo_visual.marcar_correcto()
 	vc = true
 
 func marcar_incorrecto() -> void:
 	if nodo_visual:
-		cambiar_color(Color.RED)
-		# Aquí puedes agregar la animación de quebrarse después
+		nodo_visual.marcar_incorrecto()
 
 func marcar_visitado() -> void:
 	if nodo_visual:
-		cambiar_color(Color.CYAN)
+		nodo_visual.marcar_visitado()
 
-func cambiar_color(color: Color) -> void:
-	if nodo_visual and nodo_visual.has_node("MeshInstance3D"):
-		var mesh_instance = nodo_visual.get_node("MeshInstance3D")
-		var mat = mesh_instance.get_surface_override_material(0)
-		if mat:
-			mat.albedo_color = color
 
 func restaurar_color() -> void:
+	
 	if nodo_visual and material_original:
-		var mesh_instance = nodo_visual.get_node("MeshInstance3D")
-		mesh_instance.set_surface_override_material(0, material_original)
+		print("restaura")
+
+		nodo_visual.restaurar_color()
 
 func toString() -> String:
 	return "Nodo[id=%d, nombre=%s, vecinos=%d]" % [id, nombre, vecinos.size()]

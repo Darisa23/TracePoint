@@ -1,5 +1,5 @@
 extends Node3D
-# Script para adjuntar a cada nivel dentro de CyberQuest
+# Script para adjuntar a cada nivel
 
 @export var nivel_numero: int = 1
 @export var activo: bool = true  # Desactiva niveles que no estés usando

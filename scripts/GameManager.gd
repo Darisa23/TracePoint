@@ -106,21 +106,27 @@ func iniciar_juego(type:String):
 
 func validar_salto_a_nodo(nodo_id: int) -> bool:
 	if not juego_iniciado:
-		iniciar_juego("null")
+		print("inicia juego")
+		
+		iniciar_juego(tipo_recorrido)
 		return true
 	
 	if not puede_saltar:
+		print("psalt")
+		
 		return false
 	
 	var nodo = grafo.obtener_nodo(nodo_id)
 	if not nodo:
+		print("not nodo")
 		return false
 	
 	# Verificar si es el nodo correcto
-	if indice_actual < recorrido_correcto.size():
+	if (indice_actual+1) < recorrido_correcto.size():
 		var nodo_esperado = recorrido_correcto[indice_actual+1]
 		#para que pueda devolverse por los que ya visitó correctamente
 		if nodo.vc:
+			print("lol")
 			return true
 		if nodo.id == nodo_esperado.id:
 			# CORRECTO
@@ -130,7 +136,7 @@ func validar_salto_a_nodo(nodo_id: int) -> bool:
 			indice_actual += 1
 			
 			# Verificar victoria
-			if indice_actual >= recorrido_correcto.size():
+			if (indice_actual+1) >= recorrido_correcto.size():
 				completar_mision()
 			
 			return true
