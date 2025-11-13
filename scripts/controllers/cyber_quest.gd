@@ -52,7 +52,7 @@ func cambiar_a_nivel(numero: int):
 	activar_solo_nivel(numero)
 	
 	# Esperar un poco y posicionar player
-	await get_tree().create_timer(4).timeout
+	await get_tree().create_timer(3).timeout
 	posicionar_player_en_nivel_actual()
 
 func activar_solo_nivel(numero: int):
@@ -85,7 +85,7 @@ func activar_solo_nivel(numero: int):
 			if nivel_2:
 				if nivel_2.has_method("activar"):
 					print("entra a activar en cambio")
-					await get_tree().create_timer(3.5).timeout
+					await get_tree().create_timer(3).timeout
 					nivel_2.activar() 
 				else:
 					nivel_2.visible = true
@@ -109,7 +109,7 @@ func _on_cualquier_mision_completada():
 	print("\nMisión completada detectada en CyberQuest")
 	
 	# Esperar 3 segundos y pasar al siguiente nivel
-	await get_tree().create_timer(3.0).timeout
+	await get_tree().create_timer(1.0).timeout
 	
 	if nivel_actual < 3:
 		cambiar_a_nivel(nivel_actual + 1)

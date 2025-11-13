@@ -55,5 +55,10 @@ layout_mode = 2
 [node name="hrt3" parent="HBoxContainer" instance=ExtResource("2_5u87e")]
 layout_mode = 2
 
+[node name="bfjkdk" type="TextureButton" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+ignore_texture_size = true
+
 [connection signal="pressed" from="Button_bfs" to="." method="_on_button_bfs_pressed"]
 [connection signal="pressed" from="Button_dfs" to="." method="_on_button_dfs_pressed"]

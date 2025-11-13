@@ -85,14 +85,13 @@ func cargar_nivel_2():
 	
 	# Matriz de pesos del nivel 2
 	var pesos = [
-		[0, 3, 5, 0, 0, 0, 0, 10],
-		[3, 0, 5, 8, 6, 0, 6, 9],
-		[5, 5, 0, 0, 4, 7, 3, 0],
-		[0, 8, 0, 0, 12, 0, 2, 14],
-		[0, 6, 4, 12, 0, 0, 9, 0],
-		[0, 0, 7, 0, 0, 0, 0, 5],
-		[0, 6, 3, 2, 9, 0, 0, 0],
-		[10, 9, 0, 14, 0, 5, 0, 0]
+		[0, 8, 3, 5, 0, 0, 0],
+		[8, 0, 11, 0, 0, 0, 0],
+		[3, 11, 0, 0, 1, 1, 0],
+		[5, 0, 0, 0, 4, 0, 0],
+		[0, 0, 1, 4, 0, 2, 6],
+		[0, 0, 1, 0, 2, 0, 0],
+		[0, 0, 0, 0, 6, 0, 0]
 	]
 	
 	print("Creando grafo con matriz ", matriz.size(), "x", matriz[0].size())
@@ -106,12 +105,11 @@ func cargar_nivel_2():
 	var posiciones = [
 		Vector3(0, 0, 0),      # A
 		Vector3(5, 0, 2),      # B
-		Vector3(8, 0, 6),      # C
+		Vector3(8, 0, 8),      # C
 		Vector3(6, 0, 10),     # D
 		Vector3(2, 0, 11),     # E
 		Vector3(-2, 0, 8),     # F
 		Vector3(-4, 0, 4),     # G
-		Vector3(-2, 0, 0)      # H
 	]
 	
 	for i in range(grafo.nodos.size()):
@@ -219,7 +217,7 @@ func perder_vida():
 func gameOver():
 	puede_saltar = false
 	emit_signal("game_over")
-	await get_tree().create_timer(3.5).timeout
+	await get_tree().create_timer(2.5).timeout
 	get_tree().change_scene_to_file("res://escenas/game_over.tscn")
 
 func reiniciar_nivel():
