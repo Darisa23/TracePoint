@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfb4v6e8041vj"]
+
+[ext_resource type="Script" uid="uid://dlouvw4gdikdp" path="res://scripts/heart.gd" id="1_rwlis"]
+[ext_resource type="Texture2D" uid="uid://76hctdlllyxp" path="res://assets/vidas.png" id="2_yug70"]
+
+[node name="hrt" type="Panel"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(83, 81)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1837.0
+offset_bottom = -999.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rwlis")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(56.0336, 46.8396)
+scale = Vector2(0.867697, 0.908687)
+texture = ExtResource("2_yug70")
+hframes = 2
+frame = 1

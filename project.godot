@@ -13,7 +13,6 @@ config_version=5
 config/name="M2. Get to Know 3D (Interactive Tours)"
 run/main_scene="res://game.tscn"
 config/features=PackedStringArray("4.4", "Mobile")
-config/icon="res://icon.png"
 
 [autoload]
 

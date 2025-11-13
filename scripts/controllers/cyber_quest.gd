@@ -13,7 +13,7 @@ var nivel_actual: int = 1
 
 func _ready():
 	print("\n" + "=".repeat(50))
-	print("CYBERQUEST - GUARDIANES DE LA RED GLOBAL")
+	print("TRACEPOINT BY: TINYTARDIGRADE")
 	print("=".repeat(50) + "\n")
 	
 	# Registrar player en GameManager
@@ -52,7 +52,7 @@ func cambiar_a_nivel(numero: int):
 	activar_solo_nivel(numero)
 	
 	# Esperar un poco y posicionar player
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(4).timeout
 	posicionar_player_en_nivel_actual()
 
 func activar_solo_nivel(numero: int):
@@ -84,9 +84,13 @@ func activar_solo_nivel(numero: int):
 		2:
 			if nivel_2:
 				if nivel_2.has_method("activar"):
+					print("entra a activar en cambio")
+					await get_tree().create_timer(3.5).timeout
 					nivel_2.activar() 
 				else:
 					nivel_2.visible = true
+					await get_tree().create_timer(3.5).timeout
+					get_tree().change_scene_to_file("res://escenas/niveles/nivel_2_safe_route.tscn")
 			else:
 				push_warning("Nivel 2 no existe aún")
 		3:
@@ -99,7 +103,6 @@ func activar_solo_nivel(numero: int):
 				push_warning("Nivel 3 no existe aún")
 
 func reiniciar_nivel_actual():
-	print("Reiniciando nivel actual...")
 	GameManager.reiniciar_nivel()
 
 func _on_cualquier_mision_completada():
@@ -134,5 +137,3 @@ func posicionar_player_en_nivel_actual():
 	# Resetear velocidad
 	if "velocity" in player:
 		player.velocity = Vector3.ZERO
-	
-	print("Player posicionado en nivel %d: %s" % [nivel_actual, pos_inicial])

@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dw27a5dihjvit"]
+[gd_scene load_steps=4 format=3 uid="uid://dw27a5dihjvit"]
 
 [ext_resource type="Script" uid="uid://cux0rnbg6vwuj" path="res://scripts/hud.gd" id="1_m5lxu"]
+[ext_resource type="Script" uid="uid://66fwwmyg5u6r" path="res://scripts/hearts_container.gd" id="2_0sskl"]
+[ext_resource type="PackedScene" uid="uid://cfb4v6e8041vj" path="res://escenas/hrt.tscn" id="2_5u87e"]
 
 [node name="HUD" type="CanvasLayer"]
 layer = 3
@@ -34,6 +36,24 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 30
 text = "DFS
 "
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_left = 94.0
+offset_top = 60.0
+offset_right = 351.0
+offset_bottom = 141.0
+size_flags_stretch_ratio = 2.27
+theme_override_constants/separation = 17
+script = ExtResource("2_0sskl")
+
+[node name="hrt" parent="HBoxContainer" instance=ExtResource("2_5u87e")]
+layout_mode = 2
+
+[node name="hrt2" parent="HBoxContainer" instance=ExtResource("2_5u87e")]
+layout_mode = 2
+
+[node name="hrt3" parent="HBoxContainer" instance=ExtResource("2_5u87e")]
+layout_mode = 2
 
 [connection signal="pressed" from="Button_bfs" to="." method="_on_button_bfs_pressed"]
 [connection signal="pressed" from="Button_dfs" to="." method="_on_button_dfs_pressed"]

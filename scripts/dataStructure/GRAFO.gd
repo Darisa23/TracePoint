@@ -15,6 +15,8 @@ func _init(p_matriz_adyacencia: Array, p_dirigido: bool = false, p_matriz_pesos:
 	var num_nodos = matriz_adyacencia.size()
 	for i in range(num_nodos):
 		var nodo = Nodo.new(i)
+		if nodos.is_empty():
+			nodo.esA == true
 		nodos.append(nodo)
 	
 	# Construir conexiones

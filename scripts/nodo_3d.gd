@@ -13,7 +13,7 @@ var nodo_logico: Nodo = null
 var esta_quebrando: bool = false
 var tiempo_quiebre: float = 0.0
 var duracion_quiebre: float = 1.5
-
+var attemps : int = 0
 # Colores
 var color_normal: Color = Color(0.2, 0.5, 0.8)  # Azul
 var color_correcto: Color = Color(0.2, 0.8, 0.2)  # Verde
@@ -49,6 +49,8 @@ func _process(delta):
 		# Destruir cuando termine
 		if progreso >= 1.0:
 			queue_free()
+			
+		#ACA LLAMAR A GAME OVER DEL NIVEL**********************
 
 func inicializar(p_nodo_logico: Nodo):
 	nodo_logico = p_nodo_logico
@@ -65,13 +67,12 @@ func inicializar(p_nodo_logico: Nodo):
 		if label_3d:
 			var letra = char(65 + nodo_logico.id)  # 65 = 'A' en ASCII
 			label_3d.text = letra
-			print("  Nodo %d → Letra: %s" % [nodo_logico.id, letra])
 
 func _on_body_entered(body):
 	# Verificar si es el jugador
 	if body.is_in_group("player") or body.name == "Player":
-		print("Jugador entró al nodo: ", nodo_logico.id if nodo_logico else "sin ID")
-		
+		#print("Jugador entró al nodo: ", nodo_logico.id if nodo_logico else "sin ID")
+		#if nodo_logico.esA:		
 		if nodo_logico:
 			# Validar con GameManager (singleton)
 			var es_correcto = GameManager.validar_salto_a_nodo(nodo_logico.id)
@@ -81,9 +82,11 @@ func _on_body_entered(body):
 				# El color ya lo cambia GameManager → nodo_logico.marcar_correcto()
 			else:
 				print("Nodo incorrecto!")
-				# Iniciar animación de quiebre
+				attemps+=1
 				await get_tree().create_timer(0.5).timeout  # Pequeña pausa dramática
-				iniciar_quiebre()
+				# Iniciar animación de quiebre			
+				if attemps>=3:
+					iniciar_quiebre()
 
 func marcar_correcto():
 	if material:

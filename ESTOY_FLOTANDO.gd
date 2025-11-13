@@ -19,20 +19,18 @@ extends Node
 var nivel_actual_completado: int = 0
 
 func _ready():
-	print("TracePoint inicializado")
-	
-	# Posicionar player en spawn
+# Posicionar player en spawn
 	if player:
 		print("zi")
 		player.global_position = player_spawn_position
 	
 	# Configurar estado inicial del hub
-	configurar_hub_segun_progreso()
+	configurar_mundo_segun_progreso()
 	
 	# Conectar señales
 	GameManager.mision_completada.connect(_on_mision_completada)
 
-func configurar_hub_segun_progreso():
+func configurar_mundo_segun_progreso():
 	# Cargar progreso guardado (por ahora hardcodeado)
 	nivel_actual_completado = GameManager.nivel_actual - 1
 	
@@ -59,9 +57,9 @@ func _on_mision_completada():
 	nivel_actual_completado += 1
 	
 	# Expandir el hub
-	expandir_hub()
+	ampliar_mundo()
 
-func expandir_hub():
+func ampliar_mundo():
 	print("Expandiendo Hub World...")
 	
 	# Animación de expansión (puedes mejorar esto)

@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dksfa6qfha8rg" path="res://ESTOY_FLOTANDO.gd" id="1_bmpbm"]
 [ext_resource type="PackedScene" uid="uid://b1ot6gn6tms6h" path="res://lesson_reference/player_3d_template.tscn" id="1_uaa4f"]
 [ext_resource type="PackedScene" uid="uid://2dwpnp36vlfk" path="res://escenas/niveles/nivel_1_network_tracer.tscn" id="2_5ssbh"]
-[ext_resource type="Script" uid="uid://8fpq85lemlwa" path="res://scripts/controllers/nivel_cer.gd" id="3_bmpbm"]
+[ext_resource type="PackedScene" uid="uid://c0j4675x22x1g" path="res://escenas/niveles/nivel_2_safe_route.tscn" id="4_bmpbm"]
 [ext_resource type="PackedScene" uid="uid://dw27a5dihjvit" path="res://escenas/hud.tscn" id="4_e6aq7"]
 
 [node name="TracePoint" type="Node"]
@@ -17,8 +17,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.32797, 6.37644, -7.53124)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.32797, 6.37644, -7.53124)
 script = ExtResource("1_5ssbh")
 
+[node name="Nivel2_SafeRoute" parent="Niveles" instance=ExtResource("4_bmpbm")]
+visible = false
+activo = false
+
 [node name="Nivel1_NetworkTracer" parent="Niveles" instance=ExtResource("2_5ssbh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.88785, -3.06269, 0.64905)
-script = ExtResource("3_bmpbm")
 
 [node name="HUD" parent="." instance=ExtResource("4_e6aq7")]

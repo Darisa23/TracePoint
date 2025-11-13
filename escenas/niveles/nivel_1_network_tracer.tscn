@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://2dwpnp36vlfk"]
+[gd_scene load_steps=9 format=3 uid="uid://2dwpnp36vlfk"]
 
+[ext_resource type="Script" uid="uid://8fpq85lemlwa" path="res://scripts/controllers/nivel_cer.gd" id="1_065hm"]
 [ext_resource type="Shader" uid="uid://cdlt3ujrpad32" path="res://level/sky_with_stars.tres" id="1_kj4ii"]
 [ext_resource type="Texture2D" uid="uid://bqij60qfct7lx" path="res://level/qwantani_moon_noon_puresky_4k.exr" id="2_1jpj2"]
 [ext_resource type="Script" uid="uid://b7xahjuha0vog" path="res://scripts/GrafoSpawner.gd" id="3_cuwpx"]
@@ -16,12 +17,12 @@ shader_parameter/particle_size = 0.001
 shader_parameter/neon_blue = Color(0.898995, 0.723707, 0.269514, 1)
 shader_parameter/glow_intensity = 2.0
 
-[sub_resource type="Sky" id="Sky_l5lfc"]
+[sub_resource type="Sky" id="Sky_065hm"]
 sky_material = SubResource("ShaderMaterial_065hm")
 
 [sub_resource type="Environment" id="Environment_v8kyt"]
 background_mode = 2
-sky = SubResource("Sky_l5lfc")
+sky = SubResource("Sky_065hm")
 ambient_light_source = 3
 ambient_light_color = Color(0.74902, 0.742654, 0.615273, 1)
 ambient_light_sky_contribution = 0.0
@@ -49,6 +50,7 @@ volumetric_fog_albedo = Color(0.843137, 0.737255, 0.329412, 1)
 volumetric_fog_emission = Color(0.843137, 0.737255, 0.329412, 1)
 
 [node name="Nivel1_NetworkTracer" type="Node3D"]
+script = ExtResource("1_065hm")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_v8kyt")

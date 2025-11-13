@@ -4,7 +4,8 @@ extends Node
 # Estado global del juego
 var nivel_actual: int = 1
 var puntuacion_total: int = 0
-
+var vidas_actuales : int = 3
+var vidas_maximas : int = 3
 # Nivel actual
 var grafo: Grafo = null
 var tipo_recorrido: String = "null"  # "BFS" o "DFS"
@@ -20,6 +21,8 @@ var spawner: Node3D = null
 # Señales
 signal nodo_visitado_correcto(nodo_id: int)
 signal nodo_visitado_incorrecto(nodo_id: int)
+signal vida_perdida()
+signal game_over()
 signal mision_completada()
 signal nivel_reiniciado()
 
@@ -63,12 +66,59 @@ func cargar_nivel_1():
 		grafo.nodos[i].posicion_3d = posiciones[i]
 	
 	grafo.imprimir_grafo()
+
+func cargar_nivel_2():
+	print("\n=== CARGANDO NIVEL 2: SAFEROUTE ===")
+	nivel_actual = 2
+	tipo_recorrido = "DIJKSTRA"
 	
-	# Calcular recorrido desde nodo 0
-	#calcular_recorrido_correcto(0)
+	# Matriz de adyacencia del nivel 2
+	var matriz = [
+		[0, 1, 1, 1, 0, 0, 0],
+		[1, 0, 1, 0, 0, 0, 0],
+		[1, 1, 0, 0, 1, 1, 0],
+		[1, 0, 0, 0, 1, 0, 0],
+		[0, 0, 1, 1, 0, 1, 1],
+		[0, 0, 1, 0, 1, 0, 0],
+		[0, 0, 0, 0, 1, 0, 0]
+	]
 	
-	#print("Orden correcto: ", obtener_ids_recorrido())
-	#print("Tipo de recorrido: ", tipo_recorrido)
+	# Matriz de pesos del nivel 2
+	var pesos = [
+		[0, 3, 5, 0, 0, 0, 0, 10],
+		[3, 0, 5, 8, 6, 0, 6, 9],
+		[5, 5, 0, 0, 4, 7, 3, 0],
+		[0, 8, 0, 0, 12, 0, 2, 14],
+		[0, 6, 4, 12, 0, 0, 9, 0],
+		[0, 0, 7, 0, 0, 0, 0, 5],
+		[0, 6, 3, 2, 9, 0, 0, 0],
+		[10, 9, 0, 14, 0, 5, 0, 0]
+	]
+	
+	print("Creando grafo con matriz ", matriz.size(), "x", matriz[0].size())
+	
+	# Crear grafo CON pesos
+	grafo = Grafo.new(matriz, false, pesos)
+	
+	print("Grafo creado con ", grafo.nodos.size(), " nodos")
+	
+	# Posiciones 3D (8 nodos en círculo)
+	var posiciones = [
+		Vector3(0, 0, 0),      # A
+		Vector3(5, 0, 2),      # B
+		Vector3(8, 0, 6),      # C
+		Vector3(6, 0, 10),     # D
+		Vector3(2, 0, 11),     # E
+		Vector3(-2, 0, 8),     # F
+		Vector3(-4, 0, 4),     # G
+		Vector3(-2, 0, 0)      # H
+	]
+	
+	for i in range(grafo.nodos.size()):
+		grafo.nodos[i].posicion_3d = posiciones[i]
+	
+	grafo.imprimir_grafo()
+	# Para Dijkstra calcularíamos el camino mínimo (lo implementamos después)
 
 func calcular_recorrido_correcto(nodo_inicio_id: int):
 	if not grafo:
@@ -98,8 +148,8 @@ func iniciar_juego(type:String):
 	juego_iniciado = true
 	puede_saltar = true
 	indice_actual = 0
+	grafo.obtener_nodo(0).marcar_correcto()
 	print("Juego iniciado - Sigue el recorrido ", tipo_recorrido)
-	# Calcular recorrido desde nodo 0
 	calcular_recorrido_correcto(0)
 	
 	print("Orden correcto: ", obtener_ids_recorrido())
@@ -107,29 +157,27 @@ func iniciar_juego(type:String):
 func validar_salto_a_nodo(nodo_id: int) -> bool:
 	if not juego_iniciado:
 		print("inicia juego")
-		
 		iniciar_juego(tipo_recorrido)
 		return true
 	
 	if not puede_saltar:
-		print("psalt")
+		#print("psalt")
 		
 		return false
 	
 	var nodo = grafo.obtener_nodo(nodo_id)
 	if not nodo:
-		print("not nodo")
+		#print("not nodo")
 		return false
 	
-	# Verificar si es el nodo correcto
+	# Verificción
 	if (indice_actual+1) < recorrido_correcto.size():
 		var nodo_esperado = recorrido_correcto[indice_actual+1]
 		#para que pueda devolverse por los que ya visitó correctamente
 		if nodo.vc:
-			print("lol")
+			#print("lol")
 			return true
 		if nodo.id == nodo_esperado.id:
-			# CORRECTO
 			print("nodo %d correcto (%d/%d)" % [nodo.id, indice_actual + 1, recorrido_correcto.size()])
 			nodo.marcar_correcto()
 			emit_signal("nodo_visitado_correcto", nodo.id)
@@ -141,29 +189,40 @@ func validar_salto_a_nodo(nodo_id: int) -> bool:
 			
 			return true
 		else:
-			# ¡INCORRECTO!
 			print("nodo incorrecto: %d (se esperaba: %d)" % [nodo.id, nodo_esperado.id])
 			nodo.marcar_incorrecto()
 			emit_signal("nodo_visitado_incorrecto", nodo.id)
-			game_over()
+			perder_vida()
 			return false
 	
 	return false
 
 func completar_mision():
-	print("\n¡MISIÓN COMPLETADA!")
+	print("fin nivel")
 	puede_saltar = false
 	puntuacion_total += 100
 	emit_signal("mision_completada")
 
-func game_over():
-	print("Game Over - Nodo incorrecto")
+func perder_vida():
+	vidas_actuales -= 1
+	print("LA VAINA: ",vidas_actuales)
+	print("Vida perdida! Vidas restantes: %d/%d" % [vidas_actuales, vidas_maximas])
+	emit_signal("vida_perdida")	
+	if vidas_actuales <= 0:
+		print("Sin vidas! GAME OVER")
+		gameOver()
+	else:
+		await get_tree().create_timer(0.8).timeout
+		reiniciar_nivel()
+
+
+func gameOver():
 	puede_saltar = false
-	await get_tree().create_timer(2.0).timeout
-	reiniciar_nivel()
+	emit_signal("game_over")
+	await get_tree().create_timer(3.5).timeout
+	get_tree().change_scene_to_file("res://escenas/game_over.tscn")
 
 func reiniciar_nivel():
-	print("\nReiniciando nivel...")
 	indice_actual = 0
 	juego_iniciado = false
 	puede_saltar = true

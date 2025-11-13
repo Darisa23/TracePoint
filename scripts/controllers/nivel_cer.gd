@@ -3,7 +3,7 @@ extends Node3D
 
 @export var nivel_numero: int = 1
 @export var activo: bool = true  # Desactiva niveles que no estés usando
-
+@onready var graf = $GrafoSpawner
 func _ready():
 	# Si el nivel no está activo, desactivarlo
 	if not activo:
@@ -14,10 +14,18 @@ func _ready():
 	# Cargar el nivel correspondiente en GameManager
 	match nivel_numero:
 		1:
+			print("HOLAAA, se hizo el ready para nivel 1")
 			GameManager.cargar_nivel_1()
+			graf.instanciar_grafo()
+			if graf.dibujar_conexiones:
+				graf.instanciar_conexiones()
 		2:
+			print("HOLAAA, se hizo el ready para novel 2")
 			push_warning("Nivel 2 aún no implementado")
-			# GameManager.cargar_nivel_2()
+			GameManager.cargar_nivel_2()
+			graf.instanciar_grafo()
+			if graf.dibujar_conexiones:
+				graf.instanciar_conexiones()
 		3:
 			push_warning("Nivel 3 aún no implementado")
 			# GameManager.cargar_nivel_3()
@@ -28,18 +36,14 @@ func _ready():
 	# IMPORTANTE: Esperar a que el grafo esté listo
 	await get_tree().process_frame
 	await get_tree().process_frame
-	
-	# El CyberQuestController se encargará de posicionar el player
-	
-	print("Nivel %d cargado" % nivel_numero)
+
 	
 	# Conectar señales del GameManager
 	if not GameManager.mision_completada.is_connected(_on_mision_completada):
 		GameManager.mision_completada.connect(_on_mision_completada)
 	if not GameManager.nivel_reiniciado.is_connected(_on_nivel_reiniciado):
 		GameManager.nivel_reiniciado.connect(_on_nivel_reiniciado)
-	
-	print("Nivel %d listo para jugar" % nivel_numero)
+
 
 func _on_mision_completada():
 	print("\n¡NIVEL %d COMPLETADO!" % nivel_numero)
@@ -54,11 +58,26 @@ func _on_nivel_reiniciado():
 
 # Método para activar/desactivar el nivel
 func activar():
-	activo = true
+	self.activo = true
 	visible = true
 	process_mode = Node.PROCESS_MODE_INHERIT
+	
+	match nivel_numero:
+		1:
+			GameManager.cargar_nivel_1()
+			graf.instanciar_grafo()
+			if graf.dibujar_conexiones:
+				graf.instanciar_conexiones()
+		2:
+			GameManager.cargar_nivel_2()
+			graf.instanciar_grafo()
+			if graf.dibujar_conexiones:
+				graf.instanciar_conexiones()
+		3:
+			GameManager.cargar_nivel_3()
+	await get_tree().process_frame
 
 func desactivar():
-	activo = false
+	self.activo = false
 	visible = false
 	process_mode = Node.PROCESS_MODE_DISABLED

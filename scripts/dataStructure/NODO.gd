@@ -8,6 +8,7 @@ var posicion_3d: Vector3
 var vecinos: Array = []  # Array de Nodo
 var visitado: bool = false
 var vc: bool = false
+var esA: bool = false
 var distancia: float = INF
 var padre: Nodo = null
 
@@ -48,8 +49,6 @@ func marcar_visitado() -> void:
 func restaurar_color() -> void:
 	
 	if nodo_visual and material_original:
-		print("restaura")
-
 		nodo_visual.restaurar_color()
 
 func toString() -> String:

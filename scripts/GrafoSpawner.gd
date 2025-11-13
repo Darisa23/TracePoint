@@ -6,31 +6,26 @@ extends Node3D
 
 var nodos_instanciados: Array = []
 
-func _ready():
-	print("GrafoSpawner._ready() iniciado")
+#func _ready():
 	
 	# Registrarse en el GameManager
-	GameManager.registrar_spawner(self)
+#	GameManager.registrar_spawner(self)
 	
 	# Esperar un frame
-	await get_tree().process_frame
-	
-	print("Verificando grafo en GameManager...")
-	print("  GameManager.grafo existe: ", GameManager.grafo != null)
-	if GameManager.grafo:
-		print("  Número de nodos: ", GameManager.grafo.nodos.size())
+#	await get_tree().process_frame
+#	if GameManager.grafo:
+#		print("  Número de nodos: ", GameManager.grafo.nodos.size())
 	
 	# Instanciar el grafo del nivel actual
-	if GameManager.grafo:
-		instanciar_grafo()
-		if dibujar_conexiones:
-			instanciar_conexiones()
-	else:
-		push_error("GameManager no tiene un grafo cargado")
-		push_error("Asegúrate de que LevelController llame a GameManager.cargar_nivel_X() primero")
+#	if GameManager.grafo:
+#		instanciar_grafo()
+#		if dibujar_conexiones:
+#			instanciar_conexiones()
+#	else:
+#		push_error("GameManager no tiene un grafo cargado")
+#		push_error("Asegúrate de que LevelController llame a GameManager.cargar_nivel_X() primero")
 
 func instanciar_grafo():
-	print("Instanciando nodos del grafo...")
 	
 	if not nodo_prefab:
 		push_error("No se asignó el prefab del nodo en GrafoSpawner")
@@ -53,13 +48,10 @@ func instanciar_grafo():
 		nodo_visual.inicializar(nodo_logico)
 		
 		nodos_instanciados.append(nodo_visual)
-		
-		print("  ✓ Nodo %d en %s" % [nodo_logico.id, nodo_logico.posicion_3d])
 	
 	print("%d nodos creados" % nodos_instanciados.size())
 
 func instanciar_conexiones():
-	print("Dibujando conexiones...")
 	
 	var grafo = GameManager.grafo
 	var conexiones_dibujadas = 0
@@ -72,8 +64,7 @@ func instanciar_conexiones():
 			
 			crear_linea_conexion(nodo_logico.posicion_3d, vecino.posicion_3d)
 			conexiones_dibujadas += 1
-	
-	print("%d conexiones dibujadas" % conexiones_dibujadas)
+	#print("ya conexiones")
 
 func crear_linea_conexion(pos_inicio: Vector3, pos_fin: Vector3):
 	var linea = MeshInstance3D.new()
