@@ -26,6 +26,7 @@ func _ready():
 			graf.instanciar_grafo()
 			if graf.dibujar_conexiones:
 				graf.instanciar_conexiones()
+			#GameManager.iniciar_juego("dijkstra")
 		3:
 			push_warning("Nivel 3 aún no implementado")
 			# GameManager.cargar_nivel_3()
@@ -73,6 +74,7 @@ func activar():
 			graf.instanciar_grafo()
 			if graf.dibujar_conexiones:
 				graf.instanciar_conexiones()
+			GameManager.iniciar_juego("dijkstra")
 		3:
 			GameManager.cargar_nivel_3()
 	await get_tree().process_frame

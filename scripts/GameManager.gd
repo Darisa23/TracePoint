@@ -104,12 +104,12 @@ func cargar_nivel_2():
 	# Posiciones 3D (8 nodos en círculo)
 	var posiciones = [
 		Vector3(0, 0, 0),      # A
-		Vector3(5, 0, 2),      # B
-		Vector3(8, 0, 8),      # C
-		Vector3(6, 0, 10),     # D
-		Vector3(2, 0, 11),     # E
-		Vector3(-2, 0, 8),     # F
-		Vector3(-4, 0, 4),     # G
+		Vector3(0, 0, 5),      # B
+		Vector3(5, 0, 5),      # C
+		Vector3(5, 0, 0),     # D
+		Vector3(13, 0, 5),     # E
+		Vector3(5, 0, 13),     # F
+		Vector3(13, 0, 13),     # G
 	]
 	
 	for i in range(grafo.nodos.size()):
@@ -127,9 +127,15 @@ func calcular_recorrido_correcto(nodo_inicio_id: int):
 	
 	if tipo_recorrido == "BFS":
 		recorrido_correcto = RecorridosGrafo.bfs(grafo, nodo_inicio)
-	else:
+	elif tipo_recorrido == "DFS":
 		recorrido_correcto = RecorridosGrafo.dfs(grafo, nodo_inicio)
-	
+	elif tipo_recorrido == "dijkstra":
+		var nodo_destino = grafo.obtener_nodo(6)
+		recorrido_correcto = RecorridosGrafo.dijkstra(grafo,nodo_inicio,nodo_destino)
+		print("Camino más corto:")
+		for nodo in recorrido_correcto:
+			print("Nodo %d, distancia: %f" % [nodo.id, nodo.distancia])
+
 	indice_actual = 0
 
 # ============================================
