@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://cfb4v6e8041vj"]
+[gd_scene load_steps=5 format=3 uid="uid://cfb4v6e8041vj"]
 
 [ext_resource type="Script" uid="uid://dlouvw4gdikdp" path="res://scripts/heart.gd" id="1_rwlis"]
-[ext_resource type="Texture2D" uid="uid://76hctdlllyxp" path="res://assets/vidas.png" id="2_yug70"]
+[ext_resource type="Texture2D" uid="uid://dvxd24uqig53w" path="res://assets/losdos2.png" id="2_rwlis"]
+[ext_resource type="Shader" uid="uid://0vm5n7xx5m4v" path="res://escenas/hrt.gdshader" id="2_yug70"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3gd0f"]
+shader = ExtResource("2_yug70")
 
 [node name="hrt" type="Panel"]
 self_modulate = Color(1, 1, 1, 0)
@@ -16,8 +20,9 @@ grow_vertical = 2
 script = ExtResource("1_rwlis")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_3gd0f")
 position = Vector2(56.0336, 46.8396)
-scale = Vector2(0.867697, 0.908687)
-texture = ExtResource("2_yug70")
+scale = Vector2(0.4, 0.419)
+texture = ExtResource("2_rwlis")
 hframes = 2
 frame = 1

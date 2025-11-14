@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://doqvur36b3bcq"]
+[gd_scene load_steps=8 format=3 uid="uid://doqvur36b3bcq"]
 
 [ext_resource type="Script" uid="uid://txb11pb185do" path="res://scripts/nodo_3d.gd" id="1_75lwm"]
-[ext_resource type="FontFile" uid="uid://4if1vqqqq2oh" path="res://assets/Howdybun.otf" id="2_w6lw2"]
+[ext_resource type="FontFile" uid="uid://cpwdg36okbmhs" path="res://assets/Conthrax-SemiBold.otf" id="2_g0xwr"]
+[ext_resource type="Script" uid="uid://c4lvj5t4qwx3d" path="res://escenas/label_3d.gd" id="3_g0xwr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qvnjd"]
 albedo_color = Color(0.156863, 0.0784314, 0.305882, 1)
@@ -40,7 +41,8 @@ shape = SubResource("CylinderShape3D_g0xwr")
 
 [node name="Label3D" type="Label3D" parent="."]
 offset = Vector2(0, 100)
-modulate = Color(0.908287, 0.343415, 0.245186, 1)
+outline_modulate = Color(0.1342442, 0.6195359, 0.911919, 0.7882353)
 text = "A"
-font = ExtResource("2_w6lw2")
+font = ExtResource("2_g0xwr")
 font_size = 120
+script = ExtResource("3_g0xwr")

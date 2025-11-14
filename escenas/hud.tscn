@@ -1,41 +1,49 @@
-[gd_scene load_steps=4 format=3 uid="uid://dw27a5dihjvit"]
+[gd_scene load_steps=10 format=3 uid="uid://dw27a5dihjvit"]
 
 [ext_resource type="Script" uid="uid://cux0rnbg6vwuj" path="res://scripts/hud.gd" id="1_m5lxu"]
 [ext_resource type="Script" uid="uid://66fwwmyg5u6r" path="res://scripts/hearts_container.gd" id="2_0sskl"]
 [ext_resource type="PackedScene" uid="uid://cfb4v6e8041vj" path="res://escenas/hrt.tscn" id="2_5u87e"]
+[ext_resource type="Texture2D" uid="uid://crhkb6onbkokm" path="res://assets/bfs23.png" id="2_aapq4"]
+[ext_resource type="Texture2D" uid="uid://bg3n4eoicb7k8" path="res://assets/bfs23c.png" id="3_hklxo"]
+[ext_resource type="Texture2D" uid="uid://5hdeaxsbt7oo" path="res://assets/bfs23h.png" id="4_8ppq8"]
+[ext_resource type="Texture2D" uid="uid://c5l3e1txanw2x" path="res://assets/dfs.png" id="5_aapq4"]
+[ext_resource type="Texture2D" uid="uid://cogm20io58u3y" path="res://assets/dfsc.png" id="6_hklxo"]
+[ext_resource type="Texture2D" uid="uid://3dnepgcwgafg" path="res://assets/dfsh.png" id="7_8ppq8"]
 
 [node name="HUD" type="CanvasLayer"]
 layer = 3
 script = ExtResource("1_m5lxu")
 
-[node name="Button_bfs" type="Button" parent="."]
+[node name="Button_bfs" type="TextureButton" parent="."]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 121.0
-offset_top = -124.0
-offset_right = 207.0
-offset_bottom = -71.0
+offset_left = 167.0
+offset_top = -280.0
+offset_right = 744.0
+offset_bottom = 33.0
 grow_vertical = 0
-theme_override_font_sizes/font_size = 30
-text = "BFS
-"
+scale = Vector2(0.7, 0.7)
+texture_normal = ExtResource("2_aapq4")
+texture_pressed = ExtResource("3_hklxo")
+texture_hover = ExtResource("4_8ppq8")
 
-[node name="Button_dfs" type="Button" parent="."]
+[node name="Button_dfs" type="TextureButton" parent="."]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -156.0
-offset_top = -122.0
-offset_right = -66.0
-offset_bottom = -69.0
+offset_left = -543.0
+offset_top = -280.0
+offset_right = 34.0
+offset_bottom = 33.000122
 grow_horizontal = 0
 grow_vertical = 0
-theme_override_font_sizes/font_size = 30
-text = "DFS
-"
+scale = Vector2(0.7, 0.7)
+texture_normal = ExtResource("5_aapq4")
+texture_pressed = ExtResource("6_hklxo")
+texture_hover = ExtResource("7_8ppq8")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 offset_left = 94.0
