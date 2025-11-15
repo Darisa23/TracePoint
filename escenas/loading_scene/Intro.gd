@@ -12,7 +12,7 @@ extends Control
 const DURACION_FADE_IN = 1.0
 const DURACION_MOSTRAR = 1.5
 const DURACION_FADE_OUT = 0.5
-const DURACION_NEGRO_FINAL = 1.0
+const DURACION_NEGRO_FINAL = 0.5
 
 func _ready():
 	# Configurar para pantalla completa
@@ -71,10 +71,10 @@ func iniciar_secuencia_intro():
 	# Esperar resto de animación
 	tween.tween_interval(1)
 	
-	# Pausar en el último frame (cuando deja de parpadear)
+	# Pausar en el último frame
 	tween.tween_callback(func():
 		logo_antenas.pause()
-		logo_antenas.frame = logo_antenas.sprite_frames.get_frame_count("default") - 1
+		logo_antenas.frame = logo_antenas.sprite_frames.get_frame_count("defult") - 1
 	)
 	
 	# Mantener visible medio segundo
@@ -84,19 +84,45 @@ func iniciar_secuencia_intro():
 	# 3. SUBIR antenas Y aparecer logo SIMULTÁNEAMENTE
 	# -----------------------------------------------------
 	
-	# Las 3 cosas pasan AL MISMO TIEMPO en 0.5 segundos:
-	tween.tween_property(logo_antenas, "position:y", logo_antenas.position.y - 65, 0.5)
-	tween.tween_property(logo_antenas, "scale", Vector2(0.3, 0.3), 0.5).set_delay(-0.5)
-	tween.tween_property(logo_tracepoint, "modulate:a", 1.0, 0.5).set_delay(-0.5)
+
+	tween.tween_callback(func():
+		# Tween 1: Subir antenas
+		var tween_pos = create_tween()
+		tween_pos.set_trans(Tween.TRANS_SINE)
+		tween_pos.set_ease(Tween.EASE_OUT)
+		tween_pos.tween_property(logo_antenas, "position:y", logo_antenas.position.y - 65, 0.5)
+		
+		# Tween 2: Hacer pequeño
+		var tween_scale = create_tween()
+		tween_scale.set_trans(Tween.TRANS_SINE)
+		tween_scale.set_ease(Tween.EASE_OUT)
+		tween_scale.tween_property(logo_antenas, "scale", Vector2(0.3, 0.3), 0.5)
+		
+		# Tween 3: Aparecer tracepoint
+		var tween_trace = create_tween()
+		tween_trace.set_trans(Tween.TRANS_SINE)
+		tween_trace.set_ease(Tween.EASE_OUT)
+		tween_trace.tween_property(logo_tracepoint, "modulate:a", 1.0, 0.5)
+	)
+	
+	# Esperar a que terminen las animaciones simultáneas
+	tween.tween_interval(0.5)
 	
 	# -----------------------------------------------------
 	# 4. Mantener ambos logos visibles
 	# -----------------------------------------------------
 	tween.tween_interval(4.0)
 	
-	# Desaparecer ambos
-	tween.tween_property(logo_tracepoint, "modulate:a", 0.0, DURACION_FADE_OUT)
-	tween.tween_property(logo_antenas, "modulate:a", 0.0, DURACION_FADE_OUT).set_delay(-DURACION_FADE_OUT)
+	# Desaparecer ambos simultáneamente
+	tween.tween_callback(func():
+		var tween_fade1 = create_tween()
+		tween_fade1.tween_property(logo_tracepoint, "modulate:a", 0.0, DURACION_FADE_OUT)
+		
+		var tween_fade2 = create_tween()
+		tween_fade2.tween_property(logo_antenas, "modulate:a", 0.0, DURACION_FADE_OUT)
+	)
+	
+	tween.tween_interval(DURACION_FADE_OUT)
 	
 	# -----------------------------------------------------
 	# 5. Fade a negro y cambiar escena
@@ -109,6 +135,5 @@ func iniciar_secuencia_intro():
 		if escena_siguiente:
 			get_tree().change_scene_to_packed(escena_siguiente)
 		else:
-			push_error("No hay escena siguiente asignada")
+			push_error("No hay escena siguiente asignada caritatriste")
 	)
-	

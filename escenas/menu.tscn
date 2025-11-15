@@ -1,11 +1,19 @@
-[gd_scene load_steps=7 format=3 uid="uid://dm7n6lb6glrr"]
+[gd_scene load_steps=13 format=3 uid="uid://dm7n6lb6glrr"]
 
 [ext_resource type="Script" uid="uid://d0xi72n15q4sm" path="res://scripts/menu.gd" id="1_6cq3m"]
 [ext_resource type="Texture2D" uid="uid://c0m8qfrx0277x" path="res://assets/fondomainmenu.png" id="1_d7r87"]
 [ext_resource type="PackedScene" uid="uid://prh35jb6tjtd" path="res://player/sophia_skin/sophia_skin.tscn" id="2_2owot"]
-[ext_resource type="Texture2D" uid="uid://dbb6qff6gysu0" path="res://assets/cuadradoraro_sinfondo.png" id="3_2owot"]
-[ext_resource type="Texture2D" uid="uid://5loeorw3wiqf" path="res://assets/start_enabled.png" id="5_56ah5"]
-[ext_resource type="Texture2D" uid="uid://ddtpeyutu8qp0" path="res://assets/start_hover.png" id="6_xqndx"]
+[ext_resource type="Texture2D" uid="uid://bwsp30ffi70a0" path="res://assets/mainmenu/EXITE.png" id="4_6m0pt"]
+[ext_resource type="Texture2D" uid="uid://dn87s4sywft1k" path="res://assets/mainmenu/EXITC.png" id="5_builu"]
+[ext_resource type="Texture2D" uid="uid://cpocsnqw5nj2s" path="res://assets/mainmenu/EXITH.png" id="6_20bhr"]
+[ext_resource type="Texture2D" uid="uid://nojf3dqkbtme" path="res://assets/mainmenu/CONTROLSE.png" id="7_lji1a"]
+[ext_resource type="Texture2D" uid="uid://csmd4r8sbyun4" path="res://assets/mainmenu/CONTROLSC.png" id="9_lemrg"]
+[ext_resource type="Texture2D" uid="uid://kmlewr54poau" path="res://assets/mainmenu/STARTE.png" id="10_xxdvs"]
+[ext_resource type="Texture2D" uid="uid://blk6dgdqq3sdh" path="res://assets/mainmenu/STARTC.png" id="11_l313t"]
+[ext_resource type="Texture2D" uid="uid://di0nfotcvuktc" path="res://assets/mainmenu/STARTH.png" id="12_sbks2"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_i5l0x"]
+load_path = "res://.godot/imported/CONTROLSH.png-89c43b96118114c57f5e245cb2f27f36.ctex"
 
 [node name="Menu" type="CanvasLayer"]
 script = ExtResource("1_6cq3m")
@@ -52,7 +60,9 @@ offset_left = 1148.0
 offset_top = 478.0
 offset_right = 1761.0
 offset_bottom = 732.0
-texture_normal = ExtResource("3_2owot")
+texture_normal = ExtResource("4_6m0pt")
+texture_pressed = ExtResource("5_builu")
+texture_hover = ExtResource("6_20bhr")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -61,7 +71,9 @@ offset_left = 1184.0
 offset_top = 296.0
 offset_right = 1797.0
 offset_bottom = 550.0
-texture_normal = ExtResource("3_2owot")
+texture_normal = ExtResource("7_lji1a")
+texture_pressed = ExtResource("9_lemrg")
+texture_hover = SubResource("CompressedTexture2D_i5l0x")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -70,8 +82,9 @@ offset_left = 1209.0
 offset_top = 123.0
 offset_right = 1822.0
 offset_bottom = 377.0
-texture_normal = ExtResource("5_56ah5")
-texture_hover = ExtResource("6_xqndx")
+texture_normal = ExtResource("10_xxdvs")
+texture_pressed = ExtResource("11_l313t")
+texture_hover = ExtResource("12_sbks2")
 ignore_texture_size = true
 stretch_mode = 0
 
