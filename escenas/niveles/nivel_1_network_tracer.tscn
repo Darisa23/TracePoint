@@ -1,43 +1,18 @@
-[gd_scene load_steps=13 format=3 uid="uid://2dwpnp36vlfk"]
+[gd_scene load_steps=7 format=3 uid="uid://2dwpnp36vlfk"]
 
 [ext_resource type="Shader" uid="uid://cdlt3ujrpad32" path="res://level/sky_with_stars.tres" id="1_kj4ii"]
-[ext_resource type="Texture2D" uid="uid://ca3jtautvrj1u" path="res://level/moon.png" id="2_ffrhb"]
 [ext_resource type="Script" uid="uid://b7xahjuha0vog" path="res://scripts/GrafoSpawner.gd" id="3_cuwpx"]
 [ext_resource type="PackedScene" uid="uid://doqvur36b3bcq" path="res://escenas/nodo_3d.tscn" id="4_kj4ii"]
 
-[sub_resource type="Curve" id="Curve_7i36f"]
-_data = [Vector2(0.331719, 0.0391753), 0.0, 0.0, 0, 0, Vector2(0.697336, 1), 0.51276, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_moxc7"]
-curve = SubResource("Curve_7i36f")
-
-[sub_resource type="Gradient" id="Gradient_jfkav"]
-offsets = PackedFloat32Array(0.784123, 1)
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_itrs3"]
-frequency = 0.3589
-fractal_octaves = 4
-cellular_distance_function = 2
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_83fre"]
-width = 1024
-height = 1024
-generate_mipmaps = false
-seamless = true
-color_ramp = SubResource("Gradient_jfkav")
-noise = SubResource("FastNoiseLite_itrs3")
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uxm7h"]
 shader = ExtResource("1_kj4ii")
-shader_parameter/top_color = Color(0.288469, 0.182916, 1, 1)
-shader_parameter/bottom_color = Color(1, 0.46805, 0, 1)
-shader_parameter/gradient_curve = SubResource("CurveTexture_moxc7")
-shader_parameter/noise_texture = SubResource("NoiseTexture2D_83fre")
-shader_parameter/moon_texture = ExtResource("2_ffrhb")
-shader_parameter/moon_direction = Vector3(-1.095, 0.68, 1)
-shader_parameter/moon_size = 0.045
+shader_parameter/skyColor = Color(1, 1, 1, 1)
+shader_parameter/horizonColor = Color(0.9, 0.9, 0.9, 1)
+shader_parameter/particle_speed = 0.5
+shader_parameter/particle_density = 50.0
+shader_parameter/particle_size = 0.02
+shader_parameter/neon_blue = Color(0.4, 0.8, 1, 1)
+shader_parameter/glow_intensity = 2.0
 
 [sub_resource type="Sky" id="Sky_0h0bb"]
 sky_material = SubResource("ShaderMaterial_uxm7h")
