@@ -1,28 +1,50 @@
-[gd_scene load_steps=9 format=3 uid="uid://2dwpnp36vlfk"]
+[gd_scene load_steps=13 format=3 uid="uid://2dwpnp36vlfk"]
 
-[ext_resource type="Script" uid="uid://8fpq85lemlwa" path="res://scripts/controllers/nivel_cer.gd" id="1_065hm"]
 [ext_resource type="Shader" uid="uid://cdlt3ujrpad32" path="res://level/sky_with_stars.tres" id="1_kj4ii"]
-[ext_resource type="Texture2D" uid="uid://bqij60qfct7lx" path="res://level/qwantani_moon_noon_puresky_4k.exr" id="2_1jpj2"]
+[ext_resource type="Texture2D" uid="uid://ca3jtautvrj1u" path="res://level/moon.png" id="2_ffrhb"]
 [ext_resource type="Script" uid="uid://b7xahjuha0vog" path="res://scripts/GrafoSpawner.gd" id="3_cuwpx"]
 [ext_resource type="PackedScene" uid="uid://doqvur36b3bcq" path="res://escenas/nodo_3d.tscn" id="4_kj4ii"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_065hm"]
+[sub_resource type="Curve" id="Curve_7i36f"]
+_data = [Vector2(0.331719, 0.0391753), 0.0, 0.0, 0, 0, Vector2(0.697336, 1), 0.51276, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_moxc7"]
+curve = SubResource("Curve_7i36f")
+
+[sub_resource type="Gradient" id="Gradient_jfkav"]
+offsets = PackedFloat32Array(0.784123, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_itrs3"]
+frequency = 0.3589
+fractal_octaves = 4
+cellular_distance_function = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_83fre"]
+width = 1024
+height = 1024
+generate_mipmaps = false
+seamless = true
+color_ramp = SubResource("Gradient_jfkav")
+noise = SubResource("FastNoiseLite_itrs3")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uxm7h"]
 shader = ExtResource("1_kj4ii")
-shader_parameter/skyTexture = ExtResource("2_1jpj2")
-shader_parameter/skyColor = Color(1, 1, 1, 1)
-shader_parameter/horizonColor = Color(0.9, 0.9, 0.9, 1)
-shader_parameter/particle_speed = 0.1
-shader_parameter/particle_density = 220.0
-shader_parameter/particle_size = 0.001
-shader_parameter/neon_blue = Color(0.898995, 0.723707, 0.269514, 1)
-shader_parameter/glow_intensity = 2.0
+shader_parameter/top_color = Color(0.288469, 0.182916, 1, 1)
+shader_parameter/bottom_color = Color(1, 0.46805, 0, 1)
+shader_parameter/gradient_curve = SubResource("CurveTexture_moxc7")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_83fre")
+shader_parameter/moon_texture = ExtResource("2_ffrhb")
+shader_parameter/moon_direction = Vector3(-1.095, 0.68, 1)
+shader_parameter/moon_size = 0.045
 
-[sub_resource type="Sky" id="Sky_065hm"]
-sky_material = SubResource("ShaderMaterial_065hm")
+[sub_resource type="Sky" id="Sky_0h0bb"]
+sky_material = SubResource("ShaderMaterial_uxm7h")
 
-[sub_resource type="Environment" id="Environment_v8kyt"]
+[sub_resource type="Environment" id="Environment_6u3i3"]
 background_mode = 2
-sky = SubResource("Sky_065hm")
+sky = SubResource("Sky_0h0bb")
 ambient_light_source = 3
 ambient_light_color = Color(0.74902, 0.742654, 0.615273, 1)
 ambient_light_sky_contribution = 0.0
@@ -50,10 +72,9 @@ volumetric_fog_albedo = Color(0.843137, 0.737255, 0.329412, 1)
 volumetric_fog_emission = Color(0.843137, 0.737255, 0.329412, 1)
 
 [node name="Nivel1_NetworkTracer" type="Node3D"]
-script = ExtResource("1_065hm")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_v8kyt")
+environment = SubResource("Environment_6u3i3")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.327016, 0.941731, -0.0787648, 0.688764, 0.294578, 0.662441, 0.647044, 0.162378, -0.744962, -47.2295, 26.8832, -28.0205)

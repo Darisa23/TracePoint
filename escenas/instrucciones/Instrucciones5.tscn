@@ -1,0 +1,264 @@
+[gd_scene load_steps=12 format=3 uid="uid://d2v4mfai2xu6f"]
+
+[ext_resource type="Texture2D" path="res://escenas/instrucciones/cuadro.png" id="1_h7ujv"]
+[ext_resource type="Texture2D" path="res://escenas/instrucciones/cuadroSB.png" id="2_oru6c"]
+[ext_resource type="Texture2D" path="res://escenas/instrucciones/image.psd(1).png" id="3_ps3q8"]
+[ext_resource type="Material" path="res://escenas/OutlineRojo1.tres" id="5_h7ujv"]
+[ext_resource type="FontFile" uid="uid://bo0jp8b0jlkw0" path="res://fonts/Conthrax-SemiBold.otf" id="6_1y6pp"]
+[ext_resource type="Texture2D" path="res://escenas/instrucciones/nemesisEye.png" id="6_oru6c"]
+[ext_resource type="Texture2D" path="res://escenas/instrucciones/exit_darker.png" id="7_ewpeu"]
+
+[sub_resource type="Animation" id="Animation_o3ej7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.8, 0.8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_bp8jr"]
+resource_name = "popup_appear"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 0.5),
+"update": 0,
+"values": [Vector2(0.8, 0.8), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_1w7b7"]
+resource_name = "popup_disappear"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.8, 0.8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 0.5),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ocfwe"]
+_data = {
+&"RESET": SubResource("Animation_o3ej7"),
+&"popup_appear": SubResource("Animation_bp8jr"),
+&"popup_disappear": SubResource("Animation_1w7b7")
+}
+
+[node name="Control" type="Control"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.8, 0.8)
+pivot_offset = Vector2(960, 540)
+size_flags_horizontal = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ocfwe")
+}
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect2" type="TextureRect" parent="Control"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -323.5
+offset_top = -480.6875
+offset_right = 323.5
+offset_bottom = 480.6875
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_h7ujv")
+
+[node name="TextureRect4" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_left = -273.0
+offset_top = -255.0
+offset_right = 306.0
+offset_bottom = -57.0
+texture = ExtResource("2_oru6c")
+expand_mode = 1
+
+[node name="TextureRect5" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_left = -276.0
+offset_top = -24.0
+offset_right = 303.0
+offset_bottom = 308.0
+texture = ExtResource("2_oru6c")
+expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_left = -74.5
+offset_top = -461.0
+offset_right = 525.5
+offset_bottom = 139.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_ps3q8")
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -272.0
+offset_top = -363.0
+offset_right = 266.0
+offset_bottom = -290.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.79306334, 0.9410413, 0.95804006, 1)
+theme_override_fonts/font = ExtResource("6_1y6pp")
+theme_override_font_sizes/font_size = 60
+text = "Instrucciones"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -259.0
+offset_top = -253.0
+offset_right = 265.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.7129237, 0.91739345, 0.93961006, 1)
+theme_override_fonts/normal_font = ExtResource("6_1y6pp")
+theme_override_fonts/bold_font = ExtResource("6_1y6pp")
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 20
+bbcode_enabled = true
+text = "Misión 5: TheCore
+[b]En esta mison deberas utilizar todos los algoritmos aprendidos para reconstruir el
+camino de defensa y sellar la brecha de los registros causada por NEMESIS"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -262.0
+offset_top = -31.0
+offset_right = 262.0
+offset_bottom = 275.0
+theme_override_colors/default_color = Color(0.7129237, 0.91739345, 0.93961006, 1)
+theme_override_fonts/normal_font = ExtResource("6_1y6pp")
+theme_override_fonts/bold_font = ExtResource("6_1y6pp")
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 20
+bbcode_enabled = true
+text = "[b]NEMESIS corrompio los 
+registros del sistema 
+central, tienes que 
+resolver una 
+secuencia de tareas, 
+en el orden de los 
+algoritmos que has aprendido hasta el momento los cuales son recorrido, camino minimo, reconstruccion y flujo. completar estas etapas indica tu victoria en la mision de restaurar la red y la derrota de NEMESIS"
+
+[node name="TextureRect3" type="TextureRect" parent="Control"]
+material = ExtResource("5_h7ujv")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -25.0
+offset_right = 283.0
+offset_bottom = 105.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_oru6c")
+expand_mode = 1
+
+[node name="Button" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = -205.0
+offset_top = 308.0
+offset_right = 265.0
+offset_bottom = 482.0
+toggle_mode = true
+button_pressed = true
+action_mode = 0
+icon = ExtResource("7_ewpeu")
+flat = true
