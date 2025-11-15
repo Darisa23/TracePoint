@@ -136,85 +136,83 @@ static func dijkstra(grafo: Grafo, nodo_inicio: Nodo, nodo_destino: Nodo) -> Arr
 	
 	# Reconstruir el camino desde el destino hasta el inicio
 	return obtener_camino(nodo_destino)
-# Kruskal - Árbol de Expansión Mínima
-# Retorna un array de diccionarios con las aristas en orden: [{origen: Nodo, destino: Nodo, peso: float}]
-static func kruskal(grafo: Grafo) -> Array:
-	var aristas_mst = []
-	var todas_aristas = []
-	var conjuntos = {}
+
+# Prim - Árbol de Expansión Mínima desde nodo inicial
+# Retorna un array con los nodos en el orden que fueron agregados al MST
+static func prim(grafo: Grafo, nodo_inicio: Nodo = null) -> Array:
+	var orden_mst = []
+	var en_mst = {}  # Nodos ya incluidos en el MST
+	var aristas_disponibles = []  # [{origen: Nodo, destino: Nodo, peso: float}]
 	
-	# Resetear estado
+	# Resetear estado de todos los nodos
 	grafo.resetear_todos_nodos()
 	
-	# Recolectar todas las aristas desde la matriz de pesos
-	for i in range(grafo.nodos.size()):
-		for j in range(i + 1 if not grafo.es_dirigido else 0, grafo.nodos.size()):
-			if grafo.existe_arista(grafo.nodos[i], grafo.nodos[j]):
-				var peso = grafo.obtener_peso(grafo.nodos[i], grafo.nodos[j])
-				todas_aristas.append({
-					"origen": grafo.nodos[i],
-					"destino": grafo.nodos[j],
+	# Si no se especifica nodo inicial, usar el primero
+	if nodo_inicio == null:
+		nodo_inicio = grafo.nodos[0]
+	
+	# Agregar el nodo inicial al MST
+	nodo_inicio.visitado = true
+	nodo_inicio.tiene_coleccionable = false
+	en_mst[nodo_inicio] = true
+	orden_mst.append(nodo_inicio)
+	
+	# Agregar todas las aristas del nodo inicial
+	for vecino in nodo_inicio.vecinos:
+		var peso = grafo.obtener_peso(nodo_inicio, vecino)
+		aristas_disponibles.append({
+			"origen": nodo_inicio,
+			"destino": vecino,
+			"peso": peso
+		})
+	
+	# Mientras haya nodos por agregar
+	while orden_mst.size() < grafo.nodos.size() and aristas_disponibles.size() > 0:
+		# Ordenar aristas por peso (menor primero)
+		aristas_disponibles.sort_custom(func(a, b): return a.peso < b.peso)
+		
+		# Buscar la arista de menor peso que conecte a un nodo nuevo
+		var arista_elegida = null
+		var indice_eliminar = -1
+		
+		for i in range(aristas_disponibles.size()):
+			var arista = aristas_disponibles[i]
+			if not en_mst.has(arista.destino):
+				arista_elegida = arista
+				indice_eliminar = i
+				break
+		
+		# Si no hay más aristas válidas, terminar
+		if arista_elegida == null:
+			break
+		
+		# Eliminar la arista elegida de las disponibles
+		aristas_disponibles.remove_at(indice_eliminar)
+		
+		# Agregar el nuevo nodo al MST
+		var nodo_nuevo = arista_elegida.destino
+		nodo_nuevo.visitado = true
+		nodo_nuevo.padre = arista_elegida.origen
+		en_mst[nodo_nuevo] = true
+		
+		# CRITERIO DEL COLECCIONABLE:
+		# Si el nodo nuevo NO es vecino directo del último nodo agregado
+		var ultimo_nodo = orden_mst[orden_mst.size() - 1]
+		if not ultimo_nodo.vecinos.has(nodo_nuevo):
+			nodo_nuevo.tiene_coleccionable = true
+		else:
+			nodo_nuevo.tiene_coleccionable = false
+		
+		orden_mst.append(nodo_nuevo)
+		
+		# Agregar las aristas del nuevo nodo a las disponibles
+		for vecino in nodo_nuevo.vecinos:
+			if not en_mst.has(vecino):
+				var peso = grafo.obtener_peso(nodo_nuevo, vecino)
+				aristas_disponibles.append({
+					"origen": nodo_nuevo,
+					"destino": vecino,
 					"peso": peso
 				})
 	
-	# Ordenar aristas por peso
-	todas_aristas.sort_custom(func(a, b): return a.peso < b.peso)
-	
-	# Inicializar conjuntos disjuntos (cada nodo es su propio conjunto)
-	for nodo in grafo.nodos:
-		conjuntos[nodo] = nodo
-	
-	# Función para encontrar el representante del conjunto
-	var encontrar_conjunto = func(nodo):
-		var raiz = nodo
-		while conjuntos[raiz] != raiz:
-			raiz = conjuntos[raiz]
-		# Compresión de camino
-		var actual = nodo
-		while actual != raiz:
-			var siguiente = conjuntos[actual]
-			conjuntos[actual] = raiz
-			actual = siguiente
-		return raiz
-	
-	# Función para unir dos conjuntos
-	var unir_conjuntos = func(nodo1, nodo2):
-		var raiz1 = encontrar_conjunto.call(nodo1)
-		var raiz2 = encontrar_conjunto.call(nodo2)
-		conjuntos[raiz1] = raiz2
-	
-	# Procesar aristas
-	for arista in todas_aristas:
-		var conjunto1 = encontrar_conjunto.call(arista.origen)
-		var conjunto2 = encontrar_conjunto.call(arista.destino)
-		
-		# Si no forman ciclo, agregar al MST
-		if conjunto1 != conjunto2:
-			aristas_mst.append(arista)
-			unir_conjuntos.call(arista.origen, arista.destino)
-			
-			# Marcar los nodos como visitados en el orden en que se procesan
-			if not arista.origen.visitado:
-				arista.origen.visitado = true
-			if not arista.destino.visitado:
-				arista.destino.visitado = true
-			
-			# Si ya tenemos n-1 aristas, terminamos
-			if aristas_mst.size() == grafo.nodos.size() - 1:
-				break
-	
-	return aristas_mst
-
-
-# Función para obtener solo los nodos del MST de Kruskal en orden
-static func kruskal_nodos(grafo: Grafo) -> Array:
-	var aristas_mst = kruskal(grafo)
-	var nodos_ordenados = []
-	
-	for arista in aristas_mst:
-		if not nodos_ordenados.has(arista.origen):
-			nodos_ordenados.append(arista.origen)
-		if not nodos_ordenados.has(arista.destino):
-			nodos_ordenados.append(arista.destino)
-	
-	return nodos_ordenados
+	return orden_mst

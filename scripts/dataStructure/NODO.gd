@@ -11,7 +11,7 @@ var vc: bool = false
 var esA: bool = false
 var distancia: float = INF
 var padre: Nodo = null
-
+var tiene_coleccionable: bool = false
 # Referencias visuales (si está en la escena)
 var nodo_visual: Node3D = null
 var material_original: StandardMaterial3D = null

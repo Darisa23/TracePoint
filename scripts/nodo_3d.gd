@@ -13,7 +13,6 @@ var nodo_logico: Nodo = null
 var esta_quebrando: bool = false
 var tiempo_quiebre: float = 0.0
 var duracion_quiebre: float = 1.5
-var attemps : int = 0
 # Colores
 var color_normal: Color = Color(0.2, 0.5, 0.8)  # Azul
 var color_correcto: Color = Color(0.2, 0.8, 0.2)  # Verde
@@ -76,16 +75,18 @@ func _on_body_entered(body):
 		if nodo_logico:
 			# Validar con GameManager (singleton)
 			var es_correcto = GameManager.validar_salto_a_nodo(nodo_logico.id)
-			
+			#print("el id es: ",nodo_logico.id)
 			if es_correcto:
 				print("Nodo correcto!")
+				#nodo_logico.vc=true
 				# El color ya lo cambia GameManager → nodo_logico.marcar_correcto()
 			else:
 				print("Nodo incorrecto!")
-				attemps+=1
 				await get_tree().create_timer(0.5).timeout  # Pequeña pausa dramática
 				# Iniciar animación de quiebre			
-				if attemps>=3:
+				#if attemps>=3:
+				if GameManager.vidas_actuales == 0:
+					#print("ujum")
 					iniciar_quiebre()
 
 func marcar_correcto():

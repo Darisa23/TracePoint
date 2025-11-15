@@ -1,0 +1,69 @@
+[gd_scene load_steps=9 format=3 uid="uid://bxrumyormv21n"]
+
+[ext_resource type="Script" uid="uid://8fpq85lemlwa" path="res://scripts/controllers/nivel_cer.gd" id="1_0jdvu"]
+[ext_resource type="Shader" uid="uid://b80iojip1k6wx" path="res://level/sky_with_stars.tres" id="2_ygabq"]
+[ext_resource type="Script" uid="uid://b7xahjuha0vog" path="res://scripts/GrafoSpawner.gd" id="3_0ibng"]
+[ext_resource type="PackedScene" uid="uid://doqvur36b3bcq" path="res://escenas/nodo_3d.tscn" id="4_hfsa5"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0wtap"]
+load_path = "res://.godot/imported/qwantani_moon_noon_puresky_4k.exr-9c99993655a97e2e3970192b680d1851.bptc.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uquey"]
+shader = ExtResource("2_ygabq")
+shader_parameter/skyTexture = SubResource("CompressedTexture2D_0wtap")
+shader_parameter/skyColor = Color(1, 1, 1, 1)
+shader_parameter/horizonColor = Color(0.9, 0.9, 0.9, 1)
+shader_parameter/particle_speed = 0.1
+shader_parameter/particle_density = 220.0
+shader_parameter/particle_size = 0.001
+shader_parameter/neon_blue = Color(0.898995, 0.723707, 0.269514, 1)
+shader_parameter/glow_intensity = 2.0
+
+[sub_resource type="Sky" id="Sky_l5lfc"]
+sky_material = SubResource("ShaderMaterial_uquey")
+
+[sub_resource type="Environment" id="Environment_mmdby"]
+background_mode = 2
+sky = SubResource("Sky_l5lfc")
+ambient_light_source = 3
+ambient_light_color = Color(0.74902, 0.742654, 0.615273, 1)
+ambient_light_sky_contribution = 0.0
+tonemap_mode = 2
+tonemap_exposure = 1.05
+tonemap_white = 0.95
+ssao_enabled = true
+ssao_radius = 2.0
+ssao_intensity = 1.4
+glow_intensity = 4.98
+glow_strength = 0.26
+glow_bloom = 0.08
+glow_blend_mode = 0
+glow_hdr_threshold = 0.26
+glow_hdr_scale = 0.0
+glow_hdr_luminance_cap = 18.75
+glow_map_strength = 1.0
+fog_light_color = Color(0.843137, 0.737255, 0.329412, 1)
+fog_density = 0.0
+fog_aerial_perspective = 1.0
+fog_sky_affect = 0.0
+fog_height_density = 0.1
+volumetric_fog_density = 0.01
+volumetric_fog_albedo = Color(0.843137, 0.737255, 0.329412, 1)
+volumetric_fog_emission = Color(0.843137, 0.737255, 0.329412, 1)
+
+[node name="Nivel3_RebuildNet" type="Node3D"]
+script = ExtResource("1_0jdvu")
+nivel_numero = 3
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mmdby")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.327016, 0.941731, -0.0787648, 0.688764, 0.294578, 0.662441, 0.647044, 0.162378, -0.744962, -47.2295, 26.8832, -28.0205)
+light_energy = 0.53
+shadow_enabled = true
+directional_shadow_max_distance = 40.0
+
+[node name="GrafoSpawner" type="Node3D" parent="."]
+script = ExtResource("3_0ibng")
+nodo_prefab = ExtResource("4_hfsa5")

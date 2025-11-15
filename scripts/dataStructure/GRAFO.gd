@@ -44,6 +44,7 @@ func obtener_peso(nodo_a: Nodo, nodo_b: Nodo) -> float:
 	return 1.0  # Peso por defecto si no hay matriz de pesos
 
 func resetear_todos_nodos() -> void:
+	#print("kee??")
 	for nodo in nodos:
 		nodo.resetear_estado()
 

@@ -1,4 +1,5 @@
 extends Node
+
 # Singleton - Configurar como Autoload en Project Settings
 
 # Estado global del juego
@@ -13,7 +14,7 @@ var recorrido_correcto: Array = []
 var indice_actual: int = 0
 var juego_iniciado: bool = false
 var puede_saltar: bool = true
-
+var ca:bool = false
 # Referencias (se asignan cuando se carga el nivel)
 var player: Node3D = null
 var spawner: Node3D = null
@@ -29,6 +30,14 @@ signal nivel_reiniciado()
 func _ready():
 	print("GameManager inicializado como singleton")
 
+func _process(_delta):
+	# Detectar si el player se cayó del mapa
+	if player and juego_iniciado and puede_saltar:
+		if player.global_position.y < -10:  # Límite de caída
+			print("Player se cayó del mapa!")
+			puede_saltar = false
+			ca=true
+			gameOver()
 # ============================================
 # CONFIGURACIÓN DE NIVELES
 # ============================================
@@ -104,19 +113,70 @@ func cargar_nivel_2():
 	# Posiciones 3D (8 nodos en círculo)
 	var posiciones = [
 		Vector3(0, 0, 0),      # A
-		Vector3(0, 0, 5),      # B
+		Vector3(5, 0, 0),      # B
 		Vector3(5, 0, 5),      # C
-		Vector3(5, 0, 0),     # D
-		Vector3(13, 0, 5),     # E
-		Vector3(5, 0, 13),     # F
-		Vector3(13, 0, 13),     # G
+		Vector3(0, 0, 5),     # D
+		Vector3(5, 0, 10),     # E
+		Vector3(10, 0, 6),     # F
+		Vector3(10, 0, 10),     # G
 	]
 	
 	for i in range(grafo.nodos.size()):
 		grafo.nodos[i].posicion_3d = posiciones[i]
 	
-	grafo.imprimir_grafo()
+	#grafo.imprimir_grafo()
 	# Para Dijkstra calcularíamos el camino mínimo (lo implementamos después)
+
+func cargar_nivel_3():
+	
+	print("\n=== CARGANDO NIVEL 3: REBUILDNET ===")
+	nivel_actual = 3
+	tipo_recorrido = "PRIM"
+	
+	# Matriz de adyacencia del nivel 3
+	var matriz = [
+		[0, 1, 1, 0, 0, 0, 0, 1],
+		[1, 0, 1, 1, 1, 0, 1, 1],
+		[1, 1, 0, 0, 1, 1, 1, 0],
+		[0, 1, 0, 0, 1, 0, 1, 1],
+		[0, 1, 1, 1, 0, 0, 1, 0],
+		[0, 0, 1, 0, 0, 0, 0, 1],
+		[0, 1, 1, 1, 1, 0, 0, 0],
+		[1, 1, 0, 1, 0, 1, 0, 0]
+	]
+	
+	var pesos = [
+		[0, 3, 5, 0, 0, 0, 0, 10],
+		[3, 0, 5, 8, 6, 0, 6, 9],
+		[5, 5, 0, 0, 4, 7, 3, 0],
+		[0, 8, 0, 0, 12, 0, 2, 14],
+		[0, 6, 4, 12, 0, 0, 9, 0],
+		[0, 0, 7, 0, 0, 0, 0, 5],
+		[0, 6, 3, 2, 9, 0, 0, 0],
+		[10, 9, 0, 14, 0, 5, 0, 0]
+	]
+	
+	print("Creando grafo con matriz ", matriz.size(), "x", matriz[0].size())
+	
+	grafo = Grafo.new(matriz, false, pesos)
+	
+	print("Grafo creado con ", grafo.nodos.size(), " nodos")
+
+	var posiciones = [
+		Vector3(0, 0, 0),
+		Vector3(5, 0, 2),
+		Vector3(8, 0, 6),
+		Vector3(6, 0, 10),
+		Vector3(2, 0, 11),
+		Vector3(-2, 0, 8),
+		Vector3(-4, 0, 4),
+		Vector3(-2, 0, 0)
+	]
+	
+	for i in range(grafo.nodos.size()):
+		grafo.nodos[i].posicion_3d = posiciones[i]
+	
+	#grafo.imprimir_grafo()
 
 func calcular_recorrido_correcto(nodo_inicio_id: int):
 	if not grafo:
@@ -135,6 +195,9 @@ func calcular_recorrido_correcto(nodo_inicio_id: int):
 		print("Camino más corto:")
 		for nodo in recorrido_correcto:
 			print("Nodo %d, distancia: %f" % [nodo.id, nodo.distancia])
+	elif tipo_recorrido == "prim":
+		recorrido_correcto = RecorridosGrafo.prim(grafo,nodo_inicio)
+		
 
 	indice_actual = 0
 
@@ -153,25 +216,29 @@ func iniciar_juego(type:String):
 	puede_saltar = true
 	indice_actual = 0
 	grafo.obtener_nodo(0).marcar_correcto()
+	
+	#print("vc en iniciar juego:",grafo.obtener_nodo(0).vc)
 	print("Juego iniciado - Sigue el recorrido ", tipo_recorrido)
 	calcular_recorrido_correcto(0)
-	
 	print("Orden correcto: ", obtener_ids_recorrido())
-
+	
+	grafo.obtener_nodo(0).vc = true
+	#print("vc en iniciar juego:",grafo.obtener_nodo(0).vc)
+	
 func validar_salto_a_nodo(nodo_id: int) -> bool:
 	if not juego_iniciado:
 		print("inicia juego")
+		#grafo.obtener_nodo(0).vc = true
 		iniciar_juego(tipo_recorrido)
 		return true
 	
 	if not puede_saltar:
-		#print("psalt")
-		
+		#print("psalt")	
 		return false
 	
 	var nodo = grafo.obtener_nodo(nodo_id)
 	if not nodo:
-		#print("not nodo")
+		print("not nodo")
 		return false
 	
 	# Verificción
@@ -209,7 +276,7 @@ func completar_mision():
 
 func perder_vida():
 	vidas_actuales -= 1
-	print("LA VAINA: ",vidas_actuales)
+	#print("LA VAINA: ",vidas_actuales)
 	print("Vida perdida! Vidas restantes: %d/%d" % [vidas_actuales, vidas_maximas])
 	emit_signal("vida_perdida")	
 	if vidas_actuales <= 0:
@@ -223,14 +290,17 @@ func perder_vida():
 func gameOver():
 	puede_saltar = false
 	emit_signal("game_over")
-	await get_tree().create_timer(2.5).timeout
+	var t = 3
+	if ca:
+		t=0.3
+	await get_tree().create_timer(t).timeout
 	get_tree().change_scene_to_file("res://escenas/game_over.tscn")
 
 func reiniciar_nivel():
 	indice_actual = 0
 	juego_iniciado = false
 	puede_saltar = true
-	
+	ca = false
 	# Resetear grafo
 	if grafo:
 		grafo.resetear_todos_nodos()
@@ -258,7 +328,7 @@ func obtener_ids_recorrido() -> Array:
 	var ids = []
 	for nodo in recorrido_correcto:
 		ids.append(nodo.id)
-	print(ids)
+	#print(ids)
 	return ids
 	
 

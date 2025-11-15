@@ -1,14 +1,16 @@
 [gd_scene load_steps=9 format=3 uid="uid://c0j4675x22x1g"]
 
 [ext_resource type="Script" uid="uid://8fpq85lemlwa" path="res://scripts/controllers/nivel_cer.gd" id="1_ap6iu"]
-[ext_resource type="Shader" uid="uid://cdlt3ujrpad32" path="res://level/sky_with_stars.tres" id="2_k768h"]
-[ext_resource type="Texture2D" uid="uid://bqij60qfct7lx" path="res://level/qwantani_moon_noon_puresky_4k.exr" id="3_nsocx"]
+[ext_resource type="Shader" uid="uid://b80iojip1k6wx" path="res://level/sky_with_stars.tres" id="2_0wtap"]
 [ext_resource type="Script" uid="uid://b7xahjuha0vog" path="res://scripts/GrafoSpawner.gd" id="4_qllsw"]
 [ext_resource type="PackedScene" uid="uid://doqvur36b3bcq" path="res://escenas/nodo_3d.tscn" id="5_3voxc"]
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0wtap"]
+load_path = "res://.godot/imported/qwantani_moon_noon_puresky_4k.exr-9c99993655a97e2e3970192b680d1851.bptc.ctex"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uquey"]
-shader = ExtResource("2_k768h")
-shader_parameter/skyTexture = ExtResource("3_nsocx")
+shader = ExtResource("2_0wtap")
+shader_parameter/skyTexture = SubResource("CompressedTexture2D_0wtap")
 shader_parameter/skyColor = Color(1, 1, 1, 1)
 shader_parameter/horizonColor = Color(0.9, 0.9, 0.9, 1)
 shader_parameter/particle_speed = 0.1
@@ -52,24 +54,6 @@ volumetric_fog_emission = Color(0.843137, 0.737255, 0.329412, 1)
 [node name="Nivel2_SafeRoute" type="Node3D"]
 script = ExtResource("1_ap6iu")
 nivel_numero = 2
-
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="."]
-visible = false
-offset_left = 448.0
-offset_top = 258.0
-offset_right = 1270.0
-offset_bottom = 705.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 300
-text = "HOLA"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_mmdby")

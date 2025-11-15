@@ -12,27 +12,27 @@ func _ready():
 		return
 	
 	# Cargar el nivel correspondiente en GameManager
-	match nivel_numero:
-		1:
-			print("HOLAAA, se hizo el ready para nivel 1")
-			GameManager.cargar_nivel_1()
-			graf.instanciar_grafo()
-			if graf.dibujar_conexiones:
-				graf.instanciar_conexiones()
-		2:
-			print("HOLAAA, se hizo el ready para novel 2")
-			push_warning("Nivel 2 aún no implementado")
-			GameManager.cargar_nivel_2()
-			graf.instanciar_grafo()
-			if graf.dibujar_conexiones:
-				graf.instanciar_conexiones()
-			#GameManager.iniciar_juego("dijkstra")
-		3:
-			push_warning("Nivel 3 aún no implementado")
+	#match nivel_numero:
+	#	1:
+	#		print("HOLAAA, se hizo el ready para nivel 1")
+	#		GameManager.cargar_nivel_1()
+	#		graf.instanciar_grafo()
+	#		if graf.dibujar_conexiones:
+	#			graf.instanciar_conexiones()
+	#	2:
+	#		print("HOLAAA, se hizo el ready para novel 2")
+	#		push_warning("Nivel 2 aún no implementado")
+	#		GameManager.cargar_nivel_2()
+	#		graf.instanciar_grafo()
+	#		if graf.dibujar_conexiones:
+	#			graf.instanciar_conexiones()
+	#		#GameManager.iniciar_juego("dijkstra")
+	#	3:
+	#		push_warning("Nivel 3 aún no implementado")
 			# GameManager.cargar_nivel_3()
-		_:
-			push_error("Nivel no implementado: ", nivel_numero)
-			return
+	#	_:
+	#		push_error("Nivel no implementado: ", nivel_numero)
+	#		return
 	
 	# IMPORTANTE: Esperar a que el grafo esté listo
 	await get_tree().process_frame
@@ -77,6 +77,10 @@ func activar():
 			GameManager.iniciar_juego("dijkstra")
 		3:
 			GameManager.cargar_nivel_3()
+			graf.instanciar_grafo()
+			if graf.dibujar_conexiones:
+				graf.instanciar_conexiones()
+			GameManager.iniciar_juego("prim")
 	await get_tree().process_frame
 
 func desactivar():

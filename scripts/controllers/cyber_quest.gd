@@ -96,6 +96,7 @@ func activar_solo_nivel(numero: int):
 		3:
 			if nivel_3:
 				if nivel_3.has_method("activar"):
+					await get_tree().create_timer(3).timeout
 					nivel_3.activar()
 				else:
 					nivel_3.visible = true

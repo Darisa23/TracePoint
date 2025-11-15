@@ -1,0 +1,120 @@
+[gd_scene load_steps=10 format=3 uid="uid://bqvyyhk0piymv"]
+
+[ext_resource type="Shader" uid="uid://cdlt3ujrpad32" path="res://level/sky_with_stars.tres" id="1_2wipy"]
+[ext_resource type="Texture2D" uid="uid://bqij60qfct7lx" path="res://level/qwantani_moon_noon_puresky_4k.exr" id="2_p6gy2"]
+[ext_resource type="Script" uid="uid://f4w1q8220rsj" path="res://skytest/color_test_camera.gd" id="2_v8ygw"]
+[ext_resource type="Script" uid="uid://bh6r04ma5pf3k" path="res://skytest/sky_color_tester.gd" id="3_p6gy2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1"]
+shader = ExtResource("1_2wipy")
+shader_parameter/skyTexture = ExtResource("2_p6gy2")
+shader_parameter/skyColor = Color(1, 1, 1, 1)
+shader_parameter/horizonColor = Color(0.9, 0.9, 0.9, 1)
+shader_parameter/texture_tint = Color(1, 1, 1, 1)
+shader_parameter/tint_intensity = 0.5
+shader_parameter/particle_speed = 0.1
+shader_parameter/particle_density = 220.0
+shader_parameter/particle_size = 0.001
+shader_parameter/neon_blue = Color(0.4, 0.8, 1, 1)
+shader_parameter/glow_intensity = 2.0
+
+[sub_resource type="Sky" id="Sky_1"]
+sky_material = SubResource("ShaderMaterial_1")
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 2
+sky = SubResource("Sky_1")
+ambient_light_source = 3
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1"]
+size = Vector2(20, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.2, 0.3, 0.4, 1)
+
+[node name="ColorTestScene" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 5, 0)
+light_energy = 0.5
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 3, 5)
+script = ExtResource("2_v8ygw")
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_1")
+surface_material_override/0 = SubResource("StandardMaterial3D_1")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="SkyColorTester" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_p6gy2")
+
+[node name="Panel" type="Panel" parent="UI/SkyColorTester"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -240.0
+offset_right = 420.0
+offset_bottom = -20.0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/SkyColorTester/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="UI/SkyColorTester/Panel/VBoxContainer"]
+layout_mode = 2
+text = "TRACEPOINT - Sky Color Tester"
+horizontal_alignment = 1
+
+[node name="LevelName" type="Label" parent="UI/SkyColorTester/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Nivel 1 - Azul Neón"
+horizontal_alignment = 1
+
+[node name="ColorPreview" type="ColorRect" parent="UI/SkyColorTester/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+color = Color(0.4, 0.8, 1, 1)
+
+[node name="NeonColor" type="Label" parent="UI/SkyColorTester/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Neón: Vector3(0.4, 0.8, 1.0)"
+
+[node name="SkyColor" type="Label" parent="UI/SkyColorTester/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Cielo: Vector3(0.6, 0.7, 0.9)"
+
+[node name="HorizonColor" type="Label" parent="UI/SkyColorTester/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Horizonte: Vector3(0.4, 0.5, 0.7)"
+
+[node name="Instructions" type="Label" parent="UI/SkyColorTester/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Presiona teclas 1-7 para cambiar niveles
+WASD - Mover | Ratón - Mirar | ESC - Salir"
+horizontal_alignment = 1
+autowrap_mode = 2

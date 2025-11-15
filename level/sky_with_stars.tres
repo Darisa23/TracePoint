@@ -1,10 +1,10 @@
-[gd_resource type="Shader" format=3 uid="uid://cdlt3ujrpad32"]
+[gd_resource type="Shader" format=3 uid="uid://b80iojip1k6wx"]
 
 [resource]
 code = "shader_type sky;
 
 // Textura de fondo
-uniform sampler2D skyTexture;
+uniform sampler2D skyTexture : filter_linear, repeat_enable;
 
 // Colores de respaldo si no hay textura
 uniform vec3 skyColor : source_color = vec3(1.0, 1.0, 1.0);
@@ -25,62 +25,72 @@ float hash(vec2 p) {
 }
 
 // Función para generar partículas
-float particles(vec2 uv, float time) {
+float particles(vec3 direction, float time) {
+    // Usar la dirección 3D en lugar de UV 2D
+    vec2 uv = vec2(
+        atan(direction.x, direction.z) / (3.14159265 * 2.0) + 0.5,
+        acos(direction.y) / 3.14159265
+    );
+    
     float particle_field = 0.0;
-
+    
     // Crear múltiples capas de partículas
     for (float i = 0.0; i < particle_density; i++) {
         vec2 seed = vec2(i * 0.1, i * 0.2);
-
+        
         // Posición inicial de la partícula
         float x = hash(seed);
         float y = hash(seed + vec2(1.0, 2.0));
-
+        
         // Velocidad individual de cada partícula
         float speed = hash(seed + vec2(3.0, 4.0)) * 0.5 + 0.5;
-
+        
         // Movimiento de las partículas
         vec2 particle_pos = vec2(x, y);
         particle_pos.y = fract(particle_pos.y - time * particle_speed * speed);
         particle_pos.x += sin(time * speed + i) * 0.1;
-
-        // Distancia a la partícula
-        float dist = distance(uv, particle_pos);
-
+        
+        // Wrapping horizontal para evitar la línea
+        float dx = abs(uv.x - particle_pos.x);
+        dx = min(dx, 1.0 - dx); // Distancia más corta considerando wrapping
+        
+        float dy = abs(uv.y - particle_pos.y);
+        float dist = sqrt(dx * dx + dy * dy);
+        
         // Tamaño variable para cada partícula
         float size = particle_size * (0.5 + hash(seed + vec2(5.0, 6.0)) * 0.5);
-
+        
         // Crear el brillo de la partícula
         float particle = smoothstep(size, size * 0.3, dist);
         particle += smoothstep(size * 2.0, size * 0.5, dist) * 0.3;
-
+        
         particle_field += particle;
     }
-
+    
     return particle_field;
 }
 
 void sky() {
     // Obtener color del fondo (textura o degradado)
     vec3 color = texture(skyTexture, SKY_COORDS).rgb;
-
+    
     // Si no hay textura, usar degradado
     if (color == vec3(0.0)) {
         float col = clamp(EYEDIR.y / 0.05, 0.0, 1.0);
         color = mix(horizonColor, skyColor, col);
     }
-
-    // Agregar partículas azul neón usando SKY_COORDS
-    float particle_field = particles(SKY_COORDS, TIME);
-
+    
+    // Agregar partículas azul neón usando EYEDIR en lugar de SKY_COORDS
+    float particle_field = particles(EYEDIR, TIME);
+    
     // Color neón con brillo
     vec3 particle_color = neon_blue * glow_intensity;
-
+    
     // Mezclar partículas con el fondo
     color = mix(color, particle_color, clamp(particle_field, 0.0, 1.0));
-
+    
     // Agregar un brillo adicional alrededor de las partículas
     color += particle_color * particle_field * 0.5;
-
+    
     COLOR = color;
 }"

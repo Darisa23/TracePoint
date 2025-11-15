@@ -1,0 +1,139 @@
+[gd_scene load_steps=20 format=3 uid="uid://dhc7loanxks7g"]
+
+[ext_resource type="Texture2D" uid="uid://wtiu6bf5nhup" path="res://escenas/loading_scene/loading_bkgrnd.png" id="1_1l04a"]
+[ext_resource type="Script" uid="uid://xggi5jk4vt6o" path="res://escenas/loading_scene/loading.gd" id="1_xvgud"]
+[ext_resource type="Texture2D" uid="uid://dxnqd2ou7qobj" path="res://escenas/loading_scene/sera.png" id="2_1l04a"]
+[ext_resource type="Script" uid="uid://1mi88mfo7ny" path="res://escenas/loading_scene/animated_sprite_2d.gd" id="3_1l04a"]
+[ext_resource type="FontFile" uid="uid://cw88c0xkqvmly" path="res://escenas/loading_scene/font/Conthrax-SemiBold.otf" id="4_wc73m"]
+[ext_resource type="Script" uid="uid://clbees38sj3rd" path="res://escenas/loading_scene/label.gd" id="5_xvgud"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ecfth"]
+atlas = ExtResource("2_1l04a")
+region = Rect2(0, 0, 290, 290)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wc73m"]
+atlas = ExtResource("2_1l04a")
+region = Rect2(290, 0, 290, 290)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xvgud"]
+atlas = ExtResource("2_1l04a")
+region = Rect2(580, 0, 290, 290)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ypwvy"]
+atlas = ExtResource("2_1l04a")
+region = Rect2(870, 0, 290, 290)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m23s6"]
+atlas = ExtResource("2_1l04a")
+region = Rect2(1160, 0, 290, 290)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_25ta2"]
+atlas = ExtResource("2_1l04a")
+region = Rect2(1450, 0, 290, 290)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vxij0"]
+atlas = ExtResource("2_1l04a")
+region = Rect2(1740, 0, 290, 290)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_odase"]
+atlas = ExtResource("2_1l04a")
+region = Rect2(2030, 0, 290, 290)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aecca"]
+atlas = ExtResource("2_1l04a")
+region = Rect2(2320, 0, 290, 290)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y13ep"]
+atlas = ExtResource("2_1l04a")
+region = Rect2(2610, 0, 290, 290)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6c35k"]
+atlas = ExtResource("2_1l04a")
+region = Rect2(2900, 0, 290, 290)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nbgtl"]
+atlas = ExtResource("2_1l04a")
+region = Rect2(3190, 0, 290, 290)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nbgtl"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ecfth")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wc73m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xvgud")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ypwvy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m23s6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_25ta2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vxij0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_odase")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aecca")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y13ep")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6c35k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nbgtl")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 20.0
+}]
+
+[node name="loading" type="Node2D"]
+script = ExtResource("1_xvgud")
+
+[node name="background" type="TextureRect" parent="."]
+texture = ExtResource("1_1l04a")
+metadata/_edit_use_anchors_ = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(801, 449)
+zoom = Vector2(0.72, 0.72)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(801, 478)
+sprite_frames = SubResource("SpriteFrames_nbgtl")
+animation = &"new_animation"
+frame_progress = 0.876861
+script = ExtResource("3_1l04a")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 590.0
+offset_top = 663.0
+offset_right = 1031.0
+offset_bottom = 746.0
+theme_override_colors/font_color = Color(0.781759, 0.947049, 0.936753, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.0156863, 0.0823529, 0.184314)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 19
+theme_override_fonts/font = ExtResource("4_wc73m")
+theme_override_font_sizes/font_size = 60
+text = "Cargando..."
+script = ExtResource("5_xvgud")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1618.0
+offset_bottom = 904.0
+color = Color(0, 0, 0, 1)
