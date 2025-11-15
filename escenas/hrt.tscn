@@ -2,10 +2,11 @@
 
 [ext_resource type="Script" uid="uid://dlouvw4gdikdp" path="res://scripts/heart.gd" id="1_rwlis"]
 [ext_resource type="Texture2D" uid="uid://dvxd24uqig53w" path="res://assets/losdos2.png" id="2_rwlis"]
-[ext_resource type="Shader" uid="uid://0vm5n7xx5m4v" path="res://escenas/hrt.gdshader" id="2_yug70"]
+[ext_resource type="Shader" path="res://scripts/hrt.gdshader" id="2_yug70"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3gd0f"]
 shader = ExtResource("2_yug70")
+shader_parameter/glitch_strength = 0.0
 
 [node name="hrt" type="Panel"]
 self_modulate = Color(1, 1, 1, 0)
