@@ -64,7 +64,7 @@ func instanciar_conexiones():
 			
 			crear_linea_conexion(nodo_logico.posicion_3d, vecino.posicion_3d)
 			conexiones_dibujadas += 1
-	#print("ya conexiones")
+	print("ya conexiones")
 
 func crear_linea_conexion(pos_inicio: Vector3, pos_fin: Vector3):
 	var linea = MeshInstance3D.new()

@@ -53,7 +53,7 @@ func configurar_mundo_segun_progreso():
 	print("Hub configurado - Niveles completados: %d" % nivel_actual_completado)
 
 func _on_mision_completada():
-	print("una misión completada")
+	#print("una misión completada")
 	nivel_actual_completado += 1
 	
 	# Expandir el hub

@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://bqvyyhk0piymv"]
 
-[ext_resource type="Shader" uid="uid://cdlt3ujrpad32" path="res://level/sky_with_stars.tres" id="1_2wipy"]
+[ext_resource type="Shader" uid="uid://b80iojip1k6wx" path="res://level/sky_with_stars.tres" id="1_2wipy"]
 [ext_resource type="Texture2D" uid="uid://bqij60qfct7lx" path="res://level/qwantani_moon_noon_puresky_4k.exr" id="2_p6gy2"]
 [ext_resource type="Script" uid="uid://f4w1q8220rsj" path="res://skytest/color_test_camera.gd" id="2_v8ygw"]
 [ext_resource type="Script" uid="uid://bh6r04ma5pf3k" path="res://skytest/sky_color_tester.gd" id="3_p6gy2"]
@@ -10,8 +10,6 @@ shader = ExtResource("1_2wipy")
 shader_parameter/skyTexture = ExtResource("2_p6gy2")
 shader_parameter/skyColor = Color(1, 1, 1, 1)
 shader_parameter/horizonColor = Color(0.9, 0.9, 0.9, 1)
-shader_parameter/texture_tint = Color(1, 1, 1, 1)
-shader_parameter/tint_intensity = 0.5
 shader_parameter/particle_speed = 0.1
 shader_parameter/particle_density = 220.0
 shader_parameter/particle_size = 0.001

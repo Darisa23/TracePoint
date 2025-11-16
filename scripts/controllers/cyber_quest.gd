@@ -5,6 +5,7 @@ extends Node
 @onready var nivel_1 = $Nivel1_NetworkTracer
 @onready var nivel_2 = $Nivel2_SafeRoute if has_node("Nivel2_SafeRoute") else null
 @onready var nivel_3 = $Nivel3_RebuildNet if has_node("Nivel3_RebuildNet") else null
+@onready var nivel_4 = $Nivel4_FlowControl if has_node("Nivel4_FlowControl") else null
 
 # Referencias al player
 @onready var player = $"../player"
@@ -43,12 +44,13 @@ func _input(event):
 		reiniciar_nivel_actual()
 
 func cambiar_a_nivel(numero: int):
-	if numero < 1 or numero > 3:
+	if numero < 1 or numero > 4:
 		print("Nivel fuera de rango: ", numero)
 		return
 	
 	print("\nCambiando a nivel %d..." % numero)
 	nivel_actual = numero
+	GameManager.vidas_actuales = 3
 	activar_solo_nivel(numero)
 	
 	# Esperar un poco y posicionar player
@@ -57,21 +59,10 @@ func cambiar_a_nivel(numero: int):
 
 func activar_solo_nivel(numero: int):
 	# Desactivar todos
-	if nivel_1:
-		if nivel_1.has_method("desactivar"):
-			nivel_1.desactivar()
-		else:
-			nivel_1.visible = false
-	if nivel_2:
-		if nivel_2.has_method("desactivar"):
-			nivel_2.desactivar()
-		else:
-			nivel_2.visible = false
-	if nivel_3:
-		if nivel_3.has_method("desactivar"):
-			nivel_3.desactivar()  
-		else:
-			nivel_3.visible = false
+	nivel_1.desactivar()
+	nivel_2.desactivar()
+	nivel_3.desactivar()  
+	nivel_4.desactivar()  
 	
 	# Activar el nivel solicitado
 	match numero:
@@ -92,7 +83,7 @@ func activar_solo_nivel(numero: int):
 					await get_tree().create_timer(3.5).timeout
 					get_tree().change_scene_to_file("res://escenas/niveles/nivel_2_safe_route.tscn")
 			else:
-				push_warning("Nivel 2 no existe aún")
+				push_warning("Nivel 2 no existe aún")	
 		3:
 			if nivel_3:
 				if nivel_3.has_method("activar"):
@@ -102,7 +93,16 @@ func activar_solo_nivel(numero: int):
 					nivel_3.visible = true
 			else:
 				push_warning("Nivel 3 no existe aún")
-
+		4:
+			if nivel_4:
+				if nivel_4.has_method("activar"):
+					await get_tree().create_timer(3).timeout
+					nivel_4.activar()
+				else:
+					nivel_4.visible = true
+			else:
+				push_warning("Nivel 4 no existe aún")
+			
 func reiniciar_nivel_actual():
 	GameManager.reiniciar_nivel()
 
@@ -112,8 +112,8 @@ func _on_cualquier_mision_completada():
 	# Esperar 3 segundos y pasar al siguiente nivel
 	await get_tree().create_timer(1.0).timeout
 	
-	if nivel_actual < 3:
-		cambiar_a_nivel(nivel_actual + 1)
+	if nivel_actual < 4:
+		cambiar_a_nivel(nivel_actual + 3)
 	else:
 		print("\n¡HAS COMPLETADO TODOS LOS NIVELES!")
 		print("¡NEMESIS HA SIDO DERROTADO!")

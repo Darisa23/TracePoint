@@ -135,26 +135,28 @@ func cargar_nivel_3():
 	
 	# Matriz de adyacencia del nivel 3
 	var matriz = [
-		[0, 1, 1, 0, 0, 0, 0, 1],
-		[1, 0, 1, 1, 1, 0, 1, 1],
-		[1, 1, 0, 0, 1, 1, 1, 0],
-		[0, 1, 0, 0, 1, 0, 1, 1],
-		[0, 1, 1, 1, 0, 0, 1, 0],
-		[0, 0, 1, 0, 0, 0, 0, 1],
-		[0, 1, 1, 1, 1, 0, 0, 0],
-		[1, 1, 0, 1, 0, 1, 0, 0]
+		[0, 1, 0, 0, 0, 0, 0, 1,0],
+		[1, 0, 1, 0, 0, 0, 0, 1,0],
+		[0, 1, 0, 1, 0, 1, 0, 0,1],
+		[0, 0, 1, 0, 1, 1, 0, 0,0],
+		[0, 0, 0, 1, 0, 1, 0, 0,0],
+		[0, 0, 1, 1, 1, 0, 1, 0,0],
+		[0, 0, 0, 0, 0, 1, 0, 1,1],
+		[1, 1, 0, 0, 0, 0, 1, 0,1],
+		[0,0, 1, 0, 0, 0, 1, 1,0],
 	]
 	
 	var pesos = [
-		[0, 3, 5, 0, 0, 0, 0, 10],
-		[3, 0, 5, 8, 6, 0, 6, 9],
-		[5, 5, 0, 0, 4, 7, 3, 0],
-		[0, 8, 0, 0, 12, 0, 2, 14],
-		[0, 6, 4, 12, 0, 0, 9, 0],
-		[0, 0, 7, 0, 0, 0, 0, 5],
-		[0, 6, 3, 2, 9, 0, 0, 0],
-		[10, 9, 0, 14, 0, 5, 0, 0]
-	]
+		[0, 4, 0, 0, 0, 0, 0, 8,0],
+		[4, 0, 8, 0, 0, 0, 0, 11,0],
+		[0, 8, 0, 7, 0, 4, 0, 0,2],
+		[0, 0, 7, 0, 9, 14, 0, 0,0],
+		[0, 0, 0, 9, 0, 14, 0, 0,0],
+		[0, 0, 4, 14, 10, 0, 2, 0,0],
+		[0, 0, 0, 0, 0, 2, 0, 1,6],
+		[8, 11, 0, 0, 0, 0, 1, 0,7],
+		[0, 0, 2, 0, 0, 0, 6, 7, 0], 
+		]
 	
 	print("Creando grafo con matriz ", matriz.size(), "x", matriz[0].size())
 	
@@ -163,14 +165,15 @@ func cargar_nivel_3():
 	print("Grafo creado con ", grafo.nodos.size(), " nodos")
 
 	var posiciones = [
-		Vector3(0, 0, 0),
-		Vector3(5, 0, 2),
-		Vector3(8, 0, 6),
-		Vector3(6, 0, 10),
-		Vector3(2, 0, 11),
-		Vector3(-2, 0, 8),
-		Vector3(-4, 0, 4),
-		Vector3(-2, 0, 0)
+	Vector3(0, 0, 0),     # A
+	Vector3(5, 0, 5),     # B
+	Vector3(12, 0, 5),    # C
+	Vector3(19, 0, 5),    # D
+	Vector3(24, 0, 0),    # E
+	Vector3(19, 0, -5),   # F
+	Vector3(12, 0, -5),   # G
+	Vector3(5, 0, -5),    # H
+	Vector3(12, 0, 0),     #I
 	]
 	
 	for i in range(grafo.nodos.size()):
@@ -178,6 +181,56 @@ func cargar_nivel_3():
 	
 	#grafo.imprimir_grafo()
 
+func cargar_nivel_4():
+	print("\n=== CARGANDO NIVEL 4: FLOWCONTROL ===")
+	nivel_actual = 4
+	tipo_recorrido = "FORD_FULKERSON"
+	
+	var matriz = [  #A  B  C  D  E  F  G  
+					[0, 1, 0, 0, 1, 0, 1],#A
+					[0, 0, 1, 0, 1, 0, 0],#B
+					[0, 0, 0, 1, 0, 0, 0],#C
+					[0, 0, 0, 0, 0, 0, 0],#D
+					[0, 0, 1, 0, 0, 1, 1],#E
+					[0, 0, 1, 1, 0, 0, 0],#F
+					[0, 0, 0, 0, 0, 1, 0] #G
+	]
+	
+	var capacidades = [
+		#A  B  C  D  E  F  G 
+		[0, 5, 0, 0, 7, 0, 4],#A
+		[0, 0, 3, 0, 1, 0, 0],#B
+		[0, 0, 0, 1, 0, 0, 0],#C
+		[0, 0, 0, 0, 0, 0, 0],#D
+		[0, 0, 4, 0, 0, 5, 2],#E
+		[0, 0, 1, 6, 0, 0, 0],#F
+		[0, 0, 0, 0, 0, 4, 0],#G
+		
+
+	]
+	grafo = Grafo.new(matriz, true, capacidades)  # TRUE = dirigido
+	print("Grafo creado con ", grafo.nodos.size(), " nodos")
+	
+	# Posiciones en línea (source a sink)
+	var posiciones = [
+		Vector3(0, 0, 0), # A
+		Vector3(5, 0, 0), # B
+		Vector3(10, 0, 0),# C
+		Vector3(15, 0, 0),# D
+		Vector3(5, 0, -5),# E
+		Vector3(10, 0,-5),# F
+		Vector3(5, 0,-10),# G
+	]
+	for i in range(grafo.nodos.size()):
+		grafo.nodos[i].posicion_3d = posiciones[i]
+	#grafo.imprimir_grafo()
+	
+	# Calcular flujo máximo
+	var resultado = RecorridosGrafo.calcular_flujo_maximo(grafo, 0, 3)
+	print("Flujo máximo: ", resultado.flujo_maximo)
+	print("Caminos posibles: ", resultado.caminos.size())
+	
+	print("=== NIVEL 4 CARGADO ===\n")
 func calcular_recorrido_correcto(nodo_inicio_id: int):
 	if not grafo:
 		push_error("No hay grafo cargado")
@@ -197,6 +250,9 @@ func calcular_recorrido_correcto(nodo_inicio_id: int):
 			print("Nodo %d, distancia: %f" % [nodo.id, nodo.distancia])
 	elif tipo_recorrido == "prim":
 		recorrido_correcto = RecorridosGrafo.prim(grafo,nodo_inicio)
+	elif tipo_recorrido == "fordfulkerson":
+		var hola = RecorridosGrafo.calcular_flujo_maximo(grafo, 0, 3)
+		recorrido_correcto = hola["caminos"][0]["camino"]
 		
 
 	indice_actual = 0
@@ -325,11 +381,14 @@ func cambiar_tipo_recorrido(nuevo_tipo: String):
 		print("Nuevo orden: ", obtener_ids_recorrido())
 
 func obtener_ids_recorrido() -> Array:
-	var ids = []
-	for nodo in recorrido_correcto:
-		ids.append(nodo.id)
-	#print(ids)
-	return ids
+	if typeof(recorrido_correcto[0]) == TYPE_INT:
+		return recorrido_correcto
+	else:
+		var ids = []
+		for nodo in recorrido_correcto:
+			ids.append(nodo.id)
+		#print(ids)
+		return ids
 	
 
 func obtener_siguiente_nodo_esperado() -> Nodo:

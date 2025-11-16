@@ -140,6 +140,7 @@ static func dijkstra(grafo: Grafo, nodo_inicio: Nodo, nodo_destino: Nodo) -> Arr
 # Prim - Árbol de Expansión Mínima desde nodo inicial
 # Retorna un array con los nodos en el orden que fueron agregados al MST
 static func prim(grafo: Grafo, nodo_inicio: Nodo = null) -> Array:
+	
 	var orden_mst = []
 	var en_mst = {}  # Nodos ya incluidos en el MST
 	var aristas_disponibles = []  # [{origen: Nodo, destino: Nodo, peso: float}]
@@ -216,3 +217,108 @@ static func prim(grafo: Grafo, nodo_inicio: Nodo = null) -> Array:
 				})
 	
 	return orden_mst
+
+# Ford-Fulkerson usando BFS (Edmonds-Karp)
+# Retorna el flujo máximo y los caminos usados
+
+static func calcular_flujo_maximo(grafo: Grafo, source_id: int, sink_id: int) -> Dictionary:
+	var capacidades = crear_matriz_capacidades(grafo)
+	var flujo_total = 0
+	var caminos_usados = []  # Array de caminos (para visualizar)
+	
+	# Mientras exista un camino aumentante
+	while true:
+		var camino = bfs_camino_aumentante(capacidades, source_id, sink_id)
+		
+		if camino.size() == 0:
+			break  # No hay más caminos
+		
+		# Encontrar flujo mínimo en el camino
+		var flujo_camino = INF
+		for i in range(camino.size() - 1):
+			var u = camino[i]
+			var v = camino[i + 1]
+			flujo_camino = min(flujo_camino, capacidades[u][v])
+		
+		# Actualizar capacidades residuales
+		for i in range(camino.size() - 1):
+			var u = camino[i]
+			var v = camino[i + 1]
+			capacidades[u][v] -= flujo_camino
+			capacidades[v][u] += flujo_camino  # Grafo residual
+		
+		flujo_total += flujo_camino
+		caminos_usados.append({
+			"camino": camino.duplicate(),
+			"flujo": flujo_camino
+		})
+		
+		print("  Camino encontrado: %s con flujo %d" % [str(camino), flujo_camino])
+	
+	return {
+		"flujo_maximo": flujo_total,
+		"caminos": caminos_usados
+	}
+
+# BFS para encontrar camino aumentante
+static func bfs_camino_aumentante(capacidades: Array, source: int, sink: int) -> Array:
+	var n = capacidades.size()
+	var visitado = []
+	var padre = []
+	
+	for i in range(n):
+		visitado.append(false)
+		padre.append(-1)
+	
+	var cola = [source]
+	visitado[source] = true
+	
+	while cola.size() > 0:
+		var u = cola.pop_front()
+		
+		for v in range(n):
+			if not visitado[v] and capacidades[u][v] > 0:
+				visitado[v] = true
+				padre[v] = u
+				cola.append(v)
+				
+				if v == sink:
+					# Reconstruir camino
+					return reconstruir_camino(padre, source, sink)
+	
+	return []  # No hay camino
+
+static func reconstruir_camino(padre: Array, source: int, sink: int) -> Array:
+	var camino = []
+	var actual = sink
+	
+	while actual != -1:
+		camino.push_front(actual)
+		actual = padre[actual]
+	
+	return camino
+
+static func crear_matriz_capacidades(grafo: Grafo) -> Array:
+	var n = grafo.nodos.size()
+	var capacidades = []
+	
+	# Inicializar con ceros
+	for i in range(n):
+		var fila = []
+		for j in range(n):
+			fila.append(0)
+		capacidades.append(fila)
+	
+	# Llenar con capacidades del grafo
+	if grafo.matriz_pesos.size() > 0:
+		for i in range(n):
+			for j in range(n):
+				if grafo.matriz_adyacencia[i][j] == 1:
+					capacidades[i][j] = int(grafo.matriz_pesos[i][j])
+	else:
+		# Si no hay pesos, usar capacidad 1
+		for i in range(n):
+			for j in range(n):
+				capacidades[i][j] = grafo.matriz_adyacencia[i][j]
+	
+	return capacidades

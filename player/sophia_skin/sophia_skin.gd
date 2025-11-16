@@ -52,3 +52,4 @@ func edge_grab():
 
 func wall_slide():
 	state_machine.travel("WallSlide")
+	

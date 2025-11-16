@@ -127,3 +127,24 @@ func _physics_process(delta: float) -> void:
 
 	_was_on_floor_last_frame = is_on_floor()
 	move_and_slide()
+
+# Variables para paquetes
+var paquetes_llevando: int = 0
+var max_paquetes: int = 3
+
+func recoger_paquete():
+	if paquetes_llevando < max_paquetes:
+		paquetes_llevando += 1
+		print("Paquetes: %d/%d" % [paquetes_llevando, max_paquetes])
+	else:
+		print("Mochila llena!")
+
+func depositar_paquetes():
+	var cantidad = paquetes_llevando
+	paquetes_llevando = 0
+	print("Depositados %d paquetes" % cantidad)
+	return cantidad
+
+func perder_paquetes():
+	paquetes_llevando = 0
+	print("Paquetes perdidos!")
