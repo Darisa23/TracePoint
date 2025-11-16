@@ -1,9 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://c0j4675x22x1g"]
+[gd_scene load_steps=14 format=3 uid="uid://c0j4675x22x1g"]
 
 [ext_resource type="Script" uid="uid://8fpq85lemlwa" path="res://scripts/controllers/nivel_cer.gd" id="1_ap6iu"]
 [ext_resource type="Shader" uid="uid://b80iojip1k6wx" path="res://level/sky_with_stars.tres" id="2_0wtap"]
 [ext_resource type="Script" uid="uid://b7xahjuha0vog" path="res://scripts/GrafoSpawner.gd" id="4_qllsw"]
 [ext_resource type="PackedScene" uid="uid://doqvur36b3bcq" path="res://escenas/nodo_3d.tscn" id="5_3voxc"]
+[ext_resource type="Texture2D" uid="uid://dxie6ncjjk5wi" path="res://assets/estefondo.png" id="5_qllsw"]
+[ext_resource type="Script" uid="uid://ddbdki8uc5hy" path="res://escenas/niveles/barra_peso.gd" id="5_uquey"]
+[ext_resource type="Texture2D" uid="uid://6xtdc688ygpn" path="res://assets/bbar.png" id="6_3voxc"]
+[ext_resource type="Texture2D" uid="uid://bbgl46mwchspn" path="res://assets/estabarra.png" id="7_3voxc"]
+[ext_resource type="FontFile" uid="uid://cpwdg36okbmhs" path="res://assets/Conthrax-SemiBold.otf" id="8_3voxc"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0wtap"]
 load_path = "res://.godot/imported/qwantani_moon_noon_puresky_4k.exr-9c99993655a97e2e3970192b680d1851.bptc.ctex"
@@ -67,3 +72,38 @@ directional_shadow_max_distance = 40.0
 [node name="GrafoSpawner" type="Node3D" parent="."]
 script = ExtResource("4_qllsw")
 nodo_prefab = ExtResource("5_3voxc")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="BarraPeso" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("5_uquey")
+
+[node name="ProgressBar" type="TextureProgressBar" parent="CanvasLayer/BarraPeso"]
+layout_mode = 0
+offset_left = 25.999992
+offset_top = 155.0
+offset_right = 1526.0
+offset_bottom = 455.0
+scale = Vector2(0.3, 0.3)
+value = 100.0
+texture_under = ExtResource("5_qllsw")
+texture_over = ExtResource("6_3voxc")
+texture_progress = ExtResource("7_3voxc")
+tint_progress = Color(0.7747061, 0.90208054, 0.9694653, 1)
+
+[node name="Label" type="Label" parent="CanvasLayer/BarraPeso"]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 231.0
+offset_right = 432.0
+offset_bottom = 265.0
+theme_override_colors/font_color = Color(0.9691369, 0.9691369, 0.9691368, 1)
+theme_override_colors/font_shadow_color = Color(0.36078432, 0.9098039, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_3voxc")
+theme_override_font_sizes/font_size = 27
+text = "hola"
