@@ -1,34 +1,65 @@
-[gd_scene load_steps=3 format=3 uid="uid://dgaqvcvylyj4a"]
+[gd_scene load_steps=15 format=3 uid="uid://oi7sejncy45n"]
 
-[ext_resource type="Texture2D" uid="uid://bp8ofaxpy7cm7" path="res://assets/gameover.png" id="2_2mkai"]
-[ext_resource type="Texture2D" uid="uid://dv1rg66x4wjya" path="res://icon.png" id="2_8d5yl"]
+[ext_resource type="Texture2D" uid="uid://bbvnm2oxfcg1f" path="res://assets/gameover/fondogris.png" id="2_2nw6q"]
+[ext_resource type="Shader" uid="uid://dw7r87mkx31ac" path="res://assets/gameover/shadertexto.gdshader" id="3_w3x71"]
+[ext_resource type="Texture2D" uid="uid://cqyadgsjkdhwf" path="res://assets/gameover/geiober.png" id="4_af4fq"]
+[ext_resource type="Script" uid="uid://bapvifsnicgk5" path="res://assets/gameover/texto.gd" id="4_kctv7"]
+[ext_resource type="Texture2D" uid="uid://b3ox1xwkwmlxi" path="res://assets/gameover/exit_gover.png" id="5_6ivtb"]
+[ext_resource type="Texture2D" uid="uid://2f016isckc62" path="res://assets/gameover/exit_gover_pressed.png" id="6_y32in"]
+[ext_resource type="Texture2D" uid="uid://ci4yu6hdt3rtx" path="res://assets/gameover/exit_gover_hover.png" id="7_7l154"]
+[ext_resource type="Texture2D" uid="uid://mxmrsenfq20l" path="res://assets/gameover/restart_gover.png" id="8_1bpkd"]
+[ext_resource type="Script" uid="uid://diby0isr2s2e4" path="res://escenas/exit.gd" id="8_7l154"]
+[ext_resource type="Texture2D" uid="uid://dpuyxraeuppy8" path="res://assets/gameover/restart_gover_pressed.png" id="9_hsa6y"]
+[ext_resource type="Texture2D" uid="uid://cydmfew23ikes" path="res://assets/gameover/restart_gover_hover.png" id="10_q22v7"]
+[ext_resource type="Script" uid="uid://lvf8sgj55m23" path="res://escenas/restart.gd" id="11_y32in"]
 
-[node name="GameOver" type="CanvasLayer"]
+[sub_resource type="GDScript" id="GDScript_2nw6q"]
+script/source = "extends Node2D
+"
 
-[node name="ColorRect" type="ColorRect" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 4.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.152941, 0.168627, 0.188235, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g1o2j"]
+shader = ExtResource("3_w3x71")
+shader_parameter/glitch_intensity = 0.05
+shader_parameter/glitch_speed = 2.0
+shader_parameter/glitch_offset = 0.005
 
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(977, 403)
-texture = ExtResource("2_8d5yl")
+[node name="Node2D" type="Node2D"]
+script = SubResource("GDScript_2nw6q")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -966.0
-offset_top = -218.0
-offset_right = 1082.0
-offset_bottom = 294.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_2mkai")
+[node name="fondo" type="TextureRect" parent="."]
+offset_right = 2666.0
+offset_bottom = 1507.0
+texture = ExtResource("2_2nw6q")
+
+[node name="texto" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_g1o2j")
+offset_right = 2657.0
+offset_bottom = 1511.0
+texture = ExtResource("4_af4fq")
+script = ExtResource("4_kctv7")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+zoom = Vector2(0.72, 0.72)
+
+[node name="exit" type="TextureButton" parent="."]
+offset_left = 581.0
+offset_top = 1117.0
+offset_right = 758.0
+offset_bottom = 1207.0
+scale = Vector2(1.7, 1.7)
+texture_normal = ExtResource("5_6ivtb")
+texture_pressed = ExtResource("6_y32in")
+texture_hover = ExtResource("7_7l154")
+script = ExtResource("8_7l154")
+
+[node name="Restart" type="TextureButton" parent="."]
+offset_left = 1648.0001
+offset_top = 1115.9999
+offset_right = 1929.0001
+offset_bottom = 1209.9999
+scale = Vector2(1.7, 1.7)
+texture_normal = ExtResource("8_1bpkd")
+texture_pressed = ExtResource("9_hsa6y")
+texture_hover = ExtResource("10_q22v7")
+script = ExtResource("11_y32in")

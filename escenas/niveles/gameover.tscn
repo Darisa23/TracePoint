@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://bc6mixgy53hrw"]
+
+[ext_resource type="Texture2D" uid="uid://ck7cg0wl0f3io" path="res://fondogris.png" id="2_2nw6q"]
+[ext_resource type="Shader" uid="uid://dp1jj6c2gh77u" path="res://shadertexto.gdshader" id="3_w3x71"]
+[ext_resource type="Texture2D" uid="uid://wik7qi1q68h2" path="res://gayober.png" id="4_af4fq"]
+[ext_resource type="Script" uid="uid://y4ky36hwrr8i" path="res://texto.gd" id="4_kctv7"]
+
+[sub_resource type="GDScript" id="GDScript_2nw6q"]
+script/source = "extends Node2D
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g1o2j"]
+shader = ExtResource("3_w3x71")
+shader_parameter/glitch_intensity = 0.05
+shader_parameter/glitch_speed = 2.0
+shader_parameter/glitch_offset = 0.005
+
+[node name="Node2D" type="Node2D"]
+script = SubResource("GDScript_2nw6q")
+
+[node name="fondo" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_2nw6q")
+
+[node name="texto" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_g1o2j")
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_af4fq")
+script = ExtResource("4_kctv7")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+zoom = Vector2(0.72, 0.72)
