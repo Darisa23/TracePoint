@@ -23,7 +23,6 @@ activo = false
 
 [node name="Nivel1_NetworkTracer" parent="Niveles" instance=ExtResource("2_5ssbh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.88785, -3.06269, 0.64905)
-nivel_numero = 2
 
 [node name="Nivel3_RebuildNet" parent="Niveles" instance=ExtResource("6_e6aq7")]
 

@@ -97,9 +97,9 @@ script = ExtResource("5_uquey")
 [node name="ProgressBar" type="TextureProgressBar" parent="CanvasLayer/BarraPeso"]
 material = SubResource("ShaderMaterial_nmnq1")
 layout_mode = 0
-offset_left = 25.999992
+offset_left = 49.999992
 offset_top = 155.0
-offset_right = 1526.0
+offset_right = 1550.0
 offset_bottom = 455.0
 scale = Vector2(0.3, 0.3)
 value = 100.0
@@ -110,9 +110,9 @@ tint_progress = Color(0.7747061, 0.90208054, 0.9694653, 1)
 
 [node name="Label" type="Label" parent="CanvasLayer/BarraPeso"]
 layout_mode = 0
-offset_left = 71.0
+offset_left = 93.0
 offset_top = 249.0
-offset_right = 432.0
+offset_right = 454.0
 offset_bottom = 283.0
 theme_override_colors/font_color = Color(0.9691369, 0.9691369, 0.9691368, 1)
 theme_override_colors/font_shadow_color = Color(0.36078432, 0.9098039, 1, 1)
