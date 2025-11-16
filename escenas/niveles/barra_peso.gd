@@ -37,6 +37,10 @@ func verificar_activacion():
 func inicializar_barra():
 	print("=== Inicializando Barra de Peso ===")
 	
+	# Ajustar altura de la barra
+	if barra:
+		barra.custom_minimum_size.y = 20  # Altura en píxeles
+	
 	# Esperar a que haya recorrido
 	var intentos = 0
 	while GameManager.recorrido_correcto.size() == 0 and intentos < 30:
@@ -105,7 +109,7 @@ func _on_nodo_correcto(nodo_id: int):
 	
 	# Verificar que tenemos los índices correctos
 	if indice >= recorrido.size():
-		print("    ERROR: Índice %d fuera de rango (tamaño: %d)\n" % [indice, recorrido.size()])
+		print("   ⚠️ ERROR: Índice %d fuera de rango (tamaño: %d)\n" % [indice, recorrido.size()])
 		return
 	
 	var nodo_anterior = recorrido[indice - 1]
@@ -120,7 +124,7 @@ func _on_nodo_correcto(nodo_id: int):
 		peso = grafo.matriz_pesos[nodo_anterior.id][nodo_actual.id]
 		print("   Peso de matriz[%d][%d] = %d" % [nodo_anterior.id, nodo_actual.id, peso])
 	else:
-		print("    No hay peso en matriz, usando peso=1")
+		print("   ⚠️ No hay peso en matriz, usando peso=1")
 	
 	var peso_anterior = peso_actual
 	peso_actual -= peso
@@ -134,18 +138,24 @@ func actualizar_ui():
 	if not barra or not label:
 		return
 	
+	var progreso_normalizado = float(peso_actual) / float(peso_total) if peso_total > 0 else 0.0
+	
 	barra.max_value = peso_total
 	barra.value = max(0, peso_actual)
 	label.text = "Distancia: %d / %d" % [max(0, peso_actual), peso_total]
 	
-	print("   Barra actualizada: %d/%d" % [peso_actual, peso_total])
+	# Actualizar shader si existe
+	if barra.material and barra.material is ShaderMaterial:
+		barra.material.set_shader_parameter("progreso", progreso_normalizado)
+	
+	print("  📊 Barra actualizada: %d/%d (progreso: %.2f)" % [peso_actual, peso_total, progreso_normalizado])
 
 func _on_mision_completada():
 	# Ocultar la barra cuando se completa la misión
 	if visible:
 		await get_tree().create_timer(2.0).timeout  # Esperar 2 segundos antes de ocultar
 		visible = false
-		print("Barra oculta - Misión completada")
+		print("Barra ocultada - Misión completada")
 
 func _on_nivel_reiniciado():
 	# Si se reinicia el nivel 2, reiniciar la barra

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c0j4675x22x1g"]
+[gd_scene load_steps=16 format=3 uid="uid://c0j4675x22x1g"]
 
 [ext_resource type="Script" uid="uid://8fpq85lemlwa" path="res://scripts/controllers/nivel_cer.gd" id="1_ap6iu"]
 [ext_resource type="Shader" uid="uid://b80iojip1k6wx" path="res://level/sky_with_stars.tres" id="2_0wtap"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dxie6ncjjk5wi" path="res://assets/estefondo.png" id="5_qllsw"]
 [ext_resource type="Script" uid="uid://ddbdki8uc5hy" path="res://escenas/niveles/barra_peso.gd" id="5_uquey"]
 [ext_resource type="Texture2D" uid="uid://6xtdc688ygpn" path="res://assets/bbar.png" id="6_3voxc"]
+[ext_resource type="Shader" uid="uid://du2gvliha78wk" path="res://escenas/niveles/progress_bar.gdshader" id="6_mmdby"]
 [ext_resource type="Texture2D" uid="uid://bbgl46mwchspn" path="res://assets/estabarra.png" id="7_3voxc"]
 [ext_resource type="FontFile" uid="uid://cpwdg36okbmhs" path="res://assets/Conthrax-SemiBold.otf" id="8_3voxc"]
 
@@ -56,6 +57,17 @@ volumetric_fog_density = 0.01
 volumetric_fog_albedo = Color(0.843137, 0.737255, 0.329412, 1)
 volumetric_fog_emission = Color(0.843137, 0.737255, 0.329412, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nmnq1"]
+shader = ExtResource("6_mmdby")
+shader_parameter/color_base = Color(0, 0.8, 1, 1)
+shader_parameter/color_brillo = Color(0.3, 1, 1, 1)
+shader_parameter/velocidad_lineas = 2.0
+shader_parameter/grosor_lineas = 8.0
+shader_parameter/intensidad_scanline = 0.5
+shader_parameter/velocidad_pulso = 1.5
+shader_parameter/intensidad_brillo = 0.8
+shader_parameter/progreso = 1.0
+
 [node name="Nivel2_SafeRoute" type="Node3D"]
 script = ExtResource("1_ap6iu")
 nivel_numero = 2
@@ -83,6 +95,7 @@ offset_bottom = 40.0
 script = ExtResource("5_uquey")
 
 [node name="ProgressBar" type="TextureProgressBar" parent="CanvasLayer/BarraPeso"]
+material = SubResource("ShaderMaterial_nmnq1")
 layout_mode = 0
 offset_left = 25.999992
 offset_top = 155.0
@@ -98,9 +111,9 @@ tint_progress = Color(0.7747061, 0.90208054, 0.9694653, 1)
 [node name="Label" type="Label" parent="CanvasLayer/BarraPeso"]
 layout_mode = 0
 offset_left = 71.0
-offset_top = 231.0
+offset_top = 249.0
 offset_right = 432.0
-offset_bottom = 265.0
+offset_bottom = 283.0
 theme_override_colors/font_color = Color(0.9691369, 0.9691369, 0.9691368, 1)
 theme_override_colors/font_shadow_color = Color(0.36078432, 0.9098039, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
