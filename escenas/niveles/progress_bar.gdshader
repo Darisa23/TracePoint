@@ -16,81 +16,77 @@ void fragment() {
     // Obtener el color original del ProgressBar
     vec4 tex_color = texture(TEXTURE, uv);
 
-    // Solo aplicar efecto donde hay contenido (la barra llena)
-    if (tex_color.a > 0.1) {
-        // Determinar si estamos en la zona "viva" (llena) o "congelada" (vacía)
-        bool zona_viva = uv.x <= progreso;
+    // La parte "llena" es donde el ProgressBar dibuja contenido Y donde uv.x <= progreso
+    // La parte "vacía" es donde hay contenido pero uv.x > progreso
+    bool en_parte_llena = (tex_color.a > 0.1) && (uv.x <= progreso);
+    bool en_parte_vacia = (tex_color.a > 0.1) && (uv.x > progreso);
+
+    if (en_parte_llena) {
+        // === ZONA VIVA - APLICAR TODOS LOS EFECTOS ===
 
         // === LÍNEAS HORIZONTALES ===
-        float lineas;
-        if (zona_viva) {
-            // Zona viva: animación normal
-            lineas = sin(uv.y * grosor_lineas + TIME * velocidad_lineas) * 0.5 + 0.5;
-        } else {
-            // Zona congelada: líneas estáticas (sin TIME)
-            lineas = sin(uv.y * grosor_lineas) * 0.5 + 0.5;
-        }
-        lineas = pow(lineas, 3.0); // Hacer líneas más definidas
+        float lineas = sin(uv.y * grosor_lineas + TIME * velocidad_lineas) * 0.5 + 0.5;
+        lineas = pow(lineas, 3.0);
 
         // === PULSO DE BRILLO ===
-        float pulso;
-        if (zona_viva) {
-            // Solo pulsa en la zona viva
-            pulso = sin(TIME * velocidad_pulso) * 0.3 + 0.7;
-        } else {
-            // Zona congelada: brillo constante
-            pulso = 0.7; // Valor base sin animación
-        }
+        float pulso = sin(TIME * velocidad_pulso) * 0.3 + 0.7;
 
         // === GRADIENTE VERTICAL ===
         float gradiente = smoothstep(0.0, 0.3, uv.y) * smoothstep(1.0, 0.7, uv.y);
 
-        // === EFECTO DE BORDE BRILLANTE ===
-        float borde_izq = smoothstep(0.0, 0.05, uv.x);
-        float borde_der = smoothstep(1.0, 0.95, uv.x);
-        float borde = 1.0 - (borde_izq * borde_der);
+        // === EFECTO DE BORDE BRILLANTE CON DIFUMINADO ===
+        float borde_izq = smoothstep(0.0, 0.04, uv.x); // Difuminado suave
+        float borde_der = smoothstep(1.0, 0.96, uv.x); // Difuminado suave
+        float borde_arr = smoothstep(0.0, 0.06, uv.y); // Difuminado suave
+        float borde_abj = smoothstep(1.0, 0.94, uv.y); // Difuminado suave
+
+        float borde = 1.0 - (borde_izq * borde_der * borde_arr * borde_abj);
+        borde = pow(borde, 1.5); // Suavizar el borde
 
         // === RUIDO DIGITAL ===
-        float ruido;
-        if (zona_viva) {
-            // Ruido animado en zona viva
-            ruido = fract(sin(dot(uv * TIME * 0.1, vec2(12.9898, 78.233))) * 43758.5453);
-        } else {
-            // Ruido estático en zona congelada
-            ruido = fract(sin(dot(uv, vec2(12.9898, 78.233))) * 43758.5453);
-        }
+        float ruido = fract(sin(dot(uv * TIME * 0.1, vec2(12.9898, 78.233))) * 43758.5453);
         ruido = ruido * 0.1;
 
         // === COMBINAR TODOS LOS EFECTOS ===
         vec3 color_final = color_base.rgb;
-
-        // Aplicar scanlines
         color_final += color_brillo.rgb * lineas * intensidad_scanline;
-
-        // Aplicar pulso
         color_final *= pulso;
+        color_final *= (0.7 + gradiente * 0.3);
+        color_final += color_brillo.rgb * borde * intensidad_brillo;
+        color_final += vec3(ruido);
+
+        COLOR = vec4(color_final, tex_color.a * 0.9);
+        COLOR.rgb += vec3(borde * 0.5);
+
+    } else if (en_parte_vacia) {
+        // === ZONA VACÍA - COLOR #88D7CC MÁS TRANSPARENTE CON BLUR EN BORDES ===
+
+        // === GRADIENTE VERTICAL ===
+        float gradiente = smoothstep(0.0, 0.3, uv.y) * smoothstep(1.0, 0.7, uv.y);
+
+        // === DIFUMINADO GAUSSIANO EN BORDES ===
+        // Distancia a cada borde (0 = en el borde, 1 = lejos del borde)
+        float dist_izq = smoothstep(0.0, 0.1, uv.x);
+        float dist_der = smoothstep(1.0, 0.9, uv.x);
+        float dist_arr = smoothstep(0.0, 0.15, uv.y);
+        float dist_abj = smoothstep(1.0, 0.85, uv.y);
+
+        // Multiplicar todas las distancias para crear fade en todos los bordes
+        float fade_bordes = dist_izq * dist_der * dist_arr * dist_abj;
+        fade_bordes = smoothstep(0.0, 1.0, fade_bordes); // Suavizar más
+
+        // === COLOR #88D7CC (RGB: 136, 215, 204 -> normalizado 0-1) ===
+        vec3 color_final = vec3(0.533, 0.843, 0.8); // #88D7CC
 
         // Aplicar gradiente
         color_final *= (0.7 + gradiente * 0.3);
 
-        // Aplicar brillo en bordes
-        color_final += color_brillo.rgb * borde * intensidad_brillo;
+        // Aplicar difuminado en bordes
+        float alpha_final = 0.15 * fade_bordes; // Muy transparente (15% base * fade)
 
-        // Añadir ruido sutil
-        color_final += vec3(ruido);
-
-        // Oscurecer ligeramente la zona congelada para distinguirla
-        if (!zona_viva) {
-            color_final *= 0.7; // 70% de brillo en zona congelada
-        }
-
-        // Color final con transparencia
-        COLOR = vec4(color_final, tex_color.a * 0.9);
-
-        // Efecto de brillo adicional en los bordes
-        COLOR.rgb += vec3(borde * 0.3);
+        COLOR = vec4(color_final, alpha_final);
     } else {
-        // Si es transparente, mantener transparente
-        COLOR = tex_color;
+        // Zona transparente (fuera de la barra)
+        COLOR = vec4(0.0, 0.0, 0.0, 0.0);
     }
 }
