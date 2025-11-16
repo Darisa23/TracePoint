@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://camm0ty01vmmt"]
+[gd_scene load_steps=5 format=3 uid="uid://dkg2bthahltj1"]
 
 [ext_resource type="Script" uid="uid://d145h3ufpfx0m" path="res://scripts/controllers/cyber_quest.gd" id="1_0a5x5"]
 [ext_resource type="PackedScene" uid="uid://b1ot6gn6tms6h" path="res://lesson_reference/player_3d_template.tscn" id="1_5d1fp"]

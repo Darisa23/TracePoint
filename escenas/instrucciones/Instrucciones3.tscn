@@ -1,14 +1,14 @@
 [gd_scene load_steps=14 format=3 uid="uid://sa4osif021wd"]
 
-[ext_resource type="Texture2D" path="res://escenas/instrucciones/cuadro.png" id="1_4ek73"]
-[ext_resource type="Texture2D" path="res://escenas/instrucciones/cuadroSB.png" id="2_5xtxm"]
-[ext_resource type="Texture2D" path="res://escenas/instrucciones/image.psd(1).png" id="3_xvvlo"]
-[ext_resource type="Texture2D" path="res://escenas/instrucciones/nodo.png" id="5_tsswe"]
-[ext_resource type="Material" path="res://escenas/OutlineRojo.tres" id="5_xvvlo"]
-[ext_resource type="FontFile" uid="uid://bo0jp8b0jlkw0" path="res://fonts/Conthrax-SemiBold.otf" id="6_28cyp"]
-[ext_resource type="Texture2D" path="res://escenas/instrucciones/exit_darker.png" id="7_n5hvc"]
-[ext_resource type="Material" path="res://escenas/OutlineRojo1.tres" id="7_xh16g"]
-[ext_resource type="Texture2D" path="res://escenas/instrucciones/nodomalo.png" id="8_tsswe"]
+[ext_resource type="Texture2D" uid="uid://dtqxu1fgebjjn" path="res://escenas/texturas-o-png/cuadro.png" id="1_4ek73"]
+[ext_resource type="Texture2D" uid="uid://omyf16ymo0hm" path="res://escenas/texturas-o-png/cuadroSB.png" id="2_5xtxm"]
+[ext_resource type="Texture2D" uid="uid://rq2aamwflopv" path="res://escenas/texturas-o-png/image.psd(1).png" id="3_xvvlo"]
+[ext_resource type="Texture2D" uid="uid://cf51tskvw2wfu" path="res://escenas/texturas-o-png/nodo.png" id="5_tsswe"]
+[ext_resource type="Material" uid="uid://4taoyw78qjbj" path="res://escenas/shaders/OutlineRojo.tres" id="5_xvvlo"]
+[ext_resource type="FontFile" uid="uid://cpwdg36okbmhs" path="res://assets/Conthrax-SemiBold.otf" id="6_28cyp"]
+[ext_resource type="Texture2D" uid="uid://brab4ujxshyck" path="res://escenas/texturas-o-png/exit_darker.png" id="7_n5hvc"]
+[ext_resource type="Material" uid="uid://ceqyq4tw63sk8" path="res://escenas/shaders/OutlineRojo1.tres" id="7_xh16g"]
+[ext_resource type="Texture2D" uid="uid://cco0bp75cksjp" path="res://escenas/texturas-o-png/nodomalo.png" id="8_tsswe"]
 
 [sub_resource type="Animation" id="Animation_o3ej7"]
 length = 0.001
@@ -159,7 +159,7 @@ layout_mode = 0
 offset_left = -276.0
 offset_top = -36.0
 offset_right = 303.0
-offset_bottom = 292.0
+offset_bottom = 324.0
 texture = ExtResource("2_5xtxm")
 expand_mode = 1
 
@@ -223,7 +223,9 @@ anchor_bottom = 0.5
 offset_left = -262.0
 offset_top = -31.0
 offset_right = 262.0
-offset_bottom = 275.0
+offset_bottom = 304.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/default_color = Color(0.7129237, 0.91739345, 0.93961006, 1)
 theme_override_fonts/normal_font = ExtResource("6_28cyp")
 theme_override_fonts/bold_font = ExtResource("6_28cyp")
@@ -236,7 +238,7 @@ fueron destruidas, en
 estas conexiones 
 podras ver los nodos 
 y aristas con sus costos 
-deberas aplicar un algoritmo Kruskal o Prim, iniciando en un nodo especifico o en la arista de menor valor esto para completar el arbol de expacion minima y restarurar la conectividad de la red"
+deberas aplicar un algoritmo Kruskal o Prim, iniciando en un nodo especifico o en la arista de menor valor, al saltar entre nodos se reducira de tu barra de vida el costo de la arista, asi que para lograr pasar y restaurar la red debes encontrar el camino minimo"
 
 [node name="Line2D" type="Line2D" parent="Control"]
 points = PackedVector2Array(132, 77, 174, 56)

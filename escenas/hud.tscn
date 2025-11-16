@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dw27a5dihjvit"]
+[gd_scene load_steps=7 format=3 uid="uid://dw27a5dihjvit"]
 
 [ext_resource type="Script" uid="uid://cux0rnbg6vwuj" path="res://scripts/hud.gd" id="1_m5lxu"]
 [ext_resource type="Script" uid="uid://66fwwmyg5u6r" path="res://scripts/hearts_container.gd" id="2_0sskl"]
 [ext_resource type="PackedScene" uid="uid://cfb4v6e8041vj" path="res://escenas/hrt.tscn" id="2_5u87e"]
+[ext_resource type="Texture2D" uid="uid://b6blfrdswsk14" path="res://escenas/ih.png" id="2_8qmdo"]
+[ext_resource type="Texture2D" uid="uid://dqaq64ax7jfk" path="res://escenas/ic.png" id="2_dda1n"]
+[ext_resource type="Texture2D" uid="uid://cj2rr41oi5r0g" path="res://escenas/i.png" id="3_dda1n"]
 
 [node name="HUD" type="CanvasLayer"]
 layer = 3
@@ -36,6 +39,21 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 30
 text = "DFS
 "
+
+[node name="TextureButton" type="TextureButton" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -156.00012
+offset_top = 39.999996
+offset_right = 1028.0
+offset_bottom = 904.0
+grow_horizontal = 0
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("3_dda1n")
+texture_pressed = ExtResource("2_dda1n")
+texture_hover = ExtResource("2_8qmdo")
+stretch_mode = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 offset_left = 94.0
