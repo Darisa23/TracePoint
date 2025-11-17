@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b5rssrlowm7f0"]
+
+[ext_resource type="Shader" uid="uid://dyfsdex6hfb6a" path="res://assets/mainmenu/holograma.gdshader" id="1_v0kb6"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_v0kb6")
+shader_parameter/color = Color(0.017497689, 0.13562086, 0.23533386, 1)
+shader_parameter/lines1 = 200.0
+shader_parameter/lines2 = 100.0
+shader_parameter/_emission = 20.0
+shader_parameter/_fresnel = 0.846000040185
+shader_parameter/overall_brightness = 4.70000021999012
+shader_parameter/noise_min = 1.0
+shader_parameter/scan_intensity = 0.3570000169575

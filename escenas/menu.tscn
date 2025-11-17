@@ -89,4 +89,5 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="start" to="." method="_on_start_pressed"]

@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://6ow36832ul6s"]
+
+[ext_resource type="Texture2D" uid="uid://dqdsqakhgk7hg" path="res://assets/controls/controls.png" id="1_tmjxk"]
+[ext_resource type="Texture2D" uid="uid://bxcc18n1w5bf7" path="res://assets/controls/volvervv.png" id="2_ck4ei"]
+[ext_resource type="Texture2D" uid="uid://brnwi8wxmfqnk" path="res://assets/controls/volvervvc.png" id="3_6gwq8"]
+[ext_resource type="Texture2D" uid="uid://bs6kuksuj35v0" path="res://assets/controls/volvervvh.png" id="4_3rgib"]
+[ext_resource type="Script" uid="uid://crxo7p326gqlx" path="res://escenas/volver.gd" id="5_tmjxk"]
+
+[node name="Controls" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1921.0
+offset_bottom = 1077.0
+texture = ExtResource("1_tmjxk")
+
+[node name="volver" type="TextureButton" parent="."]
+offset_left = 778.0
+offset_top = 866.0
+offset_right = 1151.0
+offset_bottom = 997.0
+texture_normal = ExtResource("2_ck4ei")
+texture_pressed = ExtResource("3_6gwq8")
+texture_hover = ExtResource("4_3rgib")
+script = ExtResource("5_tmjxk")

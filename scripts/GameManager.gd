@@ -120,7 +120,7 @@ func cargar_nivel_2():
 		Vector3(5, 0, 5),      # C
 		Vector3(0, 0, 5),     # D
 		Vector3(5, 0, 10),     # E
-		Vector3(10, 0, 6),     # F
+		Vector3(10, 0, 5),     # F
 		Vector3(10, 0, 10),     # G
 	]
 	
@@ -160,6 +160,7 @@ func cargar_nivel_3():
 		[8, 11, 0, 0, 0, 0, 1, 0,7],
 		[0, 0, 2, 0, 0, 0, 6, 7, 0], 
 		]
+
 	
 	print("Creando grafo con matriz ", matriz.size(), "x", matriz[0].size())
 	
@@ -176,9 +177,9 @@ func cargar_nivel_3():
 	Vector3(19, 0, -5),   # F
 	Vector3(12, 0, -5),   # G
 	Vector3(5, 0, -5),    # H
-	Vector3(12, 0, 0),     #I
-	]
+	Vector3(12, 0, 0),    # I
 	
+]
 	for i in range(grafo.nodos.size()):
 		grafo.nodos[i].posicion_3d = posiciones[i]
 	
