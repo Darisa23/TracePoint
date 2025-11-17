@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://2dwpnp36vlfk"]
+[gd_scene load_steps=8 format=3 uid="uid://2dwpnp36vlfk"]
 
 [ext_resource type="Shader" uid="uid://cdlt3ujrpad32" path="res://level/sky_with_stars.tres" id="1_kj4ii"]
 [ext_resource type="Script" uid="uid://b7xahjuha0vog" path="res://scripts/GrafoSpawner.gd" id="3_cuwpx"]
+[ext_resource type="PackedScene" uid="uid://b1ot6gn6tms6h" path="res://lesson_reference/player_3d_template.tscn" id="4_1jpj2"]
 [ext_resource type="PackedScene" uid="uid://doqvur36b3bcq" path="res://escenas/nodo_3d.tscn" id="4_kj4ii"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uxm7h"]
@@ -60,3 +61,6 @@ directional_shadow_max_distance = 40.0
 [node name="GrafoSpawner" type="Node3D" parent="."]
 script = ExtResource("3_cuwpx")
 nodo_prefab = ExtResource("4_kj4ii")
+
+[node name="Player3DTemplate" parent="." instance=ExtResource("4_1jpj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.30367446, 0, -0.6646614)

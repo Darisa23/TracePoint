@@ -1,0 +1,661 @@
+[gd_scene load_steps=26 format=3 uid="uid://do2j8abwan2y3"]
+
+[ext_resource type="Texture2D" uid="uid://ce05e406gby5o" path="res://escenas/fondo_level_selection.png" id="1_n2tie"]
+[ext_resource type="Texture2D" uid="uid://dayi64o3st8r5" path="res://escenas/level_button.png" id="2_b1s7h"]
+[ext_resource type="Script" uid="uid://dg4n31gyqrvya" path="res://scripts/levels.gd" id="2_bh0ka"]
+[ext_resource type="Texture2D" uid="uid://dt8e8qxov4fkw" path="res://escenas/level_button_pressed.png" id="3_dw001"]
+[ext_resource type="Texture2D" uid="uid://i5csdqajcccd" path="res://escenas/level_button_hover.png" id="4_bh0ka"]
+[ext_resource type="Texture2D" uid="uid://gv81b4jm16ib" path="res://escenas/level_button_disabled.png" id="5_asriv"]
+[ext_resource type="FontFile" uid="uid://cpwdg36okbmhs" path="res://assets/Conthrax-SemiBold.otf" id="6_2fawj"]
+[ext_resource type="Script" uid="uid://dajashaahxxrr" path="res://scripts/button1.gd" id="7_asriv"]
+[ext_resource type="Script" uid="uid://1haump1mbfvt" path="res://scripts/button2.gd" id="9_c7v5f"]
+[ext_resource type="Script" uid="uid://sl2pkay0x6wh" path="res://scripts/button3.gd" id="10_waalq"]
+[ext_resource type="Script" uid="uid://6ty03a5xi5uy" path="res://scripts/button4.gd" id="11_waalq"]
+[ext_resource type="Script" uid="uid://b1l8bwspbs0b0" path="res://scripts/button5.gd" id="12_u43jn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pja5n"]
+bg_color = Color(0.25490198, 0.31764707, 0.38431373, 1)
+
+[sub_resource type="Animation" id="Animation_2fawj"]
+resource_name = "1"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Level_1/network_tracer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 0.5),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_asriv"]
+resource_name = "1.1"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Level_1/network_tracer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_waalq"]
+resource_name = "2"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Level_2/safe_route:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_odhwm"]
+resource_name = "2.1"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Level_2/safe_route:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_u43jn"]
+resource_name = "3"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Level_3/rebuild_net:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_y2cdm"]
+resource_name = "3.1"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Level_3/rebuild_net:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_n0vw5"]
+resource_name = "4"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Level_4/flow_control:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_v6khl"]
+resource_name = "4.1"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Level_4/flow_control:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ilp6x"]
+resource_name = "5"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Level_5/the_core:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_hauuh"]
+resource_name = "5.1"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Level_5/the_core:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_c7v5f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Level_1/network_tracer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Level_2/safe_route:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Level_3/rebuild_net:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Level_4/flow_control:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Level_5/the_core:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_waalq"]
+_data = {
+&"1": SubResource("Animation_2fawj"),
+&"1.1": SubResource("Animation_asriv"),
+&"2": SubResource("Animation_waalq"),
+&"2.1": SubResource("Animation_odhwm"),
+&"3": SubResource("Animation_u43jn"),
+&"3.1": SubResource("Animation_y2cdm"),
+&"4": SubResource("Animation_n0vw5"),
+&"4.1": SubResource("Animation_v6khl"),
+&"5": SubResource("Animation_ilp6x"),
+&"5.1": SubResource("Animation_hauuh"),
+&"RESET": SubResource("Animation_c7v5f")
+}
+
+[node name="LevelSelection" type="CanvasLayer"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_n2tie")
+
+[node name="Panel" type="Panel" parent="."]
+modulate = Color(1, 1, 1, 0.75686276)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pja5n")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+script = ExtResource("2_bh0ka")
+
+[node name="Line2D1" type="Line2D" parent="Control"]
+points = PackedVector2Array(-508.33337, 23.333374, -1033.3333, 23.333374)
+width = 20.0
+default_color = Color(0, 0.7294118, 1, 1)
+
+[node name="Line2D2" type="Line2D" parent="Control"]
+position = Vector2(528.3333, 0)
+points = PackedVector2Array(-508.33337, 23.333374, -1033.3333, 23.333374)
+width = 20.0
+default_color = Color(0, 0.7294118, 1, 1)
+
+[node name="Line2D3" type="Line2D" parent="Control"]
+position = Vector2(1053.3333, 0)
+points = PackedVector2Array(-508.33337, 23.333374, -1033.3333, 23.333374)
+width = 20.0
+default_color = Color(0, 0.7294118, 1, 1)
+
+[node name="Line2D4" type="Line2D" parent="Control"]
+position = Vector2(1576.6665, 0)
+points = PackedVector2Array(-508.33337, 23.333374, -1033.3333, 23.333374)
+width = 20.0
+default_color = Color(0, 0.7294118, 1, 1)
+
+[node name="Level_1" type="TextureButton" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1288.333
+offset_top = -226.667
+offset_right = -520.333
+offset_bottom = 541.333
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+texture_normal = ExtResource("2_b1s7h")
+texture_pressed = ExtResource("3_dw001")
+texture_hover = ExtResource("4_bh0ka")
+texture_disabled = ExtResource("5_asriv")
+script = ExtResource("7_asriv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Level_1"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_waalq")
+}
+
+[node name="Label" type="Label" parent="Control/Level_1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.5
+offset_top = -154.0
+offset_right = 110.5
+offset_bottom = 154.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.7921569, 0.9411765, 0.95686275, 1)
+theme_override_fonts/font = ExtResource("6_2fawj")
+theme_override_font_sizes/font_size = 256
+text = "1"
+horizontal_alignment = 1
+
+[node name="network_tracer" type="Label" parent="Control/Level_1"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -661.77765
+offset_top = -514.0
+offset_right = 669.8889
+offset_bottom = -360.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.9098039, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0.72156864, 1, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("6_2fawj")
+theme_override_font_sizes/font_size = 192
+text = "Network Tracer"
+horizontal_alignment = 1
+
+[node name="Level_2" type="TextureButton" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -759.99994
+offset_top = -226.66666
+offset_right = 8.000061
+offset_bottom = 541.3334
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+texture_normal = ExtResource("2_b1s7h")
+texture_pressed = ExtResource("3_dw001")
+texture_hover = ExtResource("4_bh0ka")
+texture_disabled = ExtResource("5_asriv")
+script = ExtResource("9_c7v5f")
+
+[node name="Label" type="Label" parent="Control/Level_2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.5
+offset_top = -154.0
+offset_right = 43.5
+offset_bottom = 154.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.7921569, 0.9411765, 0.95686275, 1)
+theme_override_fonts/font = ExtResource("6_2fawj")
+theme_override_font_sizes/font_size = 256
+text = "2"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Level_2"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_waalq")
+}
+
+[node name="safe_route" type="Label" parent="Control/Level_2"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -661.77765
+offset_top = -514.0
+offset_right = 669.8889
+offset_bottom = -360.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.9098039, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0.72156864, 1, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("6_2fawj")
+theme_override_font_sizes/font_size = 192
+text = "Safe Route"
+horizontal_alignment = 1
+
+[node name="Level_3" type="TextureButton" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -226.66661
+offset_top = -226.66667
+offset_right = 541.3334
+offset_bottom = 541.3333
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+texture_normal = ExtResource("2_b1s7h")
+texture_pressed = ExtResource("3_dw001")
+texture_hover = ExtResource("4_bh0ka")
+texture_disabled = ExtResource("5_asriv")
+script = ExtResource("10_waalq")
+
+[node name="Label" type="Label" parent="Control/Level_3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.5
+offset_top = -154.0
+offset_right = 43.5
+offset_bottom = 154.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.7921569, 0.9411765, 0.95686275, 1)
+theme_override_fonts/font = ExtResource("6_2fawj")
+theme_override_font_sizes/font_size = 256
+text = "3"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Level_3"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_waalq")
+}
+
+[node name="rebuild_net" type="Label" parent="Control/Level_3"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -661.77765
+offset_top = -514.0
+offset_right = 669.8889
+offset_bottom = -360.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.9098039, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0.72156864, 1, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("6_2fawj")
+theme_override_font_sizes/font_size = 192
+text = "Rebuild Net"
+horizontal_alignment = 1
+
+[node name="Level_4" type="TextureButton" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 286.66675
+offset_top = -226.66666
+offset_right = 1054.6667
+offset_bottom = 541.3334
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+texture_normal = ExtResource("2_b1s7h")
+texture_pressed = ExtResource("3_dw001")
+texture_hover = ExtResource("4_bh0ka")
+texture_disabled = ExtResource("5_asriv")
+script = ExtResource("11_waalq")
+
+[node name="Label" type="Label" parent="Control/Level_4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.5
+offset_top = -154.0
+offset_right = 43.5
+offset_bottom = 154.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.7921569, 0.9411765, 0.95686275, 1)
+theme_override_fonts/font = ExtResource("6_2fawj")
+theme_override_font_sizes/font_size = 256
+text = "4"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Level_4"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_waalq")
+}
+
+[node name="flow_control" type="Label" parent="Control/Level_4"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -661.77765
+offset_top = -514.0
+offset_right = 669.8889
+offset_bottom = -360.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.9098039, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0.72156864, 1, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("6_2fawj")
+theme_override_font_sizes/font_size = 192
+text = "Flow Control"
+horizontal_alignment = 1
+
+[node name="Level_5" type="TextureButton" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 813.3333
+offset_top = -226.66666
+offset_right = 1581.3333
+offset_bottom = 541.3334
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+texture_normal = ExtResource("2_b1s7h")
+texture_pressed = ExtResource("3_dw001")
+texture_hover = ExtResource("4_bh0ka")
+texture_disabled = ExtResource("5_asriv")
+script = ExtResource("12_u43jn")
+
+[node name="Label" type="Label" parent="Control/Level_5"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.5
+offset_top = -154.0
+offset_right = 43.5
+offset_bottom = 154.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.7921569, 0.9411765, 0.95686275, 1)
+theme_override_fonts/font = ExtResource("6_2fawj")
+theme_override_font_sizes/font_size = 256
+text = "5"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Level_5"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_waalq")
+}
+
+[node name="the_core" type="Label" parent="Control/Level_5"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -661.77765
+offset_top = -514.0
+offset_right = 669.8889
+offset_bottom = -360.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.9098039, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0.72156864, 1, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("6_2fawj")
+theme_override_font_sizes/font_size = 192
+text = "The Core"
+horizontal_alignment = 1
+
+[connection signal="mouse_entered" from="Control/Level_1" to="Control/Level_1" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Level_1" to="Control/Level_1" method="_on_mouse_exited"]
+[connection signal="pressed" from="Control/Level_1" to="Control/Level_1" method="_on_pressed"]
+[connection signal="mouse_entered" from="Control/Level_2" to="Control/Level_2" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Level_2" to="Control/Level_2" method="_on_mouse_exited"]
+[connection signal="pressed" from="Control/Level_2" to="Control/Level_2" method="_on_pressed"]
+[connection signal="mouse_entered" from="Control/Level_3" to="Control/Level_3" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Level_3" to="Control/Level_3" method="_on_mouse_exited"]
+[connection signal="pressed" from="Control/Level_3" to="Control/Level_3" method="_on_pressed"]
+[connection signal="mouse_entered" from="Control/Level_4" to="Control/Level_4" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Level_4" to="Control/Level_4" method="_on_mouse_exited"]
+[connection signal="pressed" from="Control/Level_4" to="Control/Level_4" method="_on_pressed"]
+[connection signal="mouse_entered" from="Control/Level_5" to="Control/Level_5" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Level_5" to="Control/Level_5" method="_on_mouse_exited"]
+[connection signal="pressed" from="Control/Level_5" to="Control/Level_5" method="_on_pressed"]

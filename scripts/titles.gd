@@ -1,4 +1,4 @@
 extends Node
-func _ready():
+func _on_ready():
 	
 	$AnimationPlayer.play("Title")

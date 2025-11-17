@@ -1,13 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://bwoscubpdca7l"]
+[gd_scene load_steps=15 format=3 uid="uid://bwoscubpdca7l"]
 
-[ext_resource type="Texture2D" path="res://escenas/instrucciones/cuadro.png" id="1_u2j67"]
-[ext_resource type="Texture2D" path="res://escenas/instrucciones/cuadroSB.png" id="2_5pq8i"]
-[ext_resource type="FontFile" uid="uid://bo0jp8b0jlkw0" path="res://fonts/Conthrax-SemiBold.otf" id="3_jk17w"]
-[ext_resource type="Texture2D" path="res://escenas/instrucciones/image.psd(1).png" id="4_p5maw"]
-[ext_resource type="Shader" path="res://escenas/Instrucciones.gdshader" id="5_cx7bh"]
-[ext_resource type="Texture2D" path="res://escenas/instrucciones/nodo.png" id="6_5g7sp"]
-[ext_resource type="Texture2D" path="res://escenas/instrucciones/exit_darker.png" id="7_2sy4m"]
-[ext_resource type="Texture2D" path="res://escenas/instrucciones/nodomalo.png" id="7_chea7"]
+[ext_resource type="Script" uid="uid://dy4ru24sibmwj" path="res://scripts/instrucciones-boton.gd" id="1_go03p"]
+[ext_resource type="Texture2D" uid="uid://dtqxu1fgebjjn" path="res://escenas/texturas-o-png/cuadro.png" id="1_u2j67"]
+[ext_resource type="Texture2D" uid="uid://omyf16ymo0hm" path="res://escenas/texturas-o-png/cuadroSB.png" id="2_5pq8i"]
+[ext_resource type="FontFile" uid="uid://cpwdg36okbmhs" path="res://assets/Conthrax-SemiBold.otf" id="3_jk17w"]
+[ext_resource type="Texture2D" uid="uid://rq2aamwflopv" path="res://escenas/texturas-o-png/image.psd(1).png" id="4_p5maw"]
+[ext_resource type="Shader" uid="uid://c868lep0ufnoh" path="res://escenas/shaders/Instrucciones.gdshader" id="5_cx7bh"]
+[ext_resource type="Texture2D" uid="uid://cf51tskvw2wfu" path="res://escenas/texturas-o-png/nodo.png" id="6_5g7sp"]
+[ext_resource type="Texture2D" uid="uid://brab4ujxshyck" path="res://escenas/texturas-o-png/exit_darker.png" id="7_2sy4m"]
+[ext_resource type="Texture2D" uid="uid://cco0bp75cksjp" path="res://escenas/texturas-o-png/nodomalo.png" id="7_chea7"]
 
 [sub_resource type="Animation" id="Animation_o3ej7"]
 length = 0.001
@@ -118,6 +119,7 @@ grow_vertical = 2
 scale = Vector2(0.8, 0.8)
 pivot_offset = Vector2(960, 540)
 size_flags_horizontal = 4
+script = ExtResource("1_go03p")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -228,6 +230,8 @@ offset_left = -262.0
 offset_top = -31.0
 offset_right = 262.0
 offset_bottom = 275.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/default_color = Color(0.7129237, 0.91739345, 0.93961006, 1)
 theme_override_fonts/normal_font = ExtResource("3_jk17w")
 theme_override_fonts/bold_font = ExtResource("3_jk17w")
