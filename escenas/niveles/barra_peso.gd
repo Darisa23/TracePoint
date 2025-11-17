@@ -165,7 +165,7 @@ func actualizar_ui():
 	if barra.material and barra.material is ShaderMaterial:
 		barra.material.set_shader_parameter("progreso", progreso_normalizado)
 	
-	print("  📊 Barra actualizada: %d/%d (progreso shader: %.2f)" % [peso_actual, peso_total, progreso_normalizado])
+	print("Barra actualizada: %d/%d (progreso shader: %.2f)" % [peso_actual, peso_total, progreso_normalizado])
 
 func _on_mision_completada():
 	if visible:

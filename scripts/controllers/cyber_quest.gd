@@ -113,7 +113,7 @@ func _on_cualquier_mision_completada():
 	await get_tree().create_timer(1.0).timeout
 	
 	if nivel_actual < 4:
-		cambiar_a_nivel(nivel_actual+1)
+		cambiar_a_nivel(nivel_actual+3) #SALTAR DE UNA A NIVEL 4
 	else:
 		print("\n¡HAS COMPLETADO TODOS LOS NIVELES!")
 		print("¡NEMESIS HA SIDO DERROTADO!")

@@ -125,7 +125,7 @@ func _on_mision_completada():
 	var siguiente_nivel = GameManager.nivel_actual + 1
 	
 	# Verificar si hay más niveles
-	if siguiente_nivel <= 3:  # Ajusta según cuántos niveles tengas
+	if siguiente_nivel <= 4:  # Ajusta según cuántos niveles tengas CAMBIE ESTOOO A 4
 		await get_tree().create_timer(1.0).timeout
 		iniciar_nivel(siguiente_nivel)
 	else:

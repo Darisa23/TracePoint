@@ -317,9 +317,9 @@ func validar_salto_a_nodo(nodo_id: int) -> bool:
 			nodo.marcar_correcto()
 			emit_signal("nodo_visitado_correcto", nodo.id)
 			indice_actual += 1
-			#if nivel_actual == 1:
-			#	completar_mision()
-			#	return true
+			if nivel_actual == 1:
+				completar_mision()
+				return true
 			# Verificar victoria
 			if (indice_actual+1) >= recorrido_correcto.size():
 				completar_mision()
