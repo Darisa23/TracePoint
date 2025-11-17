@@ -5,6 +5,7 @@ extends Node3D
 @export var activo: bool = true  # Desactiva niveles que no estés usando
 @onready var graf = $GrafoSpawner
 @onready var pack = $PlataformaPaquetes if has_node("PlataformaPaquetes") else null
+@onready var titulo = $"../../HUD/Titulos"
 @onready var flowm = $FlowManager if has_node("FlowManager") else null
 func _ready():
 	# Si el nivel no está activo, desactivarlo
@@ -42,25 +43,30 @@ func activar():
 	
 	match nivel_numero:
 		1:
+			
 			GameManager.cargar_nivel_1()
 			graf.instanciar_grafo()
 			if graf.dibujar_conexiones:
 				graf.instanciar_conexiones()
-		2:
+			await get_tree().create_timer(1.5).timeout
+			titulo.show_level(nivel_numero)
+		2:	
+			titulo.show_level(nivel_numero)
 			GameManager.cargar_nivel_2()
 			graf.instanciar_grafo()
 			if graf.dibujar_conexiones:
 				graf.instanciar_conexiones()
 			GameManager.iniciar_juego("dijkstra")
-		3:
+		3:	
+			titulo.show_level(nivel_numero)
 			GameManager.cargar_nivel_3()
 			graf.instanciar_grafo()
 			if graf.dibujar_conexiones:
 				graf.instanciar_conexiones()
 			GameManager.iniciar_juego("prim")
-		4:
-			GameManager.cargar_nivel_4()
-			
+		4:	
+			titulo.show_level(nivel_numero)
+			GameManager.cargar_nivel_4()		
 			graf.instanciar_grafo()
 			if graf.dibujar_conexiones:
 				graf.instanciar_conexiones()

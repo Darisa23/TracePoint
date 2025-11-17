@@ -29,7 +29,6 @@ signal vida_perdida()
 signal game_over()
 signal mision_completada()
 signal nivel_reiniciado()
-
 func _ready():
 	print("GameManager inicializado como singleton")
 

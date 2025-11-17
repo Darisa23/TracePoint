@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://o3l2sqbxr6aa"]
 
-[ext_resource type="Script" uid="uid://c27kvh6ukuegv" path="res://scripts/titles.gd" id="1_14jtp"]
+[ext_resource type="Script" uid="uid://c3x2l8hlcht3a" path="res://scripts/titles.gd" id="1_14jtp"]
 [ext_resource type="Texture2D" uid="uid://dcjyggh71td5p" path="res://escenas/texturas-o-png/lineas-titulo.png" id="1_j5w6p"]
 [ext_resource type="FontFile" uid="uid://cpwdg36okbmhs" path="res://assets/Conthrax-SemiBold.otf" id="2_14jtp"]
 [ext_resource type="Shader" uid="uid://cujsj5asto54s" path="res://escenas/niveles/titulos/glitch.gdshader" id="3_t1gb1"]
@@ -41,7 +41,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(0, 0.72156864, 1, 1)]
+"values": [Color(0, 0.721569, 1, 1)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -53,7 +53,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(0.9098039, 1, 1, 1)]
+"values": [Color(0.909804, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_8uj06"]
@@ -93,7 +93,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(2, 3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0, 0.72156864, 1, 1), Color(0.22364992, 0.010108093, 0.06720055, 1)]
+"values": [Color(0, 0.721569, 1, 1), Color(0.0216133, 0.0092741, 0.388804, 1)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -105,7 +105,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(2, 3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0.9098039, 1, 1, 1), Color(1, 0.30005085, 0.23680493, 1)]
+"values": [Color(0.909804, 1, 1, 1), Color(0.0627451, 0.698039, 0.937255, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4wrfy"]
@@ -115,12 +115,12 @@ _data = {
 }
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8tbid"]
-bg_color = Color(0.09803922, 0.09803922, 0.09803922, 0.2)
+bg_color = Color(0.0980392, 0.0980392, 0.0980392, 0.2)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p2a6i"]
 shader = ExtResource("3_t1gb1")
 shader_parameter/shake_power = 0.005
-shader_parameter/shake_rate = 0.150000007125
+shader_parameter/shake_rate = 0.15
 shader_parameter/shake_speed = 2.5
 shader_parameter/shake_block_size = 30.5
 shader_parameter/shake_color_rate = 0.01
@@ -163,8 +163,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -2539.0
 offset_top = -1701.0
-offset_right = 2722.6665
-offset_bottom = 1860.6665
+offset_right = 2722.67
+offset_bottom = 1860.67
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_8tbid")
@@ -192,14 +192,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -340.79596
-offset_top = -150.49756
-offset_right = 324.20404
-offset_bottom = -72.49756
+offset_left = -340.796
+offset_top = -150.498
+offset_right = 324.204
+offset_bottom = -72.4976
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0.9098039, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0.72156864, 1, 1)
+theme_override_colors/font_color = Color(0.909804, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0.721569, 1, 1)
 theme_override_constants/outline_size = 12
 theme_override_fonts/font = ExtResource("2_14jtp")
 theme_override_font_sizes/font_size = 64

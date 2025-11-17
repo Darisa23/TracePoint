@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://camm0ty01vmmt"]
+[gd_scene load_steps=20 format=3 uid="uid://camm0ty01vmmt"]
 
 [ext_resource type="Script" uid="uid://d145h3ufpfx0m" path="res://scripts/controllers/cyber_quest.gd" id="1_5ssbh"]
 [ext_resource type="Script" uid="uid://dksfa6qfha8rg" path="res://ESTOY_FLOTANDO.gd" id="1_bmpbm"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dw27a5dihjvit" path="res://escenas/hud.tscn" id="4_e6aq7"]
 [ext_resource type="PackedScene" uid="uid://bxrumyormv21n" path="res://escenas/niveles/nivel_3_RebuildNet.tscn" id="6_e6aq7"]
 [ext_resource type="PackedScene" uid="uid://d03wjg2v1a4dy" path="res://escenas/niveles/nivel_4_FlowControl.tscn" id="7_fl800"]
+[ext_resource type="Script" uid="uid://de6qfto1frn3j" path="res://scripts/titulos.gd" id="14_mri1d"]
 [ext_resource type="PackedScene" uid="uid://drfqp3tybuj62" path="res://escenas/instrucciones/Instrucciones1.tscn" id="14_sb757"]
 [ext_resource type="PackedScene" uid="uid://bwoscubpdca7l" path="res://escenas/instrucciones/Instrucciones2.tscn" id="15_mri1d"]
 [ext_resource type="PackedScene" uid="uid://sa4osif021wd" path="res://escenas/instrucciones/Instrucciones3.tscn" id="16_eag8e"]
@@ -25,6 +26,7 @@ script = ExtResource("1_bmpbm")
 [node name="player" parent="." instance=ExtResource("2_sb757")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.32797, 6.37644, -7.53124)
 input_ray_pickable = false
+mouse_sensitivity = 0.667
 
 [node name="Niveles" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.32797, 6.37644, -7.53124)
@@ -48,21 +50,65 @@ visible = false
 [node name="HUD" parent="." instance=ExtResource("4_e6aq7")]
 
 [node name="instrucciones1" parent="HUD" instance=ExtResource("14_sb757")]
+visible = false
 
 [node name="instrucciones2" parent="HUD" instance=ExtResource("15_mri1d")]
+visible = false
 
 [node name="instrucciones3" parent="HUD" instance=ExtResource("16_eag8e")]
+visible = false
 
 [node name="instrucciones4" parent="HUD" instance=ExtResource("17_nq6b8")]
+visible = false
 
 [node name="instrucciones5" parent="HUD" instance=ExtResource("18_2r028")]
+visible = false
 
-[node name="Titulo1NetworkTracer" parent="." instance=ExtResource("19_0a8jg")]
+[node name="Titulos" type="Control" parent="HUD"]
+z_index = 1
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -65.0
+offset_right = 75.0
+offset_bottom = 65.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("14_mri1d")
 
-[node name="Titulo2SafeRoute" parent="." instance=ExtResource("20_bfir1")]
+[node name="Titulo1NetworkTracer" parent="HUD/Titulos" instance=ExtResource("19_0a8jg")]
+visible = false
+layout_mode = 1
+mouse_filter = 2
 
-[node name="Titulo3RebuildNet" parent="." instance=ExtResource("21_w8eb8")]
+[node name="Titulo2SafeRoute" parent="HUD/Titulos" instance=ExtResource("20_bfir1")]
+visible = false
+layout_mode = 1
+mouse_filter = 2
 
-[node name="Titulo4FlowControl" parent="." instance=ExtResource("22_wbi33")]
+[node name="Titulo3RebuildNet" parent="HUD/Titulos" instance=ExtResource("21_w8eb8")]
+visible = false
+layout_mode = 1
+mouse_filter = 2
 
-[node name="Titulo5TheCore" parent="." instance=ExtResource("23_5bf4p")]
+[node name="Titulo4FlowControl" parent="HUD/Titulos" instance=ExtResource("22_wbi33")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+mouse_filter = 2
+
+[node name="Titulo5TheCore" parent="HUD/Titulos" instance=ExtResource("23_5bf4p")]
+visible = false
+layout_mode = 1
+mouse_filter = 2

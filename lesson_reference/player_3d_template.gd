@@ -64,13 +64,12 @@ func _process(delta):
 		recoger_paquete()
 	if Input.is_action_just_pressed("dejar_paquete") and paquetes_llevando > 0:
 		depositar_paquete()
-		
 func _input(event: InputEvent) -> void:
-	print("INPUT!", event)
 	if event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	elif event.is_action_pressed("left_click"):
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		print("HOLAAA JIJI TEMPLATE")
 
 
 func _unhandled_input(event: InputEvent) -> void:
