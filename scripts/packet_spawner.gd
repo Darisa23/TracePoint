@@ -6,7 +6,7 @@ var source_position: Vector3
 
 func _ready():
 	await get_tree().create_timer(1.0).timeout
-	
+	print("ousi")
 	# Obtener posición del source
 	if GameManager.grafo and GameManager.grafo.nodos.size() > 0:
 		source_position = GameManager.grafo.nodos[0].posicion_3d

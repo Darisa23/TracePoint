@@ -218,85 +218,7 @@ static func prim(grafo: Grafo, nodo_inicio: Nodo = null) -> Array:
 	
 	return orden_mst
 
-# Ford-Fulkerson usando BFS (Edmonds-Karp)
-# Retorna el flujo máximo y los caminos usados
 
-static func calcular_flujo_maximo(grafo: Grafo, source_id: int, sink_id: int) -> Dictionary:
-	var capacidades = crear_matriz_capacidades(grafo)
-	var flujo_total = 0
-	var caminos_usados = []  # Array de caminos (para visualizar)
-	
-	# Mientras exista un camino aumentante
-	while true:
-		var camino = bfs_camino_aumentante(capacidades, source_id, sink_id)
-		
-		if camino.size() == 0:
-			break  # No hay más caminos
-		
-		# Encontrar flujo mínimo en el camino
-		var flujo_camino = INF
-		for i in range(camino.size() - 1):
-			var u = camino[i]
-			var v = camino[i + 1]
-			flujo_camino = min(flujo_camino, capacidades[u][v])
-		
-		# Actualizar capacidades residuales
-		for i in range(camino.size() - 1):
-			var u = camino[i]
-			var v = camino[i + 1]
-			capacidades[u][v] -= flujo_camino
-			capacidades[v][u] += flujo_camino  # Grafo residual
-		
-		flujo_total += flujo_camino
-		caminos_usados.append({
-			"camino": camino.duplicate(),
-			"flujo": flujo_camino
-		})
-		
-		print("  Camino encontrado: %s con flujo %d" % [str(camino), flujo_camino])
-	
-	return {
-		"flujo_maximo": flujo_total,
-		"caminos": caminos_usados
-	}
-
-# BFS para encontrar camino aumentante
-static func bfs_camino_aumentante(capacidades: Array, source: int, sink: int) -> Array:
-	var n = capacidades.size()
-	var visitado = []
-	var padre = []
-	
-	for i in range(n):
-		visitado.append(false)
-		padre.append(-1)
-	
-	var cola = [source]
-	visitado[source] = true
-	
-	while cola.size() > 0:
-		var u = cola.pop_front()
-		
-		for v in range(n):
-			if not visitado[v] and capacidades[u][v] > 0:
-				visitado[v] = true
-				padre[v] = u
-				cola.append(v)
-				
-				if v == sink:
-					# Reconstruir camino
-					return reconstruir_camino(padre, source, sink)
-	
-	return []  # No hay camino
-
-static func reconstruir_camino(padre: Array, source: int, sink: int) -> Array:
-	var camino = []
-	var actual = sink
-	
-	while actual != -1:
-		camino.push_front(actual)
-		actual = padre[actual]
-	
-	return camino
 
 static func crear_matriz_capacidades(grafo: Grafo) -> Array:
 	var n = grafo.nodos.size()
@@ -322,3 +244,115 @@ static func crear_matriz_capacidades(grafo: Grafo) -> Array:
 				capacidades[i][j] = grafo.matriz_adyacencia[i][j]
 	
 	return capacidades
+
+# 2. BFS para encontrar un camino aumentante
+# ------------------------------------------------------------
+# Recibe: matriz de capacidades residuales, source y sink
+# Devuelve: Array con la secuencia de IDs del camino.
+# Si no hay camino, devuelve un Array vacío.
+static func bfs_camino_aumentante(capacidades: Array, source_id: int, sink_id: int) -> Array:
+	var n := capacidades.size()
+	var visitado := []
+	var padre := []
+	
+	visitado.resize(n)
+	padre.resize(n)
+
+	for i in range(n):
+		visitado[i] = false
+		padre[i] = -1
+
+	var cola := []
+	cola.append(source_id)
+	visitado[source_id] = true
+
+	while cola.size() > 0:
+		var u = cola.pop_front()
+
+		for v in range(n):
+			if not visitado[v] and capacidades[u][v] > 0:
+				cola.append(v)
+				visitado[v] = true
+				padre[v] = u
+				
+				if v == sink_id:
+					break
+
+	# Construir el camino si llegó al sink
+	var camino := []
+	var actual = sink_id
+
+	if padre[actual] == -1:
+		return []  # No hay camino aumentante
+
+	while actual != -1:
+		camino.append(actual)
+		actual = padre[actual]
+
+	camino.reverse()
+	return camino
+
+# 3. Ford-Fulkerson / Edmonds-Karp (flujo máximo)
+# ------------------------------------------------------------
+# Devuelve un Dictionary con:
+#  - "flujo_maximo": int
+#  - "caminos": lista de {camino: [node_ids], flujo: x}
+
+static func calcular_flujo_maximo(grafo: Grafo, source_id: int, sink_id: int) -> Dictionary:
+	var capacidades := crear_matriz_capacidades(grafo)
+	var flujo_total := 0
+	var caminos_usados := []  # Para visualizar los caminos aumentantes
+
+	while true:
+		var camino := bfs_camino_aumentante(capacidades, source_id, sink_id)
+
+		if camino.size() == 0:
+			break
+
+		# Determinar flujo mínimo del camino
+		var flujo_camino := INF
+		for i in range(camino.size() - 1):
+			var u = camino[i]
+			var v = camino[i + 1]
+			flujo_camino = min(flujo_camino, capacidades[u][v])
+
+		# Actualizar capacidades residuales
+		for i in range(camino.size() - 1):
+			var u = camino[i]
+			var v = camino[i + 1]
+			capacidades[u][v] -= flujo_camino
+			capacidades[v][u] += flujo_camino
+
+		flujo_total += flujo_camino
+		caminos_usados.append({
+			"camino": camino.duplicate(),
+			"flujo": flujo_camino
+		})
+		print("  Camino encontrado: %s con flujo %d" % [str(camino), flujo_camino])
+	return {
+		"flujo_maximo": flujo_total,
+		"caminos": caminos_usados
+	}
+
+
+static func calcular_flujo_por_nodo(caminos_usados: Array) -> Dictionary:
+	var flujo_por_nodo := {}
+
+	for registro in caminos_usados:
+		var camino = registro["camino"]
+		var flujo = registro["flujo"]
+
+		for id in camino:
+			if not flujo_por_nodo.has(id):
+				flujo_por_nodo[id] = flujo
+			else:
+				flujo_por_nodo[id] += flujo
+	print(flujo_por_nodo)
+	return flujo_por_nodo
+
+# 5. pasar ids int a nodo
+static func convertir_camino_ids_a_nodos(camino_ids: Array, grafo: Grafo) -> Array:
+	var nodos_path := []
+	for id in camino_ids:
+		nodos_path.append(grafo.nodos[id])
+	return nodos_path

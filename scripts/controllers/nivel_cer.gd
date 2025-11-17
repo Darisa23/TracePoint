@@ -4,6 +4,7 @@ extends Node3D
 @export var nivel_numero: int = 1
 @export var activo: bool = true  # Desactiva niveles que no estés usando
 @onready var graf = $GrafoSpawner
+@onready var pack = $PlataformaPaquetes if has_node("PlataformaPaquetes") else null
 @onready var flowm = $FlowManager if has_node("FlowManager") else null
 func _ready():
 	# Si el nivel no está activo, desactivarlo
@@ -59,11 +60,12 @@ func activar():
 			GameManager.iniciar_juego("prim")
 		4:
 			GameManager.cargar_nivel_4()
+			
 			graf.instanciar_grafo()
 			if graf.dibujar_conexiones:
-				print("dibujande conepsiones")
 				graf.instanciar_conexiones()
 			flowm.inicializar_nivel()
+			#pack.generar_paquetes()
 			GameManager.iniciar_juego("fordfulkerson")
 			
 	await get_tree().process_frame

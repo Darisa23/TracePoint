@@ -18,6 +18,10 @@ var color_normal: Color = Color(0.2, 0.5, 0.8)  # Azul
 var color_correcto: Color = Color(0.2, 0.8, 0.2)  # Verde
 var color_incorrecto: Color = Color(0.8, 0.2, 0.2)  # Rojo
 var color_visitado: Color = Color(0.4, 0.8, 0.8)  # Cyan
+# Variables para nivel 4 (flujo)
+var capacidad_maxima: int = 0
+var paquetes_entregados: int = 0
+var esta_cerrado: bool = false
 
 func _ready():
 	# Crear y asignar material único para este nodo
@@ -66,6 +70,9 @@ func inicializar(p_nodo_logico: Nodo):
 		if label_3d:
 			var letra = char(65 + nodo_logico.id)  # 65 = 'A' en ASCII
 			label_3d.text = letra
+		if GameManager.nivel_actual == 4:
+			capacidad_maxima = GameManager.capacidades_nodos[nodo_logico.id]
+			print("se asignó capacidad max: ",capacidad_maxima, " a nodo ",nodo_logico.id)
 
 func _on_body_entered(body):
 	# Verificar si es el jugador
@@ -88,7 +95,11 @@ func _on_body_entered(body):
 				if GameManager.vidas_actuales == 0:
 					#print("ujum")
 					iniciar_quiebre()
-
+	
+func recibir_paquete():
+	print("paquete entregado a nodo ",nodo_logico.id)
+	paquetes_entregados +=1
+	
 func marcar_correcto():
 	if material:
 		material.albedo_color = color_correcto

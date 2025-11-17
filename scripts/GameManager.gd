@@ -18,7 +18,10 @@ var ca:bool = false
 # Referencias (se asignan cuando se carga el nivel)
 var player: Node3D = null
 var spawner: Node3D = null
-
+# Datos específicos del nivel 4 (Flujo Máximo)
+var flujo_maximo_calculado: int = 0
+var caminos_aumentantes: Array = []  # Resultado de Ford-Fulkerson
+var capacidades_nodos: Dictionary = {}  # {nodo_id: capacidad_maxima}
 # Señales
 signal nodo_visitado_correcto(nodo_id: int)
 signal nodo_visitado_incorrecto(nodo_id: int)
@@ -200,7 +203,7 @@ func cargar_nivel_4():
 		#A  B  C  D  E  F  G 
 		[0, 5, 0, 0, 7, 0, 4],#A
 		[0, 0, 3, 0, 1, 0, 0],#B
-		[0, 0, 0, 1, 0, 0, 0],#C
+		[0, 0, 0, 9, 0, 0, 0],#C
 		[0, 0, 0, 0, 0, 0, 0],#D
 		[0, 0, 4, 0, 0, 5, 2],#E
 		[0, 0, 1, 6, 0, 0, 0],#F
@@ -227,10 +230,12 @@ func cargar_nivel_4():
 	
 	# Calcular flujo máximo
 	var resultado = RecorridosGrafo.calcular_flujo_maximo(grafo, 0, 3)
-	print("Flujo máximo: ", resultado.flujo_maximo)
+	flujo_maximo_calculado = resultado.flujo_maximo
+	print("Flujo máximo: ", flujo_maximo_calculado)
 	print("Caminos posibles: ", resultado.caminos.size())
-	
-	print("=== NIVEL 4 CARGADO ===\n")
+	#calcular_capacidades_nodos()
+	capacidades_nodos = RecorridosGrafo.calcular_flujo_por_nodo(resultado.caminos)
+
 func calcular_recorrido_correcto(nodo_inicio_id: int):
 	if not grafo:
 		push_error("No hay grafo cargado")
@@ -251,8 +256,7 @@ func calcular_recorrido_correcto(nodo_inicio_id: int):
 	elif tipo_recorrido == "prim":
 		recorrido_correcto = RecorridosGrafo.prim(grafo,nodo_inicio)
 	elif tipo_recorrido == "fordfulkerson":
-		var hola = RecorridosGrafo.calcular_flujo_maximo(grafo, 0, 3)
-		recorrido_correcto = hola["caminos"][0]["camino"]
+		print("oki FF")
 		
 
 	indice_actual = 0
@@ -276,7 +280,8 @@ func iniciar_juego(type:String):
 	#print("vc en iniciar juego:",grafo.obtener_nodo(0).vc)
 	print("Juego iniciado - Sigue el recorrido ", tipo_recorrido)
 	calcular_recorrido_correcto(0)
-	print("Orden correcto: ", obtener_ids_recorrido())
+	if not nivel_actual == 4:
+		print("Orden correcto: ", obtener_ids_recorrido())
 	
 	grafo.obtener_nodo(0).vc = true
 	#print("vc en iniciar juego:",grafo.obtener_nodo(0).vc)
@@ -286,6 +291,7 @@ func validar_salto_a_nodo(nodo_id: int) -> bool:
 		print("inicia juego")
 		#grafo.obtener_nodo(0).vc = true
 		iniciar_juego(tipo_recorrido)
+		
 		return true
 	
 	if not puede_saltar:
@@ -296,8 +302,10 @@ func validar_salto_a_nodo(nodo_id: int) -> bool:
 	if not nodo:
 		print("not nodo")
 		return false
-	
-	# Verificción
+	if nivel_actual == 4:
+		print("nivel 4 otra dinámica")
+		return true
+	# Verificción para 3 primeros niveles:
 	if (indice_actual+1) < recorrido_correcto.size():
 		var nodo_esperado = recorrido_correcto[indice_actual+1]
 		#para que pueda devolverse por los que ya visitó correctamente
@@ -309,7 +317,9 @@ func validar_salto_a_nodo(nodo_id: int) -> bool:
 			nodo.marcar_correcto()
 			emit_signal("nodo_visitado_correcto", nodo.id)
 			indice_actual += 1
-			
+			#if nivel_actual == 1:
+			#	completar_mision()
+			#	return true
 			# Verificar victoria
 			if (indice_actual+1) >= recorrido_correcto.size():
 				completar_mision()

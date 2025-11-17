@@ -41,7 +41,7 @@ shape = SubResource("CylinderShape3D_g0xwr")
 
 [node name="Label3D" type="Label3D" parent="."]
 offset = Vector2(0, 100)
-outline_modulate = Color(0.1342442, 0.6195359, 0.911919, 0.7882353)
+outline_modulate = Color(0.134244, 0.619536, 0.911919, 0.788235)
 text = "A"
 font = ExtResource("2_g0xwr")
 font_size = 120

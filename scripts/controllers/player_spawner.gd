@@ -36,7 +36,8 @@ func reposicionar_en_nodo_inicial():
 		if "velocity" in player:
 			player.velocity = Vector3.ZERO
 		
-		print("Player reposicionado en: ", pos_spawn)
+		
+		#print("Player reposicionado en: ", pos_spawn)
 	else:
 		# Posición de respaldo
 		player.global_position = Vector3(0, altura_spawn, 0)

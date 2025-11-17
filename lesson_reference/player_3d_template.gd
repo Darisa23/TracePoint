@@ -41,7 +41,9 @@ var _camera_input_direction := Vector2.ZERO
 @onready var _jump_sound: AudioStreamPlayer3D = %JumpSound
 @onready var _dust_particles: GPUParticles3D = %DustParticles
 
-
+var paquete_cerca: RigidBody3D = null
+var paquetes_en_rango = []
+signal soltar_paquete()
 func _ready() -> void:
 	Events.kill_plane_touched.connect(func on_kill_plane_touched() -> void:
 		global_position = _start_position
@@ -54,8 +56,14 @@ func _ready() -> void:
 		_skin.idle()
 		_dust_particles.emitting = false
 	)
+	$detect_area.body_entered.connect(_on_body_entered)
+	$detect_area.body_exited.connect(_on_body_exited)
 
-
+func _process(delta):
+	if Input.is_action_just_pressed("recoger_paquete"):
+		recoger_paquete()
+	if Input.is_action_just_pressed("dejar_paquete") and paquetes_llevando > 0:
+		depositar_paquete()
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -128,22 +136,56 @@ func _physics_process(delta: float) -> void:
 	_was_on_floor_last_frame = is_on_floor()
 	move_and_slide()
 
+
+func _on_body_entered(body):
+	if body.is_in_group("paquete"):
+		paquetes_en_rango.append(body)
+
+
+func _on_body_exited(body):
+	if body.is_in_group("paquete"):
+		paquetes_en_rango.erase(body)
+
 # Variables para paquetes
 var paquetes_llevando: int = 0
 var max_paquetes: int = 3
 
 func recoger_paquete():
-	if paquetes_llevando < max_paquetes:
+	#print("intento recoger paquete")
+	if paquetes_en_rango.size() == 0:
+		return
+	
+	# Buscar el paquete más cercano
+	var paquete = null
+	var dist_min = INF
+	
+	for p in paquetes_en_rango:
+		var d = global_position.distance_to(p.global_position)
+		if d < dist_min:
+			dist_min = d
+			paquete = p
+	
+	if paquete:
+		#print("Paquete recogido:", paquete.name)
+		
+		# Remover del array para que no se pueda recoger dos veces
+		paquetes_en_rango.erase(paquete)
+		
+		# AQUÍ ESTÁ EL CAMBIO: Llamar a la animación en lugar de queue_free directo
+		if paquete.has_method("animacion_recoger"):
+			paquete.animacion_recoger()
+		
+		# Aumentar contador de paquetes
 		paquetes_llevando += 1
-		print("Paquetes: %d/%d" % [paquetes_llevando, max_paquetes])
-	else:
-		print("Mochila llena!")
+		print("Paquetes llevando: ", paquetes_llevando)
+	if paquetes_en_rango.size() == 0:
+		return
+	
 
-func depositar_paquetes():
-	var cantidad = paquetes_llevando
-	paquetes_llevando = 0
-	print("Depositados %d paquetes" % cantidad)
-	return cantidad
+func depositar_paquete():
+	#var cantidad = paquetes_llevando
+	paquetes_llevando -=1
+	emit_signal("soltar_paquete")
 
 func perder_paquetes():
 	paquetes_llevando = 0
