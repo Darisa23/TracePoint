@@ -6,7 +6,8 @@ extends Control
 	3: $Titulo3RebuildNet,
 	4: $Titulo4FlowControl
 }
-
+func _ready():
+	set_anchors_preset(Control.PRESET_FULL_RECT)
 	
 func show_level(level: int) -> void:
 	# Ocultar todos primero (máxima seguridad)
