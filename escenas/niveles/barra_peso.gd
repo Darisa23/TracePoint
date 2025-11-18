@@ -26,7 +26,7 @@ func _process(_delta):
 	if not ya_verifico_inicio and not inicializada:
 		if GameManager.nivel_actual == 2 and GameManager.juego_iniciado:
 			if GameManager.tipo_recorrido.to_lower() == "dijkstra":
-				print("\n🎮 _process detectó que el juego ya inició - Inicializando barra")
+				#print(" _process detectó que el juego ya inició - Inicializando barra")
 				inicializar_barra()
 			ya_verifico_inicio = true
 	
@@ -52,7 +52,7 @@ func _on_nodo_correcto(nodo_id: int):
 	for n in recorrido:
 		ids.append(n.id)
 	
-	print("\n🎯 Señal recibida: nodo %d correcto" % nodo_id)
+	print("\nSeñal recibida: nodo %d correcto" % nodo_id)
 	print("   GameManager.indice_actual (antes de incrementar): %d" % indice)
 	print("   Recorrido completo: %s" % str(ids))
 	
@@ -64,7 +64,7 @@ func _on_nodo_correcto(nodo_id: int):
 			break
 	
 	if nodo_actual_index == -1:
-		print("   ⚠️ ERROR: No se encontró el nodo %d en el recorrido" % nodo_id)
+		print("ERROR: No se encontró el nodo %d en el recorrido" % nodo_id)
 		return
 	
 	# Si es el primer nodo (índice 0), no restar nada

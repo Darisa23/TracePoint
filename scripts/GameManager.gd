@@ -18,6 +18,8 @@ var ca:bool = false
 # Referencias (se asignan cuando se carga el nivel)
 var player: Node3D = null
 var spawner: Node3D = null
+#Variable condición perder vide nivel 2:
+var pv2:bool = false
 # Datos específicos del nivel 4 (Flujo Máximo)
 var flujo_maximo_calculado: int = 0
 var caminos_aumentantes: Array = []  # Resultado de Ford-Fulkerson
@@ -317,9 +319,9 @@ func validar_salto_a_nodo(nodo_id: int) -> bool:
 			nodo.marcar_correcto()
 			emit_signal("nodo_visitado_correcto", nodo.id)
 			indice_actual += 1
-			if nivel_actual == 1:
-				completar_mision()
-				return true
+			#if nivel_actual == 1:
+				#completar_mision()
+				#return true
 			# Verificar victoria
 			if (indice_actual+1) >= recorrido_correcto.size():
 				completar_mision()
@@ -329,7 +331,8 @@ func validar_salto_a_nodo(nodo_id: int) -> bool:
 			print("nodo incorrecto: %d (se esperaba: %d)" % [nodo.id, nodo_esperado.id])
 			nodo.marcar_incorrecto()
 			emit_signal("nodo_visitado_incorrecto", nodo.id)
-			perder_vida()
+			if nivel_actual != 2 and pv2:
+				perder_vida()
 			return false
 	
 	return false

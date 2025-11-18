@@ -146,7 +146,7 @@ func _on_mision_completada():
 func _on_nivel_reiniciado():
 	"""Reiniciar reloj cuando se reinicia el nivel"""
 	if GameManager.nivel_actual == 4:
-		print("\n🔄 Reiniciando reloj...")
+		print("\nReiniciando reloj...")
 		inicializado = false
 		ya_verifico_inicio = false
 		visible = false
@@ -166,4 +166,4 @@ func _on_game_over():
 	visible = false
 	inicializado = false
 	ya_verifico_inicio = false
-	print("⏹️ Game Over - Reloj detenido")
+	print("Game Over - Reloj detenido")
