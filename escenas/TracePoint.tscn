@@ -1,25 +1,84 @@
-[gd_scene load_steps=21 format=3 uid="uid://camm0ty01vmmt"]
+[gd_scene load_steps=42 format=3 uid="uid://camm0ty01vmmt"]
 
 [ext_resource type="Script" uid="uid://d145h3ufpfx0m" path="res://scripts/controllers/cyber_quest.gd" id="1_5ssbh"]
 [ext_resource type="Script" uid="uid://dksfa6qfha8rg" path="res://ESTOY_FLOTANDO.gd" id="1_bmpbm"]
-[ext_resource type="PackedScene" uid="uid://2dwpnp36vlfk" path="res://escenas/niveles/nivel_1_network_tracer.tscn" id="2_5ssbh"]
 [ext_resource type="PackedScene" uid="uid://dodfrown0q7ro" path="res://playerrr_holograma.tscn" id="2_sb757"]
-[ext_resource type="PackedScene" uid="uid://c0j4675x22x1g" path="res://escenas/niveles/nivel_2_safe_route.tscn" id="4_bmpbm"]
+[ext_resource type="Script" uid="uid://8fpq85lemlwa" path="res://scripts/controllers/nivel_cer.gd" id="4_5g3o7"]
 [ext_resource type="PackedScene" uid="uid://dw27a5dihjvit" path="res://escenas/hud.tscn" id="4_e6aq7"]
-[ext_resource type="PackedScene" uid="uid://bxrumyormv21n" path="res://escenas/niveles/nivel_3_RebuildNet.tscn" id="6_e6aq7"]
-[ext_resource type="PackedScene" uid="uid://d03wjg2v1a4dy" path="res://escenas/niveles/nivel_4_FlowControl.tscn" id="7_fl800"]
+[ext_resource type="Script" uid="uid://b7xahjuha0vog" path="res://scripts/GrafoSpawner.gd" id="5_5h8vg"]
+[ext_resource type="PackedScene" uid="uid://doqvur36b3bcq" path="res://escenas/nodo_3d.tscn" id="6_qlijk"]
+[ext_resource type="Script" uid="uid://ddbdki8uc5hy" path="res://escenas/niveles/barra_peso.gd" id="7_r3xnm"]
+[ext_resource type="Shader" uid="uid://du2gvliha78wk" path="res://escenas/niveles/progress_bar.gdshader" id="8_sqkbm"]
+[ext_resource type="Texture2D" uid="uid://dxie6ncjjk5wi" path="res://assets/estefondo.png" id="9_i626u"]
+[ext_resource type="Texture2D" uid="uid://6xtdc688ygpn" path="res://assets/bbar.png" id="10_trqvr"]
+[ext_resource type="Texture2D" uid="uid://bbgl46mwchspn" path="res://assets/estabarra.png" id="11_qvifs"]
+[ext_resource type="FontFile" uid="uid://cpwdg36okbmhs" path="res://assets/Conthrax-SemiBold.otf" id="12_0l4b4"]
+[ext_resource type="Script" uid="uid://dn728v4e6hbiy" path="res://scripts/flow_manager.gd" id="13_m62pv"]
+[ext_resource type="PackedScene" uid="uid://c2yleoi8cthic" path="res://escenas/data_packet.tscn" id="14_an1nh"]
 [ext_resource type="Script" uid="uid://de6qfto1frn3j" path="res://scripts/titulos.gd" id="14_mri1d"]
 [ext_resource type="PackedScene" uid="uid://drfqp3tybuj62" path="res://escenas/instrucciones/Instrucciones1.tscn" id="14_sb757"]
+[ext_resource type="PackedScene" uid="uid://b55er4eoavok6" path="res://escenas/plataforma_paquetes.tscn" id="15_1boxo"]
 [ext_resource type="PackedScene" uid="uid://bwoscubpdca7l" path="res://escenas/instrucciones/Instrucciones2.tscn" id="15_mri1d"]
 [ext_resource type="PackedScene" uid="uid://sa4osif021wd" path="res://escenas/instrucciones/Instrucciones3.tscn" id="16_eag8e"]
+[ext_resource type="Script" uid="uid://bhvf4mwd5r2mt" path="res://scripts/particles_maneger.gd" id="16_nkjhf"]
 [ext_resource type="PackedScene" uid="uid://ckpbstcq4ht52" path="res://escenas/instrucciones/Instrucciones4.tscn" id="17_nq6b8"]
+[ext_resource type="Script" uid="uid://doah65cs3h43r" path="res://scripts/floating_labels.gd" id="17_xilwj"]
 [ext_resource type="PackedScene" uid="uid://d2v4mfai2xu6f" path="res://escenas/instrucciones/Instrucciones5.tscn" id="18_2r028"]
+[ext_resource type="Shader" uid="uid://btt2dxoksluux" path="res://escenas/niveles/ventana.gdshader" id="18_abxcp"]
 [ext_resource type="PackedScene" uid="uid://dgn40ogw14ob1" path="res://escenas/niveles/titulos/titulo_1_network_tracer.tscn" id="19_0a8jg"]
+[ext_resource type="Script" uid="uid://bxcmd7hs7qq8" path="res://escenas/niveles/reloj.gd" id="19_3tlku"]
+[ext_resource type="Shader" uid="uid://sjh4kbgc1tjb" path="res://escenas/niveles/reloj.gdshader" id="20_1ii8u"]
 [ext_resource type="PackedScene" uid="uid://o3l2sqbxr6aa" path="res://escenas/niveles/titulos/titulo_2_safe_route.tscn" id="20_bfir1"]
 [ext_resource type="PackedScene" path="res://escenas/InventoryUI.tscn" id="20_eag8e"]
+[ext_resource type="Script" uid="uid://4t3j24hbqvna" path="res://escenas/niveles/perdidos.gd" id="21_e4wjo"]
 [ext_resource type="PackedScene" uid="uid://bi2k3jygqcpep" path="res://escenas/niveles/titulos/titulo_3_rebuild_net.tscn" id="21_w8eb8"]
+[ext_resource type="PackedScene" uid="uid://b1hjrwgbuf2nr" path="res://escenas/niveles/ventana.tscn" id="22_1bop0"]
 [ext_resource type="PackedScene" uid="uid://dh5mfbv77jap1" path="res://escenas/niveles/titulos/titulo_4_flow_control.tscn" id="22_wbi33"]
 [ext_resource type="PackedScene" uid="uid://cocq18ny8hm4f" path="res://escenas/niveles/titulos/titulo_5_the_core.tscn" id="23_5bf4p"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nmnq1"]
+shader = ExtResource("8_sqkbm")
+shader_parameter/color_base = Color(0, 0.8, 1, 1)
+shader_parameter/color_brillo = Color(0.3, 1, 1, 1)
+shader_parameter/velocidad_lineas = 2.0
+shader_parameter/grosor_lineas = 8.0
+shader_parameter/intensidad_scanline = 0.5
+shader_parameter/velocidad_pulso = 1.5
+shader_parameter/intensidad_brillo = 0.8
+shader_parameter/progreso = 1.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_phfud"]
+initial_velocity_min = 2.0
+initial_velocity_max = 4.0
+scale_min = 0.05
+scale_max = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mvdu5"]
+shading_mode = 0
+albedo_color = Color(1, 1, 0.243137, 0.745098)
+
+[sub_resource type="SphereMesh" id="SphereMesh_8np8a"]
+material = SubResource("StandardMaterial3D_mvdu5")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sidgr"]
+shader = ExtResource("18_abxcp")
+shader_parameter/glitch_intensity = 1.0
+shader_parameter/scan_line_speed = 2.0
+shader_parameter/glitch_color = Color(0, 0.5, 1, 1)
+shader_parameter/chromatic_aberration = 0.02
+shader_parameter/noise_amount = 0.3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gdgp3"]
+shader = ExtResource("20_1ii8u")
+shader_parameter/color_base = Color(0, 0.8, 1, 1)
+shader_parameter/color_brillo = Color(0.3, 1, 1, 1)
+shader_parameter/velocidad_lineas = 2.0
+shader_parameter/grosor_lineas = 8.0
+shader_parameter/intensidad_scanline = 0.5
+shader_parameter/velocidad_pulso = 1.5
+shader_parameter/intensidad_brillo = 0.8
+shader_parameter/progreso = 1.0
+shader_parameter/grosor = 0.15
 
 [node name="TracePoint" type="Node"]
 script = ExtResource("1_bmpbm")
@@ -33,20 +92,190 @@ mouse_sensitivity = 0.667
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.32797, 6.37644, -7.53124)
 script = ExtResource("1_5ssbh")
 
-[node name="Nivel2_SafeRoute" parent="Niveles" instance=ExtResource("4_bmpbm")]
+[node name="Nivel2_SafeRoute" type="Node3D" parent="Niveles"]
 visible = false
+script = ExtResource("4_5g3o7")
+nivel_numero = 2
 activo = false
 
-[node name="Nivel1_NetworkTracer" parent="Niveles" instance=ExtResource("2_5ssbh")]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Niveles/Nivel2_SafeRoute"]
+transform = Transform3D(-0.327016, 0.941731, -0.0787648, 0.688764, 0.294578, 0.662441, 0.647044, 0.162378, -0.744962, -47.2295, 26.8832, -28.0205)
+light_energy = 0.53
+shadow_enabled = true
+directional_shadow_max_distance = 40.0
+
+[node name="GrafoSpawner" type="Node3D" parent="Niveles/Nivel2_SafeRoute"]
+script = ExtResource("5_5h8vg")
+nodo_prefab = ExtResource("6_qlijk")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Niveles/Nivel2_SafeRoute"]
+
+[node name="BarraPeso" type="Control" parent="Niveles/Nivel2_SafeRoute/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("7_r3xnm")
+
+[node name="ProgressBar" type="TextureProgressBar" parent="Niveles/Nivel2_SafeRoute/CanvasLayer/BarraPeso"]
+material = SubResource("ShaderMaterial_nmnq1")
+layout_mode = 0
+offset_left = 50.0
+offset_top = 155.0
+offset_right = 1550.0
+offset_bottom = 455.0
+scale = Vector2(0.3, 0.3)
+value = 100.0
+texture_under = ExtResource("9_i626u")
+texture_over = ExtResource("10_trqvr")
+texture_progress = ExtResource("11_qvifs")
+tint_progress = Color(0.774706, 0.902081, 0.969465, 1)
+
+[node name="Label" type="Label" parent="Niveles/Nivel2_SafeRoute/CanvasLayer/BarraPeso"]
+layout_mode = 0
+offset_left = 93.0
+offset_top = 249.0
+offset_right = 454.0
+offset_bottom = 283.0
+theme_override_colors/font_color = Color(0.969137, 0.969137, 0.969137, 1)
+theme_override_colors/font_shadow_color = Color(0.360784, 0.909804, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("12_0l4b4")
+theme_override_font_sizes/font_size = 27
+text = "hola"
+
+[node name="Nivel1_NetworkTracer" type="Node3D" parent="Niveles"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.88785, -3.06269, 0.64905)
+script = ExtResource("4_5g3o7")
 activo = false
 
-[node name="Nivel3_RebuildNet" parent="Niveles" instance=ExtResource("6_e6aq7")]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Niveles/Nivel1_NetworkTracer"]
+transform = Transform3D(-0.327016, 0.941731, -0.0787648, 0.688764, 0.294578, 0.662441, 0.647044, 0.162378, -0.744962, -47.2295, 26.8832, -28.0205)
+light_energy = 0.53
+shadow_enabled = true
+directional_shadow_max_distance = 40.0
+
+[node name="GrafoSpawner" type="Node3D" parent="Niveles/Nivel1_NetworkTracer"]
+script = ExtResource("5_5h8vg")
+nodo_prefab = ExtResource("6_qlijk")
+
+[node name="Nivel3_RebuildNet" type="Node3D" parent="Niveles"]
 visible = false
+script = ExtResource("4_5g3o7")
+nivel_numero = 3
 activo = false
 
-[node name="Nivel4_FlowControl" parent="Niveles" instance=ExtResource("7_fl800")]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Niveles/Nivel3_RebuildNet"]
+transform = Transform3D(-0.327016, 0.941731, -0.0787648, 0.688764, 0.294578, 0.662441, 0.647044, 0.162378, -0.744962, -47.2295, 26.8832, -28.0205)
+light_energy = 0.53
+shadow_enabled = true
+directional_shadow_max_distance = 40.0
+
+[node name="GrafoSpawner" type="Node3D" parent="Niveles/Nivel3_RebuildNet"]
+script = ExtResource("5_5h8vg")
+nodo_prefab = ExtResource("6_qlijk")
+
+[node name="Nivel4_FlowControl" type="Node3D" parent="Niveles"]
 visible = false
+script = ExtResource("4_5g3o7")
+nivel_numero = 4
+activo = false
+
+[node name="FlowManager" type="Node" parent="Niveles/Nivel4_FlowControl" node_paths=PackedStringArray("plataforma_inicial")]
+script = ExtResource("13_m62pv")
+paquete_scene = ExtResource("14_an1nh")
+plataforma_inicial = NodePath("../PlataformaPaquetes")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Niveles/Nivel4_FlowControl"]
+transform = Transform3D(-0.327016, 0.941731, -0.0787648, 0.688764, 0.294578, 0.662441, 0.647044, 0.162378, -0.744962, -47.2295, 26.8832, -28.0205)
+light_energy = 0.53
+shadow_enabled = true
+directional_shadow_max_distance = 40.0
+
+[node name="GrafoSpawner" type="Node3D" parent="Niveles/Nivel4_FlowControl"]
+script = ExtResource("5_5h8vg")
+nodo_prefab = ExtResource("6_qlijk")
+
+[node name="PlataformaPaquetes" parent="Niveles/Nivel4_FlowControl" instance=ExtResource("15_1boxo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="ParticlesManeger" type="Node3D" parent="Niveles/Nivel4_FlowControl"]
+script = ExtResource("16_nkjhf")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Niveles/Nivel4_FlowControl/ParticlesManeger"]
+emitting = false
+amount = 20
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_phfud")
+draw_pass_1 = SubResource("SphereMesh_8np8a")
+
+[node name="FloatingLabels" type="Node3D" parent="Niveles/Nivel4_FlowControl"]
+script = ExtResource("17_xilwj")
+
+[node name="Label3D" type="Label3D" parent="Niveles/Nivel4_FlowControl/FloatingLabels"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+visible = false
+billboard = 1
+fixed_size = true
+modulate = Color(1, 1, 1, 0.984314)
+outline_modulate = Color(0, 0, 0.313726, 1)
+text = "+ 1"
+font = ExtResource("12_0l4b4")
+font_size = 13
+outline_size = 8
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Niveles/Nivel4_FlowControl"]
+
+[node name="Reloj" type="Control" parent="Niveles/Nivel4_FlowControl/CanvasLayer"]
+material = SubResource("ShaderMaterial_sidgr")
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("19_3tlku")
+
+[node name="ColorRect" type="ColorRect" parent="Niveles/Nivel4_FlowControl/CanvasLayer/Reloj"]
+material = SubResource("ShaderMaterial_gdgp3")
+layout_mode = 0
+offset_left = 1711.0
+offset_top = 164.0
+offset_right = 1861.0
+offset_bottom = 314.0
+
+[node name="Label" type="Label" parent="Niveles/Nivel4_FlowControl/CanvasLayer/Reloj"]
+layout_mode = 0
+offset_left = 1711.0
+offset_top = 225.0
+offset_right = 1861.0
+offset_bottom = 256.0
+theme_override_colors/font_shadow_color = Color(0, 0.5568628, 0.5254902, 0.6313726)
+theme_override_colors/font_outline_color = Color(0, 0.74509805, 0.99607843, 0.90588236)
+theme_override_fonts/font = ExtResource("12_0l4b4")
+theme_override_font_sizes/font_size = 25
+text = ":("
+horizontal_alignment = 1
+
+[node name="perdidos" type="Label" parent="Niveles/Nivel4_FlowControl/CanvasLayer"]
+offset_left = 136.0
+offset_top = 160.0
+offset_right = 212.0
+offset_bottom = 194.0
+theme_override_colors/font_color = Color(0.96862745, 0.96862745, 0.96862745, 1)
+theme_override_colors/font_shadow_color = Color(0.36078432, 0.9098039, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("12_0l4b4")
+theme_override_font_sizes/font_size = 27
+text = "yupi"
+horizontal_alignment = 1
+script = ExtResource("21_e4wjo")
+
+[node name="ventana" parent="Niveles/Nivel4_FlowControl/CanvasLayer" instance=ExtResource("22_1bop0")]
+offset_left = 689.0
+offset_top = 313.0
+offset_right = 729.0
+offset_bottom = 353.0
 
 [node name="HUD" parent="." instance=ExtResource("4_e6aq7")]
 

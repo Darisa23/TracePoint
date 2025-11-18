@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dfqutwyeqync8"]
+
+[ext_resource type="Shader" uid="uid://8012ei86ndei" path="res://escenas/outline.gdshader" id="1_b2vq4"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_b2vq4")
+shader_parameter/step_count = 3
+shader_parameter/thickness = 3.0
+shader_parameter/edge_color = Color(0, 0.64705884, 1, 1)
+shader_parameter/fade_start = 100.0
+shader_parameter/fade_length = 200.0
