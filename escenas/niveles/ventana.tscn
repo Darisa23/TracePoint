@@ -1,0 +1,96 @@
+[gd_scene load_steps=11 format=3 uid="uid://b1hjrwgbuf2nr"]
+
+[ext_resource type="Texture2D" uid="uid://cljco5s5dtpve" path="res://escenas/texturas-o-png/ventanita.png" id="1_6x8cm"]
+[ext_resource type="Script" uid="uid://bowkmelqye2wx" path="res://escenas/niveles/ventana.gd" id="1_qjllo"]
+[ext_resource type="FontFile" uid="uid://cpwdg36okbmhs" path="res://assets/Conthrax-SemiBold.otf" id="2_qjllo"]
+[ext_resource type="Script" uid="uid://cyxcrou6v8386" path="res://escenas/niveles/max.gd" id="3_mnypt"]
+[ext_resource type="Script" uid="uid://bx6fjpchoswy" path="res://escenas/niveles/entregados.gd" id="4_kynau"]
+[ext_resource type="Script" uid="uid://dum0fwn25rcno" path="res://escenas/niveles/actuales.gd" id="5_36nqd"]
+[ext_resource type="Script" uid="uid://c0ccueks48tsm" path="res://escenas/niveles/nodo.gd" id="6_c3i0e"]
+[ext_resource type="Texture2D" uid="uid://bwsp30ffi70a0" path="res://assets/mainmenu/EXITE.png" id="7_sem84"]
+[ext_resource type="Texture2D" uid="uid://dn87s4sywft1k" path="res://assets/mainmenu/EXITC.png" id="8_vxrx1"]
+[ext_resource type="Texture2D" uid="uid://cpocsnqw5nj2s" path="res://assets/mainmenu/EXITH.png" id="9_y1usi"]
+
+[node name="ventana" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 257.0
+offset_top = 224.0
+offset_right = 297.0
+offset_bottom = 264.0
+script = ExtResource("1_qjllo")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 15.000001
+anchor_top = 8.165
+anchor_right = 15.760001
+anchor_bottom = 9.209001
+offset_left = -790.99994
+offset_top = 173.4
+offset_right = -177.3999
+offset_bottom = 548.64
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("1_6x8cm")
+
+[node name="max" type="Label" parent="."]
+layout_mode = 0
+offset_left = -126.999756
+offset_top = 586.0
+offset_right = 182.00024
+offset_bottom = 622.0
+scale = Vector2(0.7, 0.7)
+theme_override_fonts/font = ExtResource("2_qjllo")
+theme_override_font_sizes/font_size = 22
+text = "capacidad max:"
+script = ExtResource("3_mnypt")
+
+[node name="entregados" type="Label" parent="."]
+layout_mode = 0
+offset_left = -127.99988
+offset_top = 610.00006
+offset_right = 181.00012
+offset_bottom = 646.00006
+scale = Vector2(0.7, 0.7)
+theme_override_fonts/font = ExtResource("2_qjllo")
+theme_override_font_sizes/font_size = 23
+text = "entregados:"
+script = ExtResource("4_kynau")
+
+[node name="actuales" type="Label" parent="."]
+layout_mode = 0
+offset_left = -127.999756
+offset_top = 633.00006
+offset_right = 181.00024
+offset_bottom = 669.00006
+scale = Vector2(0.7, 0.7)
+theme_override_fonts/font = ExtResource("2_qjllo")
+theme_override_font_sizes/font_size = 23
+text = "actuales:"
+script = ExtResource("5_36nqd")
+
+[node name="nodo" type="Label" parent="."]
+layout_mode = 0
+offset_left = -136.99988
+offset_top = 537.0
+offset_right = 172.00012
+offset_bottom = 573.0
+scale = Vector2(0.7, 0.7)
+theme_override_colors/font_color = Color(0.14509805, 0.7294118, 0.9882353, 1)
+theme_override_fonts/font = ExtResource("2_qjllo")
+theme_override_font_sizes/font_size = 27
+text = "Nodo X"
+horizontal_alignment = 1
+script = ExtResource("6_c3i0e")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = -77.0
+offset_top = 702.0
+offset_right = 385.0
+offset_bottom = 868.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("7_sem84")
+texture_pressed = ExtResource("8_vxrx1")
+texture_hover = ExtResource("9_y1usi")

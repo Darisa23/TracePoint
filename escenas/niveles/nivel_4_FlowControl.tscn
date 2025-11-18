@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://d03wjg2v1a4dy"]
+[gd_scene load_steps=25 format=3 uid="uid://d03wjg2v1a4dy"]
 
 [ext_resource type="Script" uid="uid://8fpq85lemlwa" path="res://scripts/controllers/nivel_cer.gd" id="1_blm80"]
 [ext_resource type="Shader" uid="uid://b80iojip1k6wx" path="res://level/sky_with_stars.tres" id="2_53b8b"]
@@ -10,6 +10,11 @@
 [ext_resource type="FontFile" uid="uid://cpwdg36okbmhs" path="res://assets/Conthrax-SemiBold.otf" id="8_fj8xv"]
 [ext_resource type="Script" uid="uid://bhvf4mwd5r2mt" path="res://scripts/particles_maneger.gd" id="8_phfud"]
 [ext_resource type="Script" uid="uid://doah65cs3h43r" path="res://scripts/floating_labels.gd" id="9_8np8a"]
+[ext_resource type="Script" uid="uid://bxcmd7hs7qq8" path="res://escenas/niveles/reloj.gd" id="11_kpq2v"]
+[ext_resource type="Shader" uid="uid://btt2dxoksluux" path="res://escenas/niveles/ventana.gdshader" id="11_qxx8f"]
+[ext_resource type="Script" uid="uid://4t3j24hbqvna" path="res://escenas/niveles/perdidos.gd" id="11_t3dit"]
+[ext_resource type="Shader" uid="uid://sjh4kbgc1tjb" path="res://escenas/niveles/reloj.gdshader" id="12_t3dit"]
+[ext_resource type="PackedScene" uid="uid://b1hjrwgbuf2nr" path="res://escenas/niveles/ventana.tscn" id="15_ljjbg"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0wtap"]
 load_path = "res://.godot/imported/qwantani_moon_noon_puresky_4k.exr-9c99993655a97e2e3970192b680d1851.bptc.ctex"
@@ -70,6 +75,22 @@ albedo_color = Color(1, 1, 0.243137, 0.745098)
 [sub_resource type="SphereMesh" id="SphereMesh_8np8a"]
 material = SubResource("StandardMaterial3D_mvdu5")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sidgr"]
+render_priority = 0
+shader = ExtResource("11_qxx8f")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gdgp3"]
+shader = ExtResource("12_t3dit")
+shader_parameter/color_base = Color(0, 0.8, 1, 1)
+shader_parameter/color_brillo = Color(0.3, 1, 1, 1)
+shader_parameter/velocidad_lineas = 2.0
+shader_parameter/grosor_lineas = 8.0
+shader_parameter/intensidad_scanline = 0.5
+shader_parameter/velocidad_pulso = 1.5
+shader_parameter/intensidad_brillo = 0.8
+shader_parameter/progreso = 1.0
+shader_parameter/grosor = 0.15
+
 [node name="Nivel4_FlowControl" type="Node3D"]
 script = ExtResource("1_blm80")
 nivel_numero = 4
@@ -122,3 +143,54 @@ text = "+ 1"
 font = ExtResource("8_fj8xv")
 font_size = 13
 outline_size = 8
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Reloj" type="Control" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_sidgr")
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("11_kpq2v")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Reloj"]
+material = SubResource("ShaderMaterial_gdgp3")
+layout_mode = 0
+offset_left = 1711.0
+offset_top = 164.0
+offset_right = 1861.0
+offset_bottom = 314.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Reloj"]
+layout_mode = 0
+offset_left = 1711.0
+offset_top = 225.0
+offset_right = 1861.0
+offset_bottom = 256.0
+theme_override_colors/font_shadow_color = Color(0, 0.5568628, 0.5254902, 0.6313726)
+theme_override_colors/font_outline_color = Color(0, 0.74509805, 0.99607843, 0.90588236)
+theme_override_fonts/font = ExtResource("8_fj8xv")
+theme_override_font_sizes/font_size = 25
+text = ":("
+horizontal_alignment = 1
+
+[node name="perdidos" type="Label" parent="CanvasLayer"]
+offset_left = 136.0
+offset_top = 160.0
+offset_right = 212.0
+offset_bottom = 194.0
+theme_override_colors/font_color = Color(0.96862745, 0.96862745, 0.96862745, 1)
+theme_override_colors/font_shadow_color = Color(0.36078432, 0.9098039, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_fj8xv")
+theme_override_font_sizes/font_size = 27
+text = "yupi"
+horizontal_alignment = 1
+script = ExtResource("11_t3dit")
+
+[node name="ventana" parent="CanvasLayer" instance=ExtResource("15_ljjbg")]
+offset_left = 689.0
+offset_top = 313.0
+offset_right = 729.0
+offset_bottom = 353.0

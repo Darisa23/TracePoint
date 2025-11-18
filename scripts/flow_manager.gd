@@ -198,7 +198,10 @@ func mostrar_popup_nodo(nodo: Nodo):
 	# TODO: Crear UI popup que muestre capacidad y entregados
 	if nodo.nodo_visual:
 		print(" Capacidad: %d | Entregados: %d" % [nodo.nodo_visual.capacidad_maxima, nodo.nodo_visual.paquetes_entregados])
-
+		# Llamar al popup
+		var popup = load("res://escenas/niveles/ventana.tscn").instantiate()
+		add_child(popup)
+		popup.mostrar_info_nodo(nodo.id)
 func depositar_en_sink():
 	var cantidad = player.depositar_paquetes()
 	paquetes_entregados_sink += cantidad
