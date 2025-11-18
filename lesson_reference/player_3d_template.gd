@@ -1,4 +1,5 @@
 extends CharacterBody3D
+@onready var inventory = get_node("/root/TracePoint/HUD/InventoryUI")  # ajusta la ruta
 
 @export_group("Movement")
 ## Character maximum run speed on the ground in meters per second.
@@ -78,7 +79,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	)
 	if player_is_using_mouse:
 		_camera_input_direction.x = -event.relative.x * mouse_sensitivity
-		_camera_input_direction.y = -event.relative.y * mouse_sensitivity
+		_camera_input_direction.y = event.relative.y * mouse_sensitivity
 
 
 func _physics_process(delta: float) -> void:
@@ -176,6 +177,9 @@ func recoger_paquete():
 		if paquete.has_method("animacion_recoger"):
 			paquete.animacion_recoger()
 		
+		if inventory:
+			inventory.add_item(paquete.icon)
+			
 		# Aumentar contador de paquetes
 		paquetes_llevando += 1
 		print("Paquetes llevando: ", paquetes_llevando)
@@ -186,8 +190,10 @@ func recoger_paquete():
 func depositar_paquete():
 	#var cantidad = paquetes_llevando
 	paquetes_llevando -=1
+	inventory.remove_item()
 	emit_signal("soltar_paquete")
 
 func perder_paquetes():
 	paquetes_llevando = 0
+	inventory.clear_items()
 	print("Paquetes perdidos!")

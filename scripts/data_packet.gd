@@ -1,9 +1,9 @@
 extends RigidBody3D
-
+@export var icon: Texture   # <- icono para el inventario
 signal llamar_efectos(pos : Vector3)
 func _ready():
 	# Agregar al grupo
-	add_to_group("paquetes_plataforma")
+	add_to_group("paquete")
 	# Iniciar animación
 	#if has_node("AnimationPlayer"):
 	#	$AnimationPlayer.play("float")
