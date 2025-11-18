@@ -16,12 +16,12 @@
 [ext_resource type="Shader" uid="uid://sjh4kbgc1tjb" path="res://escenas/niveles/reloj.gdshader" id="12_t3dit"]
 [ext_resource type="PackedScene" uid="uid://b1hjrwgbuf2nr" path="res://escenas/niveles/ventana.tscn" id="15_ljjbg"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0wtap"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kplwr"]
 load_path = "res://.godot/imported/qwantani_moon_noon_puresky_4k.exr-9c99993655a97e2e3970192b680d1851.bptc.ctex"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uquey"]
 shader = ExtResource("2_53b8b")
-shader_parameter/skyTexture = SubResource("CompressedTexture2D_0wtap")
+shader_parameter/skyTexture = SubResource("CompressedTexture2D_kplwr")
 shader_parameter/skyColor = Color(1, 1, 1, 1)
 shader_parameter/horizonColor = Color(0.9, 0.9, 0.9, 1)
 shader_parameter/particle_speed = 0.1
@@ -30,12 +30,12 @@ shader_parameter/particle_size = 0.001
 shader_parameter/neon_blue = Color(0.898995, 0.723707, 0.269514, 1)
 shader_parameter/glow_intensity = 2.0
 
-[sub_resource type="Sky" id="Sky_l5lfc"]
+[sub_resource type="Sky" id="Sky_qxx8f"]
 sky_material = SubResource("ShaderMaterial_uquey")
 
 [sub_resource type="Environment" id="Environment_mmdby"]
 background_mode = 2
-sky = SubResource("Sky_l5lfc")
+sky = SubResource("Sky_qxx8f")
 ambient_light_source = 3
 ambient_light_color = Color(0.74902, 0.742654, 0.615273, 1)
 ambient_light_sky_contribution = 0.0
@@ -76,8 +76,12 @@ albedo_color = Color(1, 1, 0.243137, 0.745098)
 material = SubResource("StandardMaterial3D_mvdu5")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sidgr"]
-render_priority = 0
 shader = ExtResource("11_qxx8f")
+shader_parameter/glitch_intensity = 1.0
+shader_parameter/scan_line_speed = 2.0
+shader_parameter/glitch_color = Color(0, 0.5, 1, 1)
+shader_parameter/chromatic_aberration = 0.02
+shader_parameter/noise_amount = 0.3
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gdgp3"]
 shader = ExtResource("12_t3dit")
@@ -168,8 +172,8 @@ offset_left = 1711.0
 offset_top = 225.0
 offset_right = 1861.0
 offset_bottom = 256.0
-theme_override_colors/font_shadow_color = Color(0, 0.5568628, 0.5254902, 0.6313726)
-theme_override_colors/font_outline_color = Color(0, 0.74509805, 0.99607843, 0.90588236)
+theme_override_colors/font_shadow_color = Color(0, 0.556863, 0.52549, 0.631373)
+theme_override_colors/font_outline_color = Color(0, 0.745098, 0.996078, 0.905882)
 theme_override_fonts/font = ExtResource("8_fj8xv")
 theme_override_font_sizes/font_size = 25
 text = ":("
@@ -180,8 +184,8 @@ offset_left = 136.0
 offset_top = 160.0
 offset_right = 212.0
 offset_bottom = 194.0
-theme_override_colors/font_color = Color(0.96862745, 0.96862745, 0.96862745, 1)
-theme_override_colors/font_shadow_color = Color(0.36078432, 0.9098039, 1, 1)
+theme_override_colors/font_color = Color(0.968627, 0.968627, 0.968627, 1)
+theme_override_colors/font_shadow_color = Color(0.360784, 0.909804, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("8_fj8xv")
 theme_override_font_sizes/font_size = 27

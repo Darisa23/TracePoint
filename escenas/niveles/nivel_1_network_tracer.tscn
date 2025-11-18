@@ -1,15 +1,15 @@
 [gd_scene load_steps=9 format=3 uid="uid://2dwpnp36vlfk"]
 
-[ext_resource type="Script" uid="uid://8fpq85lemlwa" path="res://scripts/controllers/nivel_cer.gd" id="1_065hm"]
-[ext_resource type="Shader" uid="uid://b80iojip1k6wx" path="res://level/sky_with_stars.tres" id="2_1jpj2"]
-[ext_resource type="Script" uid="uid://b7xahjuha0vog" path="res://scripts/GrafoSpawner.gd" id="3_cuwpx"]
-[ext_resource type="PackedScene" uid="uid://doqvur36b3bcq" path="res://escenas/nodo_3d.tscn" id="4_kj4ii"]
+[ext_resource type="Script" uid="uid://8fpq85lemlwa" path="res://scripts/controllers/nivel_cer.gd" id="1_3bnxd"]
+[ext_resource type="Script" uid="uid://b7xahjuha0vog" path="res://scripts/GrafoSpawner.gd" id="2_1jpj2"]
+[ext_resource type="Shader" uid="uid://b80iojip1k6wx" path="res://level/sky_with_stars.tres" id="2_065hm"]
+[ext_resource type="PackedScene" uid="uid://doqvur36b3bcq" path="res://escenas/nodo_3d.tscn" id="3_065hm"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0wtap"]
 load_path = "res://.godot/imported/qwantani_moon_noon_puresky_4k.exr-9c99993655a97e2e3970192b680d1851.bptc.ctex"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_065hm"]
-shader = ExtResource("2_1jpj2")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v8kyt"]
+shader = ExtResource("2_065hm")
 shader_parameter/skyTexture = SubResource("CompressedTexture2D_0wtap")
 shader_parameter/skyColor = Color(1, 1, 1, 1)
 shader_parameter/horizonColor = Color(0.9, 0.9, 0.9, 1)
@@ -19,12 +19,12 @@ shader_parameter/particle_size = 0.001
 shader_parameter/neon_blue = Color(0.898995, 0.723707, 0.269514, 1)
 shader_parameter/glow_intensity = 2.0
 
-[sub_resource type="Sky" id="Sky_065hm"]
-sky_material = SubResource("ShaderMaterial_065hm")
+[sub_resource type="Sky" id="Sky_l5lfc"]
+sky_material = SubResource("ShaderMaterial_v8kyt")
 
-[sub_resource type="Environment" id="Environment_v8kyt"]
+[sub_resource type="Environment" id="Environment_aqnt4"]
 background_mode = 2
-sky = SubResource("Sky_065hm")
+sky = SubResource("Sky_l5lfc")
 ambient_light_source = 3
 ambient_light_color = Color(0.74902, 0.742654, 0.615273, 1)
 ambient_light_sky_contribution = 0.0
@@ -52,10 +52,8 @@ volumetric_fog_albedo = Color(0.843137, 0.737255, 0.329412, 1)
 volumetric_fog_emission = Color(0.843137, 0.737255, 0.329412, 1)
 
 [node name="Nivel1_NetworkTracer" type="Node3D"]
-script = ExtResource("1_065hm")
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_v8kyt")
+script = ExtResource("1_3bnxd")
+activo = false
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.327016, 0.941731, -0.0787648, 0.688764, 0.294578, 0.662441, 0.647044, 0.162378, -0.744962, -47.2295, 26.8832, -28.0205)
@@ -63,6 +61,9 @@ light_energy = 0.53
 shadow_enabled = true
 directional_shadow_max_distance = 40.0
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_aqnt4")
+
 [node name="GrafoSpawner" type="Node3D" parent="."]
-script = ExtResource("3_cuwpx")
-nodo_prefab = ExtResource("4_kj4ii")
+script = ExtResource("2_1jpj2")
+nodo_prefab = ExtResource("3_065hm")

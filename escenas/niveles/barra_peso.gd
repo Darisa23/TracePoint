@@ -206,9 +206,10 @@ func actualizar_ui():
 		barra.value = max(0, peso_actual)
 		label.text = "Distancia: %d / %d" % [max(0, peso_actual), peso_total]
 	else:
-		GameManager.pv2 = true
-		label.text = "ERROR, EXCEDISTE LA DISTANCIA PERMITIDA"
 		
+		label.text = "ERROR, EXCEDISTE LA DISTANCIA PERMITIDA"
+		await get_tree().create_timer(0.5).timeout
+		GameManager.perder_vida()
 	# Actualizar shader
 	if barra.material and barra.material is ShaderMaterial:
 		barra.material.set_shader_parameter("progreso", progreso_normalizado)

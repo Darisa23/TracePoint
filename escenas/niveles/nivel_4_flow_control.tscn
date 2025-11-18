@@ -1,0 +1,151 @@
+[gd_scene load_steps=20 format=3 uid="uid://d3nqp3156q2jq"]
+
+[ext_resource type="Script" uid="uid://8fpq85lemlwa" path="res://scripts/controllers/nivel_cer.gd" id="1_g418y"]
+[ext_resource type="Script" uid="uid://dn728v4e6hbiy" path="res://scripts/flow_manager.gd" id="2_pb8ng"]
+[ext_resource type="PackedScene" uid="uid://c2yleoi8cthic" path="res://escenas/data_packet.tscn" id="3_mm5td"]
+[ext_resource type="Script" uid="uid://b7xahjuha0vog" path="res://scripts/GrafoSpawner.gd" id="4_rrrw7"]
+[ext_resource type="PackedScene" uid="uid://doqvur36b3bcq" path="res://escenas/nodo_3d.tscn" id="5_wjiob"]
+[ext_resource type="PackedScene" uid="uid://b55er4eoavok6" path="res://escenas/plataforma_paquetes.tscn" id="6_ap07h"]
+[ext_resource type="Script" uid="uid://bhvf4mwd5r2mt" path="res://scripts/particles_maneger.gd" id="7_vt5j6"]
+[ext_resource type="Script" uid="uid://doah65cs3h43r" path="res://scripts/floating_labels.gd" id="8_numpt"]
+[ext_resource type="FontFile" uid="uid://cpwdg36okbmhs" path="res://assets/Conthrax-SemiBold.otf" id="9_irkx2"]
+[ext_resource type="Shader" uid="uid://btt2dxoksluux" path="res://escenas/niveles/ventana.gdshader" id="10_ya7gf"]
+[ext_resource type="Script" uid="uid://bxcmd7hs7qq8" path="res://escenas/niveles/reloj.gd" id="11_8r1no"]
+[ext_resource type="Shader" uid="uid://sjh4kbgc1tjb" path="res://escenas/niveles/reloj.gdshader" id="12_lym4m"]
+[ext_resource type="Script" uid="uid://4t3j24hbqvna" path="res://escenas/niveles/perdidos.gd" id="13_0huhm"]
+[ext_resource type="PackedScene" uid="uid://b1hjrwgbuf2nr" path="res://escenas/niveles/ventana.tscn" id="14_3yutf"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_phfud"]
+initial_velocity_min = 2.0
+initial_velocity_max = 4.0
+scale_min = 0.05
+scale_max = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mvdu5"]
+shading_mode = 0
+albedo_color = Color(1, 1, 0.243137, 0.745098)
+
+[sub_resource type="SphereMesh" id="SphereMesh_8np8a"]
+material = SubResource("StandardMaterial3D_mvdu5")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sidgr"]
+shader = ExtResource("10_ya7gf")
+shader_parameter/glitch_intensity = 1.0
+shader_parameter/scan_line_speed = 2.0
+shader_parameter/glitch_color = Color(0, 0.5, 1, 1)
+shader_parameter/chromatic_aberration = 0.02
+shader_parameter/noise_amount = 0.3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gdgp3"]
+shader = ExtResource("12_lym4m")
+shader_parameter/color_base = Color(0, 0.8, 1, 1)
+shader_parameter/color_brillo = Color(0.3, 1, 1, 1)
+shader_parameter/velocidad_lineas = 2.0
+shader_parameter/grosor_lineas = 8.0
+shader_parameter/intensidad_scanline = 0.5
+shader_parameter/velocidad_pulso = 1.5
+shader_parameter/intensidad_brillo = 0.8
+shader_parameter/progreso = 1.0
+shader_parameter/grosor = 0.15
+
+[node name="Nivel4_FlowControl" type="Node3D"]
+visible = false
+script = ExtResource("1_g418y")
+nivel_numero = 4
+activo = false
+
+[node name="FlowManager" type="Node" parent="." node_paths=PackedStringArray("plataforma_inicial")]
+script = ExtResource("2_pb8ng")
+paquete_scene = ExtResource("3_mm5td")
+plataforma_inicial = NodePath("../PlataformaPaquetes")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.327016, 0.941731, -0.0787648, 0.688764, 0.294578, 0.662441, 0.647044, 0.162378, -0.744962, -47.2295, 26.8832, -28.0205)
+light_energy = 0.53
+shadow_enabled = true
+directional_shadow_max_distance = 40.0
+
+[node name="GrafoSpawner" type="Node3D" parent="."]
+script = ExtResource("4_rrrw7")
+nodo_prefab = ExtResource("5_wjiob")
+
+[node name="PlataformaPaquetes" parent="." instance=ExtResource("6_ap07h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="ParticlesManeger" type="Node3D" parent="."]
+script = ExtResource("7_vt5j6")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="ParticlesManeger"]
+emitting = false
+amount = 20
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_phfud")
+draw_pass_1 = SubResource("SphereMesh_8np8a")
+
+[node name="FloatingLabels" type="Node3D" parent="."]
+script = ExtResource("8_numpt")
+
+[node name="Label3D" type="Label3D" parent="FloatingLabels"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+visible = false
+billboard = 1
+fixed_size = true
+modulate = Color(1, 1, 1, 0.984314)
+outline_modulate = Color(0, 0, 0.313726, 1)
+text = "+ 1"
+font = ExtResource("9_irkx2")
+font_size = 13
+outline_size = 8
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Reloj" type="Control" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_sidgr")
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("11_8r1no")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Reloj"]
+material = SubResource("ShaderMaterial_gdgp3")
+layout_mode = 0
+offset_left = 1711.0
+offset_top = 164.0
+offset_right = 1861.0
+offset_bottom = 314.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Reloj"]
+layout_mode = 0
+offset_left = 1711.0
+offset_top = 225.0
+offset_right = 1861.0
+offset_bottom = 256.0
+theme_override_colors/font_shadow_color = Color(0, 0.556863, 0.52549, 0.631373)
+theme_override_colors/font_outline_color = Color(0, 0.745098, 0.996078, 0.905882)
+theme_override_fonts/font = ExtResource("9_irkx2")
+theme_override_font_sizes/font_size = 25
+text = ":("
+horizontal_alignment = 1
+
+[node name="perdidos" type="Label" parent="CanvasLayer"]
+offset_left = 136.0
+offset_top = 160.0
+offset_right = 212.0
+offset_bottom = 194.0
+theme_override_colors/font_color = Color(0.968627, 0.968627, 0.968627, 1)
+theme_override_colors/font_shadow_color = Color(0.360784, 0.909804, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_irkx2")
+theme_override_font_sizes/font_size = 27
+text = "yupi"
+horizontal_alignment = 1
+script = ExtResource("13_0huhm")
+
+[node name="ventana" parent="CanvasLayer" instance=ExtResource("14_3yutf")]
+offset_left = 689.0
+offset_top = 313.0
+offset_right = 729.0
+offset_bottom = 353.0

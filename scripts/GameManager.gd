@@ -322,7 +322,7 @@ func validar_salto_a_nodo(nodo_id: int) -> bool:
 			#if nivel_actual == 1:
 				#completar_mision()
 				#return true
-			 #Verificar victoria
+			 ##Verificar victoria
 			if (indice_actual+1) >= recorrido_correcto.size():
 				completar_mision()
 			
