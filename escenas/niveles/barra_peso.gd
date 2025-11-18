@@ -7,7 +7,7 @@ var peso_total: int = 0
 var peso_actual: int = 0
 var inicializada: bool = false
 var ya_verifico_inicio: bool = false
-
+var crash : bool = false
 func _ready():
 	print("\n=== BarraPeso _ready() ===")
 	
@@ -16,6 +16,7 @@ func _ready():
 	
 	# Conectar señales del GameManager
 	GameManager.connect("nodo_visitado_correcto", _on_nodo_correcto)
+	GameManager.connect("nodo_visitado_incorrecto", _on_nodo_incorrecto)
 	GameManager.connect("mision_completada", _on_mision_completada)
 	GameManager.connect("nivel_reiniciado", _on_nivel_reiniciado)
 	
@@ -39,6 +40,7 @@ func _process(_delta):
 
 func _on_nodo_correcto(nodo_id: int):
 	if not visible or not inicializada:
+		
 		return
 	
 	# IMPORTANTE: La señal se emite ANTES de incrementar indice_actual
@@ -52,9 +54,9 @@ func _on_nodo_correcto(nodo_id: int):
 	for n in recorrido:
 		ids.append(n.id)
 	
-	print("\nSeñal recibida: nodo %d correcto" % nodo_id)
-	print("   GameManager.indice_actual (antes de incrementar): %d" % indice)
-	print("   Recorrido completo: %s" % str(ids))
+	#print("\nSeñal recibida: nodo %d correcto" % nodo_id)
+	#print("   GameManager.indice_actual (antes de incrementar): %d" % indice)
+	#print("   Recorrido completo: %s" % str(ids))
 	
 	# Encontrar el nodo actual en el recorrido por su ID
 	var nodo_actual_index = -1
@@ -85,16 +87,59 @@ func _on_nodo_correcto(nodo_id: int):
 		peso = grafo.matriz_pesos[nodo_anterior.id][nodo_actual.id]
 		print("   Peso de matriz[%d][%d] = %d" % [nodo_anterior.id, nodo_actual.id, peso])
 	else:
-		print("   ⚠️ No hay peso en matriz, usando peso=1")
+		print("No hay peso en matriz, usando peso=1")
 	
 	var peso_anterior = peso_actual
 	peso_actual -= peso
 	
-	print("   Peso antes: %d, restando: %d, peso después: %d" % [peso_anterior, peso, peso_actual])
-	print("   Progreso: %d/%d\n" % [peso_actual, peso_total])
-	
-	actualizar_ui()
+	if peso_actual < 0:
+		print("PESO EXCEDIDO")
+		crash = true
+	else:
+		print("Peso antes: %d | después: %d" % [peso_anterior, peso_actual])
+		print("Arista %d → %d  Peso: %d" % [nodo_anterior.id, nodo_actual.id, peso])
 
+		# Actualizar barra o UI
+	actualizar_ui()
+func _on_nodo_incorrecto(nodo_id:int):
+	print("aca se restaría para ese incorrecto")
+	if not visible or not inicializada:
+		return
+
+	var grafo = GameManager.grafo
+	var recorrido = GameManager.recorrido_correcto
+	var indice = GameManager.indice_actual+1
+
+	# Nodo actual según GameManager
+	var nodo_actual = grafo.obtener_nodo(nodo_id)
+	if nodo_actual == null:
+		print("ERROR: nodo %d no existe en el grafo" % nodo_id)
+		return
+
+	# Si estamos en el primer nodo, no restamos nada
+	if indice == 0:
+		print("Nodo inicial, no descuenta peso")
+		return
+
+	# Nodo anterior según el recorrido correcto
+	var nodo_anterior = recorrido[indice - 1]
+
+	# Pedimos el peso REAL directamente al grafo
+	var peso = grafo.obtener_peso(nodo_anterior, nodo_actual)
+
+	# Aplicamos el descuento
+	var anterior = peso_actual
+	peso_actual -= peso
+	if peso_actual < 0:
+		print("PESO EXCEDIDO")
+		crash = true
+	else:
+		print("Peso antes: %d | después: %d" % [anterior, peso_actual])
+		print("Arista %d → %d  Peso: %d" % [nodo_anterior.id, nodo_actual.id, peso])
+
+		# Actualizar barra o UI
+	actualizar_ui()
+	
 func inicializar_barra():
 	if inicializada:
 		return
@@ -156,11 +201,14 @@ func actualizar_ui():
 	
 	# Progreso normalizado: 1.0 (inicio) -> 0.0 (final)
 	var progreso_normalizado = float(peso_actual) / float(peso_total) if peso_total > 0 else 0.0
-	
-	barra.max_value = peso_total
-	barra.value = max(0, peso_actual)
-	label.text = "Distancia: %d / %d" % [max(0, peso_actual), peso_total]
-	
+	if not crash:
+		barra.max_value = peso_total
+		barra.value = max(0, peso_actual)
+		label.text = "Distancia: %d / %d" % [max(0, peso_actual), peso_total]
+	else:
+		GameManager.pv2 = true
+		label.text = "ERROR, EXCEDISTE LA DISTANCIA PERMITIDA"
+		
 	# Actualizar shader
 	if barra.material and barra.material is ShaderMaterial:
 		barra.material.set_shader_parameter("progreso", progreso_normalizado)
@@ -181,4 +229,5 @@ func _on_nivel_reiniciado():
 		inicializada = false
 		ya_verifico_inicio = false
 		visible = false
+		crash = false
 		print("Barra reseteada - Lista para reiniciar")

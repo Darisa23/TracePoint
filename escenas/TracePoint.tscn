@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://d2v4mfai2xu6f" path="res://escenas/instrucciones/Instrucciones5.tscn" id="18_2r028"]
 [ext_resource type="PackedScene" uid="uid://dgn40ogw14ob1" path="res://escenas/niveles/titulos/titulo_1_network_tracer.tscn" id="19_0a8jg"]
 [ext_resource type="PackedScene" uid="uid://o3l2sqbxr6aa" path="res://escenas/niveles/titulos/titulo_2_safe_route.tscn" id="20_bfir1"]
-[ext_resource type="PackedScene" path="res://escenas/InventoryUI.tscn" id="20_eag8e"]
+[ext_resource type="PackedScene" uid="uid://c35dlembttqr7" path="res://escenas/InventoryUI.tscn" id="20_eag8e"]
 [ext_resource type="PackedScene" uid="uid://bi2k3jygqcpep" path="res://escenas/niveles/titulos/titulo_3_rebuild_net.tscn" id="21_w8eb8"]
 [ext_resource type="PackedScene" uid="uid://dh5mfbv77jap1" path="res://escenas/niveles/titulos/titulo_4_flow_control.tscn" id="22_wbi33"]
 [ext_resource type="PackedScene" uid="uid://cocq18ny8hm4f" path="res://escenas/niveles/titulos/titulo_5_the_core.tscn" id="23_5bf4p"]

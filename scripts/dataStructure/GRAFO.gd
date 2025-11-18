@@ -40,7 +40,11 @@ func obtener_nodo(id: int) -> Nodo:
 
 func obtener_peso(nodo_a: Nodo, nodo_b: Nodo) -> float:
 	if matriz_pesos.size() > 0:
-		return matriz_pesos[nodo_a.id][nodo_b.id]
+		var peso = matriz_pesos[nodo_a.id][nodo_b.id]
+		if peso == 0:
+			return 100000
+		else:
+			return peso
 	return 1.0  # Peso por defecto si no hay matriz de pesos
 
 func resetear_todos_nodos() -> void:

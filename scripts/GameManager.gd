@@ -178,9 +178,8 @@ func cargar_nivel_3():
 	Vector3(19, 0, -5),   # F
 	Vector3(12, 0, -5),   # G
 	Vector3(5, 0, -5),    # H
-	Vector3(12, 0, 0),    # I
-	
-]
+	Vector3(12, 0, 0),    # I	
+	]
 	for i in range(grafo.nodos.size()):
 		grafo.nodos[i].posicion_3d = posiciones[i]
 	
@@ -316,22 +315,24 @@ func validar_salto_a_nodo(nodo_id: int) -> bool:
 			return true
 		if nodo.id == nodo_esperado.id:
 			print("nodo %d correcto (%d/%d)" % [nodo.id, indice_actual + 1, recorrido_correcto.size()])
-			nodo.marcar_correcto()
+			if nivel_actual != 2:
+				nodo.marcar_correcto()
 			emit_signal("nodo_visitado_correcto", nodo.id)
 			indice_actual += 1
 			#if nivel_actual == 1:
 				#completar_mision()
 				#return true
-			# Verificar victoria
+			 #Verificar victoria
 			if (indice_actual+1) >= recorrido_correcto.size():
 				completar_mision()
 			
 			return true
 		else:
 			print("nodo incorrecto: %d (se esperaba: %d)" % [nodo.id, nodo_esperado.id])
-			nodo.marcar_incorrecto()
-			emit_signal("nodo_visitado_incorrecto", nodo.id)
 			if nivel_actual != 2 and pv2:
+				nodo.marcar_incorrecto()
+			emit_signal("nodo_visitado_incorrecto", nodo.id)
+			if nivel_actual != 2 or pv2:
 				perder_vida()
 			return false
 	
@@ -367,6 +368,7 @@ func gameOver():
 
 func reiniciar_nivel():
 	indice_actual = 0
+	pv2 = false
 	juego_iniciado = false
 	puede_saltar = true
 	ca = false
