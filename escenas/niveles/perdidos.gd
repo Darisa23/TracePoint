@@ -7,7 +7,6 @@ var ya_verifico_inicio: bool = false
 var tween_parpadeo: Tween = null
 
 func _ready():
-	print("\n=== LabelPaquetes _ready() ===")
 	
 	# Ocultar por defecto
 	visible = false
@@ -43,7 +42,7 @@ func _process(_delta):
 	# SOLO verificar UNA VEZ cuando el juego se inicia
 	if not ya_verifico_inicio and not inicializado:
 		if GameManager.nivel_actual == 4 and GameManager.juego_iniciado:
-			print("\n📦 _process detectó que el nivel 4 inició - Activando label paquetes")
+			#print("\n_process detectó que el nivel 4 inició - Activando label paquetes")
 			inicializar_label()
 			ya_verifico_inicio = true
 	
@@ -58,16 +57,12 @@ func inicializar_label():
 	if inicializado:
 		return
 	
-	print("\n=== Inicializando Label de Paquetes ===")
-	print("   - Nivel: %d" % GameManager.nivel_actual)
-	
 	# Resetear paquetes
 	paquetes_perdidos = 0
 	inicializado = true
 	visible = true
 	
 	actualizar_label()
-	print("✓ Label de paquetes activado")
 
 func actualizar_label():
 	"""Actualiza el label de paquetes perdidos con color dinámico"""
@@ -106,7 +101,7 @@ func actualizar_label():
 		tween_parpadeo.tween_property(self, "modulate:a", 0.3, 0.5)
 		tween_parpadeo.tween_property(self, "modulate:a", 1.0, 0.5)
 	
-	print("📦 Paquetes actualizados: %d/%d" % [paquetes_perdidos, max_paquetes_perdidos])
+	#print("Paquetes actualizados: %d/%d" % [paquetes_perdidos, max_paquetes_perdidos])
 
 func _on_paquete_perdido(_nodo_id: int):
 	"""Se llama cuando se pierde un paquete (nodo incorrecto)"""
@@ -114,7 +109,7 @@ func _on_paquete_perdido(_nodo_id: int):
 		return
 	
 	paquetes_perdidos += 1
-	print("📦 Paquete perdido! Total: %d/%d" % [paquetes_perdidos, max_paquetes_perdidos])
+	#print("Paquete perdido! Total: %d/%d" % [paquetes_perdidos, max_paquetes_perdidos])
 	
 	actualizar_label()
 	
@@ -123,7 +118,7 @@ func _on_paquete_perdido(_nodo_id: int):
 func _on_mision_completada():
 	"""Ocultar cuando se completa la misión"""
 	if visible and GameManager.nivel_actual == 4:
-		print("✓ Misión completada - Label paquetes oculto")
+		#print("✓ Misión completada - Label paquetes oculto")
 		await get_tree().create_timer(2.0).timeout
 		visible = false
 		inicializado = false
@@ -132,7 +127,6 @@ func _on_mision_completada():
 func _on_nivel_reiniciado():
 	"""Reiniciar cuando se reinicia el nivel"""
 	if GameManager.nivel_actual == 4:
-		print("\n🔄 Reiniciando label paquetes...")
 		inicializado = false
 		ya_verifico_inicio = false
 		visible = false
@@ -158,5 +152,3 @@ func _on_game_over():
 	
 	if tween_parpadeo:
 		tween_parpadeo.kill()
-	
-	print("⏹️ Game Over - Label paquetes detenido")

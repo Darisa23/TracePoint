@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://d03wjg2v1a4dy"]
+[gd_scene load_steps=27 format=3 uid="uid://d03wjg2v1a4dy"]
 
 [ext_resource type="Script" uid="uid://8fpq85lemlwa" path="res://scripts/controllers/nivel_cer.gd" id="1_blm80"]
 [ext_resource type="Shader" uid="uid://b80iojip1k6wx" path="res://level/sky_with_stars.tres" id="2_53b8b"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://4t3j24hbqvna" path="res://escenas/niveles/perdidos.gd" id="11_t3dit"]
 [ext_resource type="Shader" uid="uid://sjh4kbgc1tjb" path="res://escenas/niveles/reloj.gdshader" id="12_t3dit"]
 [ext_resource type="PackedScene" uid="uid://b1hjrwgbuf2nr" path="res://escenas/niveles/ventana.tscn" id="15_ljjbg"]
+[ext_resource type="Texture2D" uid="uid://cljco5s5dtpve" path="res://escenas/texturas-o-png/ventanita.png" id="16_qxx8f"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kplwr"]
 load_path = "res://.godot/imported/qwantani_moon_noon_puresky_4k.exr-9c99993655a97e2e3970192b680d1851.bptc.ctex"
@@ -94,6 +95,14 @@ shader_parameter/velocidad_pulso = 1.5
 shader_parameter/intensidad_brillo = 0.8
 shader_parameter/progreso = 1.0
 shader_parameter/grosor = 0.15
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qxx8f"]
+shader = ExtResource("11_qxx8f")
+shader_parameter/glitch_intensity = 1.0
+shader_parameter/scan_line_speed = 2.0
+shader_parameter/glitch_color = Color(0, 0.5, 1, 1)
+shader_parameter/chromatic_aberration = 0.02
+shader_parameter/noise_amount = 0.3
 
 [node name="Nivel4_FlowControl" type="Node3D"]
 script = ExtResource("1_blm80")
@@ -194,7 +203,9 @@ horizontal_alignment = 1
 script = ExtResource("11_t3dit")
 
 [node name="ventana" parent="CanvasLayer" instance=ExtResource("15_ljjbg")]
-offset_left = 689.0
-offset_top = 313.0
+material = SubResource("ShaderMaterial_qxx8f")
+offset_left = 717.0
+offset_top = 334.0
 offset_right = 729.0
 offset_bottom = 353.0
+textura_popup = ExtResource("16_qxx8f")

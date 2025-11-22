@@ -72,7 +72,7 @@ func inicializar(p_nodo_logico: Nodo):
 			var letra = char(65 + nodo_logico.id)  # 65 = 'A' en ASCII
 			label_3d.text = letra
 			if GameManager.nivel_actual == 1:
-				nom.text = GameManager.nombre_nodos[nodo_logico.id-1]
+				nom.text = GameManager.nombre_nodos[nodo_logico.id]
 			#Agregar nombre de nodo
 		if GameManager.nivel_actual == 4:
 			capacidad_maxima = GameManager.capacidades_nodos[nodo_logico.id]

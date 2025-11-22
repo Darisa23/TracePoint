@@ -60,18 +60,18 @@ func _input(event):
 	if event.is_action_pressed("ui_cancel"):
 		# Si hay un panel abierto, cerrar el panel en lugar de capturar cursor
 		if panel_actual and panel_actual.visible:
-			print("ESC presionado - Cerrando panel")
+		#	print("ESC presionado - Cerrando panel")
 			cerrar_panel()
 			get_viewport().set_input_as_handled()  # Marcar el input como manejado
 			return
 		
-		print("ESC presionado")
+		#print("ESC presionado")
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-			print("Cursor liberado")
+		#	print("Cursor liberado")
 		else:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-			print("Cursor capturado")
+		#	print("Cursor capturado")
 
 func ocultar_todos_paneles():
 	var hud = get_tree().current_scene.find_child("HUD", true, false)
@@ -82,10 +82,9 @@ func ocultar_todos_paneles():
 		var panel = hud.find_child(nombre, false, false)
 		if panel:
 			panel.visible = false
-			print("Panel ", nombre, " oculto al inicio")
+			#print("Panel ", nombre, " oculto al inicio")
 
 func abrir_panel():
-	print("=== INICIANDO abrir_panel() ===")
 	
 	# Obtener el nivel actual desde GameManager
 	var nivel = GameManager.nivel_actual
@@ -97,16 +96,16 @@ func abrir_panel():
 		print("Niveles disponibles: ", nodos_instrucciones.keys())
 		return
 	
-	print("✓ Nivel encontrado en diccionario")
+	#print("✓ Nivel encontrado en diccionario")
 	
 	# Buscar el HUD
-	print("Buscando HUD en la escena...")
+	#print("Buscando HUD en la escena...")
 	var hud = get_tree().current_scene.find_child("HUD", true, false)
 	if not hud:
-		push_error("❌ No se encontró el nodo HUD")
+		push_error("No se encontró el nodo HUD")
 		return
 	
-	print("✓ HUD encontrado: ", hud.get_path())
+	#print("✓ HUD encontrado: ", hud.get_path())
 	
 	# Buscar el panel de instrucciones
 	var nombre_panel = nodos_instrucciones[nivel]
@@ -115,20 +114,20 @@ func abrir_panel():
 	
 	if not panel_actual:
 		push_error("❌ No se encontró el panel: ", nombre_panel)
-		print("Hijos del HUD:")
+		#print("Hijos del HUD:")
 		for child in hud.get_children():
 			print("  - ", child.name, " (", child.get_class(), ")")
 		return
 	
-	print("✓ Panel encontrado: ", panel_actual.name)
+	#print("✓ Panel encontrado: ", panel_actual.name)
 	
 	# Liberar el cursor para poder interactuar con el panel
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	print("✓ Cursor liberado")
+	#print("✓ Cursor liberado")
 	
 	# Hacer visible el panel
 	panel_actual.visible = true
-	print("✓ Panel visible")
+	#print("✓ Panel visible")
 	
 	# Buscar el AnimationPlayer
 	var anim_player: AnimationPlayer = null
@@ -137,24 +136,24 @@ func abrir_panel():
 			anim_player = child
 			break
 	
-	print("AnimationPlayer encontrado: ", anim_player != null)
+	#print("AnimationPlayer encontrado: ", anim_player != null)
 	
 	if anim_player:
-		print("Animaciones disponibles: ", anim_player.get_animation_list())
+		#print("Animaciones disponibles: ", anim_player.get_animation_list())
 		if anim_player.has_animation("popup_appear"):
-			print("Reproduciendo animación 'popup_appear'")
+			#print("Reproduciendo animación 'popup_appear'")
 			anim_player.play("popup_appear")
 			await anim_player.animation_finished
-			print("Animación finalizada")
+			#print("Animación finalizada")
 		elif anim_player.has_animation("scale"):
-			print("Reproduciendo animación 'scale'")
+			#print("Reproduciendo animación 'scale'")
 			anim_player.play("scale")
 			await anim_player.animation_finished
-			print("Animación finalizada")
+			#print("Animación finalizada")
 		else:
-			print("⚠️ No se encontró ninguna animación de apertura")
+			print("No se encontró ninguna animación de apertura")
 	else:
-		print("⚠️ No se encontró AnimationPlayer")
+		print("No se encontró AnimationPlayer")
 	
 	# Buscar el botón de cerrar
 	var boton_cerrar: BaseButton = null
@@ -164,7 +163,7 @@ func abrir_panel():
 			if boton_cerrar:
 				break
 	
-	print("Botón cerrar encontrado: ", boton_cerrar != null)
+	#print("Botón cerrar encontrado: ", boton_cerrar != null)
 	
 	if boton_cerrar and boton_cerrar is BaseButton:
 		# Desactivar el foco visual del botón de cerrar también
@@ -179,16 +178,13 @@ func abrir_panel():
 			boton_cerrar.pressed.disconnect(_on_cerrar_pressed)
 		
 		boton_cerrar.pressed.connect(_on_cerrar_pressed)
-		print("✓ Botón cerrar conectado (toggle mode: ", boton_cerrar.toggle_mode, ")")
+		#print("Botón cerrar conectado (toggle mode: ", boton_cerrar.toggle_mode, ")")
 	else:
-		print("⚠️ No se encontró el botón cerrar")
-	
-	print("=== abrir_panel() COMPLETADO ===")
+		print("No se encontró el botón cerrar")
 
 func cerrar_panel():
-	print("=== CERRANDO PANEL ===")
 	if not panel_actual:
-		print("⚠️ No hay panel para cerrar")
+		#print("⚠️ No hay panel para cerrar")
 		return
 	
 	# Buscar el AnimationPlayer
@@ -198,32 +194,29 @@ func cerrar_panel():
 			anim_player = child
 			break
 	
-	print("AnimationPlayer encontrado: ", anim_player != null)
+	#print("AnimationPlayer encontrado: ", anim_player != null)
 	
 	if anim_player and anim_player.has_animation("popup_disappear"):
-		print("Reproduciendo animación 'popup_disappear'")
+		#print("Reproduciendo animación 'popup_disappear'")
 		anim_player.play("popup_disappear")
 		await anim_player.animation_finished
-		print("Animación de cierre finalizada")
+		#print("Animación de cierre finalizada")
 	elif anim_player and anim_player.has_animation("modulate"):
-		print("Reproduciendo animación 'modulate'")
+		#print("Reproduciendo animación 'modulate'")
 		anim_player.play("modulate")
 		await anim_player.animation_finished
-		print("Animación de cierre finalizada")
+		#print("Animación de cierre finalizada")
 	else:
-		print("⚠️ No se encontró AnimationPlayer o animación de cierre")
+		print("No se encontró AnimationPlayer o animación de cierre")
 	
 	# Ocultar el panel DESPUÉS de la animación
 	panel_actual.visible = false
-	print("✓ Panel ocultado")
 	panel_actual = null
 	
 	# Capturar el cursor nuevamente
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	print("✓ Cursor capturado")
 
 func _on_cerrar_pressed():
-	print("=== BOTÓN CERRAR PRESIONADO ===")
 	
 	# Liberar el estado pressed del botón de cerrar
 	if panel_actual:

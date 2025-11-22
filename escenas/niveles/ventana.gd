@@ -1,18 +1,18 @@
 extends Control
 
 # Referencias a los nodos hijos según tu estructura
+@export var textura_popup: Texture2D
 @onready var texture_rect = $TextureRect
 @onready var label_max = $TextureRect/VBoxContainer/max
 @onready var label_entregados = $TextureRect/VBoxContainer/entregados
 @onready var label_actuales = $TextureRect/VBoxContainer/actuales
 @onready var label_nodo = $TextureRect/VBoxContainer/nodo
-@onready var boton_cerrar = $TextureRect/TextureButton
+@onready var boton_cerrar = $TextureRect/VBoxContainer/TextureButton
 
 var nodo_actual_id: int = -1
 var tiempo_visible: float = 0.0
 var duracion_auto_cierre: float = 999999.0  # No se cierra automáticamente
 var material_glitch: ShaderMaterial
-var cerrar = false
 # Variables para arrastrar
 var dragging: bool = false
 var drag_offset: Vector2 = Vector2.ZERO
@@ -20,12 +20,15 @@ var drag_offset: Vector2 = Vector2.ZERO
 func _ready():
 	# Ocultar el popup al inicio
 	hide()
-	
+	# textura configurable
+	if textura_popup:
+		texture_rect.texture = textura_popup
 	# Crear material con shader de glitch
 	var shader = load("res://escenas/niveles/ventana.gdshader")  # Ruta corregida
 	GameManager.connect("nodo_visitado_correcto",_actualizar_popUp)
 	GameManager.connect("mision_completada",cerrar_popup)
-
+	await get_tree().create_timer(1).timeout
+	_actualizar_popUp(0)
 	
 	if shader:
 		material_glitch = ShaderMaterial.new()
@@ -65,10 +68,10 @@ func _process(delta):
 	
 
 func _actualizar_popUp(id:int):
-	print("HOLA ME LLAMOOOO")
+	#print("HOLA ME LLAMOOOO")
 	if GameManager.nivel_actual==1:
-		print("ke")
-		mostrar_info_nodo(id-1)
+		#print("ke")
+		mostrar_info_nodo(id)
 	else:
 		visible = false
 		hide()
@@ -77,27 +80,25 @@ func mostrar_info_nodo(nodo_id: int):
 	"""Muestra el popup con información del nodo visitado"""
 	
 	# Si ya está visible, no hacer nada
-	#if visible:
-	#	return
+	if visible and GameManager.nivel_actual == 4:
+		return
+	#if nodo_id < 0:
+		#nodo_id=0
 	
 	nodo_actual_id = nodo_id
-	print("Nodo actial id: ",nodo_actual_id)
 	tiempo_visible = 0.0
-	
 	#Info depende del nivel:
 	if GameManager.nivel_actual == 1:
-		if label_nodo:
+		var datos = GameManager.info_nodos[nodo_actual_id+1]
+		if label_nodo:		
 			label_nodo.text = GameManager.nombre_nodos[nodo_actual_id]
 	
 		if label_max:
-			#TENGO QUE CONVERTIR NOMBRE NODOS A UN DICCIONARIO PARA GUARDAR EL ESTADO
-		#LOS SERVICIOS, EL LOG, ETC..
-			label_max.text = "Estado: " + "un_estado"
-	
+			label_max.text = "Estado: " + datos["estado"]
 		if label_entregados:
-			label_entregados.text = "Servicios: " + "un_servicio"
+			label_entregados.text = "Servicios: " + ", ".join(datos["servicios"])
 		if label_actuales:
-			label_actuales.text = "Log: " + "el_log"
+			label_actuales.text = "Log: " + datos["log"]
 	# Obtener información del GameManager
 	else:
 		var capacidad = 0
@@ -163,29 +164,22 @@ func mostrar_animacion():
 func cerrar_popup():
 	"""Cierra el popup con animación y glitch final"""
 	# Reactivar glitch al cerrar
-	if cerrar:
-		if material_glitch:
-			var tween_glitch = create_tween()
-			tween_glitch.tween_method(
-				func(value): material_glitch.set_shader_parameter("glitch_intensity", value),
-				0.2, 1.0, 0.2
-			)
+	print("DIJERON CERRAR")
+	if material_glitch:
+		var tween_glitch = create_tween()
+		tween_glitch.tween_method(
+			func(value): material_glitch.set_shader_parameter("glitch_intensity", value),
+			0.2, 1.0, 0.2
+		)
 		
-		var tween = create_tween()
-		tween.set_parallel(true)
-		tween.tween_property(self, "modulate:a", 0.0, 0.3)
-		tween.tween_property(self, "scale", Vector2(0.8, 0.8), 0.3)
-		cerrar = false
-		tween.finished.connect(func(): hide())
-	else:
-		mostrar_info_nodo(1)
-		cerrar = true
-		#await get_tree().create_timer(2).timeout
-		cerrar_popup()
+	var tween = create_tween()
+	tween.set_parallel(true)
+	tween.tween_property(self, "modulate:a", 0.0, 0.3)
+	tween.tween_property(self, "scale", Vector2(0.8, 0.8), 0.3)
+	tween.finished.connect(func(): hide())
 
 func _on_boton_cerrar_pressed():
 	"""Maneja el cierre manual del popup"""
-	cerrar = true
 	cerrar_popup()
 
 # Detectar inicio de arrastre

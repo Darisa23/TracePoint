@@ -16,6 +16,53 @@ var juego_iniciado: bool = false
 var puede_saltar: bool = true
 var ca:bool = false
 var nombre_nodos: Array = []
+# En tu script, podrías tener algo así:
+
+var info_nodos = {
+	1: {
+		"nombre": "Workstation_Recepcion",
+		"estado": "LIMPIO",
+		"servicios": ["HTTP"],
+		"log": "Actividad normal. No hubo interacción sospechosa en las últimas horas.",
+		"popup": "HTTP: Servicio web básico — no suele ser ruta de ransomware."
+	},
+	2: {
+		"nombre": "Server_Email",
+		"estado": "SOSPECHOSO",
+		"servicios": ["SMTP", "IMAP"],
+		"log": "Archivo adjunto abierto por Dra. Martínez. Posible phishing detectado.",
+		"popup": "SMTP: Usado para enviar correos. Vector común de phishing."
+	},
+	3: {
+		"nombre": "FileServer_Principal",
+		"estado": "CIFRADO",
+		"servicios": ["SMB"],
+		"log": "50% de archivos cifrados. Ransomware activo.",
+		"popup": "SMB: Protocolo de compartir archivos — objetivo favorito del ransomware."
+	},
+	4: {
+		"nombre": "Backup_Server",
+		"estado": "OFFLINE",
+		"servicios": [],
+		"log": "Servidor desconectado manualmente. Posible intento de sabotaje.",
+		"popup": "Los atacantes deshabilitan backups para impedir recuperación."
+	},
+	5: {
+		"nombre": "Admin_Workstation",
+		"estado": "LIMPIO",
+		"servicios": ["RDP"],
+		"log": "Credenciales válidas. Sin actividad fuera de horario.",
+		"popup": "RDP: Escritorio remoto — puerta común para movimientos laterales."
+	},
+	6: {
+		"nombre": "Exchange_Server",
+		"estado": "COMPROMETIDO",
+		"servicios": ["SMTP", "RPC", "OWA"],
+		"log": "Exploit detectado: CVE-2023-XXXX — ejecución remota vía correo malicioso.",
+		"popup": "¡PATIENT ZERO encontrado! — El ransomware entró por una macro maliciosa."
+	}
+}
+
 # Referencias (se asignan cuando se carga el nivel)
 var player: Node3D = null
 var spawner: Node3D = null
@@ -51,7 +98,8 @@ func cargar_nivel_1():
 	print("\n=== CARGANDO NIVEL 1: NETWORK TRACER ===")
 	nivel_actual = 1
 	tipo_recorrido = "null"
-	
+	nombre_nodos = ["Recepcion","Mail_Server","FileServer",
+	"Backup_Server","Admin_Workstation","Exchange_Server"]
 	# Matriz de adyacencia del nivel 1
 	var matriz = [
 		[0, 0, 1, 0, 0, 0],
@@ -64,8 +112,7 @@ func cargar_nivel_1():
 	
 	# Crear grafo
 	grafo = Grafo.new(matriz, false)
-	nombre_nodos = ["Recepcion","Mail_Server","FileServer",
-	"Backup_Server","Admin_Workstation"]
+	
 	# Posiciones 3D de cada nodo
 	var posiciones = [
 		Vector3(0, 0, 0),
@@ -314,6 +361,8 @@ func validar_salto_a_nodo(nodo_id: int) -> bool:
 		#para que pueda devolverse por los que ya visitó correctamente
 		if nodo.vc:
 			#print("lol")
+			if nivel_actual == 1:
+				emit_signal("nodo_visitado_correcto", nodo.id)
 			return true
 		if nodo.id == nodo_esperado.id:
 			print("nodo %d correcto (%d/%d)" % [nodo.id, indice_actual + 1, recorrido_correcto.size()])
@@ -321,9 +370,9 @@ func validar_salto_a_nodo(nodo_id: int) -> bool:
 				nodo.marcar_correcto()
 			emit_signal("nodo_visitado_correcto", nodo.id)
 			indice_actual += 1
-			#if nivel_actual == 1:
-				#completar_mision()
-				#return true
+			if nivel_actual == 1:
+				completar_mision()
+				return true
 			 ##Verificar victoria
 			if (indice_actual+1) >= recorrido_correcto.size():
 				completar_mision()

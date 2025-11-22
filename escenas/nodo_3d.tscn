@@ -53,7 +53,7 @@ script = ExtResource("3_g0xwr")
 transform = Transform3D(0.998825, 0.048442, -0.00123047, -0.0484274, 0.998777, 0.00996599, 0.00171174, -0.0098947, 0.99995, 0.107986, 0.828963, 0.55312)
 offset = Vector2(0, 100)
 outline_modulate = Color(0.134244, 0.619536, 0.911919, 0.788235)
-text = "nombre
+text = "Recepcion
 "
 font = ExtResource("2_g0xwr")
 font_size = 40

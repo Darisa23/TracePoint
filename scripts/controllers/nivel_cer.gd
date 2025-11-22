@@ -7,7 +7,6 @@ extends Node3D
 @onready var pack = $PlataformaPaquetes if has_node("PlataformaPaquetes") else null
 @onready var titulo = $"../../HUD/Titulos"
 @onready var flowm = $FlowManager if has_node("FlowManager") else null
-@onready var ven = $ventana if has_node("ventana") else null
 func _ready():
 	# Si el nivel no está activo, desactivarlo
 	if not activo:

@@ -50,16 +50,10 @@ func _process(delta):
 		inicializado = false
 		activo = false
 		ya_verifico_inicio = false
-		print("Reloj ocultado - Ya no estamos en nivel 4")
 
 func inicializar_reloj():
 	if inicializado:
 		return
-	
-	print("\n=== Inicializando Reloj Neón ===")
-	print("   - Nivel: %d" % GameManager.nivel_actual)
-	print("   - Tipo recorrido: %s" % GameManager.tipo_recorrido)
-	print("   - Duración: %d segundos" % int(tiempo_total))
 	
 	# Resetear tiempo
 	tiempo_actual = tiempo_total
@@ -73,7 +67,6 @@ func inicializar_reloj():
 		shader_material.set_shader_parameter("color_neon", Vector3(0.0, 1.0, 1.0))  # Cyan inicial
 	
 	actualizar_ui()
-	print("✓ Reloj activado - Tiempo: %d segundos" % int(tiempo_total))
 
 func actualizar_ui():
 	if not shader_material or not label:
@@ -105,19 +98,16 @@ func actualizar_ui():
 func pausar():
 	"""Pausa el reloj"""
 	activo = false
-	print("⏸️ Reloj pausado")
 
 func reanudar():
 	"""Reanuda el reloj"""
 	if inicializado:
 		activo = true
-		print("▶️ Reloj reanudado")
 
 func agregar_tiempo(segundos: float):
 	"""Agrega tiempo adicional al reloj"""
 	tiempo_actual = min(tiempo_actual + segundos, tiempo_total)
 	actualizar_ui()
-	print("⏰ +%d segundos agregados" % int(segundos))
 
 func _on_tiempo_agotado():
 	"""Llamado cuando el tiempo se agota"""
@@ -132,7 +122,6 @@ func _on_mision_completada():
 	"""Detener reloj cuando se completa la misión"""
 	if visible and GameManager.nivel_actual == 4:
 		activo = false
-		print("✓ Misión completada - Reloj detenido")
 		await get_tree().create_timer(2.0).timeout
 		visible = false
 		inicializado = false
@@ -141,7 +130,6 @@ func _on_mision_completada():
 func _on_nivel_reiniciado():
 	"""Reiniciar reloj cuando se reinicia el nivel"""
 	if GameManager.nivel_actual == 4:
-		print("\nReiniciando reloj...")
 		inicializado = false
 		ya_verifico_inicio = false
 		visible = false
@@ -161,4 +149,3 @@ func _on_game_over():
 	visible = false
 	inicializado = false
 	ya_verifico_inicio = false
-	print("Game Over - Reloj detenido")
