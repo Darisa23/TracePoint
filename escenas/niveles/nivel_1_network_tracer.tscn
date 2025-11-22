@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://2dwpnp36vlfk"]
+[gd_scene load_steps=10 format=3 uid="uid://2dwpnp36vlfk"]
 
 [ext_resource type="Script" uid="uid://8fpq85lemlwa" path="res://scripts/controllers/nivel_cer.gd" id="1_3bnxd"]
 [ext_resource type="Script" uid="uid://b7xahjuha0vog" path="res://scripts/GrafoSpawner.gd" id="2_1jpj2"]
 [ext_resource type="Shader" uid="uid://b80iojip1k6wx" path="res://level/sky_with_stars.tres" id="2_065hm"]
 [ext_resource type="PackedScene" uid="uid://doqvur36b3bcq" path="res://escenas/nodo_3d.tscn" id="3_065hm"]
+[ext_resource type="PackedScene" uid="uid://b1hjrwgbuf2nr" path="res://escenas/niveles/ventana.tscn" id="5_065hm"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0wtap"]
 load_path = "res://.godot/imported/qwantani_moon_noon_puresky_4k.exr-9c99993655a97e2e3970192b680d1851.bptc.ctex"
@@ -67,3 +68,14 @@ environment = SubResource("Environment_aqnt4")
 [node name="GrafoSpawner" type="Node3D" parent="."]
 script = ExtResource("2_1jpj2")
 nodo_prefab = ExtResource("3_065hm")
+
+[node name="ventana" parent="." instance=ExtResource("5_065hm")]
+anchors_preset = -1
+anchor_left = 0.125
+anchor_top = 0.213
+anchor_right = 0.125
+anchor_bottom = 0.213
+offset_left = 25.0
+offset_top = -636.04
+offset_right = 148.0
+offset_bottom = -571.04

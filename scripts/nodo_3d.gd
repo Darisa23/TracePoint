@@ -7,6 +7,7 @@ var nodo_logico: Nodo = null
 @onready var mesh_instance = $MeshInstance3D
 @onready var area_deteccion = $Area3D
 @onready var label_3d = $Label3D if has_node("Label3D") else null
+@onready var nom = $nombre if has_node("nombre") else null
 @onready var material: StandardMaterial3D = null
 
 # Animación
@@ -70,6 +71,9 @@ func inicializar(p_nodo_logico: Nodo):
 		if label_3d:
 			var letra = char(65 + nodo_logico.id)  # 65 = 'A' en ASCII
 			label_3d.text = letra
+			if GameManager.nivel_actual == 1:
+				nom.text = GameManager.nombre_nodos[nodo_logico.id-1]
+			#Agregar nombre de nodo
 		if GameManager.nivel_actual == 4:
 			capacidad_maxima = GameManager.capacidades_nodos[nodo_logico.id]
 			print("se asignó capacidad max: ",capacidad_maxima, " a nodo ",nodo_logico.id)

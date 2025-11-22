@@ -23,74 +23,71 @@ script = ExtResource("1_qjllo")
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 15.000001
+anchor_left = 15.0
 anchor_top = 8.165
-anchor_right = 15.760001
-anchor_bottom = 9.209001
-offset_left = -790.99994
-offset_top = 173.4
-offset_right = -177.3999
-offset_bottom = 548.64
+anchor_right = 15.76
+anchor_bottom = 9.209
+offset_left = -789.0
+offset_top = 192.4
+offset_right = -175.4
+offset_bottom = 567.64
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("1_6x8cm")
 
-[node name="max" type="Label" parent="."]
-layout_mode = 0
-offset_left = -126.999756
-offset_top = 586.0
-offset_right = 182.00024
-offset_bottom = 622.0
-scale = Vector2(0.7, 0.7)
-theme_override_fonts/font = ExtResource("2_qjllo")
-theme_override_font_sizes/font_size = 22
-text = "capacidad max:"
-script = ExtResource("3_mnypt")
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.098
+anchor_top = 0.106
+anchor_right = 0.098
+anchor_bottom = 0.106
+offset_left = 0.887997
+offset_top = 14.798
+offset_right = 353.888
+offset_bottom = 246.798
+theme_override_constants/separation = 22
 
-[node name="entregados" type="Label" parent="."]
-layout_mode = 0
-offset_left = -127.99988
-offset_top = 610.00006
-offset_right = 181.00012
-offset_bottom = 646.00006
-scale = Vector2(0.7, 0.7)
-theme_override_fonts/font = ExtResource("2_qjllo")
-theme_override_font_sizes/font_size = 23
-text = "entregados:"
-script = ExtResource("4_kynau")
-
-[node name="actuales" type="Label" parent="."]
-layout_mode = 0
-offset_left = -127.999756
-offset_top = 633.00006
-offset_right = 181.00024
-offset_bottom = 669.00006
-scale = Vector2(0.7, 0.7)
-theme_override_fonts/font = ExtResource("2_qjllo")
-theme_override_font_sizes/font_size = 23
-text = "actuales:"
-script = ExtResource("5_36nqd")
-
-[node name="nodo" type="Label" parent="."]
-layout_mode = 0
-offset_left = -136.99988
-offset_top = 537.0
-offset_right = 172.00012
-offset_bottom = 573.0
-scale = Vector2(0.7, 0.7)
-theme_override_colors/font_color = Color(0.14509805, 0.7294118, 0.9882353, 1)
+[node name="nodo" type="Label" parent="TextureRect/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.145098, 0.729412, 0.988235, 1)
 theme_override_fonts/font = ExtResource("2_qjllo")
 theme_override_font_sizes/font_size = 27
 text = "Nodo X"
 horizontal_alignment = 1
 script = ExtResource("6_c3i0e")
 
-[node name="TextureButton" type="TextureButton" parent="."]
+[node name="max" type="Label" parent="TextureRect/VBoxContainer"]
+custom_minimum_size = Vector2(20, 10)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_qjllo")
+theme_override_font_sizes/font_size = 22
+text = "capacidad max:"
+autowrap_mode = 3
+script = ExtResource("3_mnypt")
+
+[node name="entregados" type="Label" parent="TextureRect/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_qjllo")
+theme_override_font_sizes/font_size = 23
+text = "entregados:"
+script = ExtResource("4_kynau")
+
+[node name="actuales" type="Label" parent="TextureRect/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_qjllo")
+theme_override_font_sizes/font_size = 23
+text = "actuales:"
+script = ExtResource("5_36nqd")
+
+[node name="TextureButton" type="TextureButton" parent="TextureRect"]
 layout_mode = 0
-offset_left = -77.0
-offset_top = 702.0
-offset_right = 385.0
-offset_bottom = 868.0
+offset_left = 201.429
+offset_top = 288.571
+offset_right = 741.429
+offset_bottom = 528.571
 scale = Vector2(0.5, 0.5)
 texture_normal = ExtResource("7_sem84")
 texture_pressed = ExtResource("8_vxrx1")
 texture_hover = ExtResource("9_y1usi")
+stretch_mode = 0

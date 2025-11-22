@@ -2,17 +2,17 @@ extends Control
 
 # Referencias a los nodos hijos según tu estructura
 @onready var texture_rect = $TextureRect
-@onready var label_max = $max
-@onready var label_entregados = $entregados
-@onready var label_actuales = $actuales
-@onready var label_nodo = $nodo
-@onready var boton_cerrar = $TextureButton
+@onready var label_max = $TextureRect/VBoxContainer/max
+@onready var label_entregados = $TextureRect/VBoxContainer/entregados
+@onready var label_actuales = $TextureRect/VBoxContainer/actuales
+@onready var label_nodo = $TextureRect/VBoxContainer/nodo
+@onready var boton_cerrar = $TextureRect/TextureButton
 
 var nodo_actual_id: int = -1
 var tiempo_visible: float = 0.0
 var duracion_auto_cierre: float = 999999.0  # No se cierra automáticamente
 var material_glitch: ShaderMaterial
-
+var cerrar = false
 # Variables para arrastrar
 var dragging: bool = false
 var drag_offset: Vector2 = Vector2.ZERO
@@ -23,14 +23,17 @@ func _ready():
 	
 	# Crear material con shader de glitch
 	var shader = load("res://escenas/niveles/ventana.gdshader")  # Ruta corregida
+	GameManager.connect("nodo_visitado_correcto",_actualizar_popUp)
+	GameManager.connect("mision_completada",cerrar_popup)
+
 	
 	if shader:
 		material_glitch = ShaderMaterial.new()
 		material_glitch.shader = shader
 		material = material_glitch
-		print("✅ Shader de glitch cargado correctamente")
+		#print("Shader de glitch cargado correctamente")
 	else:
-		push_error("❌ No se pudo cargar el shader. Verifica la ruta: res://escenas/niveles/ventana.gdshader")
+		push_error(" No se pudo cargar el shader. Verifica la ruta: res://escenas/niveles/ventana.gdshader")
 	
 	# Conectar señal del botón de cerrar si existe
 	if boton_cerrar:
@@ -59,39 +62,65 @@ func _process(delta):
 	# Manejar arrastre
 	if dragging:
 		global_position = get_global_mouse_position() - drag_offset
+	
 
+func _actualizar_popUp(id:int):
+	print("HOLA ME LLAMOOOO")
+	if GameManager.nivel_actual==1:
+		print("ke")
+		mostrar_info_nodo(id-1)
+	else:
+		visible = false
+		hide()
+		
 func mostrar_info_nodo(nodo_id: int):
 	"""Muestra el popup con información del nodo visitado"""
 	
 	# Si ya está visible, no hacer nada
-	if visible:
-		return
+	#if visible:
+	#	return
 	
 	nodo_actual_id = nodo_id
+	print("Nodo actial id: ",nodo_actual_id)
 	tiempo_visible = 0.0
 	
+	#Info depende del nivel:
+	if GameManager.nivel_actual == 1:
+		if label_nodo:
+			label_nodo.text = GameManager.nombre_nodos[nodo_actual_id]
+	
+		if label_max:
+			#TENGO QUE CONVERTIR NOMBRE NODOS A UN DICCIONARIO PARA GUARDAR EL ESTADO
+		#LOS SERVICIOS, EL LOG, ETC..
+			label_max.text = "Estado: " + "un_estado"
+	
+		if label_entregados:
+			label_entregados.text = "Servicios: " + "un_servicio"
+		if label_actuales:
+			label_actuales.text = "Log: " + "el_log"
 	# Obtener información del GameManager
-	var capacidad = 0
-	if GameManager.capacidades_nodos.has(nodo_id):
-		capacidad = GameManager.capacidades_nodos[nodo_id]
-	
-	# Obtener nombre del nodo (A, B, C, etc.)
-	var nombre_nodo = char(65 + nodo_id)  # 65 = 'A' en ASCII
-	
-	# Actualizar textos según tu estructura
-	if label_nodo:
-		label_nodo.text = "Nodo: " + nombre_nodo
-	
-	if label_max:
-		label_max.text = "Máximo: " + str(GameManager.flujo_maximo_calculado)
-	
-	if label_entregados:
-		label_entregados.text = "Entregados: " + str(capacidad)
-	
-	if label_actuales:
-		# Calcular cuánto falta por entregar
-		var faltantes = GameManager.flujo_maximo_calculado - capacidad
-		label_actuales.text = "Actuales: " + str(faltantes)
+	else:
+		var capacidad = 0
+		if GameManager.capacidades_nodos.has(nodo_id):
+			capacidad = GameManager.capacidades_nodos[nodo_id]
+		
+		# Obtener nombre del nodo (A, B, C, etc.)
+		var nombre_nodo = char(65 + nodo_id)  # 65 = 'A' en ASCII
+		
+		# Actualizar textos según tu estructura
+		if label_nodo:
+			label_nodo.text = "Nodo: " + nombre_nodo
+		
+		if label_max:
+			label_max.text = "Máximo: " + str(GameManager.flujo_maximo_calculado)
+		
+		if label_entregados:
+			label_entregados.text = "Entregados: " + str(capacidad)
+		
+		if label_actuales:
+			# Calcular cuánto falta por entregar
+			var faltantes = GameManager.flujo_maximo_calculado - capacidad
+			label_actuales.text = "Actuales: " + str(faltantes)
 	
 	# Mostrar el popup con animación
 	show()
@@ -108,9 +137,9 @@ func mostrar_animacion():
 		material_glitch.set_shader_parameter("chromatic_aberration", 0.05)
 		material_glitch.set_shader_parameter("noise_amount", 0.5)
 		material_glitch.set_shader_parameter("scan_line_speed", 5.0)
-		print("🎨 Parámetros de glitch activados")
+		#print("Parámetros de glitch activados")
 	else:
-		print("⚠️ material_glitch es null, no se puede aplicar efecto")
+		print("material_glitch es null, no se puede aplicar efecto")
 	
 	# Crear tween para animar
 	var tween = create_tween()
@@ -134,21 +163,29 @@ func mostrar_animacion():
 func cerrar_popup():
 	"""Cierra el popup con animación y glitch final"""
 	# Reactivar glitch al cerrar
-	if material_glitch:
-		var tween_glitch = create_tween()
-		tween_glitch.tween_method(
-			func(value): material_glitch.set_shader_parameter("glitch_intensity", value),
-			0.2, 1.0, 0.2
-		)
-	
-	var tween = create_tween()
-	tween.set_parallel(true)
-	tween.tween_property(self, "modulate:a", 0.0, 0.3)
-	tween.tween_property(self, "scale", Vector2(0.8, 0.8), 0.3)
-	tween.finished.connect(func(): hide())
+	if cerrar:
+		if material_glitch:
+			var tween_glitch = create_tween()
+			tween_glitch.tween_method(
+				func(value): material_glitch.set_shader_parameter("glitch_intensity", value),
+				0.2, 1.0, 0.2
+			)
+		
+		var tween = create_tween()
+		tween.set_parallel(true)
+		tween.tween_property(self, "modulate:a", 0.0, 0.3)
+		tween.tween_property(self, "scale", Vector2(0.8, 0.8), 0.3)
+		cerrar = false
+		tween.finished.connect(func(): hide())
+	else:
+		mostrar_info_nodo(1)
+		cerrar = true
+		#await get_tree().create_timer(2).timeout
+		cerrar_popup()
 
 func _on_boton_cerrar_pressed():
 	"""Maneja el cierre manual del popup"""
+	cerrar = true
 	cerrar_popup()
 
 # Detectar inicio de arrastre

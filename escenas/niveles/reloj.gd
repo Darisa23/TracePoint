@@ -11,8 +11,7 @@ var ya_verifico_inicio: bool = false
 var shader_material: ShaderMaterial
 
 func _ready():
-	print("\n=== RelojNeon _ready() ===")
-	
+
 	# Ocultar por defecto
 	visible = false
 	
@@ -20,20 +19,16 @@ func _ready():
 	if reloj and reloj.material and reloj.material is ShaderMaterial:
 		shader_material = reloj.material
 		shader_material.set_shader_parameter("progreso", 1.0)
-		print("✓ Shader del reloj inicializado")
 	
 	# Conectar señales del GameManager
 	GameManager.connect("mision_completada", _on_mision_completada)
 	GameManager.connect("nivel_reiniciado", _on_nivel_reiniciado)
 	GameManager.connect("game_over", _on_game_over)
-	
-	print("Señales conectadas con GameManager")
 
 func _process(delta):
 	# SOLO verificar UNA VEZ cuando el juego se inicia
 	if not ya_verifico_inicio and not inicializado:
 		if GameManager.nivel_actual == 4 and GameManager.juego_iniciado:
-			print("\n⏰ _process detectó que el nivel 4 inició - Activando reloj")
 			inicializar_reloj()
 			ya_verifico_inicio = true
 	

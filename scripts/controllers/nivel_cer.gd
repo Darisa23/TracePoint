@@ -7,6 +7,7 @@ extends Node3D
 @onready var pack = $PlataformaPaquetes if has_node("PlataformaPaquetes") else null
 @onready var titulo = $"../../HUD/Titulos"
 @onready var flowm = $FlowManager if has_node("FlowManager") else null
+@onready var ven = $ventana if has_node("ventana") else null
 func _ready():
 	# Si el nivel no está activo, desactivarlo
 	if not activo:
@@ -23,6 +24,7 @@ func _ready():
 		GameManager.mision_completada.connect(_on_mision_completada)
 	if not GameManager.nivel_reiniciado.is_connected(_on_nivel_reiniciado) and nivel_numero == GameManager.nivel_actual:
 		GameManager.nivel_reiniciado.connect(_on_nivel_reiniciado)
+
 
 func _on_mision_completada():
 	print("\n¡NIVEL %d COMPLETADO!" % nivel_numero)
@@ -50,6 +52,7 @@ func activar():
 				graf.instanciar_conexiones()
 			await get_tree().create_timer(1.5).timeout
 			titulo.show_level(nivel_numero)
+			#ven.mostrar_info_nodo(0)
 		2:	
 			titulo.show_level(nivel_numero)
 			GameManager.cargar_nivel_2()

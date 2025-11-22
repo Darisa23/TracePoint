@@ -15,6 +15,7 @@ var indice_actual: int = 0
 var juego_iniciado: bool = false
 var puede_saltar: bool = true
 var ca:bool = false
+var nombre_nodos: Array = []
 # Referencias (se asignan cuando se carga el nivel)
 var player: Node3D = null
 var spawner: Node3D = null
@@ -63,7 +64,8 @@ func cargar_nivel_1():
 	
 	# Crear grafo
 	grafo = Grafo.new(matriz, false)
-	
+	nombre_nodos = ["Recepcion","Mail_Server","FileServer",
+	"Backup_Server","Admin_Workstation"]
 	# Posiciones 3D de cada nodo
 	var posiciones = [
 		Vector3(0, 0, 0),
