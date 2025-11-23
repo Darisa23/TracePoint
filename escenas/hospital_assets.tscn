@@ -1141,7 +1141,7 @@ shadow_mesh = SubResource("ArrayMesh_mgf4g")
 [node name="hospital_assets" type="Node3D"]
 
 [node name="Tile_Wall" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 6.198883e-06, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 6.198883e-06, 0, 0.007968903)
 mesh = SubResource("ArrayMesh_qlusi")
 skeleton = NodePath("")
 metadata/extras = {
