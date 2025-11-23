@@ -25,20 +25,20 @@ radius = 1.51
 [node name="Nodo3D" type="Node3D"]
 script = ExtResource("1_75lwm")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." groups=["nodo3d"]]
 material_overlay = ExtResource("2_sxk1x")
 mesh = SubResource("CylinderMesh_75lwm")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D" groups=["nodo3d"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.020245, 0.00739384, -0.0156624)
 shape = SubResource("CylinderShape3D_w6lw2")
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Area3D" type="Area3D" parent="." groups=["nodo3d"]]
 collision_layer = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" groups=["nodo3d"]]
 shape = SubResource("CylinderShape3D_g0xwr")
 
 [node name="Label3D" type="Label3D" parent="."]

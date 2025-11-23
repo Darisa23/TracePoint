@@ -6,25 +6,6 @@ extends Node3D
 
 var nodos_instanciados: Array = []
 
-#func _ready():
-	
-	# Registrarse en el GameManager
-#	GameManager.registrar_spawner(self)
-	
-	# Esperar un frame
-#	await get_tree().process_frame
-#	if GameManager.grafo:
-#		print("  Número de nodos: ", GameManager.grafo.nodos.size())
-	
-	# Instanciar el grafo del nivel actual
-#	if GameManager.grafo:
-#		instanciar_grafo()
-#		if dibujar_conexiones:
-#			instanciar_conexiones()
-#	else:
-#		push_error("GameManager no tiene un grafo cargado")
-#		push_error("Asegúrate de que LevelController llame a GameManager.cargar_nivel_X() primero")
-
 func instanciar_grafo():
 	
 	if not nodo_prefab:

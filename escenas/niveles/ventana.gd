@@ -8,7 +8,8 @@ extends Control
 @onready var label_actuales = $TextureRect/VBoxContainer/actuales
 @onready var label_nodo = $TextureRect/VBoxContainer/nodo
 @onready var boton_cerrar = $TextureRect/VBoxContainer/TextureButton
-
+@onready var vbox = $TextureRect/VBoxContainer
+@onready var flowm = $"../../FlowManager"
 var nodo_actual_id: int = -1
 var tiempo_visible: float = 0.0
 var duracion_auto_cierre: float = 999999.0  # No se cierra automáticamente
@@ -16,18 +17,24 @@ var material_glitch: ShaderMaterial
 # Variables para arrastrar
 var dragging: bool = false
 var drag_offset: Vector2 = Vector2.ZERO
-
-func _ready():
+var r_n : bool = false
+func ini():
 	# Ocultar el popup al inicio
 	hide()
 	# textura configurable
 	if textura_popup:
+		#print("Aplicí textura")
 		texture_rect.texture = textura_popup
 	# Crear material con shader de glitch
+	vbox.visible = true
 	var shader = load("res://escenas/niveles/ventana.gdshader")  # Ruta corregida
 	GameManager.connect("nodo_visitado_correcto",_actualizar_popUp)
 	GameManager.connect("mision_completada",cerrar_popup)
+	if GameManager.nivel_actual == 4:		
+		flowm.connect("entrega",_recibe)
+		flowm.connect("sacar",_saca)
 	await get_tree().create_timer(1).timeout
+	#if GameManager.nivel_actual == 1:
 	_actualizar_popUp(0)
 	
 	if shader:
@@ -69,24 +76,28 @@ func _process(delta):
 
 func _actualizar_popUp(id:int):
 	#print("HOLA ME LLAMOOOO")
-	if GameManager.nivel_actual==1:
+	if GameManager.nivel_actual==1 or GameManager.nivel_actual==4:
 		#print("ke")
 		mostrar_info_nodo(id)
 	else:
 		visible = false
 		hide()
 		
+func _recibe(id : int):
+	if label_entregados:
+		await get_tree().create_timer(0.65).timeout
+		label_entregados.text = "Entregados: " + str(GameManager.grafo.obtener_nodo(id).nodo_visual.paquetes_entregados[id])
+func _saca(id : int):
+	if label_actuales:
+		var entre = GameManager.grafo.obtener_nodo(id).nodo_visual.paquetes_entregados[id]
+		var act = entre-GameManager.grafo.obtener_nodo(id).nodo_visual.paquetes_actuales[id]
+		await get_tree().create_timer(0.65).timeout
+		label_actuales.text = "Actuales: " + str(act)
+		
 func mostrar_info_nodo(nodo_id: int):
 	"""Muestra el popup con información del nodo visitado"""
 	
-	# Si ya está visible, no hacer nada
-	if visible and GameManager.nivel_actual == 4:
-		return
-	#if nodo_id < 0:
-		#nodo_id=0
-	
 	nodo_actual_id = nodo_id
-	tiempo_visible = 0.0
 	#Info depende del nivel:
 	if GameManager.nivel_actual == 1:
 		var datos = GameManager.info_nodos[nodo_actual_id+1]
@@ -102,8 +113,8 @@ func mostrar_info_nodo(nodo_id: int):
 	# Obtener información del GameManager
 	else:
 		var capacidad = 0
-		if GameManager.capacidades_nodos.has(nodo_id):
-			capacidad = GameManager.capacidades_nodos[nodo_id]
+		#if GameManager.capacidades_nodos.has(nodo_id):
+			#capacidad = GameManager.capacidades_nodos[nodo_id]
 		
 		# Obtener nombre del nodo (A, B, C, etc.)
 		var nombre_nodo = char(65 + nodo_id)  # 65 = 'A' en ASCII
@@ -115,13 +126,14 @@ func mostrar_info_nodo(nodo_id: int):
 		if label_max:
 			label_max.text = "Máximo: " + str(GameManager.flujo_maximo_calculado)
 		
-		if label_entregados:
-			label_entregados.text = "Entregados: " + str(capacidad)
+		#if label_entregados:
+		var entre = GameManager.grafo.obtener_nodo(nodo_id).nodo_visual.paquetes_entregados[nodo_id]
+		#print("ENTRE PRIMERO ES: ",entre)
+		label_entregados.text = "Entregados: " + str(entre)
 		
 		if label_actuales:
-			# Calcular cuánto falta por entregar
-			var faltantes = GameManager.flujo_maximo_calculado - capacidad
-			label_actuales.text = "Actuales: " + str(faltantes)
+			var act = entre-GameManager.grafo.obtener_nodo(nodo_id).nodo_visual.paquetes_actuales[nodo_id]
+			label_actuales.text = "Actuales: " + str(act)
 	
 	# Mostrar el popup con animación
 	show()
@@ -139,8 +151,7 @@ func mostrar_animacion():
 		material_glitch.set_shader_parameter("noise_amount", 0.5)
 		material_glitch.set_shader_parameter("scan_line_speed", 5.0)
 		#print("Parámetros de glitch activados")
-	else:
-		print("material_glitch es null, no se puede aplicar efecto")
+	
 	
 	# Crear tween para animar
 	var tween = create_tween()

@@ -353,7 +353,8 @@ func validar_salto_a_nodo(nodo_id: int) -> bool:
 		print("not nodo")
 		return false
 	if nivel_actual == 4:
-		print("nivel 4 otra dinámica")
+		#print("nivel 4 otra dinámica")
+		emit_signal("nodo_visitado_correcto", nodo.id)
 		return true
 	# Verificción para 3 primeros niveles:
 	if (indice_actual+1) < recorrido_correcto.size():

@@ -18,32 +18,22 @@ var paquetes_en_plataforma: int = 0
 var paquetes_entregados_sink: int = 0
 var paquetes_perdidos: int = 0
 var max_paquetes_perdidos: int = 3
-
-var tiempo_restante: float = 180.0  # 3 minutos
+var id_nodo_ac:int = 0
 var juego_activo: bool = false
-
+var en_nodo: bool = false
 # Popups de nodos
 var popup_actual: Control = null
-
+var iniciado : bool = false
 # Señales
 signal flujo_actualizado(entregados: int, objetivo: int)
 signal paquetes_perdidos_actualizado(perdidos: int, max: int)
-signal tiempo_actualizado(tiempo: float)
 signal nivel_completado()
 signal nivel_fallido()
+signal entrega(id:int)
+signal sacar(id:int)
 
 
 
-func _process(delta):
-	if not juego_activo:
-		return
-	
-	# Countdown
-	tiempo_restante -= delta
-	emit_signal("tiempo_actualizado", tiempo_restante)
-	
-	if tiempo_restante <= 0:
-		game_over("Tiempo agotado")
 
 func inicializar_nivel():
 	
@@ -57,7 +47,8 @@ func inicializar_nivel():
 	paquetes_en_plataforma = paquetes_totales
 	
 	player = GameManager.player
-	player.soltar_paquete.connect(_on_player_soltar_paquete)
+	player.soltar_paquete.connect(_soltar_paquete)
+	player.recoger_pack.connect(_recoger_pack)
 	source_nodo = GameManager.grafo.nodos[0]
 	sink_nodo = GameManager.grafo.nodos[3]
 	
@@ -165,7 +156,8 @@ func crear_paquetes_en_plataforma():
 		if paquete is RigidBody3D:
 			paquete.linear_velocity = Vector3.ZERO
 			paquete.angular_velocity = Vector3.ZERO
-
+	
+	iniciado = true
 	
 	#print("Listo: %d paquetes creados y cayendo" % paquetes_totales)
 
@@ -186,22 +178,32 @@ func agregar_detectores_nodos():
 		area.add_child(collision)
 		
 		area.body_entered.connect(_on_nodo_entered.bind(nodo))
+		area.body_exited.connect(_on_nodo_exited.bind(nodo))
 
 func _on_nodo_entered(body, nodo: Nodo):
-	if body != player:
+	if iniciado:
+		id_nodo_ac = nodo.id
+	if body != player and iniciado:
+		#print("SE DETECTÓ UN PAQUETEE")
+		#marcar(nodo.id)
 		return
-	
+	en_nodo = true
 	print("Player entró al nodo %d" % nodo.id)
 	mostrar_popup_nodo(nodo)
-
+func _on_nodo_exited(body,nodo : Nodo):
+	if iniciado:
+		id_nodo_ac = nodo.id
+	if body != player and iniciado:
+		#print("SE DETECTÓ UN PAQUETEE")
+		#marcar(nodo.id)
+		return
+	en_nodo = false
+	print("Player salió del nodo %d" % nodo.id)
 func mostrar_popup_nodo(nodo: Nodo):
 	# TODO: Crear UI popup que muestre capacidad y entregados
 	if nodo.nodo_visual:
-		print(" Capacidad: %d | Entregados: %d" % [nodo.nodo_visual.capacidad_maxima, nodo.nodo_visual.paquetes_entregados])
-		# Llamar al popup
-		var popup = load("res://escenas/niveles/ventana.tscn").instantiate()
-		add_child(popup)
-		popup.mostrar_info_nodo(nodo.id)
+		print(" Capacidad: %d | Entregados: %d" % [nodo.nodo_visual.capacidad_maxima, nodo.nodo_visual.paquetes_entregados[nodo.id]])
+	
 func depositar_en_sink():
 	var cantidad = player.depositar_paquetes()
 	paquetes_entregados_sink += cantidad
@@ -234,6 +236,7 @@ func victoria():
 
 func game_over(razon: String):
 	juego_activo = false
+	iniciado = false
 	print("Game Over: %s" % razon)
 	emit_signal("nivel_fallido")
 	GameManager.gameOver()
@@ -244,7 +247,7 @@ func _on_llamar_efectos(pos):
 	ParticlesManager.emitir_en(pos)
 	FloatingLabels.spawn_text(pos)
 
-func _on_player_soltar_paquete():
+func _soltar_paquete():
 	print("el jugador dejó un paquete")
 	# Crear un paquete nuevo
 	var paquete = paquete_scene.instantiate()
@@ -258,9 +261,26 @@ func _on_player_soltar_paquete():
 
 	# Llamar animación inversa
 	paquete.animacion_spawn()
-	var nodoV = GameManager.grafo.obtener_nodo(GameManager.indice_actual).nodo_visual
+	marcar(id_nodo_ac)
+func _recoger_pack():
+	if en_nodo:
+		print("jugador sacó un paquete de un nodo")
+		saca(id_nodo_ac)
+	
+func saca(id:int):
+	var nodoV = GameManager.grafo.obtener_nodo(id).nodo_visual
+	nodoV.restar(id)
+	emit_signal("sacar",id)
+	
+func marcar(id:int):
+	#print("ENTRA A MARCAR")
+	var nodoV = GameManager.grafo.obtener_nodo(id).nodo_visual
+	
 	if not nodoV.esta_cerrado:		
-		nodoV.recibir_paquete()
+		nodoV.recibir_paquete(id)
+		#Mandar señal para actualizar los entregados
+		print("ENTREGANDO AL NODO: ",id)
+		emit_signal("entrega",id)
 	else:
 		print("PAQUETE NO ADMITIDO, LO PERDISTE")
 		#perder_paquetes()

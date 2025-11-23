@@ -38,6 +38,7 @@ enabled=PackedStringArray("res://addons/gdquest_colorpicker_presets/plugin.cfg")
 
 player=""
 paquete=""
+nodo3d=""
 
 [input]
 

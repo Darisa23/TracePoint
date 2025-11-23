@@ -45,6 +45,7 @@ var _camera_input_direction := Vector2.ZERO
 var paquete_cerca: RigidBody3D = null
 var paquetes_en_rango = []
 signal soltar_paquete()
+signal recoger_pack()
 func _ready() -> void:
 	Events.kill_plane_touched.connect(func on_kill_plane_touched() -> void:
 		global_position = _start_position
@@ -181,6 +182,7 @@ func recoger_paquete():
 			
 		# Aumentar contador de paquetes
 		paquetes_llevando += 1
+		emit_signal("recoger_pack")
 		print("Paquetes llevando: ", paquetes_llevando)
 	if paquetes_en_rango.size() == 0:
 		return
@@ -188,6 +190,7 @@ func recoger_paquete():
 
 func depositar_paquete():
 	#var cantidad = paquetes_llevando
+	#print("DEPOSITAAA")
 	paquetes_llevando -=1
 	inventory.remove_item()
 	emit_signal("soltar_paquete")

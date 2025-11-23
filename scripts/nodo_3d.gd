@@ -21,7 +21,8 @@ var color_incorrecto: Color = Color(0.8, 0.2, 0.2)  # Rojo
 var color_visitado: Color = Color(0.4, 0.8, 0.8)  # Cyan
 # Variables para nivel 4 (flujo)
 var capacidad_maxima: int = 0
-var paquetes_entregados: int = 0
+var paquetes_entregados: Array = []
+var paquetes_actuales: Array = []
 var esta_cerrado: bool = false
 
 func _ready():
@@ -57,8 +58,11 @@ func _process(delta):
 		#ACA LLAMAR A GAME OVER DEL NIVEL**********************
 
 func inicializar(p_nodo_logico: Nodo):
+	paquetes_entregados.resize(GameManager.grafo.obtener_num_nodos())
+	paquetes_actuales.resize(GameManager.grafo.obtener_num_nodos())
 	nodo_logico = p_nodo_logico
-	
+	paquetes_entregados[nodo_logico.id] = 0
+	paquetes_actuales[nodo_logico.id] = 0
 	# Asignar referencia visual al nodo lógico
 	if nodo_logico:
 		nodo_logico.nodo_visual = self
@@ -94,16 +98,16 @@ func _on_body_entered(body):
 			else:
 				print("Nodo incorrecto!")
 				await get_tree().create_timer(0.5).timeout  # Pequeña pausa dramática
-				# Iniciar animación de quiebre			
-				#if attemps>=3:
+				# Iniciar animación de quiebre		
 				if GameManager.vidas_actuales == 0:
-					#print("ujum")
 					iniciar_quiebre()
 	
-func recibir_paquete():
-	print("paquete entregado a nodo ",nodo_logico.id)
-	paquetes_entregados +=1
-	
+func recibir_paquete(id : int):
+	print("paquete entregado a nodo ",id)
+	paquetes_entregados[id] +=1
+	#paquetes_actuales[id] +=1
+func restar(id:int):
+	paquetes_actuales[id] +=1	
 func marcar_correcto():
 	if material:
 		material.albedo_color = color_correcto

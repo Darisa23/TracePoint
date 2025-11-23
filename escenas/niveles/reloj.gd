@@ -3,8 +3,8 @@ extends Control
 @onready var reloj = $ColorRect
 @onready var label = $Label
 
-var tiempo_total: float = 120.0  # 2 minutos para nivel 4
-var tiempo_actual: float = 120.0
+var tiempo_total: float = 1200.0  # 2 minutos para nivel 4
+var tiempo_actual: float = 1200.0
 var activo: bool = false
 var inicializado: bool = false
 var ya_verifico_inicio: bool = false

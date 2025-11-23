@@ -7,6 +7,9 @@ extends Node3D
 @onready var pack = $PlataformaPaquetes if has_node("PlataformaPaquetes") else null
 @onready var titulo = $"../../HUD/Titulos"
 @onready var flowm = $FlowManager if has_node("FlowManager") else null
+@onready var venN1 =  $ventana
+@onready var venN4 = $CanvasLayer/ventana
+
 func _ready():
 	# Si el nivel no está activo, desactivarlo
 	if not activo:
@@ -43,15 +46,14 @@ func activar():
 	process_mode = Node.PROCESS_MODE_INHERIT
 	
 	match nivel_numero:
-		1:
-			
+		1:	
 			GameManager.cargar_nivel_1()
 			graf.instanciar_grafo()
 			if graf.dibujar_conexiones:
 				graf.instanciar_conexiones()
 			await get_tree().create_timer(1.5).timeout
 			titulo.show_level(nivel_numero)
-			#ven.mostrar_info_nodo(0)
+			venN1.ini()
 		2:	
 			titulo.show_level(nivel_numero)
 			GameManager.cargar_nivel_2()
@@ -75,6 +77,7 @@ func activar():
 			flowm.inicializar_nivel()
 			#pack.generar_paquetes()
 			GameManager.iniciar_juego("fordfulkerson")
+			venN4.ini()
 			
 	await get_tree().process_frame
 
