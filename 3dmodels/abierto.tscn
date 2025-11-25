@@ -1,4 +1,4 @@
-[gd_scene load_steps=347 format=4 uid="uid://diqqboeqar3vy"]
+[gd_scene load_steps=348 format=4 uid="uid://diqqboeqar3vy"]
 
 [ext_resource type="Texture2D" uid="uid://bg18hl7npcvcw" path="res://3dmodels/simple_factory_scene_0.jpg" id="1_4dbyg"]
 [ext_resource type="Script" uid="uid://ru7hfbxo6kq3" path="res://3dmodels/abierto.gd" id="1_lnhao"]
@@ -8,6 +8,7 @@
 [ext_resource type="FontFile" uid="uid://q3xknfcbot7l" path="res://escenas/fonts/Trajan Pro Regular.ttf" id="5_0mvao"]
 [ext_resource type="Texture2D" uid="uid://dpxp6u63vaaal" path="res://escenas/texturas-o-png/Noti.png" id="6_88hpm"]
 [ext_resource type="FontFile" uid="uid://cpwdg36okbmhs" path="res://assets/Conthrax-SemiBold.otf" id="7_2vri2"]
+[ext_resource type="AnimationLibrary" uid="uid://de4rufufv7f5d" path="res://misiones.res" id="9_0mvao"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_022o3"]
 resource_name = "Mat3d66-13912488-3-14949"
@@ -5264,6 +5265,10 @@ shadow_mesh = SubResource("ArrayMesh_fmpen")
 [node name="Sketchfab_Scene" type="Node3D"]
 script = ExtResource("1_lnhao")
 
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 1.1920929e-07, 0, 1, 0, -1.1920929e-07, 0, 1, 3, 2, -14)
+current = true
+
 [node name="Sketchfab_model2" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 2.220446e-16, 1, 0, -1, 2.220446e-16, -1.4021856, 1.1920929e-07, -0.064542055)
 
@@ -5275,13 +5280,13 @@ transform = Transform3D(0.01, 0, 0, 0, 0, -0.01, 0, 0.01, 0, 0, 0, 0)
 [node name="���������" type="Node3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.6292068e-05, 100, 0, -100, -1.6292068e-05, 2409.9983, 351.38788, -874.26025)
 
-[node name="���������_Mat3d66-13912488-3-14949_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������"]
+[node name="���������_Mat3d66-13912488-3-14949_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������"]
+use_collision = true
 mesh = SubResource("ArrayMesh_1cqu4")
-skeleton = NodePath("")
 
-[node name="���������_Mat3d66-13912488-1-55383_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������"]
+[node name="���������_Mat3d66-13912488-1-55383_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������"]
+use_collision = true
 mesh = SubResource("ArrayMesh_b5b3g")
-skeleton = NodePath("")
 
 [node name="���������_Mat3d66-13912488-4-97754_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������"]
 mesh = SubResource("ArrayMesh_iefxg")
@@ -5298,13 +5303,13 @@ skeleton = NodePath("")
 [node name="���������_001" type="Node3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.6292068e-05, 100, 0, -100, -1.6292068e-05, 2409.9983, 351.3877, 3925.7393)
 
-[node name="���������_001_Mat3d66-13912488-3-14949_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_001"]
+[node name="���������_001_Mat3d66-13912488-3-14949_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_001"]
+use_collision = true
 mesh = SubResource("ArrayMesh_eidsj")
-skeleton = NodePath("")
 
-[node name="���������_001_Mat3d66-13912488-1-55383_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_001"]
+[node name="���������_001_Mat3d66-13912488-1-55383_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_001"]
+use_collision = true
 mesh = SubResource("ArrayMesh_xp8y6")
-skeleton = NodePath("")
 
 [node name="���������_001_Mat3d66-13912488-2-55722_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_001"]
 mesh = SubResource("ArrayMesh_ixc8a")
@@ -5321,13 +5326,13 @@ skeleton = NodePath("")
 [node name="���������_002" type="Node3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.6292068e-05, 100, 0, -100, -1.6292068e-05, 2409.9983, 351.38776, 3125.74)
 
-[node name="���������_002_Mat3d66-13912488-3-14949_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_002"]
+[node name="���������_002_Mat3d66-13912488-3-14949_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_002"]
+use_collision = true
 mesh = SubResource("ArrayMesh_ofl1b")
-skeleton = NodePath("")
 
-[node name="���������_002_Mat3d66-13912488-1-55383_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_002"]
+[node name="���������_002_Mat3d66-13912488-1-55383_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_002"]
+use_collision = true
 mesh = SubResource("ArrayMesh_4tpnf")
-skeleton = NodePath("")
 
 [node name="���������_002_Mat3d66-13912488-2-55722_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_002"]
 mesh = SubResource("ArrayMesh_tpjtd")
@@ -5344,13 +5349,13 @@ skeleton = NodePath("")
 [node name="���������_003" type="Node3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.6292068e-05, 100, 0, -100, -1.6292068e-05, 2409.9983, 351.38794, 725.73987)
 
-[node name="���������_003_Mat3d66-13912488-3-14949_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_003"]
+[node name="���������_003_Mat3d66-13912488-3-14949_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_003"]
+use_collision = true
 mesh = SubResource("ArrayMesh_vwlki")
-skeleton = NodePath("")
 
-[node name="���������_003_Mat3d66-13912488-1-55383_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_003"]
+[node name="���������_003_Mat3d66-13912488-1-55383_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_003"]
+use_collision = true
 mesh = SubResource("ArrayMesh_thlof")
-skeleton = NodePath("")
 
 [node name="���������_003_Mat3d66-13912488-2-55722_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_003"]
 mesh = SubResource("ArrayMesh_h01ny")
@@ -5367,13 +5372,13 @@ skeleton = NodePath("")
 [node name="���������_004" type="Node3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.6292068e-05, 100, 0, -100, -1.6292068e-05, 2409.9983, 351.38803, -74.26005)
 
-[node name="���������_004_Mat3d66-13912488-3-14949_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_004"]
+[node name="���������_004_Mat3d66-13912488-3-14949_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_004"]
+use_collision = true
 mesh = SubResource("ArrayMesh_j3fmd")
-skeleton = NodePath("")
 
-[node name="���������_004_Mat3d66-13912488-1-55383_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_004"]
+[node name="���������_004_Mat3d66-13912488-1-55383_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_004"]
+use_collision = true
 mesh = SubResource("ArrayMesh_bes7m")
-skeleton = NodePath("")
 
 [node name="���������_004_Mat3d66-13912488-2-55722_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_004"]
 mesh = SubResource("ArrayMesh_efaql")
@@ -5390,13 +5395,13 @@ skeleton = NodePath("")
 [node name="���������_005" type="Node3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.6292068e-05, 100, 0, -100, -1.6292068e-05, 2409.9983, 351.38794, -1674.2601)
 
-[node name="���������_005_Mat3d66-13912488-3-14949_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_005"]
+[node name="���������_005_Mat3d66-13912488-3-14949_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_005"]
+use_collision = true
 mesh = SubResource("ArrayMesh_65fek")
-skeleton = NodePath("")
 
-[node name="���������_005_Mat3d66-13912488-1-55383_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_005"]
+[node name="���������_005_Mat3d66-13912488-1-55383_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_005"]
+use_collision = true
 mesh = SubResource("ArrayMesh_orvd3")
-skeleton = NodePath("")
 
 [node name="���������_005_Mat3d66-13912488-2-55722_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_005"]
 mesh = SubResource("ArrayMesh_mdlf1")
@@ -5413,13 +5418,13 @@ skeleton = NodePath("")
 [node name="���������_006" type="Node3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.6292068e-05, 100, 0, -100, -1.6292068e-05, 2409.9983, 351.38788, -2474.2605)
 
-[node name="���������_006_Mat3d66-13912488-3-14949_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_006"]
+[node name="���������_006_Mat3d66-13912488-3-14949_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_006"]
+use_collision = true
 mesh = SubResource("ArrayMesh_tixtc")
-skeleton = NodePath("")
 
-[node name="���������_006_Mat3d66-13912488-1-55383_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_006"]
+[node name="���������_006_Mat3d66-13912488-1-55383_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_006"]
+use_collision = true
 mesh = SubResource("ArrayMesh_wa68k")
-skeleton = NodePath("")
 
 [node name="���������_006_Mat3d66-13912488-2-55722_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_006"]
 mesh = SubResource("ArrayMesh_qfpwv")
@@ -5440,13 +5445,13 @@ skeleton = NodePath("")
 [node name="���������_007" type="Node3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.6292068e-05, 100, 0, -100, -1.6292068e-05, 2409.9983, 351.38797, -3274.26)
 
-[node name="���������_007_Mat3d66-13912488-3-14949_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_007"]
+[node name="���������_007_Mat3d66-13912488-3-14949_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_007"]
+use_collision = true
 mesh = SubResource("ArrayMesh_hlvo4")
-skeleton = NodePath("")
 
-[node name="���������_007_Mat3d66-13912488-1-55383_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_007"]
+[node name="���������_007_Mat3d66-13912488-1-55383_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_007"]
+use_collision = true
 mesh = SubResource("ArrayMesh_8e5ci")
-skeleton = NodePath("")
 
 [node name="���������_007_Mat3d66-13912488-2-55722_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_007"]
 mesh = SubResource("ArrayMesh_1g3ld")
@@ -5463,13 +5468,13 @@ skeleton = NodePath("")
 [node name="���������_008" type="Node3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.6292068e-05, 100, 0, -100, -1.6292068e-05, 2409.9983, 351.38794, -4074.2607)
 
-[node name="���������_008_Mat3d66-13912488-3-14949_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_008"]
+[node name="���������_008_Mat3d66-13912488-3-14949_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_008"]
+use_collision = true
 mesh = SubResource("ArrayMesh_tb3yi")
-skeleton = NodePath("")
 
-[node name="���������_008_Mat3d66-13912488-1-55383_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_008"]
+[node name="���������_008_Mat3d66-13912488-1-55383_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_008"]
+use_collision = true
 mesh = SubResource("ArrayMesh_mnn6y")
-skeleton = NodePath("")
 
 [node name="���������_008_Mat3d66-13912488-2-55722_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_008"]
 mesh = SubResource("ArrayMesh_v6jx4")
@@ -5486,20 +5491,20 @@ skeleton = NodePath("")
 [node name="������" type="Node3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.6292068e-05, 100, 0, -100, -1.6292068e-05, 2419.9983, 780.81915, 2325.74)
 
-[node name="������_Mat3d66-13912488-3-14949_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������"]
+[node name="������_Mat3d66-13912488-3-14949_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������"]
+use_collision = true
 mesh = SubResource("ArrayMesh_podad")
-skeleton = NodePath("")
 
-[node name="������_Mat3d66-13912488-1-55383_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������"]
+[node name="������_Mat3d66-13912488-1-55383_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������"]
+use_collision = true
 mesh = SubResource("ArrayMesh_0yx86")
-skeleton = NodePath("")
 
 [node name="������_001" type="Node3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.6292068e-05, 100, 0, -100, -1.6292068e-05, 2419.9983, 780.81915, 1525.74)
 
-[node name="������_001_Mat3d66-13912488-3-14949_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������_001"]
+[node name="������_001_Mat3d66-13912488-3-14949_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������_001"]
+use_collision = true
 mesh = SubResource("ArrayMesh_deb53")
-skeleton = NodePath("")
 
 [node name="������_001_Mat3d66-13912488-1-55383_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������_001"]
 mesh = SubResource("ArrayMesh_qni80")
@@ -5728,20 +5733,20 @@ skeleton = NodePath("")
 [node name="������4" type="Node3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.6292068e-05, 100, 0, -100, -1.6292068e-05, 4.6938658e-05, 0.0010490417, 325.7403)
 
-[node name="������_Mat3d66-13912488-7-82485_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������4"]
+[node name="������_Mat3d66-13912488-7-82485_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������4"]
+use_collision = true
 mesh = SubResource("ArrayMesh_n3lvt")
-skeleton = NodePath("")
 
 [node name="������������" type="Node3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.6292068e-05, 100, 0, -100, -1.6292068e-05, -1800, 535.5013, 5149.992)
 
-[node name="������������_Mat3d66-13912488-3-14949_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������������"]
+[node name="������������_Mat3d66-13912488-3-14949_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������������"]
+use_collision = true
 mesh = SubResource("ArrayMesh_evydy")
-skeleton = NodePath("")
 
-[node name="������������_Mat3d66-13912488-6-58797_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������������"]
+[node name="������������_Mat3d66-13912488-6-58797_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������������"]
+use_collision = true
 mesh = SubResource("ArrayMesh_ihu2e")
-skeleton = NodePath("")
 
 [node name="������������_Mat3d66-13912488-5-11707_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������������"]
 mesh = SubResource("ArrayMesh_o2urd")
@@ -5754,17 +5759,17 @@ skeleton = NodePath("")
 [node name="������������_001" type="Node3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.6292068e-05, 100, 0, -100, -1.6292068e-05, -1800, 535.5017, -4494.2603)
 
-[node name="������������_001_Mat3d66-13912488-3-14949_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������������_001"]
+[node name="������������_001_Mat3d66-13912488-3-14949_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������������_001"]
+use_collision = true
 mesh = SubResource("ArrayMesh_i4e2x")
-skeleton = NodePath("")
 
-[node name="������������_001_Mat3d66-13912488-6-58797_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������������_001"]
+[node name="������������_001_Mat3d66-13912488-6-58797_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������������_001"]
+use_collision = true
 mesh = SubResource("ArrayMesh_i3wax")
-skeleton = NodePath("")
 
-[node name="������������_001_Mat3d66-13912488-5-11707_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������������_001"]
+[node name="������������_001_Mat3d66-13912488-5-11707_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������������_001"]
+use_collision = true
 mesh = SubResource("ArrayMesh_v5hcd")
-skeleton = NodePath("")
 
 [node name="������������_001_Mat3d66-13912488-1-55383_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������������_001"]
 mesh = SubResource("ArrayMesh_kmhdh")
@@ -5773,13 +5778,13 @@ skeleton = NodePath("")
 [node name="���������_009" type="Node3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.6292068e-05, 100, 0, -100, -1.6292068e-05, -2429.9983, 351.38794, 725.74)
 
-[node name="���������_009_Mat3d66-13912488-3-14949_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_009"]
+[node name="���������_009_Mat3d66-13912488-3-14949_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_009"]
+use_collision = true
 mesh = SubResource("ArrayMesh_xc6ob")
-skeleton = NodePath("")
 
-[node name="���������_009_Mat3d66-13912488-1-55383_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_009"]
+[node name="���������_009_Mat3d66-13912488-1-55383_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_009"]
+use_collision = true
 mesh = SubResource("ArrayMesh_v01d1")
-skeleton = NodePath("")
 
 [node name="���������_009_Mat3d66-13912488-2-55722_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_009"]
 mesh = SubResource("ArrayMesh_lv7o0")
@@ -5796,13 +5801,13 @@ skeleton = NodePath("")
 [node name="���������_010" type="Node3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.6292068e-05, 100, 0, -100, -1.6292068e-05, -2429.9983, 351.3877, -874.25995)
 
-[node name="���������_010_Mat3d66-13912488-3-14949_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_010"]
+[node name="���������_010_Mat3d66-13912488-3-14949_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_010"]
+use_collision = true
 mesh = SubResource("ArrayMesh_mgow7")
-skeleton = NodePath("")
 
-[node name="���������_010_Mat3d66-13912488-1-55383_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_010"]
+[node name="���������_010_Mat3d66-13912488-1-55383_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_010"]
+use_collision = true
 mesh = SubResource("ArrayMesh_s4bbw")
-skeleton = NodePath("")
 
 [node name="���������_010_Mat3d66-13912488-2-55722_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_010"]
 mesh = SubResource("ArrayMesh_svy4q")
@@ -5819,9 +5824,9 @@ skeleton = NodePath("")
 [node name="������_0033" type="Node3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.6292068e-05, 100, 0, -100, -1.6292068e-05, -2439.9985, 780.8191, 2325.74)
 
-[node name="������_003_Mat3d66-13912488-3-14949_02" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������_0033"]
+[node name="������_003_Mat3d66-13912488-3-14949_02" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������_0033"]
+use_collision = true
 mesh = SubResource("ArrayMesh_xhxtd")
-skeleton = NodePath("")
 
 [node name="������_003_Mat3d66-13912488-1-55383_02" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������_0033"]
 mesh = SubResource("ArrayMesh_mngqp")
@@ -5834,17 +5839,17 @@ skeleton = NodePath("")
 [node name="���������_011" type="Node3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.6292068e-05, 100, 0, -100, -1.6292068e-05, -2429.9983, 351.38773, 3925.7397)
 
-[node name="���������_011_Mat3d66-13912488-3-14949_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_011"]
+[node name="���������_011_Mat3d66-13912488-3-14949_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_011"]
+use_collision = true
 mesh = SubResource("ArrayMesh_u04wl")
-skeleton = NodePath("")
 
-[node name="���������_011_Mat3d66-13912488-1-55383_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_011"]
+[node name="���������_011_Mat3d66-13912488-1-55383_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_011"]
+use_collision = true
 mesh = SubResource("ArrayMesh_8qj71")
-skeleton = NodePath("")
 
-[node name="���������_011_Mat3d66-13912488-2-55722_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_011"]
+[node name="���������_011_Mat3d66-13912488-2-55722_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_011"]
+use_collision = true
 mesh = SubResource("ArrayMesh_bxsr6")
-skeleton = NodePath("")
 
 [node name="���������_011_Mat3d66-13912488-4-97754_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_011"]
 mesh = SubResource("ArrayMesh_chjih")
@@ -5857,13 +5862,13 @@ skeleton = NodePath("")
 [node name="���������_012" type="Node3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.6292068e-05, 100, 0, -100, -1.6292068e-05, -2429.9983, 351.38766, 3125.7402)
 
-[node name="���������_012_Mat3d66-13912488-3-14949_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_012"]
+[node name="���������_012_Mat3d66-13912488-3-14949_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_012"]
+use_collision = true
 mesh = SubResource("ArrayMesh_bbeho")
-skeleton = NodePath("")
 
-[node name="���������_012_Mat3d66-13912488-1-55383_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_012"]
+[node name="���������_012_Mat3d66-13912488-1-55383_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_012"]
+use_collision = true
 mesh = SubResource("ArrayMesh_03b2d")
-skeleton = NodePath("")
 
 [node name="���������_012_Mat3d66-13912488-2-55722_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_012"]
 mesh = SubResource("ArrayMesh_tibo8")
@@ -5880,13 +5885,13 @@ skeleton = NodePath("")
 [node name="������_0043" type="Node3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.6292068e-05, 100, 0, -100, -1.6292068e-05, -2439.9985, 780.8188, 4725.7397)
 
-[node name="������_004_Mat3d66-13912488-3-14949_02" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������_0043"]
+[node name="������_004_Mat3d66-13912488-3-14949_02" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������_0043"]
+use_collision = true
 mesh = SubResource("ArrayMesh_nc6yc")
-skeleton = NodePath("")
 
-[node name="������_004_Mat3d66-13912488-1-55383_02" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������_0043"]
+[node name="������_004_Mat3d66-13912488-1-55383_02" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������_0043"]
+use_collision = true
 mesh = SubResource("ArrayMesh_tc34q")
-skeleton = NodePath("")
 
 [node name="������_004_Mat3d66-13912488-5-11707_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������_0043"]
 mesh = SubResource("ArrayMesh_ndy6o")
@@ -5895,13 +5900,13 @@ skeleton = NodePath("")
 [node name="������_0053" type="Node3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.6292068e-05, 100, 0, -100, -1.6292068e-05, -2439.9985, 780.81903, 1525.7399)
 
-[node name="������_005_Mat3d66-13912488-3-14949_03" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������_0053"]
+[node name="������_005_Mat3d66-13912488-3-14949_03" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������_0053"]
+use_collision = true
 mesh = SubResource("ArrayMesh_isp8e")
-skeleton = NodePath("")
 
-[node name="������_005_Mat3d66-13912488-1-55383_02" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������_0053"]
+[node name="������_005_Mat3d66-13912488-1-55383_02" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������_0053"]
+use_collision = true
 mesh = SubResource("ArrayMesh_st21x")
-skeleton = NodePath("")
 
 [node name="������_005_Mat3d66-13912488-5-11707_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������_0053"]
 mesh = SubResource("ArrayMesh_c6ypg")
@@ -5910,13 +5915,13 @@ skeleton = NodePath("")
 [node name="���������_013" type="Node3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.6292068e-05, 100, 0, -100, -1.6292068e-05, -2429.9983, 351.3879, -74.2599)
 
-[node name="���������_013_Mat3d66-13912488-3-14949_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_013"]
+[node name="���������_013_Mat3d66-13912488-3-14949_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_013"]
+use_collision = true
 mesh = SubResource("ArrayMesh_k82oi")
-skeleton = NodePath("")
 
-[node name="���������_013_Mat3d66-13912488-1-55383_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_013"]
+[node name="���������_013_Mat3d66-13912488-1-55383_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_013"]
+use_collision = true
 mesh = SubResource("ArrayMesh_0n0jw")
-skeleton = NodePath("")
 
 [node name="���������_013_Mat3d66-13912488-2-55722_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_013"]
 mesh = SubResource("ArrayMesh_umu57")
@@ -5933,13 +5938,13 @@ skeleton = NodePath("")
 [node name="���������_014" type="Node3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.6292068e-05, 100, 0, -100, -1.6292068e-05, -2429.9983, 351.38785, -1674.2604)
 
-[node name="���������_014_Mat3d66-13912488-3-14949_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_014"]
+[node name="���������_014_Mat3d66-13912488-3-14949_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_014"]
+use_collision = true
 mesh = SubResource("ArrayMesh_qolhv")
-skeleton = NodePath("")
 
-[node name="���������_014_Mat3d66-13912488-1-55383_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_014"]
+[node name="���������_014_Mat3d66-13912488-1-55383_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_014"]
+use_collision = true
 mesh = SubResource("ArrayMesh_7fesu")
-skeleton = NodePath("")
 
 [node name="���������_014_Mat3d66-13912488-2-55722_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_014"]
 mesh = SubResource("ArrayMesh_qern4")
@@ -5956,13 +5961,13 @@ skeleton = NodePath("")
 [node name="���������_015" type="Node3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.6292068e-05, 100, 0, -100, -1.6292068e-05, -2429.9983, 351.38773, -4074.26)
 
-[node name="���������_015_Mat3d66-13912488-3-14949_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_015"]
+[node name="���������_015_Mat3d66-13912488-3-14949_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_015"]
+use_collision = true
 mesh = SubResource("ArrayMesh_gy23e")
-skeleton = NodePath("")
 
-[node name="���������_015_Mat3d66-13912488-1-55383_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_015"]
+[node name="���������_015_Mat3d66-13912488-1-55383_0" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_015"]
+use_collision = true
 mesh = SubResource("ArrayMesh_qvo7r")
-skeleton = NodePath("")
 
 [node name="���������_015_Mat3d66-13912488-2-55722_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/���������_015"]
 mesh = SubResource("ArrayMesh_gb7dh")
@@ -5979,13 +5984,13 @@ skeleton = NodePath("")
 [node name="������_0063" type="Node3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.6292068e-05, 100, 0, -100, -1.6292068e-05, -2439.9985, 780.8191, -2474.2605)
 
-[node name="������_006_Mat3d66-13912488-3-14949_02" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������_0063"]
+[node name="������_006_Mat3d66-13912488-3-14949_02" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������_0063"]
+use_collision = true
 mesh = SubResource("ArrayMesh_yp102")
-skeleton = NodePath("")
 
-[node name="������_006_Mat3d66-13912488-1-55383_02" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������_0063"]
+[node name="������_006_Mat3d66-13912488-1-55383_02" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������_0063"]
+use_collision = true
 mesh = SubResource("ArrayMesh_xambc")
-skeleton = NodePath("")
 
 [node name="������_006_Mat3d66-13912488-5-11707_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������_0063"]
 mesh = SubResource("ArrayMesh_0y4qy")
@@ -5994,13 +5999,13 @@ skeleton = NodePath("")
 [node name="������_0073" type="Node3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.6292068e-05, 100, 0, -100, -1.6292068e-05, -2439.9985, 780.8193, -3274.2603)
 
-[node name="������_007_Mat3d66-13912488-3-14949_02" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������_0073"]
+[node name="������_007_Mat3d66-13912488-3-14949_02" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������_0073"]
+use_collision = true
 mesh = SubResource("ArrayMesh_j0kb6")
-skeleton = NodePath("")
 
-[node name="������_007_Mat3d66-13912488-1-55383_02" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������_0073"]
+[node name="������_007_Mat3d66-13912488-1-55383_02" type="CSGMesh3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������_0073"]
+use_collision = true
 mesh = SubResource("ArrayMesh_pe7fn")
-skeleton = NodePath("")
 
 [node name="������_007_Mat3d66-13912488-5-11707_0" type="MeshInstance3D" parent="Sketchfab_model2/5cf8dad436de4746a6d4d5638a405f9a_fbx/RootNode/������_0073"]
 mesh = SubResource("ArrayMesh_mubx8")
@@ -6370,3 +6375,8 @@ bbcode_enabled = true
 text = "CADA PAQUETE PERDIDO = 10,000 registros comprometidos"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"misiones": ExtResource("9_0mvao")
+}
