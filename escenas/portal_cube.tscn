@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://dgxj6os17d7rb"]
+
+[ext_resource type="Script" uid="uid://be2c3ebhd4ud5" path="res://scripts/portal_cube.gd" id="1_vqgaj"]
+[ext_resource type="Material" uid="uid://dy1qb0imefryu" path="res://escenas/texturas-o-png/portal_cube.tres" id="2_18qal"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_vqgaj"]
+material = ExtResource("2_18qal")
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_18qal"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="PortalCube" type="Node3D"]
+script = ExtResource("1_vqgaj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = ExtResource("2_18qal")
+mesh = SubResource("BoxMesh_vqgaj")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_18qal")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

@@ -5,46 +5,17 @@ extends Node3D
 @export var activo: bool = true  # Desactiva niveles que no estés usando
 @onready var graf = $GrafoSpawner
 @onready var pack = $PlataformaPaquetes if has_node("PlataformaPaquetes") else null
-@onready var titulo = $"../../HUD/Titulos"
+@onready var titulo = $Titulo1NetworkTracer
 @onready var flowm = $FlowManager if has_node("FlowManager") else null
 @onready var venN1 =  $ventana
 @onready var venN4 = $CanvasLayer/ventana
 
 func _ready():
-	# Si el nivel no está activo, desactivarlo
-	if not activo:
-		visible = false
-		process_mode = Node.PROCESS_MODE_DISABLED
-		return
-
-	await get_tree().process_frame
-	await get_tree().process_frame
-
-	
-	# Conectar señales del GameManager
+# Conectar señales del GameManager
 	if not GameManager.mision_completada.is_connected(_on_mision_completada) and nivel_numero == GameManager.nivel_actual:
 		GameManager.mision_completada.connect(_on_mision_completada)
 	if not GameManager.nivel_reiniciado.is_connected(_on_nivel_reiniciado) and nivel_numero == GameManager.nivel_actual:
 		GameManager.nivel_reiniciado.connect(_on_nivel_reiniciado)
-
-
-func _on_mision_completada():
-	print("\n¡NIVEL %d COMPLETADO!" % nivel_numero)
-	# Aquí puedes:
-	# - Mostrar pantalla de victoria
-	# - Desactivar este nivel y activar el siguiente
-	# - Reproducir sonidos/animaciones
-
-func _on_nivel_reiniciado():
-	print("Nivel %d reiniciado" % nivel_numero)
-	# El CyberQuestController reposicionará el player
-
-# Método para activar/desactivar el nivel
-func activar():
-	self.activo = true
-	visible = true
-	process_mode = Node.PROCESS_MODE_INHERIT
-	
 	match nivel_numero:
 		1:	
 			GameManager.cargar_nivel_1()
@@ -52,7 +23,7 @@ func activar():
 			if graf.dibujar_conexiones:
 				graf.instanciar_conexiones()
 			await get_tree().create_timer(1.5).timeout
-			titulo.show_level(nivel_numero)
+			titulo.chou()
 			venN1.ini()
 		2:	
 			titulo.show_level(nivel_numero)
@@ -81,7 +52,14 @@ func activar():
 			
 	await get_tree().process_frame
 
-func desactivar():
-	self.activo = false
-	visible = false
-	process_mode = Node.PROCESS_MODE_DISABLED
+func _on_mision_completada():
+	print("\n¡NIVEL %d COMPLETADO!" % nivel_numero)
+	print("ACÁ SE CAMBIA A LA ESCENA DEL BANCO")
+	# Aquí puedes:
+	# - Mostrar pantalla de victoria
+	# - Desactivar este nivel y activar el siguiente
+	# - Reproducir sonidos/animaciones
+
+func _on_nivel_reiniciado():
+	print("Nivel %d reiniciado" % nivel_numero)
+	# El CyberQuestController reposicionará el player

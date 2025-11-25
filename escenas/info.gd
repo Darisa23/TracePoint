@@ -13,10 +13,6 @@ var nodos_instrucciones = {
 var panel_actual: Control = null
 
 func _ready():
-	print("Botón de instrucciones inicializado")
-	print("Nombre del botón: ", name)
-	print("Tipo: ", get_class())
-	print("Ruta del nodo: ", get_path())
 	
 	# Desactivar el foco visual del botón
 	focus_mode = Control.FOCUS_NONE
@@ -26,33 +22,25 @@ func _ready():
 		toggle_mode = false
 		button_pressed = false
 	
-	print("Toggle mode: ", toggle_mode)
-	
 	# Conectar la señal de múltiples formas para asegurar
 	if not button_down.is_connected(_on_button_pressed):
 		button_down.connect(_on_button_pressed)
-		print("✓ Señal button_down conectada")
 	
 	if not pressed.is_connected(_on_button_pressed):
 		pressed.connect(_on_button_pressed)
-		print("✓ Señal pressed conectada")
 	
 	# Ocultar todos los paneles al inicio
 	ocultar_todos_paneles()
 
 func _on_button_pressed():
-	print("=== BOTÓN PRESIONADO (via señal) ===")
 	
 	# Liberar el estado pressed del botón inmediatamente
 	release_focus()
 	
 	if panel_actual and panel_actual.visible:
 		# Si hay un panel abierto, cerrarlo
-		print("Cerrando panel...")
 		cerrar_panel()
 	else:
-		# Si no hay panel, abrir el correspondiente al nivel actual
-		print("Abriendo panel...")
 		abrir_panel()
 
 func _input(event):
@@ -88,12 +76,9 @@ func abrir_panel():
 	
 	# Obtener el nivel actual desde GameManager
 	var nivel = GameManager.nivel_actual
-	print("Nivel actual: ", nivel)
 	
 	# Verificar si existe un nodo para este nivel
 	if not nodos_instrucciones.has(nivel):
-		print("❌ No hay instrucciones para el nivel ", nivel)
-		print("Niveles disponibles: ", nodos_instrucciones.keys())
 		return
 	
 	#print("✓ Nivel encontrado en diccionario")
@@ -109,15 +94,9 @@ func abrir_panel():
 	
 	# Buscar el panel de instrucciones
 	var nombre_panel = nodos_instrucciones[nivel]
-	print("Buscando panel con nombre: ", nombre_panel)
 	panel_actual = hud.find_child(nombre_panel, false, false)
 	
-	if not panel_actual:
-		push_error("❌ No se encontró el panel: ", nombre_panel)
-		#print("Hijos del HUD:")
-		for child in hud.get_children():
-			print("  - ", child.name, " (", child.get_class(), ")")
-		return
+	
 	
 	#print("✓ Panel encontrado: ", panel_actual.name)
 	

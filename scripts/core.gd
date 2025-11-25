@@ -1,7 +1,8 @@
 extends Node3D
 @onready var niveles = $"../Niveles"
-@onready var hospital = $Hospital
 @onready var hud = $"../HUD"
+var sofi = preload("res://lesson_reference/player_3d_template.tscn")
+var holograma_sofi = preload("res://lesson_reference/player_3d_template.tscn")
 #@onready var banco = $"../Niveles"
 var nivel_actual: int = 1
 # Referencias al player
@@ -37,25 +38,9 @@ func _on_cualquier_mision_completada():
 		print("¡NEMESIS HA SIDO DERROTADO!")
 
 func activar_solo_core(numero: int):
-	# Desactivar todos
-	#banco.desactivar()
-	hospital.desactivar() 
 	
+
 	# Activar el nivel solicitado
 	match numero:
 		1:
-			if hospital.has_method("activar"):
-				hospital.activar() 
-			else:
-				hospital.visible = true
-		#2:
-			#if banco:
-				#if banco.has_method("activar"):
-					#await get_tree().create_timer(3).timeout
-					#banco.activar() 
-				#else:
-					#banco.visible = true
-					#await get_tree().create_timer(3.5).timeout
-					#get_tree().change_scene_to_file("res://escenas/niveles/nivel_2_safe_route.tscn")
-			#else:
-				#push_warning("No hay banco")	
+			get_tree().change_scene_to_file("res://escenas/hospital.tscn")

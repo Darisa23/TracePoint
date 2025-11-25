@@ -56,7 +56,7 @@ axis_lock_angular_z = true
 script = ExtResource("1_dpokc")
 acceleration = 30.0
 
-[node name="CharacterCollisionShape" type="CollisionShape3D" parent="."]
+[node name="CharacterCollisionShape" type="CollisionShape3D" parent="." groups=["player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_e8pdu")
 
@@ -98,14 +98,12 @@ spring_length = 8.0
 unique_name_in_owner = true
 transform = Transform3D(1, -6.75016e-14, -1.7053e-13, 0, 1, 0, 0, 0, 1, -0.710726, -1.7121, 9.64449)
 current = true
-fov = 75.4
-near = 0.046
 
-[node name="detect_area" type="Area3D" parent="."]
+[node name="detect_area" type="Area3D" parent="." groups=["player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.402845, 0.0853408, 0)
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="detect_area"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="detect_area" groups=["player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.406375, 0.207011, 0.0429413)
 shape = SubResource("SphereShape3D_jgkwk")
 

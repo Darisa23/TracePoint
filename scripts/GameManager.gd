@@ -327,7 +327,6 @@ func iniciar_juego(type:String):
 	indice_actual = 0
 	grafo.obtener_nodo(0).marcar_correcto()
 	
-	#print("vc en iniciar juego:",grafo.obtener_nodo(0).vc)
 	print("Juego iniciado - Sigue el recorrido ", tipo_recorrido)
 	calcular_recorrido_correcto(0)
 	if not nivel_actual == 4:
@@ -338,9 +337,9 @@ func iniciar_juego(type:String):
 	
 func validar_salto_a_nodo(nodo_id: int) -> bool:
 	if not juego_iniciado:
-		print("inicia juego")
+		print("ESCOGE UN BOTON PARA inicia juego")
 		#grafo.obtener_nodo(0).vc = true
-		iniciar_juego(tipo_recorrido)
+		#iniciar_juego(tipo_recorrido)
 		
 		return true
 	
@@ -371,9 +370,9 @@ func validar_salto_a_nodo(nodo_id: int) -> bool:
 				nodo.marcar_correcto()
 			emit_signal("nodo_visitado_correcto", nodo.id)
 			indice_actual += 1
-			if nivel_actual == 1:
-				completar_mision()
-				return true
+			#if nivel_actual == 1:
+				#completar_mision()
+				#return true
 			 ##Verificar victoria
 			if (indice_actual+1) >= recorrido_correcto.size():
 				completar_mision()
@@ -381,7 +380,7 @@ func validar_salto_a_nodo(nodo_id: int) -> bool:
 			return true
 		else:
 			print("nodo incorrecto: %d (se esperaba: %d)" % [nodo.id, nodo_esperado.id])
-			if nivel_actual != 2 and pv2:
+			if nivel_actual != 2 and not pv2:
 				nodo.marcar_incorrecto()
 			emit_signal("nodo_visitado_incorrecto", nodo.id)
 			if nivel_actual != 2 or pv2:

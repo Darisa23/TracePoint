@@ -87,7 +87,7 @@ _data = {
 }
 
 [node name="DataPacket" type="RigidBody3D" groups=["paquete"]]
-transform = Transform3D(-1, 0, 2.5351817e-06, 0, 1, 0, -2.5351817e-06, 0, -1, 0, 0, 0)
+transform = Transform3D(-1, 0, 2.53518e-06, 0, 1, 0, -2.53518e-06, 0, -1, 0, 0, 0)
 collision_layer = 2
 collision_mask = 3
 mass = 3.0

@@ -34,7 +34,7 @@ var _camera_input_direction := Vector2.ZERO
 ## the character model.
 @onready var _last_input_direction := global_basis.z
 # We store the initial position of the player to reset to it when the player falls off the map.
-@onready var _start_position := global_position
+#@onready var _start_position := global_position
 
 @onready var _camera_pivot: Node3D = %CameraPivot
 @onready var _camera: Camera3D = %Camera3D
@@ -48,17 +48,17 @@ var paquetes_en_rango = []
 signal soltar_paquete()
 signal recoger_pack()
 func _ready() -> void:
-	Events.kill_plane_touched.connect(func on_kill_plane_touched() -> void:
-		global_position = _start_position
-		velocity = Vector3.ZERO
-		_skin.idle()
-		set_physics_process(true)
-	)
+	#Events.kill_plane_touched.connect(func on_kill_plane_touched() -> void:
+		#global_position = _start_position
+		#velocity = Vector3.ZERO
+		#_skin.idle()
+		#set_physics_process(true)
+	#)
 	
 	$detect_area.body_entered.connect(_on_body_entered)
 	$detect_area.body_exited.connect(_on_body_exited)
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("recoger_paquete"):
 		recoger_paquete()
 	if Input.is_action_just_pressed("dejar_paquete") and paquetes_llevando > 0:
@@ -196,3 +196,15 @@ func perder_paquetes():
 	paquetes_llevando = 0
 	inventory.clear_items()
 	print("Paquetes perdidos!")
+
+	
+func posicionar_en_nivel_actual():
+	if not GameManager.grafo or GameManager.grafo.nodos.size() == 0:
+		push_warning("No hay grafo cargado aún")
+		return
+	
+	# Posicionar en el primer nodo del grafo actual
+	var pos_inicial = GameManager.grafo.nodos[0].posicion_3d + Vector3(0, 2, 0)
+	global_position = pos_inicial
+
+	velocity = Vector3.ZERO

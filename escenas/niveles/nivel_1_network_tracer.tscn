@@ -1,11 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://2dwpnp36vlfk"]
+[gd_scene load_steps=14 format=3 uid="uid://2dwpnp36vlfk"]
 
 [ext_resource type="Script" uid="uid://8fpq85lemlwa" path="res://scripts/controllers/nivel_cer.gd" id="1_3bnxd"]
 [ext_resource type="Script" uid="uid://b7xahjuha0vog" path="res://scripts/GrafoSpawner.gd" id="2_1jpj2"]
+[ext_resource type="PackedScene" uid="uid://dodfrown0q7ro" path="res://playerrr_holograma.tscn" id="2_12g1x"]
 [ext_resource type="Shader" uid="uid://b80iojip1k6wx" path="res://level/sky_with_stars.tres" id="2_065hm"]
 [ext_resource type="PackedScene" uid="uid://doqvur36b3bcq" path="res://escenas/nodo_3d.tscn" id="3_065hm"]
 [ext_resource type="PackedScene" uid="uid://b1hjrwgbuf2nr" path="res://escenas/niveles/ventana.tscn" id="5_065hm"]
 [ext_resource type="Texture2D" uid="uid://omyf16ymo0hm" path="res://escenas/texturas-o-png/cuadroSB.png" id="6_v8kyt"]
+[ext_resource type="PackedScene" uid="uid://dw27a5dihjvit" path="res://escenas/hud.tscn" id="7_aqnt4"]
+[ext_resource type="PackedScene" uid="uid://dgn40ogw14ob1" path="res://escenas/niveles/titulos/titulo_1_network_tracer.tscn" id="9_hyiib"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0wtap"]
 load_path = "res://.godot/imported/qwantani_moon_noon_puresky_4k.exr-9c99993655a97e2e3970192b680d1851.bptc.ctex"
@@ -57,6 +60,8 @@ volumetric_fog_emission = Color(0.843137, 0.737255, 0.329412, 1)
 script = ExtResource("1_3bnxd")
 activo = false
 
+[node name="player" parent="." instance=ExtResource("2_12g1x")]
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.327016, 0.941731, -0.0787648, 0.688764, 0.294578, 0.662441, 0.647044, 0.162378, -0.744962, -47.2295, 26.8832, -28.0205)
 light_energy = 0.53
@@ -81,3 +86,8 @@ offset_top = -807.04
 offset_right = 186.0
 offset_bottom = -738.04
 textura_popup = ExtResource("6_v8kyt")
+
+[node name="HUD" parent="." instance=ExtResource("7_aqnt4")]
+
+[node name="Titulo1NetworkTracer" parent="." instance=ExtResource("9_hyiib")]
+visible = false

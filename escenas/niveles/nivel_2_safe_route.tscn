@@ -1,64 +1,17 @@
-[gd_scene load_steps=16 format=3 uid="uid://c0j4675x22x1g"]
+[gd_scene load_steps=11 format=3 uid="uid://c0j4675x22x1g"]
 
-[ext_resource type="Script" uid="uid://8fpq85lemlwa" path="res://scripts/controllers/nivel_cer.gd" id="1_ap6iu"]
-[ext_resource type="Shader" uid="uid://b80iojip1k6wx" path="res://level/sky_with_stars.tres" id="2_0wtap"]
-[ext_resource type="Script" uid="uid://b7xahjuha0vog" path="res://scripts/GrafoSpawner.gd" id="4_qllsw"]
-[ext_resource type="PackedScene" uid="uid://doqvur36b3bcq" path="res://escenas/nodo_3d.tscn" id="5_3voxc"]
-[ext_resource type="Texture2D" uid="uid://dxie6ncjjk5wi" path="res://assets/estefondo.png" id="5_qllsw"]
-[ext_resource type="Script" uid="uid://ddbdki8uc5hy" path="res://escenas/niveles/barra_peso.gd" id="5_uquey"]
-[ext_resource type="Texture2D" uid="uid://6xtdc688ygpn" path="res://assets/bbar.png" id="6_3voxc"]
-[ext_resource type="Shader" uid="uid://du2gvliha78wk" path="res://escenas/niveles/progress_bar.gdshader" id="6_mmdby"]
-[ext_resource type="Texture2D" uid="uid://bbgl46mwchspn" path="res://assets/estabarra.png" id="7_3voxc"]
-[ext_resource type="FontFile" uid="uid://cpwdg36okbmhs" path="res://assets/Conthrax-SemiBold.otf" id="8_3voxc"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0wtap"]
-load_path = "res://.godot/imported/qwantani_moon_noon_puresky_4k.exr-9c99993655a97e2e3970192b680d1851.bptc.ctex"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_uquey"]
-shader = ExtResource("2_0wtap")
-shader_parameter/skyTexture = SubResource("CompressedTexture2D_0wtap")
-shader_parameter/skyColor = Color(1, 1, 1, 1)
-shader_parameter/horizonColor = Color(0.9, 0.9, 0.9, 1)
-shader_parameter/particle_speed = 0.1
-shader_parameter/particle_density = 220.0
-shader_parameter/particle_size = 0.001
-shader_parameter/neon_blue = Color(0.898995, 0.723707, 0.269514, 1)
-shader_parameter/glow_intensity = 2.0
-
-[sub_resource type="Sky" id="Sky_l5lfc"]
-sky_material = SubResource("ShaderMaterial_uquey")
-
-[sub_resource type="Environment" id="Environment_mmdby"]
-background_mode = 2
-sky = SubResource("Sky_l5lfc")
-ambient_light_source = 3
-ambient_light_color = Color(0.74902, 0.742654, 0.615273, 1)
-ambient_light_sky_contribution = 0.0
-tonemap_mode = 2
-tonemap_exposure = 1.05
-tonemap_white = 0.95
-ssao_enabled = true
-ssao_radius = 2.0
-ssao_intensity = 1.4
-glow_intensity = 4.98
-glow_strength = 0.26
-glow_bloom = 0.08
-glow_blend_mode = 0
-glow_hdr_threshold = 0.26
-glow_hdr_scale = 0.0
-glow_hdr_luminance_cap = 18.75
-glow_map_strength = 1.0
-fog_light_color = Color(0.843137, 0.737255, 0.329412, 1)
-fog_density = 0.0
-fog_aerial_perspective = 1.0
-fog_sky_affect = 0.0
-fog_height_density = 0.1
-volumetric_fog_density = 0.01
-volumetric_fog_albedo = Color(0.843137, 0.737255, 0.329412, 1)
-volumetric_fog_emission = Color(0.843137, 0.737255, 0.329412, 1)
+[ext_resource type="Script" uid="uid://8fpq85lemlwa" path="res://scripts/controllers/nivel_cer.gd" id="1_uquey"]
+[ext_resource type="Script" uid="uid://b7xahjuha0vog" path="res://scripts/GrafoSpawner.gd" id="2_mmdby"]
+[ext_resource type="PackedScene" uid="uid://doqvur36b3bcq" path="res://escenas/nodo_3d.tscn" id="3_nmnq1"]
+[ext_resource type="Script" uid="uid://ddbdki8uc5hy" path="res://escenas/niveles/barra_peso.gd" id="4_cbkww"]
+[ext_resource type="Shader" uid="uid://du2gvliha78wk" path="res://escenas/niveles/progress_bar.gdshader" id="5_i2o6t"]
+[ext_resource type="Texture2D" uid="uid://dxie6ncjjk5wi" path="res://assets/estefondo.png" id="6_roef5"]
+[ext_resource type="Texture2D" uid="uid://6xtdc688ygpn" path="res://assets/bbar.png" id="7_3pb1q"]
+[ext_resource type="Texture2D" uid="uid://bbgl46mwchspn" path="res://assets/estabarra.png" id="8_8mrmj"]
+[ext_resource type="FontFile" uid="uid://cpwdg36okbmhs" path="res://assets/Conthrax-SemiBold.otf" id="9_epn0x"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nmnq1"]
-shader = ExtResource("6_mmdby")
+shader = ExtResource("5_i2o6t")
 shader_parameter/color_base = Color(0, 0.8, 1, 1)
 shader_parameter/color_brillo = Color(0.3, 1, 1, 1)
 shader_parameter/velocidad_lineas = 2.0
@@ -69,11 +22,10 @@ shader_parameter/intensidad_brillo = 0.8
 shader_parameter/progreso = 1.0
 
 [node name="Nivel2_SafeRoute" type="Node3D"]
-script = ExtResource("1_ap6iu")
+visible = false
+script = ExtResource("1_uquey")
 nivel_numero = 2
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_mmdby")
+activo = false
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.327016, 0.941731, -0.0787648, 0.688764, 0.294578, 0.662441, 0.647044, 0.162378, -0.744962, -47.2295, 26.8832, -28.0205)
@@ -82,8 +34,8 @@ shadow_enabled = true
 directional_shadow_max_distance = 40.0
 
 [node name="GrafoSpawner" type="Node3D" parent="."]
-script = ExtResource("4_qllsw")
-nodo_prefab = ExtResource("5_3voxc")
+script = ExtResource("2_mmdby")
+nodo_prefab = ExtResource("3_nmnq1")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -92,7 +44,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("5_uquey")
+script = ExtResource("4_cbkww")
 
 [node name="ProgressBar" type="TextureProgressBar" parent="CanvasLayer/BarraPeso"]
 material = SubResource("ShaderMaterial_nmnq1")
@@ -103,9 +55,9 @@ offset_right = 1550.0
 offset_bottom = 455.0
 scale = Vector2(0.3, 0.3)
 value = 100.0
-texture_under = ExtResource("5_qllsw")
-texture_over = ExtResource("6_3voxc")
-texture_progress = ExtResource("7_3voxc")
+texture_under = ExtResource("6_roef5")
+texture_over = ExtResource("7_3pb1q")
+texture_progress = ExtResource("8_8mrmj")
 tint_progress = Color(0.774706, 0.902081, 0.969465, 1)
 
 [node name="Label" type="Label" parent="CanvasLayer/BarraPeso"]
@@ -117,6 +69,6 @@ offset_bottom = 283.0
 theme_override_colors/font_color = Color(0.969137, 0.969137, 0.969137, 1)
 theme_override_colors/font_shadow_color = Color(0.360784, 0.909804, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("8_3voxc")
+theme_override_fonts/font = ExtResource("9_epn0x")
 theme_override_font_sizes/font_size = 27
 text = "hola"

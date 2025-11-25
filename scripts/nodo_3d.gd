@@ -91,12 +91,12 @@ func _on_body_entered(body):
 			# Validar con GameManager (singleton)
 			var es_correcto = GameManager.validar_salto_a_nodo(nodo_logico.id)
 			#print("el id es: ",nodo_logico.id)
-			if es_correcto:
-				print("Nodo correcto!")
+			#if es_correcto:
+				#print("Nodo correcto!")
 				#nodo_logico.vc=true
 				# El color ya lo cambia GameManager → nodo_logico.marcar_correcto()
-			else:
-				print("Nodo incorrecto!")
+			if not es_correcto:
+				#print("Nodo incorrecto!")
 				await get_tree().create_timer(0.5).timeout  # Pequeña pausa dramática
 				# Iniciar animación de quiebre		
 				if GameManager.vidas_actuales == 0:
