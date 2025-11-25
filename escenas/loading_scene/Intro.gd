@@ -55,7 +55,7 @@ func iniciar_secuencia_intro():
 	# Configurar y reproducir animación rápida
 	tween.tween_callback(func(): 
 		if logo_antenas.sprite_frames:
-			logo_antenas.sprite_frames.set_animation_loop("default", false)
+			logo_antenas.sprite_frames.set_animation_loop("defult", false)
 		logo_antenas.speed_scale = 5.0
 		logo_antenas.play()
 	)

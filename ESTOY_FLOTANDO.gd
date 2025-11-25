@@ -1,8 +1,8 @@
 extends Node
 # Script para el Hub World (zona central que se expande)
 
-@export var player_spawn_position: Vector3 = Vector3(0, 2, 0)
-@onready var player = get_node("../Player") if has_node("../Player") else null
+#@export var player_spawn_position: Vector3 = Vector3(0, 2, 0)
+#@onready var player = $player 
 
 # Banderas/Portales para cada nivel
 @onready var portal_nivel_1 = $Portal_Nivel1 if has_node("Portal_Nivel1") else null
@@ -20,9 +20,9 @@ var nivel_actual_completado: int = 0
 
 func _ready():
 # Posicionar player en spawn
-	if player:
-		print("zi")
-		player.global_position = player_spawn_position
+	#if player:
+		#print("zi")
+		#player.global_position = player_spawn_position
 	
 	# Configurar estado inicial del hub
 	configurar_mundo_segun_progreso()
@@ -85,9 +85,9 @@ func animar_aparicion_seccion(seccion: Node3D):
 	
 	print("nueva sección desbloqueada: ", seccion.name)
 
-func teleportar_player(posicion_custom: Vector3 = player_spawn_position):
-	if player:
-		player.global_position = posicion_custom
-		if "velocity" in player:
-			player.velocity = Vector3.ZERO
-		print("player teleportado al mundo: ", posicion_custom)
+#func teleportar_player(posicion_custom: Vector3 = player_spawn_position):
+	#if player:
+		#player.global_position = posicion_custom
+		#if "velocity" in player:
+			#player.velocity = Vector3.ZERO
+		#print("player teleportado al mundo: ", posicion_custom)

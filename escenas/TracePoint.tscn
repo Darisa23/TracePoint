@@ -1,8 +1,9 @@
-[gd_scene load_steps=30 format=3 uid="uid://camm0ty01vmmt"]
+[gd_scene load_steps=31 format=3 uid="uid://camm0ty01vmmt"]
 
 [ext_resource type="Script" uid="uid://d145h3ufpfx0m" path="res://scripts/controllers/cyber_quest.gd" id="1_5ssbh"]
 [ext_resource type="Script" uid="uid://dksfa6qfha8rg" path="res://ESTOY_FLOTANDO.gd" id="1_bmpbm"]
-[ext_resource type="PackedScene" uid="uid://dodfrown0q7ro" path="res://playerrr_holograma.tscn" id="2_sb757"]
+[ext_resource type="PackedScene" uid="uid://g6too1ic74yo" path="res://escenas/hospital.tscn" id="3_2unfa"]
+[ext_resource type="Script" uid="uid://db21rchoxsid0" path="res://scripts/core.gd" id="3_lh60t"]
 [ext_resource type="Script" uid="uid://8fpq85lemlwa" path="res://scripts/controllers/nivel_cer.gd" id="4_5g3o7"]
 [ext_resource type="PackedScene" uid="uid://dw27a5dihjvit" path="res://escenas/hud.tscn" id="4_e6aq7"]
 [ext_resource type="Script" uid="uid://b7xahjuha0vog" path="res://scripts/GrafoSpawner.gd" id="5_5h8vg"]
@@ -43,10 +44,10 @@ shader_parameter/progreso = 1.0
 [node name="TracePoint" type="Node"]
 script = ExtResource("1_bmpbm")
 
-[node name="player" parent="." instance=ExtResource("2_sb757")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.32797, 6.37644, -7.53124)
-input_ray_pickable = false
-mouse_sensitivity = 0.667
+[node name="core" type="Node3D" parent="."]
+script = ExtResource("3_lh60t")
+
+[node name="Hospital" parent="core" instance=ExtResource("3_2unfa")]
 
 [node name="Niveles" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.32797, 6.37644, -7.53124)
@@ -114,6 +115,7 @@ visible = false
 visible = false
 
 [node name="HUD" parent="." instance=ExtResource("4_e6aq7")]
+visible = false
 
 [node name="instrucciones1" parent="HUD" instance=ExtResource("14_sb757")]
 visible = false

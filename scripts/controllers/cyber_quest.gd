@@ -8,31 +8,15 @@ extends Node
 @onready var nivel_4 = $Nivel4_FlowControl if has_node("Nivel4_FlowControl") else null
 
 # Referencias al player
-@onready var player = $"../player"
+#@onready var player = $"../player"
 
 var nivel_actual: int = 1
 
 func _ready():
-	print("\n" + "=".repeat(50))
-	print("TRACEPOINT BY: TINYTARDIGRADE")
-	print("=".repeat(50) + "\n")
-	
-	# Registrar player en GameManager
-	if player:
-		GameManager.registrar_player(player)
-	else:
-		push_error("No se encontró el Player en CyberQuest")
-	
-	# Configurar niveles iniciales
-	activar_solo_nivel(1)
-	
-	# Esperar a que todo cargue
-	await get_tree().create_timer(0.1).timeout
-	posicionar_player_en_nivel_actual()
-	
-	# Conectar señales del GameManager
-	GameManager.mision_completada.connect(_on_cualquier_mision_completada)
 	GameManager.nivel_reiniciado.connect(_on_nivel_reiniciado)
+	# Registrar player en GameManager
+	#if player:
+	#	GameManager.registrar_player(player)
 
 func _input(event):
 	# Atajos de teclado para testing
@@ -55,7 +39,7 @@ func cambiar_a_nivel(numero: int):
 	
 	# Esperar un poco y posicionar player
 	await get_tree().create_timer(3).timeout
-	posicionar_player_en_nivel_actual()
+	#posicionar_player_en_nivel_actual()
 
 func activar_solo_nivel(numero: int):
 	# Desactivar todos
@@ -106,35 +90,25 @@ func activar_solo_nivel(numero: int):
 func reiniciar_nivel_actual():
 	GameManager.reiniciar_nivel()
 
-func _on_cualquier_mision_completada():
-	print("\nMisión completada detectada en CyberQuest")
-	
-	# Esperar 3 segundos y pasar al siguiente nivel
-	await get_tree().create_timer(1.0).timeout
-	
-	if nivel_actual < 4:
-		cambiar_a_nivel(nivel_actual+3) #SALTAR DE UNA A NIVEL 4
-	else:
-		print("\n¡HAS COMPLETADO TODOS LOS NIVELES!")
-		print("¡NEMESIS HA SIDO DERROTADO!")
+
 
 func _on_nivel_reiniciado():
 	print("Reinicio detectado en CyberQuest")
-	posicionar_player_en_nivel_actual()
+	#posicionar_player_en_nivel_actual()
 
-func posicionar_player_en_nivel_actual():
-	if not player:
-		push_error("No hay player para posicionar")
-		return
-	
-	if not GameManager.grafo or GameManager.grafo.nodos.size() == 0:
-		push_warning("No hay grafo cargado aún")
-		return
-	
-	# Posicionar en el primer nodo del grafo actual
-	var pos_inicial = GameManager.grafo.nodos[0].posicion_3d + Vector3(0, 2, 0)
-	player.global_position = pos_inicial
-	
-	# Resetear velocidad
-	if "velocity" in player:
-		player.velocity = Vector3.ZERO
+#func posicionar_player_en_nivel_actual():
+	#if not player:
+		#push_error("No hay player para posicionar")
+		#return
+	#
+	#if not GameManager.grafo or GameManager.grafo.nodos.size() == 0:
+		#push_warning("No hay grafo cargado aún")
+		#return
+	#
+	## Posicionar en el primer nodo del grafo actual
+	#var pos_inicial = GameManager.grafo.nodos[0].posicion_3d + Vector3(0, 2, 0)
+	#player.global_position = pos_inicial
+	#
+	## Resetear velocidad
+	#if "velocity" in player:
+		#player.velocity = Vector3.ZERO

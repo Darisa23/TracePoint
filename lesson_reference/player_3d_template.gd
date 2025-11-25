@@ -1,4 +1,5 @@
 extends CharacterBody3D
+
 @onready var inventory = get_node("/root/TracePoint/HUD/InventoryUI")  # ajusta la ruta
 
 @export_group("Movement")
@@ -53,11 +54,7 @@ func _ready() -> void:
 		_skin.idle()
 		set_physics_process(true)
 	)
-	Events.flag_reached.connect(func on_flag_reached() -> void:
-		set_physics_process(false)
-		_skin.idle()
-		_dust_particles.emitting = false
-	)
+	
 	$detect_area.body_entered.connect(_on_body_entered)
 	$detect_area.body_exited.connect(_on_body_exited)
 
