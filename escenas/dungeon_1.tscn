@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://djcnekuoft2l3"]
+
+[ext_resource type="PackedScene" uid="uid://bgwhx7aodnv1k" path="res://mapas/Dungeon1.tmx" id="1_bvqkt"]
+
+[node name="Dungeon1" instance=ExtResource("1_bvqkt")]

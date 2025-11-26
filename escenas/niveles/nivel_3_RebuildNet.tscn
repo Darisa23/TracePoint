@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bxrumyormv21n"]
+[gd_scene load_steps=10 format=3 uid="uid://bxrumyormv21n"]
 
 [ext_resource type="Script" uid="uid://8fpq85lemlwa" path="res://scripts/controllers/nivel_cer.gd" id="1_0jdvu"]
 [ext_resource type="Shader" uid="uid://b80iojip1k6wx" path="res://level/sky_with_stars.tres" id="2_ygabq"]
 [ext_resource type="Script" uid="uid://b7xahjuha0vog" path="res://scripts/GrafoSpawner.gd" id="3_0ibng"]
 [ext_resource type="PackedScene" uid="uid://doqvur36b3bcq" path="res://escenas/nodo_3d.tscn" id="4_hfsa5"]
+[ext_resource type="PackedScene" uid="uid://bi2k3jygqcpep" path="res://escenas/niveles/titulos/titulo_3_rebuild_net.tscn" id="5_3dv64"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0wtap"]
 load_path = "res://.godot/imported/qwantani_moon_noon_puresky_4k.exr-9c99993655a97e2e3970192b680d1851.bptc.ctex"
@@ -67,3 +68,5 @@ directional_shadow_max_distance = 40.0
 [node name="GrafoSpawner" type="Node3D" parent="."]
 script = ExtResource("3_0ibng")
 nodo_prefab = ExtResource("4_hfsa5")
+
+[node name="titulo" parent="." instance=ExtResource("5_3dv64")]

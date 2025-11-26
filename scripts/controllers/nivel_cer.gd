@@ -31,12 +31,12 @@ func _ready():
 			GameManager.iniciar_juego("dijkstra")
 			titulo.chou()
 		3:	
-			titulo.show_level(nivel_numero)
 			GameManager.cargar_nivel_3()
 			graf.instanciar_grafo()
 			if graf.dibujar_conexiones:
 				graf.instanciar_conexiones()
 			GameManager.iniciar_juego("prim")
+			titulo.chou()
 		4:	
 			titulo.show_level(nivel_numero)
 			GameManager.cargar_nivel_4()		
@@ -55,10 +55,6 @@ func _on_mision_completada():
 	print("ACÁ SE CAMBIA A LA ESCENA DEL BANCO")
 	await get_tree().create_timer(3).timeout
 	get_tree().change_scene_to_file("res://3dmodels/tristeza.tscn")
-	# Aquí puedes:
-	# - Mostrar pantalla de victoria
-	# - Desactivar este nivel y activar el siguiente
-	# - Reproducir sonidos/animaciones
 
 func _on_nivel_reiniciado():
 	print("Nivel %d reiniciado" % nivel_numero)
