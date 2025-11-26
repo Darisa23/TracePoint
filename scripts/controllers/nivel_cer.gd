@@ -5,17 +5,15 @@ extends Node3D
 @export var activo: bool = true  # Desactiva niveles que no estés usando
 @onready var graf = $GrafoSpawner
 @onready var pack = $PlataformaPaquetes if has_node("PlataformaPaquetes") else null
-@onready var titulo = $Titulo1NetworkTracer
+@onready var titulo = $titulo
 @onready var flowm = $FlowManager if has_node("FlowManager") else null
 @onready var venN1 =  $ventana
 @onready var venN4 = $CanvasLayer/ventana
-
+@onready var player = $player
 func _ready():
 # Conectar señales del GameManager
-	if not GameManager.mision_completada.is_connected(_on_mision_completada) and nivel_numero == GameManager.nivel_actual:
-		GameManager.mision_completada.connect(_on_mision_completada)
-	if not GameManager.nivel_reiniciado.is_connected(_on_nivel_reiniciado) and nivel_numero == GameManager.nivel_actual:
-		GameManager.nivel_reiniciado.connect(_on_nivel_reiniciado)
+	GameManager.mision_completada.connect(_on_mision_completada)
+	GameManager.nivel_reiniciado.connect(_on_nivel_reiniciado)
 	match nivel_numero:
 		1:	
 			GameManager.cargar_nivel_1()
@@ -26,12 +24,12 @@ func _ready():
 			titulo.chou()
 			venN1.ini()
 		2:	
-			titulo.show_level(nivel_numero)
 			GameManager.cargar_nivel_2()
 			graf.instanciar_grafo()
 			if graf.dibujar_conexiones:
 				graf.instanciar_conexiones()
 			GameManager.iniciar_juego("dijkstra")
+			titulo.chou()
 		3:	
 			titulo.show_level(nivel_numero)
 			GameManager.cargar_nivel_3()
@@ -55,6 +53,8 @@ func _ready():
 func _on_mision_completada():
 	print("\n¡NIVEL %d COMPLETADO!" % nivel_numero)
 	print("ACÁ SE CAMBIA A LA ESCENA DEL BANCO")
+	await get_tree().create_timer(3).timeout
+	get_tree().change_scene_to_file("res://3dmodels/tristeza.tscn")
 	# Aquí puedes:
 	# - Mostrar pantalla de victoria
 	# - Desactivar este nivel y activar el siguiente
@@ -62,4 +62,4 @@ func _on_mision_completada():
 
 func _on_nivel_reiniciado():
 	print("Nivel %d reiniciado" % nivel_numero)
-	# El CyberQuestController reposicionará el player
+	player.posicionar_en_nivel_actual()

@@ -16,6 +16,7 @@ var juego_iniciado: bool = false
 var puede_saltar: bool = true
 var ca:bool = false
 var nombre_nodos: Array = []
+var iniciado_una_vez : bool = false
 # En tu script, podrías tener algo así:
 
 var info_nodos = {
@@ -324,6 +325,7 @@ func iniciar_juego(type:String):
 	tipo_recorrido = type
 	juego_iniciado = true
 	puede_saltar = true
+	iniciado_una_vez = true
 	indice_actual = 0
 	grafo.obtener_nodo(0).marcar_correcto()
 	
@@ -339,6 +341,7 @@ func validar_salto_a_nodo(nodo_id: int) -> bool:
 	if not juego_iniciado:
 		print("ESCOGE UN BOTON PARA inicia juego")
 		#grafo.obtener_nodo(0).vc = true
+		
 		#iniciar_juego(tipo_recorrido)
 		
 		return true
@@ -392,6 +395,7 @@ func validar_salto_a_nodo(nodo_id: int) -> bool:
 func completar_mision():
 	print("fin nivel")
 	puede_saltar = false
+	iniciado_una_vez = false
 	puntuacion_total += 100
 	emit_signal("mision_completada")
 
@@ -410,6 +414,7 @@ func perder_vida():
 
 func gameOver():
 	puede_saltar = false
+	iniciado_una_vez = false
 	emit_signal("game_over")
 	var t = 3
 	if ca:
@@ -420,7 +425,7 @@ func gameOver():
 func reiniciar_nivel():
 	indice_actual = 0
 	pv2 = false
-	juego_iniciado = false
+	#juego_iniciado = false
 	puede_saltar = true
 	ca = false
 	# Resetear grafo
