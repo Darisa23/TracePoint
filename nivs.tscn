@@ -1,0 +1,57 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkqr8p7aksdk4"]
+
+[ext_resource type="Script" uid="uid://mtm0sfk8artn" path="res://nivs.gd" id="1_tm4od"]
+
+[node name="nivs" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tm4od")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -86.0
+offset_top = -122.0
+offset_right = 1995.0
+offset_bottom = 1105.0
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 201.0
+offset_top = 440.0
+offset_right = 513.0
+offset_bottom = 649.0
+theme_override_font_sizes/font_size = 80
+text = "NIVEL 1"
+
+[node name="Button2" type="Button" parent="."]
+offset_left = 611.0
+offset_top = 440.0
+offset_right = 923.0
+offset_bottom = 649.0
+theme_override_font_sizes/font_size = 80
+text = "NIVEL 2"
+
+[node name="Button3" type="Button" parent="."]
+offset_left = 1451.0
+offset_top = 434.0
+offset_right = 1763.0
+offset_bottom = 643.0
+theme_override_font_sizes/font_size = 80
+text = "NIVEL 4"
+
+[node name="Button4" type="Button" parent="."]
+offset_left = 1037.0
+offset_top = 434.0
+offset_right = 1349.0
+offset_bottom = 643.0
+theme_override_font_sizes/font_size = 80
+text = "NIVEL 3"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="Button4" to="." method="_on_button_4_pressed"]

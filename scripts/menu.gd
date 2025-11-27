@@ -15,3 +15,7 @@ func _on_exit_pressed() -> void:
 
 func _on_settings_pressed() -> void:
 	get_tree().change_scene_to_file("res://escenas/controls.tscn")
+
+
+func _on_niveles_pressed() -> void:
+	get_tree().change_scene_to_file("res://nivs.tscn")

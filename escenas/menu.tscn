@@ -88,6 +88,15 @@ texture_hover = ExtResource("12_sbks2")
 ignore_texture_size = true
 stretch_mode = 0
 
+[node name="NIVELES" type="Button" parent="."]
+offset_left = 1484.0
+offset_top = 870.0
+offset_right = 1809.0
+offset_bottom = 1003.0
+theme_override_font_sizes/font_size = 50
+text = "NIVELES"
+
 [connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="NIVELES" to="." method="_on_niveles_pressed"]
