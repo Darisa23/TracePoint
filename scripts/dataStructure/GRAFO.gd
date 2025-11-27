@@ -15,13 +15,14 @@ func _init(p_matriz_adyacencia: Array, p_dirigido: bool = false, p_matriz_pesos:
 	var num_nodos = matriz_adyacencia.size()
 	for i in range(num_nodos):
 		var nodo = Nodo.new(i)
+		if nodos.is_empty():
+			nodo.esA == true
+			nodo.vc = true
 		if GameManager.nivel_actual == 1:
 			nodo.nombre = GameManager.info_nodos_n1[1]["nombre"]	
 		elif GameManager.nivel_actual == 3:
 			nodo.nombre = GameManager.info_nodos_n3[1]["nombre"]			
-		if nodos.is_empty():
-			nodo.esA == true
-			nodo.vc = true
+		
 		nodos.append(nodo)
 	
 	# Construir conexiones

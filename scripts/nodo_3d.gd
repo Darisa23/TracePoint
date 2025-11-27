@@ -96,6 +96,8 @@ func _on_body_entered(body):
 			# Validar con GameManager (singleton)
 			var es_correcto = GameManager.validar_salto_a_nodo(nodo_logico.id)
 			#print("el id es: ",nodo_logico.id)
+			if nodo_logico.id == 0:
+				return
 			if es_correcto:
 				#print("Nodo correcto!")
 				if nodosv[nodo_logico.id]==null:

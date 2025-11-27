@@ -23,6 +23,7 @@ func _ready():
 
 func _on_restart_pressed() -> void:
 	var n = GameManager.nivel_actual
+	GameManager.vidas_actuales = 3
 	#print(\"NI IDEA PERO HOLA\")
 	match n:
 		1: 

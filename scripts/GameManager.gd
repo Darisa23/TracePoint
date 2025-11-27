@@ -474,7 +474,7 @@ func perder_vida():
 		print("Sin vidas! GAME OVER")
 		gameOver()
 	else:
-		await get_tree().create_timer(0.8).timeout
+		await get_tree().create_timer(1).timeout
 		reiniciar_nivel()
 
 
