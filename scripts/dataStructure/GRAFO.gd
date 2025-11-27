@@ -21,6 +21,7 @@ func _init(p_matriz_adyacencia: Array, p_dirigido: bool = false, p_matriz_pesos:
 			nodo.nombre = GameManager.info_nodos_n3[1]["nombre"]			
 		if nodos.is_empty():
 			nodo.esA == true
+			nodo.vc = true
 		nodos.append(nodo)
 	
 	# Construir conexiones

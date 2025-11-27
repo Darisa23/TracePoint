@@ -392,6 +392,7 @@ func iniciar_juego(type:String):
 		return
 	if type == "null":
 		return
+	grafo.obtener_nodo(0).vc = true
 	tipo_recorrido = type
 	juego_iniciado = true
 	puede_saltar = true
@@ -404,7 +405,7 @@ func iniciar_juego(type:String):
 	if not nivel_actual == 4:
 		print("Orden correcto: ", obtener_ids_recorrido())
 	
-	grafo.obtener_nodo(0).vc = true
+	
 	#print("vc en iniciar juego:",grafo.obtener_nodo(0).vc)
 	
 func validar_salto_a_nodo(nodo_id: int) -> bool:
@@ -430,8 +431,9 @@ func validar_salto_a_nodo(nodo_id: int) -> bool:
 		var nodo_esperado = recorrido_correcto[indice_actual+1]
 		#para que pueda devolverse por los que ya visitó correctamente
 		if nodo.vc:
-			#print("lol")
+			print("lol")
 			if nivel_actual == 1 or nivel_actual == 3:
+				nodo.marcar_correcto()
 				emit_signal("nodo_visitado_correcto", nodo.id)
 			return true
 		if nodo.id == nodo_esperado.id:
@@ -497,7 +499,7 @@ func reiniciar_nivel():
 		grafo.resetear_todos_nodos()
 		for nodo in grafo.nodos:
 			nodo.restaurar_color()
-	
+	grafo.obtener_nodo(0).vc = true
 	# Reposicionar jugador
 	if player and grafo:
 		player.global_position = grafo.nodos[0].posicion_3d + Vector3(0, 2, 0)
