@@ -1,10 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://bxrumyormv21n"]
+[gd_scene load_steps=12 format=3 uid="uid://bxrumyormv21n"]
 
 [ext_resource type="Script" uid="uid://8fpq85lemlwa" path="res://scripts/controllers/nivel_cer.gd" id="1_0jdvu"]
+[ext_resource type="PackedScene" uid="uid://dodfrown0q7ro" path="res://playerrr_holograma.tscn" id="2_mv402"]
 [ext_resource type="Shader" uid="uid://b80iojip1k6wx" path="res://level/sky_with_stars.tres" id="2_ygabq"]
 [ext_resource type="Script" uid="uid://b7xahjuha0vog" path="res://scripts/GrafoSpawner.gd" id="3_0ibng"]
 [ext_resource type="PackedScene" uid="uid://doqvur36b3bcq" path="res://escenas/nodo_3d.tscn" id="4_hfsa5"]
 [ext_resource type="PackedScene" uid="uid://bi2k3jygqcpep" path="res://escenas/niveles/titulos/titulo_3_rebuild_net.tscn" id="5_3dv64"]
+[ext_resource type="PackedScene" uid="uid://dw27a5dihjvit" path="res://escenas/hud.tscn" id="6_go6iy"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0wtap"]
 load_path = "res://.godot/imported/qwantani_moon_noon_puresky_4k.exr-9c99993655a97e2e3970192b680d1851.bptc.ctex"
@@ -56,6 +58,8 @@ volumetric_fog_emission = Color(0.843137, 0.737255, 0.329412, 1)
 script = ExtResource("1_0jdvu")
 nivel_numero = 3
 
+[node name="player" parent="." instance=ExtResource("2_mv402")]
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_mmdby")
 
@@ -70,3 +74,5 @@ script = ExtResource("3_0ibng")
 nodo_prefab = ExtResource("4_hfsa5")
 
 [node name="titulo" parent="." instance=ExtResource("5_3dv64")]
+
+[node name="HUD" parent="." instance=ExtResource("6_go6iy")]

@@ -83,14 +83,14 @@ signal nivel_reiniciado()
 func _ready():
 	print("GameManager inicializado como singleton")
 
-func _process(_delta):
-	# Detectar si el player se cayó del mapa
-	if player and juego_iniciado and puede_saltar:
-		if player.global_position.y < -10:  # Límite de caída
-			print("Player se cayó del mapa!")
-			puede_saltar = false
-			ca=true
-			gameOver()
+#func _process(_delta):
+	## Detectar si el player se cayó del mapa
+	#if player and puede_saltar:
+		#if player.global_position.y < -3:  # Límite de caída
+			#print("Player se cayó del mapa!")
+			#puede_saltar = false
+			#ca=true
+			#gameOver()
 # ============================================
 # CONFIGURACIÓN DE NIVELES
 # ============================================
@@ -340,16 +340,13 @@ func iniciar_juego(type:String):
 func validar_salto_a_nodo(nodo_id: int) -> bool:
 	if not juego_iniciado:
 		print("ESCOGE UN BOTON PARA inicia juego")
-		#grafo.obtener_nodo(0).vc = true
-		
-		#iniciar_juego(tipo_recorrido)
-		
-		return true
-	
+		return true	
 	if not puede_saltar:
 		#print("psalt")	
 		return false
-	
+	if nivel_actual == 3 and nodo_id == 0:
+		grafo.obtener_nodo(0).marcar_correcto()
+		return true
 	var nodo = grafo.obtener_nodo(nodo_id)
 	if not nodo:
 		print("not nodo")
@@ -364,7 +361,7 @@ func validar_salto_a_nodo(nodo_id: int) -> bool:
 		#para que pueda devolverse por los que ya visitó correctamente
 		if nodo.vc:
 			#print("lol")
-			if nivel_actual == 1:
+			if nivel_actual == 1 or nivel_actual == 3:
 				emit_signal("nodo_visitado_correcto", nodo.id)
 			return true
 		if nodo.id == nodo_esperado.id:
@@ -373,9 +370,6 @@ func validar_salto_a_nodo(nodo_id: int) -> bool:
 				nodo.marcar_correcto()
 			emit_signal("nodo_visitado_correcto", nodo.id)
 			indice_actual += 1
-			#if nivel_actual == 1:
-				#completar_mision()
-				#return true
 			 ##Verificar victoria
 			if (indice_actual+1) >= recorrido_correcto.size():
 				completar_mision()

@@ -8,8 +8,8 @@ var peso_actual: int = 0
 var inicializada: bool = false
 var ya_verifico_inicio: bool = false
 var crash : bool = false
+var antt : int = 0
 func _ready():
-	print("\n=== BarraPeso _ready() ===")
 	
 	# Ocultar por defecto
 	visible = false
@@ -36,59 +36,25 @@ func _process(_delta):
 		visible = false
 		inicializada = false
 		ya_verifico_inicio = false
-		print("Barra ocultada - Ya no estamos en nivel 2")
 
 func _on_nodo_correcto(nodo_id: int):
 	if not visible or not inicializada:
-		
 		return
-	
-	# IMPORTANTE: La señal se emite ANTES de incrementar indice_actual
-	# Entonces indice_actual es el nodo ANTERIOR, y nodo_id es el nodo al que acabamos de llegar
-	var indice = GameManager.indice_actual
-	var recorrido = GameManager.recorrido_correcto
+	if nodo_id == antt:
+		return	
 	var grafo = GameManager.grafo
-	
-	# Debug info
-	var ids = []
-	for n in recorrido:
-		ids.append(n.id)
-	
-	#print("\nSeñal recibida: nodo %d correcto" % nodo_id)
-	#print("   GameManager.indice_actual (antes de incrementar): %d" % indice)
-	#print("   Recorrido completo: %s" % str(ids))
-	
-	# Encontrar el nodo actual en el recorrido por su ID
-	var nodo_actual_index = -1
-	for i in range(recorrido.size()):
-		if recorrido[i].id == nodo_id:
-			nodo_actual_index = i
-			break
-	
-	if nodo_actual_index == -1:
-		print("ERROR: No se encontró el nodo %d en el recorrido" % nodo_id)
-		return
-	
-	# Si es el primer nodo (índice 0), no restar nada
-	if nodo_actual_index == 0:
-		print("   ➜ Nodo inicial (índice 0), no se resta peso\n")
-		return
-	
-	# Calcular peso de la arista que acabamos de recorrer
-	var nodo_anterior = recorrido[nodo_actual_index - 1]
-	var nodo_actual = recorrido[nodo_actual_index]
-	
-	print("   Arista: nodo[%d] (%d) -> nodo[%d] (%d)" % [nodo_actual_index-1, nodo_anterior.id, nodo_actual_index, nodo_actual.id])
-	
-	var peso = 1
-	
-	# Obtener peso real de la matriz
-	if grafo.matriz_pesos.size() > nodo_anterior.id and grafo.matriz_pesos[nodo_anterior.id].size() > nodo_actual.id:
-		peso = grafo.matriz_pesos[nodo_anterior.id][nodo_actual.id]
-		print("   Peso de matriz[%d][%d] = %d" % [nodo_anterior.id, nodo_actual.id, peso])
-	else:
-		print("No hay peso en matriz, usando peso=1")
-	
+	var indice = nodo_id
+	#print("1. EL NODO ES: ",indice)
+	#print("1. El ANTERIOR ES: ",antt)
+	# Nodo actual según GameManager
+	var nodo_actual = grafo.obtener_nodo(nodo_id)
+	# Nodo anterior según el recorrido correcto
+	var nodo_anterior = grafo.obtener_nodo(antt)
+
+	# Pedimos el peso REAL directamente al grafo
+	#print("2. EL NODO ES: ",nodo_actual.id)
+	#print("2. El ANTERIOR ES: ",nodo_anterior.id)
+	var peso = grafo.obtener_peso(nodo_anterior, nodo_actual)
 	var peso_anterior = peso_actual
 	peso_actual -= peso
 	
@@ -97,19 +63,20 @@ func _on_nodo_correcto(nodo_id: int):
 		crash = true
 	else:
 		print("Peso antes: %d | después: %d" % [peso_anterior, peso_actual])
-		print("Arista %d → %d  Peso: %d" % [nodo_anterior.id, nodo_actual.id, peso])
 
 		# Actualizar barra o UI
+	antt = nodo_id
 	actualizar_ui()
 func _on_nodo_incorrecto(nodo_id:int):
 	print("aca se restaría para ese incorrecto")
 	if not visible or not inicializada:
 		return
-
+	if nodo_id == antt:
+		return	
 	var grafo = GameManager.grafo
-	var recorrido = GameManager.recorrido_correcto
-	var indice = GameManager.indice_actual+1
-
+	var indice = nodo_id
+	#print("1. EL NODO ES: ",indice)
+	#print("1. El ANTERIOR ES: ",antt)
 	# Nodo actual según GameManager
 	var nodo_actual = grafo.obtener_nodo(nodo_id)
 	if nodo_actual == null:
@@ -122,9 +89,11 @@ func _on_nodo_incorrecto(nodo_id:int):
 		return
 
 	# Nodo anterior según el recorrido correcto
-	var nodo_anterior = recorrido[indice - 1]
+	var nodo_anterior = grafo.obtener_nodo(antt)
 
 	# Pedimos el peso REAL directamente al grafo
+	#print("2. EL NODO ES: ",nodo_actual.id)
+	#print("2. El ANTERIOR ES: ",nodo_anterior.id)
 	var peso = grafo.obtener_peso(nodo_anterior, nodo_actual)
 
 	# Aplicamos el descuento
@@ -135,8 +104,8 @@ func _on_nodo_incorrecto(nodo_id:int):
 		crash = true
 	else:
 		print("Peso antes: %d | después: %d" % [anterior, peso_actual])
-		print("Arista %d → %d  Peso: %d" % [nodo_anterior.id, nodo_actual.id, peso])
-
+		
+	antt = nodo_id
 		# Actualizar barra o UI
 	actualizar_ui()
 	
@@ -144,11 +113,6 @@ func inicializar_barra():
 	if inicializada:
 		return
 		
-	print("\n=== Inicializando Barra de Peso ===")
-	print("   - Nivel: %d" % GameManager.nivel_actual)
-	print("   - Tipo recorrido: %s" % GameManager.tipo_recorrido)
-	print("   - Recorrido calculado: %d nodos" % GameManager.recorrido_correcto.size())
-	
 	# Ajustar altura de la barra
 	if barra:
 		barra.custom_minimum_size.y = 15
@@ -229,6 +193,7 @@ func _on_nivel_reiniciado():
 		# Resetear banderas para reinicializar
 		inicializada = false
 		ya_verifico_inicio = false
+		antt = 0
 		visible = false
 		crash = false
 		print("Barra reseteada - Lista para reiniciar")

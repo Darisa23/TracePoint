@@ -5,6 +5,11 @@ extends CanvasLayer
 
 func _ready():
 	GameManager.vida_perdida.connect(_on_vida_perdida)
+	GameManager.mision_completada.connect(desactivar)
+	
+func _process(_delta):
+	if GameManager.nivel_actual > 1:
+		desactivar()
 func _on_button_bfs_pressed() -> void:
 	GameManager.iniciar_juego("BFS")
 	desactivar()

@@ -10,6 +10,7 @@ extends Node3D
 @onready var venN1 =  $ventana
 @onready var venN4 = $CanvasLayer/ventana
 @onready var player = $player
+
 func _ready():
 # Conectar señales del GameManager
 	GameManager.mision_completada.connect(_on_mision_completada)
@@ -54,7 +55,14 @@ func _on_mision_completada():
 	print("\n¡NIVEL %d COMPLETADO!" % nivel_numero)
 	print("ACÁ SE CAMBIA A LA ESCENA DEL BANCO")
 	await get_tree().create_timer(3).timeout
-	get_tree().change_scene_to_file("res://3dmodels/tristeza.tscn")
+	var n = GameManager.nivel_actual
+	match n:
+		1:
+			get_tree().change_scene_to_file("res://escenas/tristeza_v_2.tscn")
+		2:
+			get_tree().change_scene_to_file("res://3dmodels/plantaelectrica.tscn")
+		3:
+			print("BB NO HAY MAS NADA, LOL")
 
 func _on_nivel_reiniciado():
 	print("Nivel %d reiniciado" % nivel_numero)

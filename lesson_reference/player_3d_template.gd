@@ -29,7 +29,7 @@ var ground_height := 0.0
 var _gravity := -30.0
 var _was_on_floor_last_frame := true
 var _camera_input_direction := Vector2.ZERO
-
+var caigo:bool
 ## The last movement or aim direction input by the player. We use this to orient
 ## the character model.
 @onready var _last_input_direction := global_basis.z
@@ -54,7 +54,7 @@ func _ready() -> void:
 		#_skin.idle()
 		#set_physics_process(true)
 	#)
-	
+	caigo = false
 	$detect_area.body_entered.connect(_on_body_entered)
 	$detect_area.body_exited.connect(_on_body_exited)
 
@@ -63,6 +63,12 @@ func _process(_delta):
 		recoger_paquete()
 	if Input.is_action_just_pressed("dejar_paquete") and paquetes_llevando > 0:
 		depositar_paquete()
+		
+	if not is_on_floor() and not caigo:
+		caigo = true
+		g_o()
+		
+		
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -133,6 +139,8 @@ func _physics_process(delta: float) -> void:
 		_landing_sound.play()
 
 	_was_on_floor_last_frame = is_on_floor()
+	
+	
 	move_and_slide()
 
 
@@ -197,7 +205,9 @@ func perder_paquetes():
 	inventory.clear_items()
 	print("Paquetes perdidos!")
 
-	
+func g_o():
+	await get_tree().create_timer(4).timeout
+	GameManager.gameOver()
 func posicionar_en_nivel_actual():
 	if not GameManager.grafo or GameManager.grafo.nodos.size() == 0:
 		push_warning("No hay grafo cargado aún")

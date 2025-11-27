@@ -19,7 +19,8 @@ script/source = "extends Node2D
 func _ready():
 	# Liberar el cursor cuando se carga la escena de Game Over
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	print(\"Game Over - Cursor liberado\")
+	print(\"HOLA ESTOY PERDIDO\")
+	#print(\"Game Over - Cursor liberado\")
 	
 	# Buscar y conectar el botón de restart si existe
 	conectar_boton_restart()
@@ -39,12 +40,12 @@ func conectar_boton_restart():
 		
 		boton_restart.pressed.connect(_on_restart_pressed)
 		boton_restart.focus_mode = Control.FOCUS_NONE
-		print(\"✓ Botón restart conectado\")
+		#print(\"✓ Botón restart conectado\")
 	else:
 		print(\"⚠️ No se encontró el botón restart\")
 
 func _on_restart_pressed():
-	print(\"=== RESTART PRESIONADO ===\")
+	#print(\"=== RESTART PRESIONADO ===\")
 	
 	# Resetear las vidas en el GameManager
 	GameManager.vidas_actuales = GameManager.vidas_maximas

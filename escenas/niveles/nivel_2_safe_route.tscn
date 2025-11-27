@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c0j4675x22x1g"]
+[gd_scene load_steps=19 format=3 uid="uid://c0j4675x22x1g"]
 
 [ext_resource type="Script" uid="uid://8fpq85lemlwa" path="res://scripts/controllers/nivel_cer.gd" id="1_uquey"]
 [ext_resource type="Script" uid="uid://b7xahjuha0vog" path="res://scripts/GrafoSpawner.gd" id="2_mmdby"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bbgl46mwchspn" path="res://assets/estabarra.png" id="8_8mrmj"]
 [ext_resource type="FontFile" uid="uid://cpwdg36okbmhs" path="res://assets/Conthrax-SemiBold.otf" id="9_epn0x"]
 [ext_resource type="PackedScene" uid="uid://o3l2sqbxr6aa" path="res://escenas/niveles/titulos/titulo_2_safe_route.tscn" id="10_mmdby"]
+[ext_resource type="PackedScene" uid="uid://dw27a5dihjvit" path="res://escenas/hud.tscn" id="13_i2o6t"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0wtap"]
 load_path = "res://.godot/imported/qwantani_moon_noon_puresky_4k.exr-9c99993655a97e2e3970192b680d1851.bptc.ctex"
@@ -124,5 +125,8 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("9_epn0x")
 theme_override_font_sizes/font_size = 27
 text = "hola"
+autowrap_mode = 3
 
 [node name="titulo" parent="." instance=ExtResource("10_mmdby")]
+
+[node name="HUD" parent="." instance=ExtResource("13_i2o6t")]
