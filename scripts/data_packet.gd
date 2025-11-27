@@ -1,5 +1,6 @@
 extends RigidBody3D
 @export var icon: Texture   # <- icono para el inventario
+signal secayo()
 signal llamar_efectos(pos : Vector3)
 func _ready():
 	# Agregar al grupo
@@ -7,6 +8,12 @@ func _ready():
 	# Iniciar animación
 	#if has_node("AnimationPlayer"):
 	#	$AnimationPlayer.play("float")
+	
+func _process(_delta):
+	if global_position.y < -8:
+		print("Un Paquete se cayó y se perdió")
+		emit_signal("secayo")
+		queue_free() 
 func animacion_recoger():
 	# Desactivar físicas para que no siga rebotando
 	freeze = true  

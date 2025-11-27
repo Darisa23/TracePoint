@@ -196,14 +196,16 @@ func recoger_paquete():
 func depositar_paquete():
 	#var cantidad = paquetes_llevando
 	#print("DEPOSITAAA")
-	paquetes_llevando -=1
-	inventory.remove_item()
-	emit_signal("soltar_paquete")
+	if not paquetes_llevando == 0:
+		paquetes_llevando -=1
+		inventory.remove_item()
+		emit_signal("soltar_paquete")
 
 func perder_paquetes():
-	paquetes_llevando = 0
-	inventory.clear_items()
-	print("Paquetes perdidos!")
+	if paquetes_llevando > 0:
+		paquetes_llevando -=1
+	inventory.remove_item()
+	print("Paquete perdido!")
 
 func g_o():
 	await get_tree().create_timer(4).timeout

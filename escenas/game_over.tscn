@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dgaqvcvylyj4a"]
+[gd_scene load_steps=14 format=3 uid="uid://dgaqvcvylyj4a"]
 
 [ext_resource type="Texture2D" uid="uid://bbvnm2oxfcg1f" path="res://assets/gameover/fondogris.png" id="2_2nw6q"]
 [ext_resource type="Shader" uid="uid://dw7r87mkx31ac" path="res://assets/gameover/shadertexto.gdshader" id="3_w3x71"]
@@ -11,7 +11,6 @@
 [ext_resource type="Script" uid="uid://diby0isr2s2e4" path="res://escenas/exit.gd" id="8_7l154"]
 [ext_resource type="Texture2D" uid="uid://dpuyxraeuppy8" path="res://assets/gameover/restart_gover_pressed.png" id="9_hsa6y"]
 [ext_resource type="Texture2D" uid="uid://cydmfew23ikes" path="res://assets/gameover/restart_gover_hover.png" id="10_q22v7"]
-[ext_resource type="Script" uid="uid://lvf8sgj55m23" path="res://escenas/restart.gd" id="11_y32in"]
 
 [sub_resource type="GDScript" id="GDScript_2nw6q"]
 script/source = "extends Node2D
@@ -19,7 +18,23 @@ script/source = "extends Node2D
 func _ready():
 	# Liberar el cursor cuando se carga la escena de Game Over
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	print(\"HOLA ESTOY PERDIDO\")
+	#print(\"HOLA ESTOY PERDIDO\")
+
+
+func _on_restart_pressed() -> void:
+	var n = GameManager.nivel_actual
+	#print(\"NI IDEA PERO HOLA\")
+	match n:
+		1: 
+			get_tree().change_scene_to_file(\"res://escenas/hospital.tscn\")
+		2:
+			get_tree().change_scene_to_file(\"res://escenas/tristeza_v_2.tscn\")
+		3:
+			get_tree().change_scene_to_file(\"res://3dmodels/plantaelectrica.tscn\")
+		4:
+			#print(\"HOLA, YO QUISIERA PERO NADA\")
+			get_tree().change_scene_to_file(\"res://escenas/niveles/abierto.tscn\")
+			
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g1o2j"]
@@ -67,4 +82,5 @@ scale = Vector2(1.7, 1.7)
 texture_normal = ExtResource("8_1bpkd")
 texture_pressed = ExtResource("9_hsa6y")
 texture_hover = ExtResource("10_q22v7")
-script = ExtResource("11_y32in")
+
+[connection signal="pressed" from="Restart" to="." method="_on_restart_pressed"]

@@ -5,6 +5,7 @@ extends Node
 @export var plataforma_inicial: StaticBody3D  # Arrastra tu plataforma desde el editor
 @onready var ParticlesManager = $"../ParticlesManeger"
 @onready var FloatingLabels = $"../FloatingLabels"
+@onready var vainaG = $"../CanvasLayer"
 var player: CharacterBody3D
 
 # Nodos especiales
@@ -26,7 +27,7 @@ var popup_actual: Control = null
 var iniciado : bool = false
 # Señales
 signal flujo_actualizado(entregados: int, objetivo: int)
-signal paquetes_perdidos_actualizado(perdidos: int, max: int)
+signal paquetes_perdidos_actualizado()
 signal nivel_completado()
 signal nivel_fallido()
 signal entrega(id:int)
@@ -141,6 +142,7 @@ func crear_paquetes_en_plataforma():
 		await get_tree().create_timer(0.101).timeout
 		var paquete = paquete_scene.instantiate()
 		paquete.llamar_efectos.connect(_on_llamar_efectos)
+		paquete.secayo.connect(perder_paquetes)
 		plataforma_inicial.get_parent().add_child(paquete) 
 		# IMPORTANTÍSIMO:
 		# ↑ así la física funciona normal. No lo pongas como hijo de StaticBody!!!
@@ -198,7 +200,7 @@ func _on_nodo_exited(body,nodo : Nodo):
 		#marcar(nodo.id)
 		return
 	en_nodo = false
-	print("Player salió del nodo %d" % nodo.id)
+	#print("Player salió del nodo %d" % nodo.id)
 func mostrar_popup_nodo(nodo: Nodo):
 	# TODO: Crear UI popup que muestre capacidad y entregados
 	if nodo.nodo_visual:
@@ -221,12 +223,15 @@ func perder_paquetes():
 	var cantidad = player.paquetes_llevando
 	player.perder_paquetes()
 	
-	paquetes_perdidos += cantidad
+	#paquetes_perdidos += cantidad
+	paquetes_perdidos += 1
 	print("Paquetes perdidos: %d/%d" % [paquetes_perdidos, max_paquetes_perdidos])
-	emit_signal("paquetes_perdidos_actualizado", paquetes_perdidos, max_paquetes_perdidos)
+	emit_signal("paquetes_perdidos_actualizado")
 	
-	if paquetes_perdidos >= max_paquetes_perdidos:
-		game_over("Perdiste demasiados paquetes")
+	if paquetes_perdidos > max_paquetes_perdidos:
+		vainaG.visible = false
+		#await get_tree().create_timer(0.1).timeout
+		GameManager.gameOver()
 
 func victoria():
 	juego_activo = false
@@ -248,20 +253,22 @@ func _on_llamar_efectos(pos):
 	FloatingLabels.spawn_text(pos)
 
 func _soltar_paquete():
-	print("el jugador dejó un paquete")
 	# Crear un paquete nuevo
-	var paquete = paquete_scene.instantiate()
+	if not player.paquetes_llevando == 0:		
+		print("el jugador dejó un paquete")
+		var paquete = paquete_scene.instantiate()
+		paquete.secayo.connect(perder_paquetes)
+		# Agregarlo al mundo
+		get_tree().current_scene.add_child(paquete)
 
-	# Agregarlo al mundo
-	get_tree().current_scene.add_child(paquete)
+		# Posición donde aparecerá
+		var drop_pos = player.global_position + Vector3(0, 1.2, 0)
+		paquete.global_position = drop_pos
 
-	# Posición donde aparecerá
-	var drop_pos = player.global_position + Vector3(0, 1.2, 0)
-	paquete.global_position = drop_pos
-
-	# Llamar animación inversa
-	paquete.animacion_spawn()
-	marcar(id_nodo_ac)
+		# Llamar animación inversa
+		paquete.animacion_spawn()
+		marcar(id_nodo_ac)
+		
 func _recoger_pack():
 	if en_nodo:
 		print("jugador sacó un paquete de un nodo")
@@ -283,4 +290,4 @@ func marcar(id:int):
 		emit_signal("entrega",id)
 	else:
 		print("PAQUETE NO ADMITIDO, LO PERDISTE")
-		#perder_paquetes()
+		perder_paquetes()

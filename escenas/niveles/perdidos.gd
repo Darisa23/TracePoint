@@ -5,7 +5,7 @@ var max_paquetes_perdidos: int = 3
 var inicializado: bool = false
 var ya_verifico_inicio: bool = false
 var tween_parpadeo: Tween = null
-
+@onready var  flm = $"../../FlowManager"
 func _ready():
 	
 	# Ocultar por defecto
@@ -15,7 +15,7 @@ func _ready():
 	configurar_estilo_defecto()
 	
 	# Conectar señales del GameManager
-	GameManager.connect("nodo_visitado_incorrecto", _on_paquete_perdido)
+	flm.connect("paquetes_perdidos_actualizado", _on_paquete_perdido)
 	GameManager.connect("mision_completada", _on_mision_completada)
 	GameManager.connect("nivel_reiniciado", _on_nivel_reiniciado)
 	GameManager.connect("game_over", _on_game_over)
@@ -68,7 +68,7 @@ func actualizar_label():
 	"""Actualiza el label de paquetes perdidos con color dinámico"""
 	
 	# Actualizar texto
-	text = "Paquetes: %d/%d" % [paquetes_perdidos, max_paquetes_perdidos]
+	text = "Paquetes perdidos: %d/%d" % [paquetes_perdidos, max_paquetes_perdidos]
 	
 	# Calcular color basado en proximidad al límite
 	var color_final: Color
@@ -103,11 +103,11 @@ func actualizar_label():
 	
 	#print("Paquetes actualizados: %d/%d" % [paquetes_perdidos, max_paquetes_perdidos])
 
-func _on_paquete_perdido(_nodo_id: int):
+func _on_paquete_perdido():
 	"""Se llama cuando se pierde un paquete (nodo incorrecto)"""
-	if not visible or not inicializado:
-		return
-	
+	#if not visible or not inicializado:
+		#return
+	#print("LLEGO HASTA ACA BABY")
 	paquetes_perdidos += 1
 	#print("Paquete perdido! Total: %d/%d" % [paquetes_perdidos, max_paquetes_perdidos])
 	

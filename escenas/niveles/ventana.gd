@@ -87,6 +87,9 @@ func _recibe(id : int):
 	if label_entregados:
 		await get_tree().create_timer(0.65).timeout
 		label_entregados.text = "Entregados: " + str(GameManager.grafo.obtener_nodo(id).nodo_visual.paquetes_entregados[id])
+		var entre = GameManager.grafo.obtener_nodo(id).nodo_visual.paquetes_entregados[id]
+		var act = entre-GameManager.grafo.obtener_nodo(id).nodo_visual.paquetes_actuales[id]
+		label_actuales.text = "Actuales: " + str(act)
 func _saca(id : int):
 	if label_actuales:
 		var entre = GameManager.grafo.obtener_nodo(id).nodo_visual.paquetes_entregados[id]
@@ -114,9 +117,7 @@ func mostrar_info_nodo(nodo_id: int):
 	# Obtener información del GameManager
 	else:
 		var capacidad = 0
-		#if GameManager.capacidades_nodos.has(nodo_id):
-			#capacidad = GameManager.capacidades_nodos[nodo_id]
-		
+		var nodo = GameManager.grafo.obtener_nodo(nodo_id)
 		# Obtener nombre del nodo (A, B, C, etc.)
 		var nombre_nodo = char(65 + nodo_id)  # 65 = 'A' en ASCII
 		
@@ -125,17 +126,17 @@ func mostrar_info_nodo(nodo_id: int):
 			label_nodo.text = "Nodo: " + nombre_nodo
 		
 		if label_max:
-			label_max.text = "Máximo: " + str(GameManager.flujo_maximo_calculado)
+			label_max.text = "Máximo: " + str(nodo.nodo_visual.capacidad_maxima)
 		
 		#if label_entregados:
-		var entre = GameManager.grafo.obtener_nodo(nodo_id).nodo_visual.paquetes_entregados[nodo_id]
-		#print("ENTRE PRIMERO ES: ",entre)
+		var entre = nodo.nodo_visual.paquetes_entregados[nodo_id]
+		
 		label_entregados.text = "Entregados: " + str(entre)
 		
 		if label_actuales:
-			var act = entre-GameManager.grafo.obtener_nodo(nodo_id).nodo_visual.paquetes_actuales[nodo_id]
+			var act = entre-nodo.nodo_visual.paquetes_actuales[nodo_id]
 			label_actuales.text = "Actuales: " + str(act)
-	
+			
 	# Mostrar el popup con animación
 	show()
 	mostrar_animacion()
@@ -216,7 +217,7 @@ func _input(event: InputEvent):
 		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
 			dragging = false
 
-# Función para ser llamada desde el script del jugador o nodo
-func actualizar_desde_nodo(nodo_id: int):
-	"""Método público para actualizar y mostrar el popup"""
-	mostrar_info_nodo(nodo_id)
+## Función para ser llamada desde el script del jugador o nodo
+#func actualizar_desde_nodo(nodo_id: int):
+	#"""Método público para actualizar y mostrar el popup"""
+	#mostrar_info_nodo(nodo_id)

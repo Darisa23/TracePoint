@@ -24,7 +24,7 @@ var capacidad_maxima: int = 0
 var paquetes_entregados: Array = []
 var paquetes_actuales: Array = []
 var esta_cerrado: bool = false
-
+var nodosv:Array = []
 func _ready():
 	# Crear y asignar material único para este nodo
 	if mesh_instance:
@@ -60,12 +60,17 @@ func _process(delta):
 func inicializar(p_nodo_logico: Nodo):
 	paquetes_entregados.resize(GameManager.grafo.obtener_num_nodos())
 	paquetes_actuales.resize(GameManager.grafo.obtener_num_nodos())
+	nodosv.resize(GameManager.grafo.obtener_num_nodos())
 	nodo_logico = p_nodo_logico
 	paquetes_entregados[nodo_logico.id] = 0
 	paquetes_actuales[nodo_logico.id] = 0
+	
 	# Asignar referencia visual al nodo lógico
 	if nodo_logico:
 		nodo_logico.nodo_visual = self
+		#nodosv[nodo_logico.id] = self
+		#if nodosv[nodo_logico.id] == null:
+			#print("OHH NO RECORCHOLIS VIEJO")
 		nodo_logico.material_original = material
 		
 		# Posicionar en el mundo 3D
@@ -93,10 +98,14 @@ func _on_body_entered(body):
 			#print("el id es: ",nodo_logico.id)
 			if es_correcto:
 				#print("Nodo correcto!")
+				if nodosv[nodo_logico.id]==null:
+					nodosv[nodo_logico.id]=nodo_logico.nodo_visual
 				nodo_logico.vc=true
 				# El color ya lo cambia GameManager → nodo_logico.marcar_correcto()
 			if not es_correcto:
 				#print("Nodo incorrecto!")
+				if nodosv[nodo_logico.id]==null:
+					nodosv[nodo_logico.id]=nodo_logico.nodo_visual
 				await get_tree().create_timer(0.5).timeout  # Pequeña pausa dramática
 				# Iniciar animación de quiebre		
 				if GameManager.vidas_actuales == 0:
@@ -105,6 +114,21 @@ func _on_body_entered(body):
 func recibir_paquete(id : int):
 	print("paquete entregado a nodo ",id)
 	paquetes_entregados[id] +=1
+	var nv = GameManager.grafo.obtener_nodo(id).nodo_visual
+	if paquetes_entregados[id] == nv.capacidad_maxima:
+		nv.esta_cerrado = true
+		print("CERRAMOS EL NODO: ",id)
+	if verificar_fin():
+		GameManager.mision_completada
+
+func verificar_fin():
+	var r:bool
+	for n in nodosv:
+		if n == null:
+			return false
+		else:
+			r = n.esta_cerrado	
+	return r
 	#paquetes_actuales[id] +=1
 func restar(id:int):
 	paquetes_actuales[id] +=1	

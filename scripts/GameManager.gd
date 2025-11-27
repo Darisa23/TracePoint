@@ -256,7 +256,7 @@ func cargar_nivel_3():
 	"PLC DE GENERACIÓN",         # 6
 	"ROUTER INDUSTRIAL",         # 7
 	"ENLACE EXTERNO"             # 8
-]
+		]
 	# Matriz de adyacencia del nivel 3
 	var matriz = [
 		[0, 1, 0, 0, 0, 0, 0, 1,0],
