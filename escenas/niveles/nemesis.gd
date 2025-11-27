@@ -4,8 +4,8 @@ const SPEED = 150.0
 const DETECTION_RANGE = 500.0
 const SAFE_DISTANCE = 250.0
 const TOO_CLOSE = 150.0
-
-const MAX_HEALTH = 100
+signal boss_defeated
+const MAX_HEALTH = 1100
 var current_health = MAX_HEALTH
 
 enum State { IDLE, PATROL, CHASE, ATTACK, RETREAT }
@@ -199,5 +199,5 @@ func flash_damage():
 	animated_sprite.modulate = Color.WHITE
 
 func die():
-	print("Boss derrotado!")
+	boss_defeated.emit()
 	queue_free()

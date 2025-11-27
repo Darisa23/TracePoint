@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bduk75krkpv7r" path="res://compañero 2.png" id="2_e3b1w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u30s6"]
+size = Vector2(19, 29)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k64d6"]
 atlas = ExtResource("2_e3b1w")
@@ -153,6 +154,7 @@ animations = [{
 script = ExtResource("1_6fbr1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_u30s6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -162,3 +164,17 @@ animation = &"shoot"
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="ShootTimer" type="Timer" parent="."]
+
+[node name="HealthBar" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Fill" type="ColorRect" parent="HealthBar"]
+layout_mode = 0
+offset_left = -14.0
+offset_top = -20.0
+offset_right = 14.0
+offset_bottom = -17.0
+color = Color(0, 1, 0, 1)

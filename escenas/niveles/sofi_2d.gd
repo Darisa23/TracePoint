@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 const SPEED = 300.0
 
-var health = 100
+var health = 120
 
 @onready var animated_sprite = $AnimatedSprite2D
 
