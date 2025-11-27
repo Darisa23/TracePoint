@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@onready var inventory = get_node("/root/TracePoint/HUD/InventoryUI")  # ajusta la ruta
+@onready var inventory = $"../InventoryUI" 
 
 @export_group("Movement")
 ## Character maximum run speed on the ground in meters per second.

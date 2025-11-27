@@ -19,7 +19,7 @@ var nombre_nodos: Array = []
 var iniciado_una_vez : bool = false
 # En tu script, podrías tener algo así:
 
-var info_nodos = {
+var info_nodos_n1 = {
 	1: {
 		"nombre": "Workstation_Recepcion",
 		"estado": "LIMPIO",
@@ -63,7 +63,66 @@ var info_nodos = {
 		"popup": "¡PATIENT ZERO encontrado! — El ransomware entró por una macro maliciosa."
 	}
 }
-
+var info_nodos_n3 = {
+	1: {
+		"nombre":"SCADA_CORE",
+		"estado": "ACTIVO",
+		"servicios": ["SCADA", "HMI", "Monitoreo"],
+		"log": "Nodo central de control. Todas las órdenes salen desde aquí."
+	},
+	2: {
+		"nombre":"SUBESTACIÓN NORTE",
+		"estado": "DESCONECTADO",
+		"servicios": ["RTU", "Distribución Urbana"],
+		"log": "Subestación norte sin comunicación tras el sabotaje."
+	},
+	3: {
+		"nombre":"SUBESTACIÓN SUR",
+		"estado": "INESTABLE",
+		"servicios": ["RTU", "Zona Residencial"],
+		"log": "Flujo irregular. Riesgo de sobrecarga si se conecta mal."
+	},
+	4: {
+		
+		"nombre":"SUBESTACIÓN INDUSTRIAL",
+		"estado": "DESCONECTADO",
+		"servicios": ["RTU", "Zona Industrial"],
+		"log": "Consumo extremo. Conectar sólo por líneas seguras."
+	},
+	5: {
+		"nombre":"TRANSFORMADOR A",
+		"estado": "SOBRECARGA CRÍTICA",
+		"servicios": ["IED", "Transformación 230kV"],
+		"log": "Transformador al límite térmico. Un error lo destruye."
+	},
+	6: {
+		"nombre":"ROUTER INDUSTRIAL",
+		
+		
+		"estado": "INACTIVO",
+		"servicios": ["IED", "Respaldo"],
+		"log": "Transformador secundario. Puede absorber carga si se conecta bien."
+	},
+	7: {
+		"nombre":"TRANSFORMADOR B",
+		"estado": "COMPROMETIDO",
+		"servicios": ["PLC", "Generación"],
+		"log": "Valores de control alterados por malware ICS."
+	},
+	8: {
+		"nombre":"PLC DE GENERACIÓN",
+		"estado": "INTERMITENTE",
+		"servicios": ["Router OT", "Comunicación"],
+		"log": "Pérdida de paquetes constante entre subestaciones."
+	},
+	9: {
+		"nombre":"ENLACE EXTERNO",
+		"estado": "DISPONIBLE",
+		"servicios": ["Interconexión Nacional"],
+		"log": "Enlace externo para balanceo de carga crítico."
+	}
+}
+var info_nodos: Dictionary = {} 
 # Referencias (se asignan cuando se carga el nivel)
 var player: Node3D = null
 var spawner: Node3D = null
@@ -85,7 +144,7 @@ func _ready():
 
 func _process(_delta):
 	# Detectar si el player se cayó del mapa
-	if player and puede_saltar:
+	if player and juego_iniciado and puede_saltar:
 		if player.global_position.y < -10:  # Límite de caída
 			print("Player se cayó del mapa!")
 			puede_saltar = false
@@ -99,6 +158,7 @@ func cargar_nivel_1():
 	print("\n=== CARGANDO NIVEL 1: NETWORK TRACER ===")
 	nivel_actual = 1
 	tipo_recorrido = "null"
+	info_nodos = info_nodos_n1
 	nombre_nodos = ["Recepcion","Mail_Server","FileServer",
 	"Backup_Server","Admin_Workstation","Exchange_Server"]
 	# Matriz de adyacencia del nivel 1
@@ -182,11 +242,21 @@ func cargar_nivel_2():
 	# Para Dijkstra calcularíamos el camino mínimo (lo implementamos después)
 
 func cargar_nivel_3():
-	
 	print("\n=== CARGANDO NIVEL 3: REBUILDNET ===")
 	nivel_actual = 3
+	info_nodos = info_nodos_n3
 	tipo_recorrido = "PRIM"
-	
+	nombre_nodos = [
+	"SCADA_CORE",                # 0
+	"SUBESTACIÓN NORTE",         # 1
+	"SUBESTACIÓN SUR",           # 2
+	"SUBESTACIÓN INDUSTRIAL",    # 3
+	"TRANSFORMADOR A",           # 4
+	"TRANSFORMADOR B",           # 5
+	"PLC DE GENERACIÓN",         # 6
+	"ROUTER INDUSTRIAL",         # 7
+	"ENLACE EXTERNO"             # 8
+]
 	# Matriz de adyacencia del nivel 3
 	var matriz = [
 		[0, 1, 0, 0, 0, 0, 0, 1,0],

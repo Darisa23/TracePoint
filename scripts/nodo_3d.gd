@@ -75,7 +75,7 @@ func inicializar(p_nodo_logico: Nodo):
 		if label_3d:
 			var letra = char(65 + nodo_logico.id)  # 65 = 'A' en ASCII
 			label_3d.text = letra
-			if GameManager.nivel_actual == 1:
+			if GameManager.nivel_actual == 1 or GameManager.nivel_actual == 3:
 				nom.text = GameManager.nombre_nodos[nodo_logico.id]
 			#Agregar nombre de nodo
 		if GameManager.nivel_actual == 4:
@@ -91,9 +91,9 @@ func _on_body_entered(body):
 			# Validar con GameManager (singleton)
 			var es_correcto = GameManager.validar_salto_a_nodo(nodo_logico.id)
 			#print("el id es: ",nodo_logico.id)
-			#if es_correcto:
+			if es_correcto:
 				#print("Nodo correcto!")
-				#nodo_logico.vc=true
+				nodo_logico.vc=true
 				# El color ya lo cambia GameManager → nodo_logico.marcar_correcto()
 			if not es_correcto:
 				#print("Nodo incorrecto!")

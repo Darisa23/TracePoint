@@ -125,7 +125,7 @@ func crear_paquetes_en_plataforma():
 		await plataforma_inicial.ready
 	
 	#print("Creando %d paquetes en plataforma..." % paquetes_totales)
-	plataforma_inicial.position = Vector3(-3, -6.6, 5)
+	plataforma_inicial.position = Vector3(-7, 0, -1)
 	var pbe = plataforma_inicial.position + Vector3(0, 0.8, 0)
 	#print("  Posición base: ", pbe)
 	# Tomamos posición global real de la plataforma

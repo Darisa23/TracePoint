@@ -39,8 +39,8 @@ func _ready():
 				graf.instanciar_conexiones()
 			GameManager.iniciar_juego("prim")
 			titulo.chou()
+			venN1.ini()
 		4:	
-			titulo.show_level(nivel_numero)
 			GameManager.cargar_nivel_4()		
 			graf.instanciar_grafo()
 			if graf.dibujar_conexiones:
@@ -48,6 +48,7 @@ func _ready():
 			flowm.inicializar_nivel()
 			#pack.generar_paquetes()
 			GameManager.iniciar_juego("fordfulkerson")
+			titulo.chou()
 			venN4.ini()
 			
 	await get_tree().process_frame
@@ -63,7 +64,7 @@ func _on_mision_completada():
 		2:
 			get_tree().change_scene_to_file("res://3dmodels/plantaelectrica.tscn")
 		3:
-			print("BB NO HAY MAS NADA, LOL")
+			get_tree().change_scene_to_file("res://3dmodels/abierto.tscn")
 
 func _on_nivel_reiniciado():
 	print("Nivel %d reiniciado" % nivel_numero)

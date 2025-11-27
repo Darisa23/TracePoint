@@ -76,7 +76,7 @@ func _process(delta):
 
 func _actualizar_popUp(id:int):
 	#print("HOLA ME LLAMOOOO")
-	if GameManager.nivel_actual==1 or GameManager.nivel_actual==4:
+	if GameManager.nivel_actual==1 or GameManager.nivel_actual==4 or GameManager.nivel_actual==3:
 		#print("ke")
 		mostrar_info_nodo(id)
 	else:
@@ -98,8 +98,9 @@ func mostrar_info_nodo(nodo_id: int):
 	"""Muestra el popup con información del nodo visitado"""
 	
 	nodo_actual_id = nodo_id
+	#print("LO QUE QUIERES VER QUE SE PIDE: ",nodo_actual_id)
 	#Info depende del nivel:
-	if GameManager.nivel_actual == 1:
+	if GameManager.nivel_actual == 1 or GameManager.nivel_actual == 3:
 		var datos = GameManager.info_nodos[nodo_actual_id+1]
 		if label_nodo:		
 			label_nodo.text = GameManager.nombre_nodos[nodo_actual_id]
