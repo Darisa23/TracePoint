@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://cya6a2vw5374r"]
+
+[ext_resource type="Script" uid="uid://dv87dss0d0vvb" path="res://escenas/bullet.gd" id="1_blkrf"]
+[ext_resource type="Texture2D" uid="uid://deykcalqhwrnu" path="res://escenas/bala.png" id="2_mbwb3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nlb16"]
+radius = 16.03122
+
+[node name="Bullet" type="Area2D"]
+script = ExtResource("1_blkrf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_mbwb3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_nlb16")

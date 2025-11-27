@@ -39,6 +39,7 @@ enabled=PackedStringArray("res://addons/YATI/plugin.cfg", "res://addons/gdquest_
 player=""
 paquete=""
 nodo3d=""
+enemy=""
 
 [input]
 
