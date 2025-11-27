@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://d3nqp3156q2jq"]
+[gd_scene load_steps=35 format=3 uid="uid://d3nqp3156q2jq"]
 
 [ext_resource type="Script" uid="uid://8fpq85lemlwa" path="res://scripts/controllers/nivel_cer.gd" id="1_g418y"]
 [ext_resource type="PackedScene" uid="uid://dodfrown0q7ro" path="res://playerrr_holograma.tscn" id="2_mm5td"]
@@ -20,6 +20,11 @@
 [ext_resource type="Texture2D" uid="uid://cljco5s5dtpve" path="res://escenas/ventanita.png" id="17_wjiob"]
 [ext_resource type="PackedScene" uid="uid://dw27a5dihjvit" path="res://escenas/hud.tscn" id="19_vt5j6"]
 [ext_resource type="PackedScene" uid="uid://c35dlembttqr7" path="res://escenas/InventoryUI.tscn" id="20_numpt"]
+[ext_resource type="PackedScene" uid="uid://drfqp3tybuj62" path="res://escenas/instrucciones/Instrucciones1.tscn" id="21_lym4m"]
+[ext_resource type="PackedScene" uid="uid://bwoscubpdca7l" path="res://escenas/instrucciones/Instrucciones2.tscn" id="22_0huhm"]
+[ext_resource type="PackedScene" uid="uid://sa4osif021wd" path="res://escenas/instrucciones/Instrucciones3.tscn" id="23_3yutf"]
+[ext_resource type="PackedScene" uid="uid://ckpbstcq4ht52" path="res://escenas/instrucciones/Instrucciones4.tscn" id="24_gjyhc"]
+[ext_resource type="PackedScene" uid="uid://d2v4mfai2xu6f" path="res://escenas/instrucciones/Instrucciones5.tscn" id="25_j6se4"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0wtap"]
 load_path = "res://.godot/imported/qwantani_moon_noon_puresky_4k.exr-9c99993655a97e2e3970192b680d1851.bptc.ctex"
@@ -203,8 +208,6 @@ textura_popup = ExtResource("17_wjiob")
 
 [node name="titulo" parent="." instance=ExtResource("15_pb8ng")]
 
-[node name="HUD" parent="." instance=ExtResource("19_vt5j6")]
-
 [node name="InventoryUI" parent="." instance=ExtResource("20_numpt")]
 anchors_preset = -1
 anchor_left = 0.54
@@ -215,3 +218,15 @@ offset_left = 603.2
 offset_top = -18.52
 offset_right = 869.2
 offset_bottom = 312.48
+
+[node name="HUD" parent="." instance=ExtResource("19_vt5j6")]
+
+[node name="instrucciones1" parent="HUD" instance=ExtResource("21_lym4m")]
+
+[node name="instrucciones2" parent="HUD" instance=ExtResource("22_0huhm")]
+
+[node name="instrucciones3" parent="HUD" instance=ExtResource("23_3yutf")]
+
+[node name="instrucciones4" parent="HUD" instance=ExtResource("24_gjyhc")]
+
+[node name="instrucciones5" parent="HUD" instance=ExtResource("25_j6se4")]

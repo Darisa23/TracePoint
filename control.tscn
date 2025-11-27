@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://br8wga1gw20rp"]
+
+[ext_resource type="PackedScene" uid="uid://drfqp3tybuj62" path="res://escenas/instrucciones/Instrucciones1.tscn" id="1_kbped"]
+[ext_resource type="PackedScene" uid="uid://bwoscubpdca7l" path="res://escenas/instrucciones/Instrucciones2.tscn" id="2_fj5cn"]
+[ext_resource type="PackedScene" uid="uid://sa4osif021wd" path="res://escenas/instrucciones/Instrucciones3.tscn" id="3_iy58a"]
+[ext_resource type="PackedScene" uid="uid://ckpbstcq4ht52" path="res://escenas/instrucciones/Instrucciones4.tscn" id="4_6a6wx"]
+[ext_resource type="PackedScene" uid="uid://d2v4mfai2xu6f" path="res://escenas/instrucciones/Instrucciones5.tscn" id="5_sky72"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" parent="." instance=ExtResource("1_kbped")]
+layout_mode = 1
+
+[node name="Control2" parent="." instance=ExtResource("2_fj5cn")]
+layout_mode = 1
+
+[node name="Control3" parent="." instance=ExtResource("3_iy58a")]
+layout_mode = 1
+
+[node name="Control4" parent="." instance=ExtResource("4_6a6wx")]
+layout_mode = 1
+
+[node name="Control5" parent="." instance=ExtResource("5_sky72")]
+layout_mode = 1

@@ -77,30 +77,16 @@ func abrir_panel():
 	# Obtener el nivel actual desde GameManager
 	var nivel = GameManager.nivel_actual
 	
-	# Verificar si existe un nodo para este nivel
-	if not nodos_instrucciones.has(nivel):
-		return
-	
-	#print("✓ Nivel encontrado en diccionario")
-	
-	# Buscar el HUD
+
 	#print("Buscando HUD en la escena...")
 	var hud = get_tree().current_scene.find_child("HUD", true, false)
-	if not hud:
-		push_error("No se encontró el nodo HUD")
-		return
 	
-	#print("✓ HUD encontrado: ", hud.get_path())
 	
 	# Buscar el panel de instrucciones
 	var nombre_panel = nodos_instrucciones[nivel]
 	panel_actual = hud.find_child(nombre_panel, false, false)
 	
 	
-	
-	#print("✓ Panel encontrado: ", panel_actual.name)
-	
-	# Liberar el cursor para poder interactuar con el panel
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	#print("✓ Cursor liberado")
 	

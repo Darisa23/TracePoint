@@ -28,6 +28,7 @@ theme_override_font_sizes/font_size = 80
 text = "NIVEL 1"
 
 [node name="Button2" type="Button" parent="."]
+layout_mode = 0
 offset_left = 611.0
 offset_top = 440.0
 offset_right = 923.0
@@ -36,6 +37,7 @@ theme_override_font_sizes/font_size = 80
 text = "NIVEL 2"
 
 [node name="Button3" type="Button" parent="."]
+layout_mode = 0
 offset_left = 1451.0
 offset_top = 434.0
 offset_right = 1763.0
@@ -44,6 +46,7 @@ theme_override_font_sizes/font_size = 80
 text = "NIVEL 4"
 
 [node name="Button4" type="Button" parent="."]
+layout_mode = 0
 offset_left = 1037.0
 offset_top = 434.0
 offset_right = 1349.0

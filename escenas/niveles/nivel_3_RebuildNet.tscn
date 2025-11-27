@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bxrumyormv21n"]
+[gd_scene load_steps=19 format=3 uid="uid://bxrumyormv21n"]
 
 [ext_resource type="Script" uid="uid://8fpq85lemlwa" path="res://scripts/controllers/nivel_cer.gd" id="1_0jdvu"]
 [ext_resource type="PackedScene" uid="uid://dodfrown0q7ro" path="res://playerrr_holograma.tscn" id="2_mv402"]
@@ -9,6 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://b1hjrwgbuf2nr" path="res://escenas/niveles/ventana.tscn" id="6_fmfp8"]
 [ext_resource type="PackedScene" uid="uid://dw27a5dihjvit" path="res://escenas/hud.tscn" id="6_go6iy"]
 [ext_resource type="Texture2D" uid="uid://omyf16ymo0hm" path="res://escenas/texturas-o-png/cuadroSB.png" id="7_gux0k"]
+[ext_resource type="PackedScene" uid="uid://drfqp3tybuj62" path="res://escenas/instrucciones/Instrucciones1.tscn" id="10_q8mal"]
+[ext_resource type="PackedScene" uid="uid://bwoscubpdca7l" path="res://escenas/instrucciones/Instrucciones2.tscn" id="11_w0omh"]
+[ext_resource type="PackedScene" uid="uid://sa4osif021wd" path="res://escenas/instrucciones/Instrucciones3.tscn" id="12_7gm8q"]
+[ext_resource type="PackedScene" uid="uid://ckpbstcq4ht52" path="res://escenas/instrucciones/Instrucciones4.tscn" id="13_suvws"]
+[ext_resource type="PackedScene" uid="uid://d2v4mfai2xu6f" path="res://escenas/instrucciones/Instrucciones5.tscn" id="14_0gdyf"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fmfp8"]
 load_path = "res://.godot/imported/qwantani_moon_noon_puresky_4k.exr-9c99993655a97e2e3970192b680d1851.bptc.ctex"
@@ -90,3 +95,13 @@ textura_popup = ExtResource("7_gux0k")
 [node name="titulo" parent="." instance=ExtResource("5_3dv64")]
 
 [node name="HUD" parent="." instance=ExtResource("6_go6iy")]
+
+[node name="instrucciones1" parent="HUD" instance=ExtResource("10_q8mal")]
+
+[node name="instrucciones2" parent="HUD" instance=ExtResource("11_w0omh")]
+
+[node name="instrucciones3" parent="HUD" instance=ExtResource("12_7gm8q")]
+
+[node name="instrucciones4" parent="HUD" instance=ExtResource("13_suvws")]
+
+[node name="instrucciones5" parent="HUD" instance=ExtResource("14_0gdyf")]

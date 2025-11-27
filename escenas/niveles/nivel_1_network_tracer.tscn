@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://2dwpnp36vlfk"]
+[gd_scene load_steps=19 format=3 uid="uid://2dwpnp36vlfk"]
 
 [ext_resource type="Script" uid="uid://8fpq85lemlwa" path="res://scripts/controllers/nivel_cer.gd" id="1_3bnxd"]
 [ext_resource type="Script" uid="uid://b7xahjuha0vog" path="res://scripts/GrafoSpawner.gd" id="2_1jpj2"]
@@ -8,7 +8,12 @@
 [ext_resource type="PackedScene" uid="uid://b1hjrwgbuf2nr" path="res://escenas/niveles/ventana.tscn" id="5_065hm"]
 [ext_resource type="Texture2D" uid="uid://omyf16ymo0hm" path="res://escenas/texturas-o-png/cuadroSB.png" id="6_v8kyt"]
 [ext_resource type="PackedScene" uid="uid://dw27a5dihjvit" path="res://escenas/hud.tscn" id="7_aqnt4"]
+[ext_resource type="PackedScene" uid="uid://drfqp3tybuj62" path="res://escenas/instrucciones/Instrucciones1.tscn" id="9_ded53"]
 [ext_resource type="PackedScene" uid="uid://dgn40ogw14ob1" path="res://escenas/niveles/titulos/titulo_1_network_tracer.tscn" id="9_hyiib"]
+[ext_resource type="PackedScene" uid="uid://bwoscubpdca7l" path="res://escenas/instrucciones/Instrucciones2.tscn" id="10_50iup"]
+[ext_resource type="PackedScene" uid="uid://sa4osif021wd" path="res://escenas/instrucciones/Instrucciones3.tscn" id="11_gvktg"]
+[ext_resource type="PackedScene" uid="uid://ckpbstcq4ht52" path="res://escenas/instrucciones/Instrucciones4.tscn" id="12_45yfp"]
+[ext_resource type="PackedScene" uid="uid://d2v4mfai2xu6f" path="res://escenas/instrucciones/Instrucciones5.tscn" id="13_fnv8f"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hyiib"]
 load_path = "res://.godot/imported/qwantani_moon_noon_puresky_4k.exr-9c99993655a97e2e3970192b680d1851.bptc.ctex"
@@ -88,6 +93,16 @@ offset_bottom = -738.04
 textura_popup = ExtResource("6_v8kyt")
 
 [node name="HUD" parent="." instance=ExtResource("7_aqnt4")]
+
+[node name="instrucciones1" parent="HUD" instance=ExtResource("9_ded53")]
+
+[node name="instrucciones2" parent="HUD" instance=ExtResource("10_50iup")]
+
+[node name="instrucciones3" parent="HUD" instance=ExtResource("11_gvktg")]
+
+[node name="instrucciones4" parent="HUD" instance=ExtResource("12_45yfp")]
+
+[node name="instrucciones5" parent="HUD" instance=ExtResource("13_fnv8f")]
 
 [node name="titulo" parent="." instance=ExtResource("9_hyiib")]
 visible = false
