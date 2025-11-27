@@ -10,12 +10,12 @@
 [ext_resource type="PackedScene" uid="uid://dw27a5dihjvit" path="res://escenas/hud.tscn" id="6_go6iy"]
 [ext_resource type="Texture2D" uid="uid://omyf16ymo0hm" path="res://escenas/texturas-o-png/cuadroSB.png" id="7_gux0k"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0wtap"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fmfp8"]
 load_path = "res://.godot/imported/qwantani_moon_noon_puresky_4k.exr-9c99993655a97e2e3970192b680d1851.bptc.ctex"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uquey"]
 shader = ExtResource("2_ygabq")
-shader_parameter/skyTexture = SubResource("CompressedTexture2D_0wtap")
+shader_parameter/skyTexture = SubResource("CompressedTexture2D_fmfp8")
 shader_parameter/skyColor = Color(1, 1, 1, 1)
 shader_parameter/horizonColor = Color(0.9, 0.9, 0.9, 1)
 shader_parameter/particle_speed = 0.1
@@ -24,12 +24,12 @@ shader_parameter/particle_size = 0.001
 shader_parameter/neon_blue = Color(0.898995, 0.723707, 0.269514, 1)
 shader_parameter/glow_intensity = 2.0
 
-[sub_resource type="Sky" id="Sky_l5lfc"]
+[sub_resource type="Sky" id="Sky_gux0k"]
 sky_material = SubResource("ShaderMaterial_uquey")
 
 [sub_resource type="Environment" id="Environment_mmdby"]
 background_mode = 2
-sky = SubResource("Sky_l5lfc")
+sky = SubResource("Sky_gux0k")
 ambient_light_source = 3
 ambient_light_color = Color(0.74902, 0.742654, 0.615273, 1)
 ambient_light_sky_contribution = 0.0
