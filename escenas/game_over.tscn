@@ -20,56 +20,6 @@ func _ready():
 	# Liberar el cursor cuando se carga la escena de Game Over
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	print(\"HOLA ESTOY PERDIDO\")
-	#print(\"Game Over - Cursor liberado\")
-	
-	# Buscar y conectar el botón de restart si existe
-	conectar_boton_restart()
-
-func conectar_boton_restart():
-	# Buscar el botón de restart (puede tener diferentes nombres)
-	var boton_restart = find_child(\"restart\", true, false)
-	if not boton_restart:
-		boton_restart = find_child(\"Restart\", true, false)
-	if not boton_restart:
-		boton_restart = find_child(\"Button\", true, false)
-	
-	if boton_restart and boton_restart is BaseButton:
-		# Desconectar si ya estaba conectado
-		if boton_restart.pressed.is_connected(_on_restart_pressed):
-			boton_restart.pressed.disconnect(_on_restart_pressed)
-		
-		boton_restart.pressed.connect(_on_restart_pressed)
-		boton_restart.focus_mode = Control.FOCUS_NONE
-		#print(\"✓ Botón restart conectado\")
-	else:
-		print(\"⚠️ No se encontró el botón restart\")
-
-func _on_restart_pressed():
-	#print(\"=== RESTART PRESIONADO ===\")
-	
-	# Resetear las vidas en el GameManager
-	GameManager.vidas_actuales = GameManager.vidas_maximas
-	GameManager.juego_iniciado = false
-	GameManager.puede_saltar = true
-	GameManager.indice_actual = 0
-	GameManager.ca = false
-	
-	# Volver a cargar el nivel según el nivel actual
-	var nivel = GameManager.nivel_actual
-	var escena_nivel = \"\"
-	
-	match nivel:
-		1:
-			escena_nivel = \"res://escenas/TracePoint.tscn\"
-		2:
-			escena_nivel = \"res://escenas/TracePoint.tscn\"
-		3:
-			escena_nivel = \"res://escenas/TracePoint.tscn\"
-		_:
-			escena_nivel = \"res://escenas/TracePoint.tscn\"  #aca no puse bien las rutas hay que arreglarlo
-	
-	print(\"Cargando escena: \", escena_nivel)
-	get_tree().change_scene_to_file(escena_nivel)
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g1o2j"]

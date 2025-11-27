@@ -83,14 +83,14 @@ signal nivel_reiniciado()
 func _ready():
 	print("GameManager inicializado como singleton")
 
-#func _process(_delta):
-	## Detectar si el player se cayó del mapa
-	#if player and puede_saltar:
-		#if player.global_position.y < -3:  # Límite de caída
-			#print("Player se cayó del mapa!")
-			#puede_saltar = false
-			#ca=true
-			#gameOver()
+func _process(_delta):
+	# Detectar si el player se cayó del mapa
+	if player and puede_saltar:
+		if player.global_position.y < -10:  # Límite de caída
+			print("Player se cayó del mapa!")
+			puede_saltar = false
+			ca=true
+			gameOver()
 # ============================================
 # CONFIGURACIÓN DE NIVELES
 # ============================================

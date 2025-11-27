@@ -15,6 +15,7 @@ func _ready():
 # Conectar señales del GameManager
 	GameManager.mision_completada.connect(_on_mision_completada)
 	GameManager.nivel_reiniciado.connect(_on_nivel_reiniciado)
+	GameManager.registrar_player(player)
 	match nivel_numero:
 		1:	
 			GameManager.cargar_nivel_1()

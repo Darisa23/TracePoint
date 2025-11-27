@@ -64,9 +64,9 @@ func _process(_delta):
 	if Input.is_action_just_pressed("dejar_paquete") and paquetes_llevando > 0:
 		depositar_paquete()
 		
-	if not is_on_floor() and not caigo:
-		caigo = true
-		g_o()
+	#if not is_on_floor() and not caigo:
+		#caigo = true
+		#g_o()
 		
 		
 func _input(event: InputEvent) -> void:
